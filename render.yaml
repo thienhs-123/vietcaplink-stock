@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: vietcaplink-vnstock-backend
+    env: python
+    region: singapore
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python realtime_server.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.12
+      - key: VNSTOCK_API_KEY
+        value: vnstock_fd6806b2490020fd64e6f78bc851c412

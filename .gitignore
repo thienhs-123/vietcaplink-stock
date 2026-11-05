@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.env
+scratch/
+realtime_port.json
+.DS_Store
