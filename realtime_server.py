@@ -218,20 +218,20 @@ for sym in TRACKED_SYMBOLS:
     }
 
 MACRO_STATE = {
-    "vnindex": 1245.76,
-    "vnindexChange": 1.05,
-    "vnindexPct": 0.08,
-    "vn30": 1313.35,
-    "vn30Change": 0.71,
-    "vn30Pct": 0.05,
-    "upcom": 91.90,
-    "upcomChange": 0.29,
-    "upcomPct": 0.32,
-    "hnx": 224.96,
-    "hnxChange": 0.40,
-    "hnxPct": 0.18,
-    "vnindexGtgd": "10.850 tỷ",
-    "vnindexVol": "485,2 tr cp",
+    "vnindex": 1740.73,
+    "vnindexChange": 7.71,
+    "vnindexPct": 0.44,
+    "vn30": 1865.23,
+    "vn30Change": 3.17,
+    "vn30Pct": 0.17,
+    "upcom": 122.38,
+    "upcomChange": -0.45,
+    "upcomPct": -0.37,
+    "hnx": 257.00,
+    "hnxChange": -2.51,
+    "hnxPct": -0.97,
+    "vnindexGtgd": "15.500 tỷ",
+    "vnindexVol": "720,5 tr cp",
     "usdVnd": 25480,
     "usdVndBuy": 25120,
     "goldWorld": 2658.40,
@@ -370,6 +370,76 @@ def init_vnstock_auth():
         print("❌ [Vnstock Auth] Chưa tìm thấy thư viện vnstock trong môi trường Python này.")
         print("💡 Cài đặt chính thức: python -m pip install -U --extra-index-url https://vnstocks.com/api/packages vnstock")
 
+
+
+def fetch_indices_from_vnstock_or_api():
+    """
+    Tự động truy vấn các chỉ số VNINDEX, VN30, HNX, UPCOM trực tiếp từ vnstock hoặc API bảng giá
+    """
+    global MACRO_STATE
+    # 1. Thử qua vnstock
+    vnstock = try_import_vnstock()
+    if vnstock and hasattr(vnstock, 'Market'):
+        try:
+            m = vnstock.Market()
+            for idx_name, state_key in [('VNINDEX', 'vnindex'), ('VN30', 'vn30'), ('HNXINDEX', 'hnx'), ('UPCOMINDEX', 'upcom')]:
+                try:
+                    df = m.index(idx_name).ohlcv(length=2)
+                    if df is not None and not df.empty:
+                        close = float(df.iloc[-1].get('close', df.iloc[-1].get('Close', 0)))
+                        prev = float(df.iloc[-2].get('close', df.iloc[-2].get('Close', close))) if len(df) > 1 else close
+                        chg = round(close - prev, 2)
+                        pct = round((chg / prev) * 100, 2) if prev else 0.0
+                        with DATA_LOCK:
+                            MACRO_STATE[state_key] = close
+                            MACRO_STATE[f"{state_key}Change"] = chg
+                            MACRO_STATE[f"{state_key}Pct"] = pct
+                except Exception:
+                    pass
+            return True
+        except Exception:
+            pass
+
+    # 2. Dự phòng: Thử qua API công khai VNDIRECT
+    try:
+        import urllib.request
+        import json
+        req = urllib.request.Request(
+            'https://mkw.vndirect.com.vn/mkws/indices',
+            headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+        )
+        with urllib.request.urlopen(req, timeout=4) as resp:
+            data = json.loads(resp.read().decode('utf-8'))
+            indices_data = data.get('data', [])
+            for item in indices_data:
+                code = str(item.get('code', '')).upper()
+                idx_val = float(item.get('indexValue', 0))
+                chg_val = float(item.get('change', 0))
+                pct_val = float(item.get('changePercent', 0))
+                if code == 'VNINDEX':
+                    with DATA_LOCK:
+                        MACRO_STATE["vnindex"] = idx_val
+                        MACRO_STATE["vnindexChange"] = chg_val
+                        MACRO_STATE["vnindexPct"] = pct_val
+                elif code == 'VN30':
+                    with DATA_LOCK:
+                        MACRO_STATE["vn30"] = idx_val
+                        MACRO_STATE["vn30Change"] = chg_val
+                        MACRO_STATE["vn30Pct"] = pct_val
+                elif code in ['UPCOM', 'UPCOMINDEX']:
+                    with DATA_LOCK:
+                        MACRO_STATE["upcom"] = idx_val
+                        MACRO_STATE["upcomChange"] = chg_val
+                        MACRO_STATE["upcomPct"] = pct_val
+                elif code in ['HNX', 'HNXINDEX']:
+                    with DATA_LOCK:
+                        MACRO_STATE["hnx"] = idx_val
+                        MACRO_STATE["hnxChange"] = chg_val
+                        MACRO_STATE["hnxPct"] = pct_val
+            return True
+    except Exception:
+        pass
+    return False
 
 def fetch_prices_from_vnstock():
     """
@@ -749,6 +819,10 @@ def sync_cycle_worker():
         SERVER_PACKET_COUNT += 1
 
         count = fetch_prices_from_vnstock()
+        try:
+            fetch_indices_from_vnstock_or_api()
+        except Exception:
+            pass
         now_str = datetime.datetime.now().strftime("%H:%M:%S")
 
         if count > 0:
