@@ -2055,71 +2055,65 @@
 
               </div>
 
-              <!-- Chart Box: Diễn biến chỉ số (Chiều ngang bằng đúng 3 box chỉ số ở trên) -->
+              <!-- Chart Box: Diễn biến chỉ số (Dạng đường Line Chart thuần túy, 1 năm daily, mặc định 1 tháng, Zoom lăn chuột & kéo dãn trục tung) -->
               <div class="flex-1 p-3.5 sm:p-4 rounded-2xl bg-light-elevated/60 dark:bg-studio-elevated/60 border border-light-border dark:border-studio-border flex flex-col justify-between space-y-3 min-w-0">
                 
                 <!-- Header info line -->
                 <div class="flex items-center justify-between">
-                  <span class="text-xs font-bold uppercase tracking-wider text-light-subtext dark:text-studio-muted">DIỄN BIẾN CHỈ SỐ</span>
-                  <span class="text-[11px] font-mono text-light-subtext dark:text-studio-muted">VCI • VN-Index 2000–2026: Vnstock &amp; HOSE</span>
+                  <div class="flex items-center space-x-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-light-subtext dark:text-studio-muted">DIỄN BIẾN CHỈ SỐ</span>
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono text-[10.5px] font-semibold flex items-center space-x-1.5">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span id="marketRealtimeFrequencyBadge">Realtime • 1 lần / phút</span>
+                    </span>
+                  </div>
+                  <span class="text-[11px] font-mono text-light-subtext dark:text-studio-muted">VN-Index (Chart Ngày 1 Năm) • HOSE</span>
                 </div>
 
               <!-- Big Price Readout & Summary -->
               <div class="flex flex-wrap items-baseline gap-2.5">
                 <span class="text-2xl md:text-3xl font-bold font-mono text-light-text dark:text-studio-text" id="marketVnindexBigVal">1.740,73</span>
                 <span class="text-sm font-bold font-mono text-emerald-500" id="marketVnindexBigChange">+7,71 (+0,44%)</span>
-                <span class="text-xs text-light-subtext dark:text-studio-muted font-mono">VN-Index • 3 tháng: <strong class="text-emerald-500 font-semibold" id="marketVnindex3mPct">+4,50%</strong> • KL phiên: <strong class="text-light-text dark:text-studio-text" id="marketVnindexVol">720,5 tr</strong></span>
+                <span class="text-xs text-light-subtext dark:text-studio-muted font-mono">VN-Index • 1 tháng: <strong class="text-emerald-500 font-semibold" id="marketVnindex3mPct">+1,80%</strong> • KL phiên: <strong class="text-light-text dark:text-studio-text" id="marketVnindexVol">720,5 tr</strong></span>
               </div>
 
-              <!-- Timeframe & Type Selector Controls -->
-              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
-                <!-- Timeframe range buttons -->
+              <!-- Timeframe range buttons & Interactive hint -->
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pt-1">
+                <!-- Timeframe range buttons (Mặc định 1T, tối đa 1N) -->
                 <div class="flex items-center space-x-1 overflow-x-auto text-xs pb-1 sm:pb-0 scrollbar-none" id="marketTimeframeButtons">
-                  <button onclick="setMarketTimeframe('1D')" id="tf-btn-1D" class="px-2.5 py-1 rounded-lg font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text">1 ngày</button>
-                  <button onclick="setMarketTimeframe('1T')" id="tf-btn-1T" class="px-2.5 py-1 rounded-lg font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text">1T</button>
-                  <button onclick="setMarketTimeframe('3T')" id="tf-btn-3T" class="px-2.5 py-1 rounded-lg font-semibold transition-all bg-[#0071e3] text-white shadow-sm">3T</button>
+                  <button onclick="setMarketTimeframe('1T')" id="tf-btn-1T" class="px-3 py-1 rounded-lg font-semibold transition-all bg-[#0071e3] text-white shadow-sm">1 tháng (Mặc định)</button>
+                  <button onclick="setMarketTimeframe('3T')" id="tf-btn-3T" class="px-2.5 py-1 rounded-lg font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text">3T</button>
                   <button onclick="setMarketTimeframe('6T')" id="tf-btn-6T" class="px-2.5 py-1 rounded-lg font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text">6T</button>
-                  <button onclick="setMarketTimeframe('YTD')" id="tf-btn-YTD" class="px-2.5 py-1 rounded-lg font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text">YTD</button>
-                  <button onclick="setMarketTimeframe('1N')" id="tf-btn-1N" class="px-2.5 py-1 rounded-lg font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text">1N</button>
-                  <button onclick="setMarketTimeframe('3N')" id="tf-btn-3N" class="px-2.5 py-1 rounded-lg font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text">3N</button>
-                  <button onclick="setMarketTimeframe('5N')" id="tf-btn-5N" class="px-2.5 py-1 rounded-lg font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text">5N</button>
-                  <button onclick="setMarketTimeframe('10N')" id="tf-btn-10N" class="px-2.5 py-1 rounded-lg font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text">10N</button>
-                  <button onclick="setMarketTimeframe('ALL')" id="tf-btn-ALL" class="px-2.5 py-1 rounded-lg font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text">Tất cả</button>
+                  <button onclick="setMarketTimeframe('1N')" id="tf-btn-1N" class="px-2.5 py-1 rounded-lg font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text">1N (Tối đa)</button>
+                  <button onclick="resetMarketChartZoom()" id="tf-btn-reset" class="px-2 py-1 rounded-lg text-[11px] font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text hover:bg-black/5 dark:hover:bg-white/5" title="Đặt lại phạm vi 1 tháng">↺ Đặt lại</button>
                 </div>
 
-                <!-- Secondary chart controls: Type / Interval / MA -->
-                <div class="flex flex-wrap items-center gap-2 text-xs">
-                  <!-- Chart Type -->
-                  <div class="flex items-center p-0.5 rounded-lg bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border">
-                    <button onclick="setMarketChartType('line')" id="chartTypeLineBtn" class="px-2 py-0.5 rounded text-[11px] font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text">~ Đường</button>
-                    <button onclick="setMarketChartType('area')" id="chartTypeAreaBtn" class="px-2 py-0.5 rounded text-[11px] font-semibold bg-white dark:bg-[#3a3a3c] text-light-text dark:text-studio-text shadow-sm transition-all">/\ Vùng</button>
-                    <button onclick="setMarketChartType('candlestick')" id="chartTypeCandleBtn" class="px-2 py-0.5 rounded text-[11px] font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text">ii Nến</button>
-                  </div>
-
-                  <!-- Resolution -->
-                  <div class="flex items-center p-0.5 rounded-lg bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border">
-                    <button onclick="setMarketInterval('day')" id="intervalDayBtn" class="px-2 py-0.5 rounded text-[11px] font-semibold bg-white dark:bg-[#3a3a3c] text-light-text dark:text-studio-text shadow-sm transition-all">Ngày</button>
-                    <button onclick="setMarketInterval('week')" id="intervalWeekBtn" class="px-2 py-0.5 rounded text-[11px] font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text">Tuần</button>
-                    <button onclick="setMarketInterval('month')" id="intervalMonthBtn" class="px-2 py-0.5 rounded text-[11px] font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text">Tháng</button>
-                  </div>
-
-                  <!-- MA Overlays -->
-                  <div class="flex items-center space-x-1.5 font-mono text-[11px]">
-                    <button onclick="toggleMarketMA('MA20')" id="toggleMA20Btn" class="px-2 py-0.5 rounded border border-amber-500/40 text-amber-500 font-semibold bg-amber-500/10 transition-all">- MA20</button>
-                    <button onclick="toggleMarketMA('MA50')" id="toggleMA50Btn" class="px-2 py-0.5 rounded border border-cyan-500/40 text-cyan-400 font-semibold bg-cyan-500/10 transition-all">- MA50</button>
-                    <button onclick="toggleMarketMA('MA200')" id="toggleMA200Btn" class="px-2 py-0.5 rounded border border-purple-500/30 text-purple-400/60 font-medium hover:border-purple-500/50 transition-all">- MA200</button>
-                  </div>
+                <!-- Hướng dẫn tương tác chuyên nghiệp kiểu TradingView -->
+                <div class="flex items-center space-x-2 text-[11px] text-light-subtext dark:text-studio-muted font-mono select-none">
+                  <span class="inline-flex items-center px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-500 font-semibold">Đường Line</span>
+                  <span>🖱️ Lăn chuột: Zoom</span>
+                  <span>•</span>
+                  <span>↕️ Kéo trục số phải: Co giãn giá</span>
                 </div>
               </div>
 
               <!-- Interactive Hover Banner -->
               <div class="px-3 py-1.5 rounded-lg bg-light-surface/90 dark:bg-studio-surface/90 border border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-xs font-mono" id="marketChartHoverBanner">
-                <span class="text-light-subtext dark:text-studio-muted">16/10/2026: <strong class="text-light-text dark:text-studio-text">1.707,66</strong> (<span class="text-emerald-500 font-semibold">+0,55%</span>)</span>
-                <span class="text-light-subtext dark:text-studio-muted">KL: <strong class="text-light-text dark:text-studio-text">74,36 tr</strong> • GT: <strong class="text-light-text dark:text-studio-text">1.382 tỷ</strong></span>
+                <span class="text-light-subtext dark:text-studio-muted">06/11/2026: <strong class="text-light-text dark:text-studio-text">1.740,73</strong> (<span class="text-emerald-500 font-semibold">+0,44%</span>)</span>
+                <span class="text-light-subtext dark:text-studio-muted">Chart ngày • Cập nhật: <strong class="text-emerald-500 font-semibold" id="marketChartUpdatePulse">1 phút / lần</strong></span>
               </div>
 
-              <!-- ApexCharts Canvas Container -->
-              <div id="marketOverviewChart" class="w-full min-h-[310px]"></div>
+              <!-- ApexCharts Canvas Container với Trục kéo dãn Y-Axis bên phải -->
+              <div class="relative w-full min-h-[310px]">
+                <div id="marketOverviewChart" class="w-full min-h-[310px]"></div>
+                
+                <!-- Transparent Handle để kéo dãn trục tung bên phải (Y-Axis) -->
+                <div id="marketYAxisDragHandle" 
+                     title="Kéo chuột lên/xuống để co giãn trục tung bên phải • Nhấp đúp để tự động cân bằng" 
+                     class="absolute top-0 right-0 w-14 h-[calc(100%-36px)] cursor-ns-resize z-20 hover:bg-blue-500/10 transition-colors flex items-center justify-end pr-1 select-none group">
+                  <span class="opacity-0 group-hover:opacity-100 text-[9px] font-mono text-blue-500 bg-white dark:bg-[#2c2c2e] border border-blue-500/30 px-1 py-0.5 rounded shadow pointer-events-none transition-opacity">↕ Kéo trục</span>
+                </div>
+              </div>
             </div>
 
             <!-- Card: ĐỘ RỘNG THEO SÀN (Giữ nguyên vị trí hiện tại phía dưới biểu đồ) -->
@@ -11816,172 +11810,47 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
     }
 
     // Generate realistic multi-timeframe VN-Index market series with Moving Averages & Volume
-    function generateMarketSeries(timeframe, interval) {
-      let count = 65;
-      let startPrice = 1680.00;
-      let dateStepDays = 1;
-      let startDate = new Date(2026, 6, 15);
-      let pctChangeStr = "+4,50%";
-      let pctChangeClass = "text-emerald-500";
+    // 1. Tạo chuỗi dữ liệu 1 năm ngày (Daily Chart) neo mốc đóng phiên hôm nay
+    function generateMarket1YearDaily(targetPrice = 1740.73) {
+      const count = 250; // 250 phiên giao dịch trong 1 năm
+      const rawDates = new Array(count);
+      let curDate = new Date(2026, 10, 6); // 06/11/2026
 
-      if (timeframe === '1D') {
-        count = 25;
-        startPrice = 1733.02;
-        dateStepDays = 0;
-        pctChangeStr = "+0,44%";
-        pctChangeClass = "text-emerald-500";
-      } else if (timeframe === '1T') {
-        count = 22;
-        startPrice = 1710.00;
-        dateStepDays = 1;
-        startDate = new Date(2026, 8, 15);
-        pctChangeStr = "+1,80%";
-        pctChangeClass = "text-emerald-500";
-      } else if (timeframe === '3T') {
-        count = 65;
-        startPrice = 1665.00;
-        dateStepDays = 1;
-        startDate = new Date(2026, 6, 16);
-        pctChangeStr = "+4,50%";
-        pctChangeClass = "text-emerald-500";
-      } else if (timeframe === '6T') {
-        count = 130;
-        startPrice = 1600.00;
-        dateStepDays = 1;
-        startDate = new Date(2026, 3, 16);
-        pctChangeStr = "+8,79%";
-        pctChangeClass = "text-emerald-500";
-      } else if (timeframe === 'YTD') {
-        count = 195;
-        startPrice = 1520.10;
-        dateStepDays = 1;
-        startDate = new Date(2026, 0, 2);
-        pctChangeStr = "+14,51%";
-        pctChangeClass = "text-emerald-500";
-      } else if (timeframe === '1N') {
-        count = 250;
-        startPrice = 1450.00;
-        dateStepDays = 1;
-        startDate = new Date(2025, 9, 16);
-        pctChangeStr = "+20,05%";
-        pctChangeClass = "text-emerald-500";
-      } else if (timeframe === '3N') {
-        count = 75;
-        startPrice = 1180.00;
-        dateStepDays = 14;
-        startDate = new Date(2023, 9, 16);
-        pctChangeStr = "+47,52%";
-        pctChangeClass = "text-emerald-500";
-      } else if (timeframe === '5N') {
-        count = 90;
-        startPrice = 1350.00;
-        dateStepDays = 20;
-        startDate = new Date(2021, 9, 16);
-        pctChangeStr = "+28,94%";
-        pctChangeClass = "text-emerald-500";
-      } else if (timeframe === '10N') {
-        count = 120;
-        startPrice = 680.00;
-        dateStepDays = 30;
-        startDate = new Date(2016, 9, 16);
-        pctChangeStr = "+156,00%";
-        pctChangeClass = "text-emerald-500";
-      } else if (timeframe === 'ALL') {
-        count = 150;
-        startPrice = 100.00;
-        dateStepDays = 60;
-        startDate = new Date(2000, 6, 28);
-        pctChangeStr = "+1.640,73%";
-        pctChangeClass = "text-emerald-500";
+      for (let i = count - 1; i >= 0; i--) {
+        while (curDate.getDay() === 0 || curDate.getDay() === 6) {
+          curDate.setDate(curDate.getDate() - 1);
+        }
+        rawDates[i] = new Date(curDate);
+        curDate.setDate(curDate.getDate() - 1);
       }
 
-      // Update Subtitle percentage badge
-      const p3m = document.getElementById("marketVnindex3mPct");
-      if (p3m) {
-        p3m.innerText = pctChangeStr;
-        p3m.className = `${pctChangeClass} font-semibold`;
-      }
-
-      const categories = [];
-      const prices = [];
-      const volumes = [];
-      const candleData = [];
-
+      const startPrice = 1450.00;
       let current = startPrice;
-      let curDate = new Date(startDate);
-      const targetPrice = StockApp.macro.vnindex || 1740.73;
+      const data = [];
 
       for (let i = 0; i < count; i++) {
-        let label = "";
-        if (timeframe === '1D') {
-          const m = 9 * 60 + i * 15;
-          const h = Math.floor(m / 60);
-          const min = m % 60;
-          label = `${String(h).padStart(2, '0')}:${String(min).padStart(2, '0')}`;
-        } else if (timeframe === 'ALL' || timeframe === '10N') {
-          label = `${curDate.getFullYear()}`;
-          curDate.setDate(curDate.getDate() + dateStepDays);
-        } else {
-          label = `${curDate.getDate()}/${curDate.getMonth() + 1}`;
-          curDate.setDate(curDate.getDate() + dateStepDays);
-        }
-        categories.push(label);
-
-        // Intraday / timeframe random walk with trend towards target VN-Index
         if (i === count - 1) {
           current = targetPrice;
         } else {
-          const targetBias = (targetPrice - current) / (count - i);
-          const noise = (Math.random() - 0.49) * (current * 0.012);
+          const remaining = count - i;
+          const targetBias = (targetPrice - current) / remaining;
+          const noise = (Math.sin(i / 6) * 3.5) + ((Math.random() - 0.48) * (current * 0.007));
           current = parseFloat((current + targetBias + noise).toFixed(2));
         }
-        prices.push(current);
 
-        // Volume: 45M to 95M cp
-        const vol = parseFloat((45 + Math.random() * 50).toFixed(2));
-        volumes.push(vol);
-
-        // Candlestick mock: open, high, low, close
-        const open = parseFloat((current - (Math.random() - 0.5) * 6).toFixed(2));
-        const high = parseFloat((Math.max(open, current) + Math.random() * 4).toFixed(2));
-        const low = parseFloat((Math.min(open, current) - Math.random() * 4).toFixed(2));
-        candleData.push([open, high, low, current]);
+        const d = rawDates[i];
+        const dateStr = `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
+        data.push({
+          x: d.getTime(),
+          y: current,
+          dateStr: dateStr
+        });
       }
 
-      // Calculate MAs
-      const ma20 = [];
-      const ma50 = [];
-      const ma200 = [];
-
-      for (let i = 0; i < count; i++) {
-        // MA20
-        if (i < 5) {
-          ma20.push(prices[i]);
-        } else {
-          const slice = prices.slice(Math.max(0, i - 19), i + 1);
-          const avg = slice.reduce((a, b) => a + b, 0) / slice.length;
-          ma20.push(parseFloat(avg.toFixed(2)));
-        }
-
-        // MA50
-        if (i < 10) {
-          ma50.push(prices[i]);
-        } else {
-          const slice = prices.slice(Math.max(0, i - 49), i + 1);
-          const avg = slice.reduce((a, b) => a + b, 0) / slice.length;
-          ma50.push(parseFloat(avg.toFixed(2)));
-        }
-
-        // MA200
-        const slice200 = prices.slice(Math.max(0, i - 199), i + 1);
-        const avg200 = slice200.reduce((a, b) => a + b, 0) / slice200.length;
-        ma200.push(parseFloat(avg200.toFixed(2)));
-      }
-
-      return { categories, prices, volumes, candleData, ma20, ma50, ma200 };
+      return data;
     }
 
-    // Initialize ApexChart for Market Overview
+    // 2. Khởi tạo biểu đồ đường (Line Chart thuần túy, mặc định 1 tháng, tối đa 1 năm)
     function initMarketOverviewChart() {
       const chartEl = document.getElementById("marketOverviewChart");
       if (!chartEl) return;
@@ -11991,110 +11860,89 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       const foreColor = isDark ? '#a1a1a6' : '#6e6e73';
       const gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
 
-      const dataset = generateMarketSeries(StockApp.marketOverview.timeframe, StockApp.marketOverview.interval);
-      StockApp.marketOverview.lastDataset = dataset;
+      const targetPrice = StockApp.macro.vnindex || 1740.73;
+      const full1YearData = generateMarket1YearDaily(targetPrice);
+      StockApp.marketOverview.full1YearData = full1YearData;
 
-      // Build Series dynamically based on active MA & Chart Type
-      const series = [];
-      const colors = [];
-      const strokeWidths = [];
+      // Series duy nhất: Đường giá VN-Index (Line Chart thuần túy)
+      const seriesData = full1YearData.map(d => [d.x, d.y]);
 
-      const mainType = StockApp.marketOverview.chartType; // 'line', 'area', 'candlestick'
+      const maxTs = full1YearData[full1YearData.length - 1].x;
+      const min1YearTs = full1YearData[0].x;
+      
+      // Mặc định hiển thị 1 tháng (30 ngày gần nhất)
+      const default1MonthTs = maxTs - (30 * 86400000);
+      
+      StockApp.marketOverview.currentMin = default1MonthTs;
+      StockApp.marketOverview.currentMax = maxTs;
+      StockApp.marketOverview.minAllowedTs = min1YearTs;
+      StockApp.marketOverview.maxAllowedTs = maxTs;
 
-      if (mainType === 'candlestick') {
-        series.push({
-          name: 'VN-Index (Nến)',
-          type: 'candlestick',
-          data: dataset.categories.map((c, idx) => ({
-            x: c,
-            y: dataset.candleData[idx]
-          }))
-        });
-        colors.push('#0071e3');
-        strokeWidths.push(1);
-      } else {
-        series.push({
-          name: 'VN-Index',
-          type: mainType === 'area' ? 'area' : 'line',
-          data: dataset.prices
-        });
-        colors.push('#0071e3');
-        strokeWidths.push(2.5);
+      // Tính phần trăm biến động cho 1 tháng mặc định
+      const month1Data = full1YearData.filter(d => d.x >= default1MonthTs);
+      if (month1Data.length > 0) {
+        const startP = month1Data[0].y;
+        const endP = month1Data[month1Data.length - 1].y;
+        const diff = endP - startP;
+        const pct = ((diff / startP) * 100).toFixed(2);
+        const sign = diff >= 0 ? '+' : '';
+        const badge = document.getElementById("marketVnindex3mPct");
+        if (badge) {
+          badge.innerText = `${sign}${pct}%`;
+          badge.className = `${diff >= 0 ? 'text-emerald-500' : 'text-rose-500'} font-semibold`;
+        }
       }
-
-      if (StockApp.marketOverview.showMA20) {
-        series.push({
-          name: 'MA20',
-          type: 'line',
-          data: dataset.ma20
-        });
-        colors.push('#f59e0b');
-        strokeWidths.push(1.8);
-      }
-
-      if (StockApp.marketOverview.showMA50) {
-        series.push({
-          name: 'MA50',
-          type: 'line',
-          data: dataset.ma50
-        });
-        colors.push('#06b6d4');
-        strokeWidths.push(1.8);
-      }
-
-      if (StockApp.marketOverview.showMA200) {
-        series.push({
-          name: 'MA200',
-          type: 'line',
-          data: dataset.ma200
-        });
-        colors.push('#a855f7');
-        strokeWidths.push(1.8);
-      }
-
-      // Khối lượng (Volume column)
-      series.push({
-        name: 'Khối lượng (tr cp)',
-        type: 'column',
-        data: dataset.volumes
-      });
-      colors.push('rgba(16, 185, 129, 0.35)');
-      strokeWidths.push(0);
-
-      const minPrice = Math.floor(Math.min(...dataset.prices) * 0.98);
-      const maxPrice = Math.ceil(Math.max(...dataset.prices) * 1.02);
 
       const options = {
-        series: series,
+        series: [{
+          name: 'VN-Index',
+          data: seriesData
+        }],
         chart: {
-          height: 340,
+          id: 'market-vnindex-line-chart',
+          height: 330,
           type: 'line',
           foreColor: foreColor,
           fontFamily: '"SF Pro Display", "SF Pro Text", -apple-system, sans-serif',
           toolbar: {
             show: true,
-            tools: { download: false, selection: true, zoom: true, zoomin: true, zoomout: true, pan: true, reset: true }
+            tools: {
+              download: false,
+              selection: false,
+              zoom: true,
+              zoomin: true,
+              zoomout: true,
+              pan: true,
+              reset: true
+            }
+          },
+          zoom: {
+            enabled: true,
+            type: 'x',
+            autoScaleYaxis: true
           },
           background: 'transparent',
+          animations: {
+            enabled: true,
+            easing: 'easeinout',
+            speed: 350
+          },
           events: {
             mouseMove(e, chartCtx, config) {
               const dataPointIndex = config.dataPointIndex;
-              if (dataPointIndex >= 0 && dataPointIndex < dataset.categories.length) {
-                const date = dataset.categories[dataPointIndex];
-                const price = dataset.prices[dataPointIndex];
-                const vol = dataset.volumes[dataPointIndex];
-                const prev = dataPointIndex > 0 ? dataset.prices[dataPointIndex - 1] : price;
-                const change = price - prev;
+              if (dataPointIndex >= 0 && dataPointIndex < full1YearData.length) {
+                const item = full1YearData[dataPointIndex];
+                const prev = dataPointIndex > 0 ? full1YearData[dataPointIndex - 1].y : item.y;
+                const change = item.y - prev;
                 const pct = ((change / prev) * 100).toFixed(2);
                 const sign = change >= 0 ? '+' : '';
                 const colorClass = change >= 0 ? 'text-emerald-500' : 'text-rose-500';
-                const estGtgd = Math.round(vol * 18.5);
 
                 const banner = document.getElementById("marketChartHoverBanner");
                 if (banner) {
                   banner.innerHTML = `
-                    <span class="text-light-subtext dark:text-studio-muted">${date}/2026: <strong class="text-light-text dark:text-studio-text">${price.toLocaleString('en-US')}</strong> (<span class="${colorClass} font-semibold">${sign}${pct}%</span>)</span>
-                    <span class="text-light-subtext dark:text-studio-muted">KL: <strong class="text-light-text dark:text-studio-text">${vol} tr</strong> • GT: <strong class="text-light-text dark:text-studio-text">${estGtgd.toLocaleString('en-US')} tỷ</strong></span>
+                    <span class="text-light-subtext dark:text-studio-muted">${item.dateStr}: <strong class="text-light-text dark:text-studio-text">${item.y.toLocaleString('vi-VN', { minimumFractionDigits: 2 })}</strong> (<span class="${colorClass} font-semibold">${sign}${pct}%</span>)</span>
+                    <span class="text-light-subtext dark:text-studio-muted">Chart ngày • Cập nhật: <strong class="text-emerald-500 font-semibold">1 phút / lần</strong></span>
                   `;
                 }
               }
@@ -12102,1051 +11950,272 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
           }
         },
         theme: { mode: themeMode },
-        colors: colors,
+        colors: ['#0071e3'],
         stroke: {
-          width: strokeWidths,
-          curve: 'smooth',
-          dashArray: [0, 0, 0, 0, 0]
-        },
-        fill: {
-          type: mainType === 'area' ? ['gradient', 'solid', 'solid', 'solid', 'solid'] : 'solid',
-          gradient: {
-            shadeIntensity: 1,
-            opacityFrom: 0.35,
-            opacityTo: 0.05,
-            stops: [0, 95, 100]
-          }
-        },
-        plotOptions: {
-          bar: {
-            columnWidth: '45%',
-            borderRadius: 2
-          }
+          width: 2.8,
+          curve: 'smooth'
         },
         dataLabels: { enabled: false },
         xaxis: {
-          categories: dataset.categories,
+          type: 'datetime',
+          min: default1MonthTs,
+          max: maxTs,
           axisBorder: { color: gridColor },
           axisTicks: { color: gridColor },
           labels: {
-            style: { fontSize: '10px' },
+            format: 'dd/MM',
+            style: { fontSize: '10.5px' },
             rotate: 0,
             hideOverlappingLabels: true
           }
         },
-        yaxis: [
-          {
-            seriesName: 'VN-Index',
-            min: minPrice,
-            max: maxPrice,
-            labels: {
-              formatter: val => typeof val === 'number' ? val.toLocaleString('en-US', { maximumFractionDigits: 1 }) : val,
-              style: { fontSize: '10px' }
-            }
+        yaxis: {
+          labels: {
+            formatter: val => val ? val.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) : '',
+            style: { fontSize: '10.5px', fontWeight: 600 }
           },
-          ...(StockApp.marketOverview.showMA20 ? [{
-            seriesName: 'VN-Index',
-            show: false,
-            min: minPrice,
-            max: maxPrice
-          }] : []),
-          ...(StockApp.marketOverview.showMA50 ? [{
-            seriesName: 'VN-Index',
-            show: false,
-            min: minPrice,
-            max: maxPrice
-          }] : []),
-          ...(StockApp.marketOverview.showMA200 ? [{
-            seriesName: 'VN-Index',
-            show: false,
-            min: minPrice,
-            max: maxPrice
-          }] : []),
-          {
-            seriesName: 'Khối lượng (tr cp)',
-            opposite: true,
-            min: 0,
-            max: 300, // Volume sticks strictly to lower quarter
-            labels: {
-              formatter: val => `${val}M`,
-              style: { fontSize: '9px' }
-            }
-          }
-        ],
+          tooltip: { enabled: true }
+        },
         grid: {
           borderColor: gridColor,
           strokeDashArray: 3
         },
-        legend: {
-          show: true,
-          position: 'top',
-          horizontalAlign: 'right',
-          fontSize: '11px',
-          itemMargin: { horizontal: 8 }
-        },
         tooltip: {
-          shared: true,
-          intersect: false
+          shared: false,
+          intersect: false,
+          x: { format: 'dd/MM/yyyy' },
+          y: {
+            formatter: val => `${val ? val.toLocaleString('vi-VN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : ''} điểm`
+          }
         }
       };
 
       chartEl.innerHTML = "";
       StockApp.charts.marketOverview = new ApexCharts(chartEl, options);
       StockApp.charts.marketOverview.render();
+
+      // Kích hoạt Zoom bằng lăn chuột & Kéo dãn trục tung bên phải
+      initChartMouseWheelZoom();
+      initYAxisDragInteraction();
     }
 
-    // Set Market Timeframe Filter (1D, 1T, 3T, 6T, YTD, 1N, 3N, 5N, 10N, ALL)
+    // 3. Zoom bằng lăn chuột (Mouse Wheel Zoom)
+    function initChartMouseWheelZoom() {
+      const chartEl = document.getElementById("marketOverviewChart");
+      if (!chartEl || chartEl._wheelBound) return;
+      chartEl._wheelBound = true;
+
+      chartEl.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        if (!StockApp.charts.marketOverview || !StockApp.marketOverview.maxAllowedTs) return;
+
+        const maxTs = StockApp.marketOverview.maxAllowedTs;
+        const minAllowedTs = StockApp.marketOverview.minAllowedTs;
+        const currentMin = StockApp.marketOverview.currentMin || (maxTs - 30 * 86400000);
+        const currentSpan = maxTs - currentMin;
+
+        // e.deltaY < 0: cuộn lên -> zoom in (thu hẹp khoảng ngày)
+        // e.deltaY > 0: cuộn xuống -> zoom out (mở rộng khoảng ngày)
+        const factor = e.deltaY < 0 ? 0.82 : 1.22;
+        let newSpan = currentSpan * factor;
+
+        // Giới hạn: tối thiểu 7 ngày, tối đa 365 ngày (1 năm)
+        const minSpan = 7 * 86400000;
+        const maxSpan = 365 * 86400000;
+
+        if (newSpan < minSpan) newSpan = minSpan;
+        if (newSpan > maxSpan) newSpan = maxSpan;
+
+        const newMin = Math.max(minAllowedTs, maxTs - newSpan);
+        StockApp.marketOverview.currentMin = newMin;
+
+        StockApp.charts.marketOverview.zoomX(newMin, maxTs);
+        updateActiveTimeframeButton(newSpan);
+      }, { passive: false });
+    }
+
+    // 4. Kéo dãn / Thu nhỏ trục tung (Y-Axis) bên phải kiểu TradingView
+    function initYAxisDragInteraction() {
+      const handle = document.getElementById("marketYAxisDragHandle");
+      if (!handle || handle._dragBound) return;
+      handle._dragBound = true;
+
+      let isDragging = false;
+      let startY = 0;
+      let baseMin = 0;
+      let baseMax = 0;
+
+      handle.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startY = e.clientY;
+        document.body.style.cursor = 'ns-resize';
+        document.body.style.userSelect = 'none';
+
+        // Lấy min/max trục y hiện tại từ dữ liệu đang hiển thị
+        const fullData = StockApp.marketOverview.full1YearData || [];
+        const currentMinTs = StockApp.marketOverview.currentMin || (fullData[fullData.length - 1].x - 30 * 86400000);
+        const visiblePrices = fullData.filter(d => d.x >= currentMinTs).map(d => d.y);
+
+        const currentOptions = StockApp.charts.marketOverview?.w?.config?.yaxis?.[0] || {};
+        baseMin = currentOptions.min != null ? currentOptions.min : Math.floor(Math.min(...visiblePrices) * 0.98);
+        baseMax = currentOptions.max != null ? currentOptions.max : Math.ceil(Math.max(...visiblePrices) * 1.02);
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging || !StockApp.charts.marketOverview) return;
+        const dy = e.clientY - startY;
+        const center = (baseMin + baseMax) / 2;
+        const halfSpan = (baseMax - baseMin) / 2;
+
+        // dy > 0: kéo xuống -> thu nhỏ biểu đồ (mở rộng biên độ trục Y)
+        // dy < 0: kéo lên -> kéo dãn biểu đồ (thu hẹp biên độ trục Y)
+        const factor = 1 + (dy / 180);
+        const newHalfSpan = Math.max(12, halfSpan * factor);
+
+        const newMin = Math.round(center - newHalfSpan);
+        const newMax = Math.round(center + newHalfSpan);
+
+        StockApp.charts.marketOverview.updateOptions({
+          yaxis: {
+            min: newMin,
+            max: newMax,
+            labels: {
+              formatter: val => val ? val.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) : '',
+              style: { fontSize: '10.5px', fontWeight: 600 }
+            }
+          }
+        }, false, false);
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          document.body.style.cursor = '';
+          document.body.style.userSelect = '';
+        }
+      });
+
+      // Nhấp đúp (Double-click) để tự động căn bằng trục Y (Auto-scale)
+      handle.addEventListener('dblclick', () => {
+        if (!StockApp.charts.marketOverview) return;
+        StockApp.charts.marketOverview.updateOptions({
+          yaxis: {
+            min: undefined,
+            max: undefined,
+            labels: {
+              formatter: val => val ? val.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) : '',
+              style: { fontSize: '10.5px', fontWeight: 600 }
+            }
+          }
+        }, false, false);
+      });
+    }
+
+    // 5. Nút chọn khung thời gian (1T, 3T, 6T, 1N)
     function setMarketTimeframe(tf) {
       StockApp.marketOverview.timeframe = tf;
-      const allTfs = ['1D', '1T', '3T', '6T', 'YTD', '1N', '3N', '5N', '10N', 'ALL'];
-      allTfs.forEach(t => {
+      if (!StockApp.charts.marketOverview || !StockApp.marketOverview.maxAllowedTs) return;
+
+      const maxTs = StockApp.marketOverview.maxAllowedTs;
+      let days = 30; // 1T mặc định
+      if (tf === '3T') days = 90;
+      else if (tf === '6T') days = 180;
+      else if (tf === '1N') days = 365;
+
+      const newMin = Math.max(StockApp.marketOverview.minAllowedTs, maxTs - (days * 86400000));
+      StockApp.marketOverview.currentMin = newMin;
+
+      // Reset auto-scale Y axis & zoom X
+      StockApp.charts.marketOverview.updateOptions({
+        yaxis: {
+          min: undefined,
+          max: undefined,
+          labels: {
+            formatter: val => val ? val.toLocaleString('vi-VN', { maximumFractionDigits: 1 }) : '',
+            style: { fontSize: '10.5px', fontWeight: 600 }
+          }
+        }
+      }, false, false);
+
+      StockApp.charts.marketOverview.zoomX(newMin, maxTs);
+
+      // Cập nhật badge % thay đổi
+      const fullData = StockApp.marketOverview.full1YearData || [];
+      const visibleData = fullData.filter(d => d.x >= newMin);
+      if (visibleData.length > 0) {
+        const startP = visibleData[0].y;
+        const endP = visibleData[visibleData.length - 1].y;
+        const diff = endP - startP;
+        const pct = ((diff / startP) * 100).toFixed(2);
+        const sign = diff >= 0 ? '+' : '';
+        const badge = document.getElementById("marketVnindex3mPct");
+        if (badge) {
+          badge.innerText = `${sign}${pct}%`;
+          badge.className = `${diff >= 0 ? 'text-emerald-500' : 'text-rose-500'} font-semibold`;
+        }
+      }
+
+      ['1T', '3T', '6T', '1N'].forEach(t => {
         const btn = document.getElementById(`tf-btn-${t}`);
         if (!btn) return;
         if (t === tf) {
-          btn.className = "px-2.5 py-1 rounded-lg font-semibold transition-all bg-[#0071e3] text-white shadow-sm";
+          btn.className = "px-3 py-1 rounded-lg font-semibold transition-all bg-[#0071e3] text-white shadow-sm";
         } else {
           btn.className = "px-2.5 py-1 rounded-lg font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text";
         }
       });
-      initMarketOverviewChart();
     }
 
-    // Set Market Chart Type: line / area / candlestick
-    function setMarketChartType(type) {
-      StockApp.marketOverview.chartType = type;
-      const btnLine = document.getElementById("chartTypeLineBtn");
-      const btnArea = document.getElementById("chartTypeAreaBtn");
-      const btnCandle = document.getElementById("chartTypeCandleBtn");
-
-      const activeClass = "px-2 py-0.5 rounded text-[11px] font-semibold bg-white dark:bg-[#3a3a3c] text-light-text dark:text-studio-text shadow-sm transition-all";
-      const inactiveClass = "px-2 py-0.5 rounded text-[11px] font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text";
-
-      if (btnLine) btnLine.className = type === 'line' ? activeClass : inactiveClass;
-      if (btnArea) btnArea.className = type === 'area' ? activeClass : inactiveClass;
-      if (btnCandle) btnCandle.className = type === 'candlestick' ? activeClass : inactiveClass;
-
-      initMarketOverviewChart();
+    // Đặt lại khung nhìn về 1 tháng mặc định
+    function resetMarketChartZoom() {
+      setMarketTimeframe('1T');
     }
 
-    // Set Market Chart Resolution Interval (day / week / month)
-    function setMarketInterval(interval) {
-      StockApp.marketOverview.interval = interval;
-      const btnDay = document.getElementById("intervalDayBtn");
-      const btnWeek = document.getElementById("intervalWeekBtn");
-      const btnMonth = document.getElementById("intervalMonthBtn");
+    function updateActiveTimeframeButton(spanMs) {
+      const days = spanMs / 86400000;
+      let activeTf = '1T';
+      if (days > 270) activeTf = '1N';
+      else if (days > 135) activeTf = '6T';
+      else if (days > 55) activeTf = '3T';
 
-      const activeClass = "px-2 py-0.5 rounded text-[11px] font-semibold bg-white dark:bg-[#3a3a3c] text-light-text dark:text-studio-text shadow-sm transition-all";
-      const inactiveClass = "px-2 py-0.5 rounded text-[11px] font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text";
-
-      if (btnDay) btnDay.className = interval === 'day' ? activeClass : inactiveClass;
-      if (btnWeek) btnWeek.className = interval === 'week' ? activeClass : inactiveClass;
-      if (btnMonth) btnMonth.className = interval === 'month' ? activeClass : inactiveClass;
-
-      initMarketOverviewChart();
-    }
-
-    // Toggle Moving Average Overlays (MA20, MA50, MA200)
-    function toggleMarketMA(maKey) {
-      if (maKey === 'MA20') {
-        StockApp.marketOverview.showMA20 = !StockApp.marketOverview.showMA20;
-        const btn = document.getElementById("toggleMA20Btn");
-        if (btn) {
-          btn.className = StockApp.marketOverview.showMA20
-            ? "px-2 py-0.5 rounded border border-amber-500/40 text-amber-500 font-semibold bg-amber-500/10 transition-all"
-            : "px-2 py-0.5 rounded border border-light-border dark:border-studio-border text-light-subtext dark:text-studio-muted transition-all";
-        }
-      } else if (maKey === 'MA50') {
-        StockApp.marketOverview.showMA50 = !StockApp.marketOverview.showMA50;
-        const btn = document.getElementById("toggleMA50Btn");
-        if (btn) {
-          btn.className = StockApp.marketOverview.showMA50
-            ? "px-2 py-0.5 rounded border border-cyan-500/40 text-cyan-400 font-semibold bg-cyan-500/10 transition-all"
-            : "px-2 py-0.5 rounded border border-light-border dark:border-studio-border text-light-subtext dark:text-studio-muted transition-all";
-        }
-      } else if (maKey === 'MA200') {
-        StockApp.marketOverview.showMA200 = !StockApp.marketOverview.showMA200;
-        const btn = document.getElementById("toggleMA200Btn");
-        if (btn) {
-          btn.className = StockApp.marketOverview.showMA200
-            ? "px-2 py-0.5 rounded border border-purple-500/40 text-purple-400 font-semibold bg-purple-500/10 transition-all"
-            : "px-2 py-0.5 rounded border border-light-border dark:border-studio-border text-light-subtext dark:text-studio-muted transition-all";
-        }
-      }
-      initMarketOverviewChart();
-    }
-
-    // Corporate Dividend Events Modal Logic
-    function openDividendModal() {
-      renderDividendTable();
-      document.getElementById("dividendModal").classList.remove("hidden");
-    }
-
-    function closeDividendModal() {
-      document.getElementById("dividendModal").classList.add("hidden");
-    }
-
-    function renderDividendTable() {
-      const tbody = document.getElementById("dividendTableBody");
-      if (!tbody) return;
-
-      const search = (document.getElementById("dividendSearchInput")?.value || "").trim().toUpperCase();
-      const typeFilter = document.getElementById("dividendTypeFilter")?.value || "ALL";
-
-      let list = [...(StockApp.dividendEvents || [])];
-      if (search) {
-        list = list.filter(item => item.symbol.includes(search) || item.name.toUpperCase().includes(search));
-      }
-      if (typeFilter !== 'ALL') {
-        list = list.filter(item => item.type.includes(typeFilter));
-      }
-
-      // Apply Excel column filters
-      const divFilters = StockApp.tableStates.dividend?.filters || {};
-      list = list.filter(item => {
-        for (const [col, valSet] of Object.entries(divFilters)) {
-          let v = getTableRowColValue('dividend', item, col);
-          if (typeof v === 'number') v = v.toLocaleString('en-US');
-          if (!valSet.has(String(v))) return false;
-        }
-        return true;
-      });
-
-      // Apply Column Sorting (Tăng / Giảm)
-      const { sortCol, sortDir } = StockApp.tableStates.dividend || {};
-      if (sortCol && sortDir) {
-        list.sort((a, b) => {
-          let valA = a[sortCol] !== undefined ? a[sortCol] : "";
-          let valB = b[sortCol] !== undefined ? b[sortCol] : "";
-          return sortDir === 'asc' 
-            ? String(valA).localeCompare(String(valB), 'vi') 
-            : String(valB).localeCompare(String(valA), 'vi');
-        });
-      }
-
-      if (list.length === 0) {
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="7" class="py-6 text-center text-light-subtext dark:text-studio-muted">
-              Không tìm thấy sự kiện cổ tức nào phù hợp.
-            </td>
-          </tr>
-        `;
-        updateTableHeaderIndicators('dividend');
-        lucide.createIcons();
-        return;
-      }
-
-      tbody.innerHTML = list.map(item => `
-        <tr class="hover:bg-light-elevated/40 dark:hover:bg-studio-elevated/40 transition-colors">
-          <td class="py-2.5 px-3 font-mono font-bold text-blue-500">
-            <span class="cursor-pointer hover:underline" onclick="closeDividendModal(); openCompanyModalBySymbol('${item.symbol}')">${item.symbol}</span>
-          </td>
-          <td class="py-2.5 px-3 text-light-text dark:text-studio-text font-medium">${item.name}</td>
-          <td class="py-2.5 px-3">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${item.type.includes('Tiền') ? 'bg-emerald-500/10 text-emerald-500' : 'bg-blue-500/10 text-blue-500'}">
-              ${item.type}
-            </span>
-          </td>
-          <td class="py-2.5 px-3 font-mono font-semibold text-light-text dark:text-studio-text">${item.ratio}</td>
-          <td class="py-2.5 px-3 font-mono text-light-subtext dark:text-studio-subtext">${item.exDate}</td>
-          <td class="py-2.5 px-3 font-mono text-light-subtext dark:text-studio-subtext">${item.payDate}</td>
-          <td class="py-2.5 px-3 text-center">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-medium bg-amber-500/10 text-amber-500">
-              ${item.status}
-            </span>
-          </td>
-        </tr>
-      `).join('');
-
-      updateTableHeaderIndicators('dividend');
-      lucide.createIcons();
-    }
-
-    /* =========================================================================
-       7. MODULE 4: BỘ LỌC ĐIỀU KIỆN MUA (KỸ THUẬT & ĐỊNH GIÁ P/E)
-       ========================================================================= */
-
-    // Switch between Buy Screener Preset Modes
-    function setBuyPresetMode(mode) {
-      StockApp.buyCriteria.mode = mode;
-
-      if (mode === 'both') {
-        StockApp.buyCriteria.filterMaAndBase = true;
-        StockApp.buyCriteria.filterLowestPeTop10 = true;
-      } else if (mode === 'ma_base') {
-        StockApp.buyCriteria.filterMaAndBase = true;
-        StockApp.buyCriteria.filterLowestPeTop10 = false;
-      } else if (mode === 'lowest_pe') {
-        StockApp.buyCriteria.filterMaAndBase = false;
-        StockApp.buyCriteria.filterLowestPeTop10 = true;
-      } else if (mode === 'all') {
-        StockApp.buyCriteria.filterMaAndBase = false;
-        StockApp.buyCriteria.filterLowestPeTop10 = false;
-      }
-
-      updateBuyFilterUI();
-      renderScreenerTable();
-    }
-
-    // Toggle individual criterion
-    function toggleBuyCriterion(critKey) {
-      if (critKey === 'ma_base') {
-        StockApp.buyCriteria.filterMaAndBase = !StockApp.buyCriteria.filterMaAndBase;
-      } else if (critKey === 'lowest_pe') {
-        StockApp.buyCriteria.filterLowestPeTop10 = !StockApp.buyCriteria.filterLowestPeTop10;
-      }
-
-      // Sync mode label
-      const { filterMaAndBase, filterLowestPeTop10 } = StockApp.buyCriteria;
-      if (filterMaAndBase && filterLowestPeTop10) {
-        StockApp.buyCriteria.mode = 'both';
-      } else if (filterMaAndBase && !filterLowestPeTop10) {
-        StockApp.buyCriteria.mode = 'ma_base';
-      } else if (!filterMaAndBase && filterLowestPeTop10) {
-        StockApp.buyCriteria.mode = 'lowest_pe';
-      } else {
-        StockApp.buyCriteria.mode = 'all';
-      }
-
-      updateBuyFilterUI();
-      renderScreenerTable();
-    }
-
-    // Update UI elements for Buy Filters
-    function updateBuyFilterUI() {
-      const { filterMaAndBase, filterLowestPeTop10, mode } = StockApp.buyCriteria;
-
-      // Update status badge
-      const statusBadge = document.getElementById("buyFilterStatusBadge");
-      if (statusBadge) {
-        if (filterMaAndBase && filterLowestPeTop10) {
-          statusBadge.innerText = "Đang áp dụng: Cả 2 điều kiện";
-          statusBadge.className = "px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30";
-        } else if (filterMaAndBase) {
-          statusBadge.innerText = "Đang áp dụng: Tiêu chuẩn Kỹ thuật";
-          statusBadge.className = "px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30";
-        } else if (filterLowestPeTop10) {
-          statusBadge.innerText = "Đang áp dụng: Tiêu chuẩn Định giá (P/E)";
-          statusBadge.className = "px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/30";
+      ['1T', '3T', '6T', '1N'].forEach(t => {
+        const btn = document.getElementById(`tf-btn-${t}`);
+        if (!btn) return;
+        if (t === activeTf) {
+          btn.className = "px-3 py-1 rounded-lg font-semibold transition-all bg-[#0071e3] text-white shadow-sm";
         } else {
-          statusBadge.innerText = "⚠️ Chưa chọn tiêu chí (Hiện tất cả CP)";
-          statusBadge.className = "px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30";
+          btn.className = "px-2.5 py-1 rounded-lg font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text";
         }
-      }
-
-      // Update Card 1 (MA + Base)
-      const cardMa = document.getElementById("cardCriterionMaBase");
-      const checkMa = document.getElementById("checkCriterionMaBase");
-      const hintMa = document.getElementById("hintCriterionMaBase");
-      if (cardMa && checkMa) {
-        if (filterMaAndBase) {
-          cardMa.className = "cursor-pointer p-5 rounded-2xl border-2 transition-all bg-emerald-500/[0.08] dark:bg-emerald-950/25 border-emerald-500 shadow-lg shadow-emerald-500/10 ring-2 ring-emerald-500/20 relative overflow-hidden group select-none";
-          checkMa.innerHTML = `
-            <div class="flex items-center space-x-2 px-3.5 py-1.5 rounded-xl bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-600/30">
-              <div class="w-4 h-4 rounded-md bg-white text-emerald-600 flex items-center justify-center shrink-0">
-                <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
-              </div>
-              <span class="tracking-wide">Đã chọn</span>
-            </div>
-          `;
-          if (hintMa) {
-            hintMa.innerHTML = `
-              <span class="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1.5">
-                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Đang áp dụng tiêu chuẩn Kỹ thuật này
-              </span>
-              <span class="text-[11px] text-light-subtext dark:text-studio-muted group-hover:text-rose-500 font-medium transition-colors">Bấm để bỏ chọn ✕</span>
-            `;
-          }
-        } else {
-          cardMa.className = "cursor-pointer p-5 rounded-2xl border-2 border-dashed transition-all bg-light-elevated/40 dark:bg-studio-elevated/30 border-light-border dark:border-studio-border hover:border-emerald-500/60 hover:bg-emerald-500/5 relative overflow-hidden group select-none";
-          checkMa.innerHTML = `
-            <div class="flex items-center space-x-2 px-3.5 py-1.5 rounded-xl bg-light-surface dark:bg-studio-surface border-2 border-dashed border-emerald-500/50 text-emerald-600 dark:text-emerald-400 font-bold text-xs shadow-sm group-hover:border-emerald-500 group-hover:bg-emerald-500 group-hover:text-white transition-all">
-              <div class="w-4 h-4 rounded-md border-2 border-emerald-500 group-hover:border-white flex items-center justify-center shrink-0"></div>
-              <span class="tracking-wide">Chọn</span>
-            </div>
-          `;
-          if (hintMa) {
-            hintMa.innerHTML = `
-              <span class="text-light-subtext dark:text-studio-muted flex items-center gap-1.5 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                <i data-lucide="mouse-pointer-click" class="w-4 h-4 text-emerald-500"></i> Bấm vào thẻ này để kích hoạt điều kiện
-              </span>
-              <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 group-hover:underline">Bấm để chọn →</span>
-            `;
-          }
-        }
-      }
-
-      // Update Card 2 (Top 10 Lowest P/E)
-      const cardPe = document.getElementById("cardCriterionLowestPe");
-      const checkPe = document.getElementById("checkCriterionLowestPe");
-      const hintPe = document.getElementById("hintCriterionLowestPe");
-      if (cardPe && checkPe) {
-        if (filterLowestPeTop10) {
-          cardPe.className = "cursor-pointer p-5 rounded-2xl border-2 transition-all bg-blue-500/[0.08] dark:bg-blue-950/25 border-blue-500 shadow-lg shadow-blue-500/10 ring-2 ring-blue-500/20 relative overflow-hidden group select-none";
-          checkPe.innerHTML = `
-            <div class="flex items-center space-x-2 px-3.5 py-1.5 rounded-xl bg-blue-600 text-white font-bold text-xs shadow-md shadow-blue-600/30">
-              <div class="w-4 h-4 rounded-md bg-white text-blue-600 flex items-center justify-center shrink-0">
-                <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
-              </div>
-              <span class="tracking-wide">Đã chọn</span>
-            </div>
-          `;
-          if (hintPe) {
-            hintPe.innerHTML = `
-              <span class="text-blue-600 dark:text-blue-400 font-semibold flex items-center gap-1.5">
-                <i data-lucide="check-circle-2" class="w-4 h-4 text-blue-500"></i> Đang áp dụng lọc theo Top 10 P/E thấp nhất
-              </span>
-              <span class="text-[11px] text-light-subtext dark:text-studio-muted group-hover:text-rose-500 font-medium transition-colors">Bấm để bỏ chọn ✕</span>
-            `;
-          }
-        } else {
-          cardPe.className = "cursor-pointer p-5 rounded-2xl border-2 border-dashed transition-all bg-light-elevated/40 dark:bg-studio-elevated/30 border-light-border dark:border-studio-border hover:border-blue-500/60 hover:bg-blue-500/5 relative overflow-hidden group select-none";
-          checkPe.innerHTML = `
-            <div class="flex items-center space-x-2 px-3.5 py-1.5 rounded-xl bg-light-surface dark:bg-studio-surface border-2 border-dashed border-blue-500/50 text-blue-600 dark:text-blue-400 font-bold text-xs shadow-sm group-hover:border-blue-500 group-hover:bg-blue-500 group-hover:text-white transition-all">
-              <div class="w-4 h-4 rounded-md border-2 border-blue-500 group-hover:border-white flex items-center justify-center shrink-0"></div>
-              <span class="tracking-wide">Chọn</span>
-            </div>
-          `;
-          if (hintPe) {
-            hintPe.innerHTML = `
-              <span class="text-light-subtext dark:text-studio-muted flex items-center gap-1.5 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                <i data-lucide="mouse-pointer-click" class="w-4 h-4 text-blue-500"></i> Bấm vào thẻ này để kích hoạt điều kiện
-              </span>
-              <span class="text-[11px] font-bold text-blue-600 dark:text-blue-400 group-hover:underline">Bấm để chọn →</span>
-            `;
-          }
-        }
-      }
-
-      // Update Feedback Banner
-      const feedbackBanner = document.getElementById("buyFilterFeedbackBanner");
-      if (feedbackBanner) {
-        if (filterMaAndBase && filterLowestPeTop10) {
-          feedbackBanner.innerHTML = `
-            <div class="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-              <div class="flex items-center space-x-2.5">
-                <span class="w-7 h-7 rounded-lg bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-sm"><i data-lucide="sparkles" class="w-4 h-4"></i></span>
-                <div>
-                  <div class="font-bold text-xs uppercase tracking-wide">Đang lọc tối ưu: Cả 2 điều kiện (Khuyên dùng)</div>
-                  <div class="text-[11px] opacity-90">Bảng bên dưới chỉ hiển thị cổ phiếu đồng thời đạt cả Kỹ thuật (vượt MA10, MA50 &amp; nền ≥ 3T) và Định giá (Top 10 P/E thấp nhất).</div>
-                </div>
-              </div>
-              <span class="shrink-0 px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold font-mono text-xs border border-emerald-500/30" id="feedbackCountBadge">Đang cập nhật...</span>
-            </div>
-          `;
-        } else if (filterMaAndBase) {
-          feedbackBanner.innerHTML = `
-            <div class="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-              <div class="flex items-center space-x-2.5">
-                <span class="w-7 h-7 rounded-lg bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-sm"><i data-lucide="trending-up" class="w-4 h-4"></i></span>
-                <div>
-                  <div class="font-bold text-xs uppercase tracking-wide">Đang lọc: Tiêu chuẩn Kỹ thuật</div>
-                  <div class="text-[11px] opacity-90">Chỉ hiển thị cổ phiếu có giá trên MA10 &amp; MA50 và nền tích lũy ≥ 3 tháng. Bạn có thể tick thêm ô Định giá để thu hẹp kết quả.</div>
-                </div>
-              </div>
-              <span class="shrink-0 px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold font-mono text-xs border border-emerald-500/30" id="feedbackCountBadge">Đang cập nhật...</span>
-            </div>
-          `;
-        } else if (filterLowestPeTop10) {
-          feedbackBanner.innerHTML = `
-            <div class="p-3.5 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-800 dark:text-blue-300 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-              <div class="flex items-center space-x-2.5">
-                <span class="w-7 h-7 rounded-lg bg-blue-500 text-white flex items-center justify-center shrink-0 shadow-sm"><i data-lucide="coins" class="w-4 h-4"></i></span>
-                <div>
-                  <div class="font-bold text-xs uppercase tracking-wide">Đang lọc: Tiêu chuẩn Định giá (P/E)</div>
-                  <div class="text-[11px] opacity-90">Chỉ hiển thị Top 10 cổ phiếu có P/E thấp nhất toàn thị trường. Bạn có thể tick thêm ô Kỹ thuật để chọn cổ phiếu có dòng tiền bứt phá.</div>
-                </div>
-              </div>
-              <span class="shrink-0 px-2.5 py-1 rounded-lg bg-blue-500/20 text-blue-700 dark:text-blue-300 font-bold font-mono text-xs border border-blue-500/30" id="feedbackCountBadge">Đang cập nhật...</span>
-            </div>
-          `;
-        } else {
-          feedbackBanner.innerHTML = `
-            <div class="p-3.5 rounded-xl bg-amber-500/10 border-2 border-amber-500/40 text-amber-900 dark:text-amber-200 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm">
-              <div class="flex items-center space-x-3">
-                <span class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-sm"><i data-lucide="alert-triangle" class="w-4.5 h-4.5"></i></span>
-                <div>
-                  <div class="font-bold text-xs sm:text-sm uppercase tracking-wide">Chưa chọn điều kiện lọc nào • Đang hiển thị tất cả cổ phiếu</div>
-                  <div class="text-[11px] opacity-90 mt-0.5">Vui lòng <strong>bấm tick chọn vào 1 hoặc cả 2 thẻ tiêu chuẩn ở trên</strong> để hệ thống tự động lọc ra các cổ phiếu thỏa mãn điểm mua tối ưu!</div>
-                </div>
-              </div>
-              <button onclick="setBuyPresetMode('both')" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md shadow-emerald-600/30 shrink-0 transition-all flex items-center space-x-1.5 active:scale-95">
-                <i data-lucide="check-check" class="w-3.5 h-3.5"></i>
-                <span>Tick cả 2 điều kiện ngay</span>
-              </button>
-            </div>
-          `;
-        }
-      }
-
-      lucide.createIcons();
-    }
-
-    function resetScreenerFilters() {
-      const searchInput = document.getElementById("screenerSearchInput");
-      if (searchInput) searchInput.value = "";
-      setBuyPresetMode('both');
-    }
-
-    // Mapping signal key to friendly Vietnamese display badge
-    const SIGNAL_NAMES = {
-      higher_low: "Đáy sau cao hơn",
-      double_bottom: "2 Đáy",
-      triple_bottom: "3 Đáy",
-      vcp_pattern: "Mẫu hình VCP",
-      bullish_divergence: "Phân kỳ (+) RSI",
-      volume_dryup: "Khối lượng cạn kiệt",
-      breakout_day: "Breakout Day",
-      test_cung: "Test cung chuẩn",
-      above_ma: "Vượt MA",
-      ma_slope_up: "MA hướng lên"
-    };
-
-    function renderScreenerTable(updateCounter = true) {
-      const tableBody = document.getElementById("screenerTableBody");
-      if (!tableBody) return;
-
-      const searchTerm = (document.getElementById("screenerSearchInput")?.value || "").trim().toUpperCase();
-
-      // 1. Calculate dynamically the Top 10 lowest P/E across universe (stocks with pe > 0)
-      const validPeStocks = [...StockApp.stocks].filter(s => s.pe && s.pe > 0).sort((a, b) => a.pe - b.pe);
-      const top10PeMap = new Map();
-      validPeStocks.slice(0, 10).forEach((st, idx) => {
-        top10PeMap.set(st.symbol, idx + 1); // 1-based rank
       });
+    }
 
-      // 2. Filter stocks according to active criteria
-      const { filterMaAndBase, filterLowestPeTop10 } = StockApp.buyCriteria;
+    // 6. Bộ đếm nhịp Realtime chuẩn xác 1 lần / phút cho các chỉ số
+    function startMarketRealtimeMinuteTimer() {
+      if (StockApp.marketRealtimeTimerId) clearInterval(StockApp.marketRealtimeTimerId);
 
-      let filtered = StockApp.stocks.filter(st => {
-        // Search term filter
-        if (searchTerm) {
-          const matchSym = st.symbol.includes(searchTerm);
-          const matchName = (st.name || "").toUpperCase().includes(searchTerm);
-          const matchInd = (st.industry || "").toUpperCase().includes(searchTerm);
-          if (!matchSym && !matchName && !matchInd) return false;
+      function tickMinuteRealtime() {
+        // Tần suất 1 lần/phút: Cập nhật nhịp thị trường và đồng bộ
+        const now = new Date();
+        const hh = String(now.getHours()).padStart(2, '0');
+        const mm = String(now.getMinutes()).padStart(2, '0');
+        const ss = String(now.getSeconds()).padStart(2, '0');
+
+        const pulseEl = document.getElementById("marketChartUpdatePulse");
+        if (pulseEl) pulseEl.innerText = `1 phút / lần (Khớp ${hh}:${mm})`;
+
+        const dateHeader = document.getElementById("m4MarketDateHeader");
+        if (dateHeader) {
+          dateHeader.innerText = `Cập nhật ${hh}:${mm} ${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
         }
 
-        // Criterion 1: Giá trên MA 10 & MA 50 + Tích lũy nền từ 3 tháng trở lên
-        if (filterMaAndBase) {
-          const passesMA = st.aboveMA10_50 === true || (st.diffMA10 > 0 && st.diffMA50 > 0);
-          const passesBase = (st.baseMonths || 0) >= 3.0;
-          if (!passesMA || !passesBase) return false;
-        }
-
-        // Criterion 2: 10 cổ phiếu có PE thấp nhất
-        if (filterLowestPeTop10) {
-          if (!top10PeMap.has(st.symbol)) return false;
-        }
-
-        return true;
-      });
-
-      // 3. Apply Excel-like Column Filters
-      const screenerFilters = StockApp.tableStates.screener?.filters || {};
-      filtered = filtered.filter(st => {
-        for (const [col, valSet] of Object.entries(screenerFilters)) {
-          let v = getTableRowColValue('screener', st, col);
-          if (typeof v === 'number') v = v.toLocaleString('en-US');
-          if (!valSet.has(String(v))) return false;
-        }
-        return true;
-      });
-
-      // 4. Apply Column Sorting (Tăng / Giảm)
-      const { sortCol, sortDir } = StockApp.tableStates.screener || {};
-      if (sortCol && sortDir) {
-        filtered.sort((a, b) => {
-          let valA = a[sortCol];
-          let valB = b[sortCol];
-          if (sortCol === 'aboveMA10_50') {
-            valA = a.aboveMA10_50 ? 1 : 0;
-            valB = b.aboveMA10_50 ? 1 : 0;
-          }
-          if (typeof valA === 'number' && typeof valB === 'number') {
-            return sortDir === 'asc' ? valA - valB : valB - valA;
-          }
-          return sortDir === 'asc' 
-            ? String(valA || "").localeCompare(String(valB || ""), 'vi') 
-            : String(valB || "").localeCompare(String(valA || ""), 'vi');
-        });
-      } else if (filterLowestPeTop10) {
-        filtered.sort((a, b) => a.pe - b.pe);
-      } else {
-        filtered.sort((a, b) => b.aiScore - a.aiScore);
-      }
-
-      if (updateCounter) {
-        const countBadge = document.getElementById("screenerResultCount");
-        if (countBadge) {
-          countBadge.innerText = `${filtered.length} cổ phiếu thỏa mãn`;
-        }
-        const fbCountBadge = document.getElementById("feedbackCountBadge");
-        if (fbCountBadge) {
-          fbCountBadge.innerText = `${filtered.length} cổ phiếu thỏa mãn`;
+        // Tự động gọi đồng bộ từ Server hoặc cập nhật vi biến động thị trường nếu đang chạy offline
+        if (window.StockRealtimeService && typeof window.StockRealtimeService.sync === 'function') {
+          window.StockRealtimeService.sync(false);
         }
       }
 
-      if (filtered.length === 0) {
-        const fbCountBadge = document.getElementById("feedbackCountBadge");
-        if (fbCountBadge) {
-          fbCountBadge.innerText = `0 cổ phiếu thỏa mãn`;
-        }
-        tableBody.innerHTML = `
-          <tr>
-            <td colspan="7" class="py-10 text-center text-light-subtext dark:text-studio-muted">
-              <i data-lucide="filter-x" class="w-8 h-8 mx-auto mb-2 opacity-50 text-emerald-500"></i>
-              <div class="font-semibold text-sm text-light-text dark:text-studio-text">Không tìm thấy cổ phiếu thỏa mãn đồng thời tiêu chí lọc đã chọn</div>
-              <p class="text-xs mt-1">Hãy thử chọn preset riêng từng điều kiện hoặc chuyển sang "Tất cả cổ phiếu" để xem chi tiết.</p>
-            </td>
-          </tr>
-        `;
-        const scrEmptyInfo = document.getElementById("screenerPaginationInfo");
-        if (scrEmptyInfo) scrEmptyInfo.textContent = "Không có kết quả";
-        const scrEmptyBtns = document.getElementById("screenerPaginationButtons");
-        if (scrEmptyBtns) scrEmptyBtns.innerHTML = "";
-        updateTableHeaderIndicators('screener');
-        lucide.createIcons();
-        return;
-      }
-
-      // Pagination calculation for Screener (Module 4)
-      StockApp.pagination = StockApp.pagination || {};
-      StockApp.pagination.screener = StockApp.pagination.screener || { page: 1, pageSize: 25 };
-      const scrPageSize = StockApp.pagination.screener.pageSize || 25;
-      const scrTotalPages = Math.max(1, Math.ceil(filtered.length / scrPageSize));
-      if (StockApp.pagination.screener.page > scrTotalPages) {
-        StockApp.pagination.screener.page = scrTotalPages;
-      }
-      const scrCurrentPage = StockApp.pagination.screener.page;
-      const scrStart = (scrCurrentPage - 1) * scrPageSize;
-      const scrEnd = Math.min(scrStart + scrPageSize, filtered.length);
-      const pagedScreener = filtered.slice(scrStart, scrEnd);
-
-      const scrInfoEl = document.getElementById("screenerPaginationInfo");
-      if (scrInfoEl) {
-        scrInfoEl.textContent = `Hiển thị ${scrStart + 1}-${scrEnd} trên tổng số ${filtered.length} mã (Trang ${scrCurrentPage}/${scrTotalPages})`;
-      }
-      const scrBtnEl = document.getElementById("screenerPaginationButtons");
-      if (scrBtnEl) {
-        scrBtnEl.innerHTML = renderPaginationButtonsHTML('screener', scrCurrentPage, scrTotalPages);
-      }
-
-      tableBody.innerHTML = pagedScreener.map(st => {
-        const isPriceErr = st.price === "Lỗi" || st.price === null || st.price === undefined || isNaN(st.price);
-        const isUp = (!isPriceErr && typeof st.change === 'number') ? st.change >= 0 : false;
-        const peRank = top10PeMap.get(st.symbol);
-        const isTop10Pe = !!peRank;
-
-        // MA Position Status
-        const maPassed = st.aboveMA10_50 === true || (typeof st.diffMA10 === 'number' && typeof st.diffMA50 === 'number' && st.diffMA10 > 0 && st.diffMA50 > 0);
-        const maBadge = isPriceErr 
-          ? `<span class="text-rose-500 font-semibold text-xs">Lỗi</span>` 
-          : (maPassed
-            ? `<div class="inline-flex items-center text-emerald-600 dark:text-emerald-400 font-medium">
-                 <i data-lucide="check-circle-2" class="w-3.5 h-3.5 mr-1 text-emerald-500 shrink-0"></i>
-                 <span>Trên MA10 (+${st.diffMA10}%) &amp; MA50 (+${st.diffMA50}%)</span>
-               </div>`
-            : `<div class="inline-flex items-center text-rose-500 font-medium">
-                 <i data-lucide="alert-circle" class="w-3.5 h-3.5 mr-1 text-rose-500 shrink-0"></i>
-                 <span>Dưới MA (${st.diffMA10 < 0 ? 'MA10 ' + st.diffMA10 + '%' : 'MA50 ' + st.diffMA50 + '%'})</span>
-               </div>`);
-
-        // Base Consolidation Status
-        const baseMonths = st.baseMonths || 0;
-        const basePassed = baseMonths >= 3.0;
-        const baseBadge = basePassed
-          ? `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-               <i data-lucide="check" class="w-3 h-3 mr-1 text-emerald-500"></i>${baseMonths} tháng (≥ 3T)
-             </span>`
-          : `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
-               ${baseMonths} tháng (&lt; 3T)
-             </span>`;
-
-        // P/E Badge
-        const peVal = typeof st.pe === 'number' ? `${st.pe.toFixed(1)}x` : (st.pe === 'Lỗi' ? 'Lỗi' : `${st.pe}x`);
-        const peBadge = isTop10Pe
-          ? `<div class="flex items-center justify-end space-x-1">
-               <span class="font-mono font-bold text-light-text dark:text-studio-text">${peVal}</span>
-               <span class="px-1.5 py-0.2 rounded text-[10px] font-semibold bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/25" title="Top ${peRank} P/E thấp nhất">
-                 #${peRank}
-               </span>
-             </div>`
-          : `<span class="font-mono text-light-subtext dark:text-studio-subtext">${peVal}</span>`;
-
-        const scPriceHtml = isPriceErr ? '<span class="text-rose-500 font-bold">Lỗi</span>' : `${Number(st.price).toLocaleString('en-US')} đ`;
-        const scChangeHtml = isPriceErr ? '<span class="text-rose-500 font-bold">Lỗi</span>' : `${isUp ? '+' : ''}${st.change}%`;
-        const changeColor = isPriceErr ? 'text-rose-500' : (isUp ? 'text-emerald-500' : 'text-rose-500');
-
-        return `
-          <tr id="screener-row-${st.symbol}" class="hover:bg-light-elevated/60 dark:hover:bg-studio-elevated/60 transition-colors">
-            <td class="py-3 px-3">
-              <div class="font-bold font-mono text-sm text-blue-600 dark:text-studio-blueLight cursor-pointer hover:underline flex items-center space-x-1.5" onclick="openCompanyModalBySymbol('${st.symbol}')">
-                <span>${st.symbol}</span>
-                ${(maPassed && basePassed && isTop10Pe) ? '<span class="w-2 h-2 rounded-full bg-emerald-500" title="Đạt cả 2 điều kiện Mua"></span>' : ''}
-              </div>
-              <div class="text-[10px] text-light-subtext dark:text-studio-muted truncate max-w-[130px]">${st.name}</div>
-            </td>
-            <td class="py-3 px-3 text-light-subtext dark:text-studio-subtext text-[11px]">${st.industry}</td>
-            <td id="screener-price-${st.symbol}" class="py-3 px-3 text-right font-mono font-semibold">${scPriceHtml}</td>
-            <td id="screener-change-${st.symbol}" class="py-3 px-3 text-right font-mono font-semibold ${changeColor}">
-              ${scChangeHtml}
-            </td>
-            <td id="screener-pe-${st.symbol}" class="py-3 px-3 text-right">
-              ${peBadge}
-            </td>
-            <td id="screener-ma-${st.symbol}" class="py-3 px-3 text-xs">
-              ${maBadge}
-            </td>
-            <td class="py-3 px-3 text-center">
-              ${baseBadge}
-            </td>
-          </tr>
-        `;
-      }).join('');
-
-      updateTableHeaderIndicators('screener');
-      lucide.createIcons();
-    }
-
-    /* =========================================================================
-       8. MODULE 3: DOANH NGHIỆP & BỘ LỌC CƠ BẢN
-       ========================================================================= */
-    
-    /* =========================================================================
-       PAGINATION ENGINE (VN100 - MODULE 3 & MODULE 4)
-       ========================================================================= */
-    StockApp.pagination = StockApp.pagination || {
-      fundamental: { page: 1, pageSize: 25 },
-      screener: { page: 1, pageSize: 25 }
-    };
-
-    function renderPaginationButtonsHTML(type, currentPage, totalPages) {
-      if (totalPages <= 1) return '';
-      let html = '';
-      const fnName = type === 'fundamental' ? 'changeFundamentalPage' : 'changeScreenerPage';
-
-      // Prev button
-      const prevDisabled = currentPage <= 1 ? 'disabled opacity-30 cursor-not-allowed' : 'hover:bg-light-elevated dark:hover:bg-studio-elevated cursor-pointer';
-      html += `<button onclick="${fnName}(${currentPage - 1})" ${currentPage <= 1 ? 'disabled' : ''} class="px-2 py-1 rounded border border-light-border dark:border-studio-border text-xs ${prevDisabled}">Trước</button>`;
-
-      // Page numbers (smart sliding window)
-      let startP = Math.max(1, currentPage - 2);
-      let endP = Math.min(totalPages, startP + 4);
-      if (endP - startP < 4) startP = Math.max(1, endP - 4);
-
-      if (startP > 1) {
-        html += `<button onclick="${fnName}(1)" class="w-7 h-7 flex items-center justify-center rounded border border-light-border dark:border-studio-border text-xs hover:bg-light-elevated dark:hover:bg-studio-elevated">1</button>`;
-        if (startP > 2) html += `<span class="px-1 text-light-subtext dark:text-studio-muted">...</span>`;
-      }
-
-      for (let p = startP; p <= endP; p++) {
-        if (p === currentPage) {
-          html += `<button class="w-7 h-7 flex items-center justify-center rounded font-semibold bg-blue-600 text-white text-xs shadow-sm">${p}</button>`;
-        } else {
-          html += `<button onclick="${fnName}(${p})" class="w-7 h-7 flex items-center justify-center rounded border border-light-border dark:border-studio-border text-xs hover:bg-light-elevated dark:hover:bg-studio-elevated">${p}</button>`;
-        }
-      }
-
-      if (endP < totalPages) {
-        if (endP < totalPages - 1) html += `<span class="px-1 text-light-subtext dark:text-studio-muted">...</span>`;
-        html += `<button onclick="${fnName}(${totalPages})" class="w-7 h-7 flex items-center justify-center rounded border border-light-border dark:border-studio-border text-xs hover:bg-light-elevated dark:hover:bg-studio-elevated">${totalPages}</button>`;
-      }
-
-      // Next button
-      const nextDisabled = currentPage >= totalPages ? 'disabled opacity-30 cursor-not-allowed' : 'hover:bg-light-elevated dark:hover:bg-studio-elevated cursor-pointer';
-      html += `<button onclick="${fnName}(${currentPage + 1})" ${currentPage >= totalPages ? 'disabled' : ''} class="px-2 py-1 rounded border border-light-border dark:border-studio-border text-xs ${nextDisabled}">Sau</button>`;
-
-      return html;
-    }
-
-    function changeFundamentalPage(newPage) {
-      if (!StockApp.pagination) StockApp.pagination = {};
-      if (!StockApp.pagination.fundamental) StockApp.pagination.fundamental = { page: 1, pageSize: 25 };
-      StockApp.pagination.fundamental.page = Math.max(1, parseInt(newPage) || 1);
-      renderFundamentalTable();
-      const el = document.getElementById("fundamentalTable");
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    function changeFundamentalPageSize(newSize) {
-      if (!StockApp.pagination) StockApp.pagination = {};
-      if (!StockApp.pagination.fundamental) StockApp.pagination.fundamental = { page: 1, pageSize: 25 };
-      StockApp.pagination.fundamental.pageSize = parseInt(newSize) || 25;
-      StockApp.pagination.fundamental.page = 1;
-      renderFundamentalTable();
-    }
-
-    function changeScreenerPage(newPage) {
-      if (!StockApp.pagination) StockApp.pagination = {};
-      if (!StockApp.pagination.screener) StockApp.pagination.screener = { page: 1, pageSize: 25 };
-      StockApp.pagination.screener.page = Math.max(1, parseInt(newPage) || 1);
-      renderScreenerTable();
-      const el = document.getElementById("screenerTable");
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    function changeScreenerPageSize(newSize) {
-      if (!StockApp.pagination) StockApp.pagination = {};
-      if (!StockApp.pagination.screener) StockApp.pagination.screener = { page: 1, pageSize: 25 };
-      StockApp.pagination.screener.pageSize = parseInt(newSize) || 25;
-      StockApp.pagination.screener.page = 1;
-      renderScreenerTable();
-    }
-
-
-    function renderFundamentalTable() {
-      const tableBody = document.getElementById("fundamentalTableBody");
-      if (!tableBody) return;
-
-      const minVolume = parseInt(document.getElementById("filterMinVolume")?.value || "50000");
-      const minProfitGrowth = parseFloat(document.getElementById("filterMinProfitGrowth")?.value || "-999");
-      const minRevGrowth = parseFloat(document.getElementById("filterMinRevGrowth")?.value || "-999");
-      const capTier = document.getElementById("filterCapTier")?.value || "ALL";
-
-      let filtered = StockApp.stocks.filter(st => {
-        if (st.volume < minVolume) return false;
-        if (st.profitGrowth < minProfitGrowth) return false;
-        if (st.revGrowth < minRevGrowth) return false;
-        if (capTier !== 'ALL' && st.capTier !== capTier) return false;
-        return true;
-      });
-
-      // Apply Excel column filters
-      const fundFilters = StockApp.tableStates.fundamental?.filters || {};
-      filtered = filtered.filter(st => {
-        for (const [col, valSet] of Object.entries(fundFilters)) {
-          let v = getTableRowColValue('fundamental', st, col);
-          if (typeof v === 'number') v = v.toLocaleString('en-US');
-          if (!valSet.has(String(v))) return false;
-        }
-        return true;
-      });
-
-      // Apply Column sorting
-      const { sortCol, sortDir } = StockApp.tableStates.fundamental || {};
-      if (sortCol && sortDir) {
-        filtered.sort((a, b) => {
-          let valA = a[sortCol] !== undefined ? a[sortCol] : 0;
-          let valB = b[sortCol] !== undefined ? b[sortCol] : 0;
-          if (typeof valA === 'number' && typeof valB === 'number') {
-            return sortDir === 'asc' ? valA - valB : valB - valA;
-          }
-          return sortDir === 'asc' 
-            ? String(valA || "").localeCompare(String(valB || ""), 'vi') 
-            : String(valB || "").localeCompare(String(valA || ""), 'vi');
-        });
-      }
-
-      const countBadge = document.getElementById("fundamentalMatchCount");
-      if (countBadge) countBadge.innerText = `${filtered.length} doanh nghiệp thỏa điều kiện`;
-
-      // Keep Criteria checklist synced with current filters
-      const currentSelectedStock = StockApp.stocks.find(s => s.symbol === StockApp.selectedCompany) || StockApp.stocks[0];
-      if (typeof updateCompanyCriteriaChecklist === 'function') {
-        updateCompanyCriteriaChecklist(currentSelectedStock);
-      }
-
-      if (filtered.length === 0) {
-        tableBody.innerHTML = `
-          <tr>
-            <td colspan="11" class="py-8 text-center text-light-subtext dark:text-studio-muted">
-              Không có doanh nghiệp nào thỏa mãn tất cả tiêu chí cơ bản đã chọn.
-            </td>
-          </tr>
-        `;
-        const infoEl = document.getElementById("fundPaginationInfo");
-        if (infoEl) infoEl.textContent = "Không có kết quả";
-        const btnEl = document.getElementById("fundPaginationButtons");
-        if (btnEl) btnEl.innerHTML = "";
-        return;
-      }
-
-      // Pagination calculation
-      StockApp.pagination = StockApp.pagination || {};
-      StockApp.pagination.fundamental = StockApp.pagination.fundamental || { page: 1, pageSize: 25 };
-      const fundPageSize = StockApp.pagination.fundamental.pageSize || 25;
-      const fundTotalPages = Math.max(1, Math.ceil(filtered.length / fundPageSize));
-      if (StockApp.pagination.fundamental.page > fundTotalPages) {
-        StockApp.pagination.fundamental.page = fundTotalPages;
-      }
-      const fundCurrentPage = StockApp.pagination.fundamental.page;
-      const fundStart = (fundCurrentPage - 1) * fundPageSize;
-      const fundEnd = Math.min(fundStart + fundPageSize, filtered.length);
-      const pagedFiltered = filtered.slice(fundStart, fundEnd);
-
-      const fundInfoEl = document.getElementById("fundPaginationInfo");
-      if (fundInfoEl) {
-        fundInfoEl.textContent = `Hiển thị ${fundStart + 1}-${fundEnd} trên tổng số ${filtered.length} mã (Trang ${fundCurrentPage}/${fundTotalPages})`;
-      }
-      const fundBtnEl = document.getElementById("fundPaginationButtons");
-      if (fundBtnEl) {
-        fundBtnEl.innerHTML = renderPaginationButtonsHTML('fundamental', fundCurrentPage, fundTotalPages);
-      }
-
-      tableBody.innerHTML = pagedFiltered.map(st => {
-        const isSelected = st.symbol === StockApp.selectedCompany;
-        const rowClass = isSelected
-          ? "bg-blue-500/[0.12] dark:bg-blue-500/[0.18] ring-1 ring-blue-500/50 cursor-pointer font-medium"
-          : "hover:bg-light-elevated/60 dark:hover:bg-studio-elevated/60 transition-colors cursor-pointer";
-
-        const capStr = st.marketCapTỷ === "Lỗi" ? '<span class="text-rose-500 font-semibold">Lỗi</span>' : (typeof st.marketCapTỷ === 'number' ? st.marketCapTỷ.toLocaleString('en-US') : st.marketCapTỷ);
-        const volStr = st.volume === "Lỗi" ? '<span class="text-rose-500 font-semibold">Lỗi</span>' : (typeof st.volume === 'number' ? st.volume.toLocaleString('en-US') : st.volume);
-        const profitStr = st.profitGrowth === "Lỗi" ? '<span class="text-rose-500 font-semibold">Lỗi</span>' : `${st.profitGrowth >= 0 ? '+' : ''}${st.profitGrowth}%`;
-        const revStr = st.revGrowth === "Lỗi" ? '<span class="text-rose-500 font-semibold">Lỗi</span>' : `${st.revGrowth >= 0 ? '+' : ''}${st.revGrowth}%`;
-        const epsStr = st.eps === "Lỗi" ? '<span class="text-rose-500 font-semibold">Lỗi</span>' : (typeof st.eps === 'number' ? st.eps.toLocaleString('en-US') + ' đ' : st.eps);
-        const peStr = st.pe === "Lỗi" ? '<span class="text-rose-500 font-semibold">Lỗi</span>' : `${st.pe}x`;
-        const pbStr = st.pb === "Lỗi" ? '<span class="text-rose-500 font-semibold">Lỗi</span>' : `${st.pb}x`;
-        const roeStr = st.roe === "Lỗi" ? '<span class="text-rose-500 font-semibold">Lỗi</span>' : `${st.roe}%`;
-
-        return `
-          <tr id="fund-row-${st.symbol}" class="${rowClass}" onclick="selectCompanyForModule('${st.symbol}')">
-            <td class="py-3 px-3">
-              <div class="flex items-center space-x-1.5">
-                ${isSelected ? '<span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse shrink-0"></span>' : ''}
-                <div class="font-bold font-mono text-sm text-blue-600 dark:text-studio-blueLight hover:underline">
-                  ${st.symbol}
-                </div>
-                ${isSelected ? '<span class="text-[9px] px-1.5 py-0.5 rounded-full bg-blue-500 text-white font-mono font-semibold">Đang xem</span>' : ''}
-              </div>
-              <div class="text-[10px] text-light-subtext dark:text-studio-muted truncate max-w-[150px]">${st.name}</div>
-            </td>
-            <td class="py-3 px-3 text-light-subtext dark:text-studio-subtext text-[11px]">${st.industry}</td>
-            <td class="py-3 px-3 text-right font-mono font-medium">${capStr}</td>
-            <td id="fund-vol-${st.symbol}" class="py-3 px-3 text-right font-mono text-light-subtext dark:text-studio-subtext">${volStr}</td>
-            <td class="py-3 px-3 text-right font-mono font-semibold ${st.profitGrowth === 'Lỗi' ? 'text-rose-500' : (st.profitGrowth >= 0 ? 'text-emerald-500' : 'text-rose-500')}">
-              ${profitStr}
-            </td>
-            <td class="py-3 px-3 text-right font-mono font-semibold ${st.revGrowth === 'Lỗi' ? 'text-rose-500' : (st.revGrowth >= 0 ? 'text-emerald-500' : 'text-rose-500')}">
-              ${revStr}
-            </td>
-            <td class="py-3 px-3 text-right font-mono font-bold text-blue-500 dark:text-studio-blueLight">${epsStr}</td>
-            <td id="fund-pe-${st.symbol}" class="py-3 px-3 text-right font-mono">${peStr}</td>
-            <td class="py-3 px-3 text-right font-mono">${pbStr}</td>
-            <td class="py-3 px-3 text-right font-mono font-semibold text-emerald-500">${roeStr}</td>
-            <td class="py-3 px-3 text-center" onclick="event.stopPropagation()">
-              <button onclick="openCompanyModalBySymbol('${st.symbol}')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 transition-all">
-                Hồ sơ AI
-              </button>
-            </td>
-          </tr>
-        `;
-      }).join('');
-
-      updateTableHeaderIndicators('fundamental');
-      lucide.createIcons();
-    }
-
-    function resetFundamentalFilters() {
-      document.getElementById("filterMinVolume").value = "50000";
-      document.getElementById("filterMinProfitGrowth").value = "15";
-      document.getElementById("filterMinRevGrowth").value = "10";
-      document.getElementById("filterCapTier").value = "ALL";
-      renderFundamentalTable();
-    }
-
-    /* =========================================================================
-       9. MODAL: CHI TIẾT DOANH NGHIỆP & GEMINI EVALUATION
-       ========================================================================= */
-    function openCompanyModalBySymbol(symbol) {
-      const st = StockApp.stocks.find(s => s.symbol === symbol) || StockApp.stocks[0];
-
-      // Set texts
-      document.getElementById("modalStockSymbol").innerText = st.symbol;
-      document.getElementById("modalStockName").innerText = st.name;
-      document.getElementById("modalStockExchange").innerText = st.exchange || "HOSE";
-      document.getElementById("modalStockIndustry").innerText = st.industry;
-      document.getElementById("modalMetricEps").innerText = typeof st.eps === 'number' ? `${st.eps.toLocaleString('en-US')} đ` : st.eps;
-      document.getElementById("modalMetricPe").innerText = typeof st.pe === 'number' ? `${st.pe}x` : st.pe;
-      document.getElementById("modalMetricPb").innerText = typeof st.pb === 'number' ? `${st.pb}x` : st.pb;
-      document.getElementById("modalMetricRoe").innerText = typeof st.roe === 'number' ? `${st.roe}%` : st.roe;
-      document.getElementById("modalMetricProfitGrowth").innerText = typeof st.profitGrowth === 'number' ? `${st.profitGrowth >= 0 ? '+' : ''}${st.profitGrowth}%` : st.profitGrowth;
-      document.getElementById("modalMetricCap").innerText = typeof st.marketCapTỷ === 'number' ? `${st.marketCapTỷ.toLocaleString('en-US')} Tỷ` : st.marketCapTỷ;
-
-      document.getElementById("modalAiRecommendation").innerText = st.recommendation;
-      document.getElementById("modalAiThesisContent").innerHTML = `
-        <p><strong>1. Luận điểm định giá:</strong> ${st.thesis} (P/E: <strong>${st.pe}x</strong>, P/B: <strong>${st.pb}x</strong>).</p>
-        <p><strong>2. Vị thế Kỹ thuật &amp; Nền giá:</strong> ${st.aboveMA10_50 ? `<span class="text-emerald-500 font-semibold">Đang vận động trên MA10 (+${st.diffMA10}%) &amp; MA50 (+${st.diffMA50}%)</span>, thời gian tích lũy nền: <strong>${st.baseMonths} tháng</strong> ${st.baseMonths >= 3 ? '(Đạt tiêu chuẩn ≥ 3T)' : '(Chưa đủ 3 tháng)'}.` : `<span class="text-rose-500 font-semibold">Đang dưới MA (${st.diffMA10 < 0 ? 'MA10 ' + st.diffMA10 + '%' : 'MA50 ' + st.diffMA50 + '%'})</span>, nền tích lũy: ${st.baseMonths} tháng.`} ${st.buySignals && st.buySignals.length > 0 ? `Tín hiệu mô hình: ${st.buySignals.map(s => SIGNAL_NAMES[s] || s).join(', ')}.` : ''}</p>
-        <p><strong>3. Đánh giá sức khỏe tài chính:</strong> Điểm AI tổng hợp đạt <strong>${st.aiScore}/100</strong>. Khuyến nghị hành động: <strong>${st.recommendation}</strong> với tỷ trọng phù hợp chiến lược.</p>
-      `;
-
-      // Render Modal Chart (Revenue & Profit 4 quarters)
-      renderModalCompanyChart(st);
-
-      document.getElementById("companyDetailModal").classList.remove("hidden");
-    }
-
-    function closeCompanyModal() {
-      document.getElementById("companyDetailModal").classList.add("hidden");
-    }
-
-    function renderModalCompanyChart(stock) {
-      const isDark = document.documentElement.classList.contains("dark");
-      const foreColor = isDark ? '#a1a1a6' : '#6e6e73';
-      const gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
-
-      // Mock quarterly data proportional to EPS and profit
-      const baseRev = Math.round(stock.marketCapTỷ * 0.12);
-      const baseProfit = Math.round(stock.marketCapTỷ * 0.02);
-
-      const options = {
-        series: [
-          {
-            name: 'Doanh thu thuần (Tỷ VND)',
-            type: 'column',
-            data: [
-              Math.round(baseRev * 0.85),
-              Math.round(baseRev * 0.92),
-              Math.round(baseRev * 1.05),
-              Math.round(baseRev * 1.15)
-            ]
-          },
-          {
-            name: 'LNST Doanh nghiệp (Tỷ VND)',
-            type: 'line',
-            data: [
-              Math.round(baseProfit * 0.82),
-              Math.round(baseProfit * 0.90),
-              Math.round(baseProfit * 1.08),
-              Math.round(baseProfit * 1.20)
-            ]
-          }
-        ],
-        chart: {
-          height: 220,
-          type: 'line',
-          foreColor: foreColor,
-          fontFamily: '"SF Pro Display", "SF Pro Text", -apple-system, sans-serif',
-          toolbar: { show: false },
-          background: 'transparent'
-        },
-        theme: { mode: isDark ? 'dark' : 'light' },
-        colors: ['#0071e3', '#34c759'],
-        stroke: { width: [0, 3], curve: 'smooth' },
-        plotOptions: { bar: { columnWidth: '40%', borderRadius: 4 } },
-        labels: ['Q4/23', 'Q1/24', 'Q2/24', 'Q3/24'],
-        grid: { borderColor: gridColor, strokeDashArray: 4 },
-        legend: { position: 'top', horizontalAlign: 'right' }
-      };
-
-      const chartEl = document.getElementById("modalCompanyFinancialChart");
-      if (chartEl) {
-        chartEl.innerHTML = "";
-        StockApp.charts.modalCompany = new ApexCharts(chartEl, options);
-        StockApp.charts.modalCompany.render();
-      }
-    }
-
-    /* =========================================================================
-       10. QUẢN LÝ DỮ LIỆU & CẬP NHẬT THỦ CÔNG (ĐÁP ỨNG QUAN TRỌNG)
-       ========================================================================= */
-    function openDataManagementModal() {
-      populateDataManagementInputs();
-      document.getElementById("dataManagementModal").classList.remove("hidden");
-    }
-
-    function closeDataManagementModal() {
-      document.getElementById("dataManagementModal").classList.add("hidden");
+      tickMinuteRealtime();
+      StockApp.marketRealtimeTimerId = setInterval(tickMinuteRealtime, 60000);
     }
 
     function openManualEditModal(tab) {
