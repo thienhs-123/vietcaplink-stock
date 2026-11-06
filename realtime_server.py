@@ -891,7 +891,15 @@ class StockDataHandler(BaseHTTPRequestHandler):
         clean_path = self.path.split("?")[0].strip()
 
         # 1. API Realtime Endpoint (phục vụ trực tiếp từ RAM trong 1-2ms)
-        if clean_path.startswith("/api/stocks/realtime") or clean_path.startswith("/api/health"):
+        if clean_path in ["/healthz", "/health", "/ping"] or clean_path.startswith("/api/health"):
+            self.send_response(200)
+            self._set_cors_headers()
+            self.send_header("Content-Type", "text/plain; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(b"OK")
+            return
+
+        if clean_path.startswith("/api/stocks/realtime"):
             if not RAM_CACHE_REALTIME_JSON:
                 update_ram_cache()
             self.send_bytes_with_compression(
@@ -970,40 +978,43 @@ def get_local_lan_ip():
 
 
 def start_server():
-    """Tự động chọn cổng khả dụng cho Dashboard và API"""
+    """Khởi chạy HTTP server trên đúng cổng PORT (Render / Docker / Local)"""
     global HOST, PORT
-    candidate_ports = [PORT, 8088, 8899, 8080, 5050, 3000, 8000] if PORT != 8088 else [8088, 8899, 8080, 5050, 3000, 8000]
+
+    # 1. Nếu đang chạy trên Cloud (Render, Railway, Heroku có biến môi trường PORT)
+    if "PORT" in os.environ:
+        cloud_port = int(os.environ["PORT"])
+        cloud_host = "0.0.0.0"
+        try:
+            server = ThreadedHTTPServer((cloud_host, cloud_port), StockDataHandler)
+            HOST = cloud_host
+            PORT = cloud_port
+            print(f"✅ [Cloud Server] Đã mở cổng thành công trên {HOST}:{PORT}", flush=True)
+            return server, HOST, PORT
+        except Exception as e:
+            print(f"❌ [Cloud Server] Không thể mở cổng {cloud_port}: {e}", flush=True)
+
+    # 2. Nếu đang chạy trên máy tính cá nhân (Local Windows / Mac)
+    candidate_ports = [PORT, 8088, 8899, 8080, 5050, 3000, 8000]
     candidate_hosts = ["0.0.0.0", "127.0.0.1"]
 
     server = None
-    selected_host = HOST
-    selected_port = PORT
-
     for p in candidate_ports:
-        if is_port_listening("127.0.0.1", p):
-            continue
         for h in candidate_hosts:
             try:
                 server = ThreadedHTTPServer((h, p), StockDataHandler)
-                selected_host = h
-                selected_port = p
+                HOST = h
+                PORT = p
                 break
-            except (PermissionError, OSError):
+            except Exception:
                 continue
         if server:
             break
 
     if not server:
-        try:
-            server = ThreadedHTTPServer(("127.0.0.1", 0), StockDataHandler)
-            selected_host = "127.0.0.1"
-            selected_port = server.server_port
-        except Exception as e:
-            print(f"❌ Không thể mở cổng socket: {e}")
-            return None, HOST, PORT
-
-    HOST = selected_host
-    PORT = selected_port
+        server = ThreadedHTTPServer(("127.0.0.1", 0), StockDataHandler)
+        HOST = "127.0.0.1"
+        PORT = server.server_port
 
     try:
         with open(PORT_FILE_PATH, "w", encoding="utf-8") as f:
@@ -1020,69 +1031,77 @@ def start_server():
 
 
 def main():
+    # Bật unbuffered output cho stdout để log Render hiển thị ngay lập tức
+    try:
+        sys.stdout.reconfigure(line_buffering=True)
+    except Exception:
+        pass
+
     lan_ip = get_local_lan_ip()
-    print("=" * 72)
-    print("🚀 VIETCAPLINK STOCK AI DASHBOARD - VN100 REALTIME & BCTC BRIDGE SERVER")
-    print("=" * 72)
-    print("📊 Danh mục theo dõi: RỔ VN100 (100 Cổ phiếu hàng đầu TTCK Việt Nam)")
-    print(f"⏱️  Tần suất cập nhật giá: 1 LẦN / PHÚT ({UPDATE_INTERVAL_SECONDS} GIÂY)")
-    print(f"🔑 Vnstock API Key: {VNSTOCK_API_KEY[:8]}...{VNSTOCK_API_KEY[-4:] if len(VNSTOCK_API_KEY) > 8 else '(Chưa cấu hình)'}")
-    print("⚡ Hiệu năng: Đa luồng (Multi-threaded) • Nén Gzip (85%) • Cache RAM (0 Disk I/O)")
-    print("🛡️  Nguồn dữ liệu: DUY NHẤT VNSTOCK")
-    print("=" * 72)
+    print("=" * 72, flush=True)
+    print("🚀 VIETCAPLINK STOCK AI DASHBOARD - VN100 REALTIME & BCTC BRIDGE SERVER", flush=True)
+    print("=" * 72, flush=True)
+    print("📊 Danh mục theo dõi: RỔ VN100 (100 Cổ phiếu hàng đầu TTCK Việt Nam)", flush=True)
+    print(f"⏱️  Tần suất cập nhật giá: 1 LẦN / PHÚT ({UPDATE_INTERVAL_SECONDS} GIÂY)", flush=True)
+    print("⚡ Hiệu năng: Đa luồng (Multi-threaded) • Nén Gzip (85%) • Cache RAM (0 Disk I/O)", flush=True)
+    print("=" * 72, flush=True)
 
     # 1. Khởi tạo Vnstock Authentication
     init_vnstock_auth()
 
-    # 2. Tạo sẵn RAM cache ban đầu
+    # 2. Tạo sẵn RAM cache ban đầu từ snapshot (chỉ mất 1 mili-giây)
     update_ram_cache()
     get_cached_index_html()
 
-    # 3. Đồng bộ ngay lập tức 1 lần trước khi mở cổng
-    print("🔄 Đang kết nối Vnstock để nạp bảng giá thời gian thực cho 100 mã CP...")
-    init_count = fetch_prices_from_vnstock()
-    if init_count > 0:
-        print(f"✅ Đã nạp thành công {init_count}/100 mã CP từ Vnstock API!")
-    else:
-        print("ℹ️  Chưa nhận được phản hồi từ Vnstock API, sử dụng dữ liệu xác thực ban đầu...")
-
-    # 4. Khởi chạy luồng cập nhật giá ngầm 1 phút / lần (60 giây)
-    worker_thread = threading.Thread(target=sync_cycle_worker, daemon=True)
-    worker_thread.start()
-
-    # 5. Khởi chạy luồng ngầm cập nhật Báo cáo tài chính (BCTC) từ Vnstock
-    fundamentals_thread = threading.Thread(target=fundamentals_sync_worker, daemon=True)
-    fundamentals_thread.start()
-
-    # 6. Khởi tạo máy chủ HTTP đa luồng
+    # 3. KHỞI TẠO VÀ MỞ CỔNG HTTP SERVER NGAY LẬP TỨC!
+    # Điều này cực kỳ quan trọng cho Render/Cloud để Health Check 200 OK ngay trong 1s đầu
     server, active_host, active_port = start_server()
     if not server:
-        print("❌ Lỗi: Không thể khởi chạy HTTP Server do Windows chặn toàn bộ cổng.")
-        input("Nhấn phím Enter để thoát...")
+        print("❌ Lỗi: Không thể khởi chạy HTTP Server.", flush=True)
         sys.exit(1)
 
-    print("\n" + "=" * 72)
-    print(f"🌐 Dashboard Web (Máy này):   http://127.0.0.1:{active_port}/")
-    if lan_ip != "127.0.0.1":
-        print(f"📱 Mạng Wifi / Nội bộ (LAN):  http://{lan_ip}:{active_port}/")
-    print(f"📡 API Realtime VN100:        http://127.0.0.1:{active_port}/api/stocks/realtime")
-    print("💡 Mẹo chia sẻ Internet: Bạn có thể chạy 'cloudflared tunnel' hoặc 'ngrok' trỏ đến cổng này.")
-    print("=" * 72)
+    print(f"🌐 Dashboard Web: http://{active_host}:{active_port}/", flush=True)
+    print(f"📡 API Realtime:  http://{active_host}:{active_port}/api/stocks/realtime", flush=True)
+    print("=" * 72, flush=True)
 
-    # Tự động mở trình duyệt đến đúng cổng vừa khởi chạy
-    def auto_open_browser(target_url):
-        time.sleep(1.0)
+    # 4. Chạy nạp dữ liệu ban đầu và các luồng ngầm TRONG BACKGROUND THREAD
+    def initial_sync_worker():
+        time.sleep(0.5)
+        print("🔄 Đang đồng bộ dữ liệu thời gian thực ban đầu từ Vnstock/API...", flush=True)
         try:
-            webbrowser.open(target_url)
+            fetch_indices_from_vnstock_or_api()
+        except Exception:
+            pass
+        try:
+            fetch_prices_from_vnstock()
         except Exception:
             pass
 
-    threading.Thread(target=auto_open_browser, args=(f"http://127.0.0.1:{active_port}/",), daemon=True).start()
+    threading.Thread(target=initial_sync_worker, daemon=True).start()
 
+    # 5. Khởi chạy luồng cập nhật giá ngầm định kỳ
+    worker_thread = threading.Thread(target=sync_cycle_worker, daemon=True)
+    worker_thread.start()
+
+    # 6. Khởi chạy luồng cập nhật Báo cáo tài chính
+    fundamentals_thread = threading.Thread(target=fundamentals_sync_worker, daemon=True)
+    fundamentals_thread.start()
+
+    # 7. Tự động mở trình duyệt nếu là máy tính cá nhân (không phải Cloud)
+    if "PORT" not in os.environ:
+        def auto_open_browser(target_url):
+            time.sleep(1.0)
+            try:
+                webbrowser.open(target_url)
+            except Exception:
+                pass
+        threading.Thread(target=auto_open_browser, args=(f"http://127.0.0.1:{active_port}/",), daemon=True).start()
+
+    # 8. Bắt đầu phục vụ request HTTP
     try:
         server.serve_forever()
     except KeyboardInterrupt:
-        print("\n🛑 Đã dừng Vnstock Bridge Server.")
+        print("\n🛑 Đã dừng Vnstock Bridge Server.", flush=True)
         sys.exit(0)
 
 
