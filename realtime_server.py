@@ -218,18 +218,18 @@ for sym in TRACKED_SYMBOLS:
     }
 
 MACRO_STATE = {
-    "vnindex": 1722.67,
-    "vnindexChange": -18.06,
-    "vnindexPct": -1.04,
-    "vn30": 1843.49,
-    "vn30Change": -21.74,
-    "vn30Pct": -1.17,
+    "vnindex": 1732.88,
+    "vnindexChange": -7.85,
+    "vnindexPct": -0.45,
+    "vn30": 1852.97,
+    "vn30Change": -12.26,
+    "vn30Pct": -0.66,
     "upcom": 121.31,
     "upcomChange": -1.07,
     "upcomPct": -0.87,
-    "hnx": 255.30,
-    "hnxChange": -1.70,
-    "hnxPct": -0.66,
+    "hnx": 254.73,
+    "hnxChange": -2.27,
+    "hnxPct": -0.88,
     "vnindexGtgd": "15.500 tỷ",
     "vnindexVol": "720,5 tr cp",
     "usdVnd": 25480,
@@ -713,12 +713,47 @@ def fetch_prices_from_vnstock():
                 update_ram_cache()
                 return updated_count
 
+    # 2. Dự phòng trực tiếp từ SSI Live Datafeed (Cực nhanh, cập nhật thời gian thực từng phút)
+    if updated_count == 0:
+        try:
+            import urllib.request
+            for ex in ['hose', 'hnx', 'upcom']:
+                req = urllib.request.Request(f"https://iboard-query.ssi.com.vn/stock/exchange/{ex}", headers={'User-Agent': 'Mozilla/5.0'})
+                with urllib.request.urlopen(req, timeout=4) as resp:
+                    items = json.loads(resp.read().decode('utf-8')).get('data', [])
+                    for it in items:
+                        sym = it.get('stockSymbol')
+                        if sym in CURRENT_STOCKS:
+                            p = it.get('matchedPrice') or it.get('refPrice') or 0
+                            if p > 0:
+                                with DATA_LOCK:
+                                    st = CURRENT_STOCKS[sym]
+                                    st["price"] = p
+                                    st["change"] = it.get('priceChangePercent', 0.0)
+                                    st["volume"] = it.get('nmTotalTradedQty') or it.get('stockVol') or 0
+                                    st["status"] = "success"
+                                    st["source"] = "SSI Live Datafeed"
+                                    if st.get("eps", 0) > 0:
+                                        st["pe"] = round(p / st["eps"], 1)
+                                    shares = st.get("shares") or STOCK_METRICS.get(sym, {}).get("shares", 0)
+                                    if shares > 0:
+                                        st["marketCapTỷ"] = round((shares * p) / 1e9, 0)
+                                updated_count += 1
+            if updated_count > 0:
+                LAST_SYNC_SOURCE = "SSI Live Datafeed (Cập nhật 1 phút / lần)"
+                LAST_SYNC_TIMESTAMP = now_str
+                save_snapshot()
+                update_ram_cache()
+                return updated_count
+        except Exception:
+            pass
+
     with DATA_LOCK:
         for sym in TRACKED_SYMBOLS:
             CURRENT_STOCKS[sym]["price"] = "Lỗi"
             CURRENT_STOCKS[sym]["change"] = "Lỗi"
             CURRENT_STOCKS[sym]["status"] = "error"
-        LAST_SYNC_SOURCE = "Lỗi kết nối Vnstock (Không lấy được dữ liệu)"
+        LAST_SYNC_SOURCE = "Lỗi kết nối API thị trường"
         LAST_SYNC_TIMESTAMP = now_str
 
     update_ram_cache()

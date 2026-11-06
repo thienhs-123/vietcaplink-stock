@@ -2003,8 +2003,8 @@
                   </div>
                   <div class="flex items-baseline justify-between mt-2">
                     <div>
-                      <div class="text-base md:text-lg font-bold font-mono text-light-text dark:text-studio-text" id="m4CardVnindexVal">1.723,61</div>
-                      <div class="text-[10px] md:text-[11px] font-mono font-semibold text-rose-500" id="m4CardVnindexChange">-17,12 (-0,98%)</div>
+                      <div class="text-base md:text-lg font-bold font-mono text-light-text dark:text-studio-text" id="m4CardVnindexVal">1.732,88</div>
+                      <div class="text-[10px] md:text-[11px] font-mono font-semibold text-rose-500" id="m4CardVnindexChange">-7,85 (-0,45%)</div>
                     </div>
                     <!-- Mini Sparkline SVG -->
                     <div class="w-14 h-7 shrink-0">
@@ -2023,8 +2023,8 @@
                   </div>
                   <div class="flex items-baseline justify-between mt-2">
                     <div>
-                      <div class="text-base md:text-lg font-bold font-mono text-light-text dark:text-studio-text" id="m4CardVn30Val">1.843,49</div>
-                      <div class="text-[10px] md:text-[11px] font-mono font-semibold text-rose-500" id="m4CardVn30Change">-21,74 (-1,17%)</div>
+                      <div class="text-base md:text-lg font-bold font-mono text-light-text dark:text-studio-text" id="m4CardVn30Val">1.852,97</div>
+                      <div class="text-[10px] md:text-[11px] font-mono font-semibold text-rose-500" id="m4CardVn30Change">-12,26 (-0,66%)</div>
                     </div>
                     <div class="w-14 h-7 shrink-0">
                       <svg class="w-full h-full text-emerald-500" viewBox="0 0 60 25" fill="none" stroke="currentColor" stroke-width="2">
@@ -2082,8 +2082,8 @@
                   <!-- PHẦN HIỂN THỊ CHỈ SỐ SANG BÊN PHẢI (Theo yêu cầu) -->
                   <div class="flex flex-col sm:items-end justify-center">
                     <div class="flex items-baseline space-x-2">
-                      <span class="text-2xl md:text-3xl font-bold font-mono text-light-text dark:text-studio-text" id="marketVnindexBigVal">1.723,61</span>
-                      <span class="text-sm font-bold font-mono text-rose-500" id="marketVnindexBigChange">-17,12 (-0,98%)</span>
+                      <span class="text-2xl md:text-3xl font-bold font-mono text-light-text dark:text-studio-text" id="marketVnindexBigVal">1.732,88</span>
+                      <span class="text-sm font-bold font-mono text-rose-500" id="marketVnindexBigChange">-7,85 (-0,45%)</span>
                     </div>
                     <div class="text-xs text-light-subtext dark:text-studio-muted font-mono mt-0.5">
                       VN-Index • 1 tháng: <strong class="text-emerald-500 font-semibold" id="marketVnindex3mPct">+1,80%</strong> • KL: <strong class="text-light-text dark:text-studio-text" id="marketVnindexVol">720,5 tr</strong>
@@ -2093,7 +2093,7 @@
 
                 <!-- Interactive Hover Banner: Ngày, Điểm số, % Biến động -->
                 <div class="px-3 py-1.5 rounded-lg bg-light-surface/90 dark:bg-studio-surface/90 border border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-xs font-mono" id="marketChartHoverBanner">
-                  <span class="text-light-subtext dark:text-studio-muted">06/11/2026: <strong class="text-light-text dark:text-studio-text">1.723,61</strong> (<span class="text-rose-500 font-semibold">-0,98%</span>)</span>
+                  <span class="text-light-subtext dark:text-studio-muted">06/11/2026: <strong class="text-light-text dark:text-studio-text">1.732,88</strong> (<span class="text-rose-500 font-semibold">-0,98%</span>)</span>
                   <span class="text-[11px] text-light-subtext dark:text-studio-muted">Daily VN-Index • HOSE</span>
                 </div>
 
@@ -3809,18 +3809,18 @@
         gdpPrev: "6.93% (Q2)",
         pmi: 52.4,
         pmiPrev: 51.6,
-        vnindex: 1723.61,
-        vnindexChange: -17.12,
-        vnindexPct: -0.98,
-        vn30: 1843.49,
-        vn30Change: -21.74,
-        vn30Pct: -1.17,
+        vnindex: 1732.88,
+        vnindexChange: -7.85,
+        vnindexPct: -0.45,
+        vn30: 1852.97,
+        vn30Change: -12.26,
+        vn30Pct: -0.66,
         upcom: 121.31,
         upcomChange: -1.07,
         upcomPct: -0.87,
-        hnx: 255.36,
-        hnxChange: -1.64,
-        hnxPct: -0.64,
+        hnx: 254.73,
+        hnxChange: -2.27,
+        hnxPct: -0.88,
         vnindexGtgd: "15.500 tỷ",
         vnindexVol: "720,5 tr",
         interestRate: "4.8 - 5.3%",
@@ -8163,6 +8163,90 @@
         return (idx >= 0 && idx < 10) ? (idx + 1) : null;
       },
 
+      
+      async fetchClientLiveMarketData() {
+        try {
+          const now = Math.floor(Date.now() / 1000);
+          const from = now - 3600;
+
+          // 1. Truy vấn các chỉ số thị trường thời gian thực (CORS mở, tốc độ < 1s)
+          const [vnindexRes, vn30Res, hnxRes] = await Promise.allSettled([
+            fetch(`https://iboard-api.ssi.com.vn/statistics/charts/history?symbol=VNINDEX&resolution=1&from=${from}&to=${now}`).then(r => r.ok ? r.json() : null),
+            fetch(`https://iboard-api.ssi.com.vn/statistics/charts/history?symbol=VN30&resolution=1&from=${from}&to=${now}`).then(r => r.ok ? r.json() : null),
+            fetch(`https://iboard-api.ssi.com.vn/statistics/charts/history?symbol=HNXINDEX&resolution=1&from=${from}&to=${now}`).then(r => r.ok ? r.json() : null)
+          ]);
+
+          const macroUpdates = {};
+          if (vnindexRes.status === 'fulfilled' && vnindexRes.value?.data?.c?.length) {
+            const c = vnindexRes.value.data.c;
+            const last = c[c.length - 1];
+            macroUpdates.vnindex = last;
+            macroUpdates.vnindexChange = parseFloat((last - 1740.73).toFixed(2));
+            macroUpdates.vnindexPct = parseFloat((((last - 1740.73) / 1740.73) * 100).toFixed(2));
+          }
+
+          if (vn30Res.status === 'fulfilled' && vn30Res.value?.data?.c?.length) {
+            const c = vn30Res.value.data.c;
+            const last = c[c.length - 1];
+            macroUpdates.vn30 = last;
+            macroUpdates.vn30Change = parseFloat((last - 1865.23).toFixed(2));
+            macroUpdates.vn30Pct = parseFloat((((last - 1865.23) / 1865.23) * 100).toFixed(2));
+          }
+
+          if (hnxRes.status === 'fulfilled' && hnxRes.value?.data?.c?.length) {
+            const c = hnxRes.value.data.c;
+            const last = c[c.length - 1];
+            macroUpdates.hnx = last;
+            macroUpdates.hnxChange = parseFloat((last - 257.00).toFixed(2));
+            macroUpdates.hnxPct = parseFloat((((last - 257.00) / 257.00) * 100).toFixed(2));
+          }
+
+          if (Object.keys(macroUpdates).length > 0) {
+            this.applyRealMacroData(macroUpdates);
+          }
+
+          // 2. Truy vấn toàn bộ bảng giá các mã cổ phiếu HOSE, HNX, UPCOM
+          const [hoseRes, hnxStockRes, upcomRes] = await Promise.allSettled([
+            fetch('https://iboard-query.ssi.com.vn/stock/exchange/hose').then(r => r.ok ? r.json() : null),
+            fetch('https://iboard-query.ssi.com.vn/stock/exchange/hnx').then(r => r.ok ? r.json() : null),
+            fetch('https://iboard-query.ssi.com.vn/stock/exchange/upcom').then(r => r.ok ? r.json() : null)
+          ]);
+
+          const stockMap = {};
+          let totalCount = 0;
+          [hoseRes, hnxStockRes, upcomRes].forEach(res => {
+            if (res.status === 'fulfilled' && Array.isArray(res.value?.data)) {
+              res.value.data.forEach(it => {
+                if (!it.stockSymbol) return;
+                const p = it.matchedPrice || it.refPrice || 0;
+                stockMap[it.stockSymbol] = {
+                  price: p,
+                  change: it.priceChangePercent !== undefined ? it.priceChangePercent : 0,
+                  volume: it.nmTotalTradedQty || it.stockVol || 0,
+                  status: 'success'
+                };
+                totalCount++;
+              });
+            }
+          });
+
+          if (totalCount > 0) {
+            this.applyRealStockData(stockMap);
+            this.log('SYNC', `[Live Datafeed] Đã đồng bộ ${totalCount} mã cổ phiếu & chỉ số thị trường thời gian thực`);
+            const statusLabel = document.getElementById("realtimeStatusLabel");
+            if (statusLabel) statusLabel.innerText = "REALTIME LIVE (1p)";
+            const pulseRing = document.getElementById("realtimePulseRing");
+            if (pulseRing) pulseRing.className = "animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75";
+            const pulseDot = document.getElementById("realtimePulseDot");
+            if (pulseDot) pulseDot.className = "relative inline-flex rounded-full h-2 w-2 bg-emerald-500";
+            return true;
+          }
+        } catch (err) {
+          console.warn("[Live Market Datafeed Fetch Error]", err);
+        }
+        return false;
+      },
+
       async fetchRealMarketData() {
         let liveConnected = false;
 
@@ -8235,7 +8319,14 @@
           }
         }
 
-        // 2. Dự phòng an toàn: Đọc bản snapshot mới nhất từ Vnstock (tạo bởi realtime_server.py)
+        // 2. Trực tiếp từ Live Market Datafeed (SSI Live Exchange & Statistics - CORS mở)
+        const clientLiveOk = await this.fetchClientLiveMarketData();
+        if (clientLiveOk) {
+          liveConnected = true;
+          return;
+        }
+
+        // 3. Dự phòng: Đọc bản snapshot mới nhất từ Vnstock (tạo bởi realtime_server.py)
         try {
           const snapRes = await fetch('vnstock_snapshot.json?t=' + Date.now());
           if (snapRes.ok) {
@@ -11828,7 +11919,7 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
 
     // Generate realistic multi-timeframe VN-Index market series with Moving Averages & Volume
     // 1. Tạo chuỗi dữ liệu 1 năm ngày (Daily Chart) neo mốc đóng phiên hôm nay
-    function generateMarket1YearDaily(targetPrice = 1723.61) {
+    function generateMarket1YearDaily(targetPrice = 1732.88) {
       const count = 250; // 250 phiên giao dịch trong 1 năm
       const rawDates = new Array(count);
       let curDate = new Date(2026, 10, 6); // 06/11/2026
@@ -11877,7 +11968,7 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       const foreColor = isDark ? '#a1a1a6' : '#6e6e73';
       const gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
 
-      const targetPrice = StockApp.macro.vnindex || 1723.61;
+      const targetPrice = StockApp.macro.vnindex || 1732.88;
       const full1YearData = generateMarket1YearDaily(targetPrice);
       StockApp.marketOverview.full1YearData = full1YearData;
 
