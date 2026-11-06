@@ -1,3 +1,0 @@
-# Netlify Redirects / Reverse Proxy rule
-# Tu dong chuyen tiep cac goi tin /api/* sang Render Backend ma khong bi loi CORS
-/api/*  https://vietcaplink-vnstock-backend.onrender.com/api/:splat  200!
