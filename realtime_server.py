@@ -218,18 +218,18 @@ for sym in TRACKED_SYMBOLS:
     }
 
 MACRO_STATE = {
-    "vnindex": 1740.73,
-    "vnindexChange": 7.71,
-    "vnindexPct": 0.44,
-    "vn30": 1865.23,
-    "vn30Change": 3.17,
-    "vn30Pct": 0.17,
-    "upcom": 122.38,
-    "upcomChange": -0.45,
-    "upcomPct": -0.37,
-    "hnx": 257.00,
-    "hnxChange": -2.51,
-    "hnxPct": -0.97,
+    "vnindex": 1722.67,
+    "vnindexChange": -18.06,
+    "vnindexPct": -1.04,
+    "vn30": 1843.49,
+    "vn30Change": -21.74,
+    "vn30Pct": -1.17,
+    "upcom": 121.31,
+    "upcomChange": -1.07,
+    "upcomPct": -0.87,
+    "hnx": 255.30,
+    "hnxChange": -1.70,
+    "hnxPct": -0.66,
     "vnindexGtgd": "15.500 tỷ",
     "vnindexVol": "720,5 tr cp",
     "usdVnd": 25480,
@@ -374,10 +374,40 @@ def init_vnstock_auth():
 
 def fetch_indices_from_vnstock_or_api():
     """
-    Tự động truy vấn các chỉ số VNINDEX, VN30, HNX, UPCOM trực tiếp từ vnstock hoặc API bảng giá
+    Tự động truy vấn các chỉ số VNINDEX, VN30, HNX, UPCOM trực tiếp từ API bảng giá chính xác nhất
     """
     global MACRO_STATE
-    # 1. Thử qua vnstock
+    # 1. Ưu tiên Entrade Chart API (Cực nhanh, thời gian thực 1 phút/lần, không cần token)
+    try:
+        import urllib.request
+        import json
+        symbols = {'VNINDEX': 'vnindex', 'VN30': 'vn30', 'HNX': 'hnx', 'UPCOM': 'upcom'}
+        ref_prices = {'vnindex': 1740.73, 'vn30': 1865.23, 'hnx': 257.00, 'upcom': 122.38}
+        fetched_any = False
+        for sym, state_key in symbols.items():
+            try:
+                url = f"https://services.entrade.com.vn/chart-api/v2/ohlcs/index?symbol={sym}&resolution=1"
+                req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
+                with urllib.request.urlopen(req, timeout=3) as resp:
+                    d = json.loads(resp.read().decode('utf-8'))
+                    if d and d.get('c') and len(d['c']) > 0:
+                        close = round(float(d['c'][-1]), 2)
+                        ref = ref_prices.get(state_key, close)
+                        chg = round(close - ref, 2)
+                        pct = round((chg / ref) * 100, 2) if ref else 0.0
+                        with DATA_LOCK:
+                            MACRO_STATE[state_key] = close
+                            MACRO_STATE[f"{state_key}Change"] = chg
+                            MACRO_STATE[f"{state_key}Pct"] = pct
+                        fetched_any = True
+            except Exception:
+                pass
+        if fetched_any:
+            return True
+    except Exception:
+        pass
+
+    # 2. Thử qua vnstock
     vnstock = try_import_vnstock()
     if vnstock and hasattr(vnstock, 'Market'):
         try:
