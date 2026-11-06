@@ -2926,5 +2926,35 @@
       "aboveMA10_50": false,
       "source": "Vnstock API (Key: vnstock_...)"
     }
+  },
+  "breadth": {
+    "total": {
+      "adv": 163,
+      "ref": 929,
+      "dec": 424,
+      "ceil": 18,
+      "flr": 32
+    },
+    "hose": {
+      "adv": 69,
+      "ref": 114,
+      "dec": 225,
+      "ceil": 1,
+      "flr": 6
+    },
+    "hnx": {
+      "adv": 28,
+      "ref": 183,
+      "dec": 88,
+      "ceil": 6,
+      "flr": 8
+    },
+    "upcom": {
+      "adv": 66,
+      "ref": 632,
+      "dec": 111,
+      "ceil": 11,
+      "flr": 18
+    }
   }
 }

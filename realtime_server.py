@@ -239,6 +239,13 @@ MACRO_STATE = {
     "oilBrent": 77.85
 }
 
+BREADTH_STATE = {
+    "total": {"adv": 163, "ref": 929, "dec": 424, "ceil": 18, "flr": 32},
+    "hose": {"adv": 69, "ref": 114, "dec": 225, "ceil": 1, "flr": 6},
+    "hnx": {"adv": 28, "ref": 183, "dec": 88, "ceil": 6, "flr": 8},
+    "upcom": {"adv": 66, "ref": 632, "dec": 111, "ceil": 11, "flr": 18}
+}
+
 DATA_LOCK = threading.Lock()
 SERVER_PACKET_COUNT = 0
 LAST_SYNC_TIMESTAMP = "Chưa đồng bộ"
@@ -269,6 +276,7 @@ def update_ram_cache():
             "updateInterval": UPDATE_INTERVAL_SECONDS,
             "packetCount": SERVER_PACKET_COUNT,
             "macro": MACRO_STATE,
+            "breadth": BREADTH_STATE,
             "stocks": CURRENT_STOCKS
         }
     raw = json.dumps(payload_data, ensure_ascii=False).encode("utf-8")
@@ -470,6 +478,54 @@ def fetch_indices_from_vnstock_or_api():
     except Exception:
         pass
     return False
+
+def fetch_market_breadth():
+    """
+    Tự động truy vấn độ rộng thị trường (Tăng/Đứng giá/Giảm/Trần/Sàn) trên cả 3 sàn HOSE, HNX, UPCOM
+    """
+    global BREADTH_STATE
+    try:
+        import urllib.request
+        import json
+        exchanges = ['hose', 'hnx', 'upcom']
+        total = {'adv': 0, 'dec': 0, 'ref': 0, 'ceil': 0, 'flr': 0}
+        new_breadth = {}
+        for ex in exchanges:
+            url = f'https://iboard-query.ssi.com.vn/stock/exchange/{ex}'
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req, timeout=4) as resp:
+                data = json.loads(resp.read().decode('utf-8'))
+                items = data.get('data', [])
+                adv, dec, ref, ceil, flr = 0, 0, 0, 0, 0
+                for it in items:
+                    sym = it.get('stockSymbol', '')
+                    if len(sym) > 4:
+                        continue
+                    mp = it.get('matchedPrice', 0)
+                    rp = it.get('refPrice', 0)
+                    cp = it.get('ceiling', 0)
+                    fp = it.get('floor', 0)
+                    chg = it.get('priceChange', 0)
+                    if chg > 0 or (mp > rp and rp > 0):
+                        adv += 1
+                        if cp > 0 and mp >= cp: ceil += 1
+                    elif chg < 0 or (mp < rp and mp > 0 and rp > 0):
+                        dec += 1
+                        if fp > 0 and mp <= fp: flr += 1
+                    else:
+                        ref += 1
+                new_breadth[ex] = {'adv': adv, 'ref': ref, 'dec': dec, 'ceil': ceil, 'flr': flr}
+                total['adv'] += adv
+                total['dec'] += dec
+                total['ref'] += ref
+                total['ceil'] += ceil
+                total['flr'] += flr
+        new_breadth['total'] = total
+        with DATA_LOCK:
+            BREADTH_STATE = new_breadth
+        return True
+    except Exception:
+        return False
 
 def fetch_prices_from_vnstock():
     """
@@ -680,6 +736,7 @@ def save_snapshot():
                 "updateInterval": UPDATE_INTERVAL_SECONDS,
                 "packetCount": SERVER_PACKET_COUNT,
                 "macro": MACRO_STATE,
+                "breadth": BREADTH_STATE,
                 "stocks": CURRENT_STOCKS
             }, f, ensure_ascii=False, indent=2)
     except Exception:
@@ -851,6 +908,10 @@ def sync_cycle_worker():
         count = fetch_prices_from_vnstock()
         try:
             fetch_indices_from_vnstock_or_api()
+        except Exception:
+            pass
+        try:
+            fetch_market_breadth()
         except Exception:
             pass
         now_str = datetime.datetime.now().strftime("%H:%M:%S")
@@ -1100,6 +1161,10 @@ def main():
         print("🔄 Đang đồng bộ dữ liệu thời gian thực ban đầu từ Vnstock/API...", flush=True)
         try:
             fetch_indices_from_vnstock_or_api()
+        except Exception:
+            pass
+        try:
+            fetch_market_breadth()
         except Exception:
             pass
         try:

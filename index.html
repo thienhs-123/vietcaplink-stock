@@ -2109,33 +2109,39 @@
                 </div>
               </div>
 
-            <!-- Card: ĐỘ RỘNG THEO SÀN (Giữ nguyên vị trí hiện tại phía dưới biểu đồ) -->
+            <!-- Card: ĐỘ RỘNG THEO SÀN (Cập nhật tự động 1 phút / lần) -->
             <div class="p-3.5 rounded-2xl bg-light-elevated/60 dark:bg-studio-elevated/60 border border-light-border dark:border-studio-border space-y-2.5 flex-shrink-0">
                 <div class="flex items-center justify-between">
-                  <span class="text-xs font-bold uppercase tracking-wider text-light-subtext dark:text-studio-muted">ĐỘ RỘNG THEO SÀN</span>
-                  <span class="text-[11px] text-light-subtext dark:text-studio-muted font-mono">trong phiên</span>
+                  <div class="flex items-center space-x-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-light-subtext dark:text-studio-muted">ĐỘ RỘNG THEO SÀN</span>
+                    <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono text-[10px] font-semibold flex items-center space-x-1">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span id="marketBreadthSyncBadge">Tự động • 1 phút / lần</span>
+                    </span>
+                  </div>
+                  <span class="text-[11px] text-light-subtext dark:text-studio-muted font-mono" id="marketBreadthTime">trong phiên</span>
                 </div>
 
                 <!-- Combined Multi-Segment Progress Bar -->
                 <div class="w-full h-2.5 rounded-full overflow-hidden flex bg-gray-200 dark:bg-gray-800 shadow-inner">
-                  <div class="bg-emerald-500 h-full transition-all" style="width: 21%;"></div>
-                  <div class="bg-amber-400 h-full transition-all" style="width: 70%;"></div>
-                  <div class="bg-rose-500 h-full transition-all" style="width: 9%;"></div>
+                  <div id="breadthTotalBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 10.8%;"></div>
+                  <div id="breadthTotalBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 61.3%;"></div>
+                  <div id="breadthTotalBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 27.9%;"></div>
                 </div>
 
                 <!-- 3 Big Numbers (Tăng / Đứng giá / Giảm) -->
                 <div class="grid grid-cols-3 gap-2 text-center py-0.5">
                   <div>
-                    <div class="text-xl font-bold font-mono text-emerald-500">318</div>
-                    <div class="text-[10px] text-light-subtext dark:text-studio-muted mt-0.5">Tăng • <span class="text-emerald-600 dark:text-emerald-400 font-semibold">9 trần</span></div>
+                    <div class="text-xl font-bold font-mono text-emerald-500" id="breadthTotalAdv">163</div>
+                    <div class="text-[10px] text-light-subtext dark:text-studio-muted mt-0.5">Tăng • <span class="text-emerald-600 dark:text-emerald-400 font-semibold" id="breadthTotalCeil">18 trần</span></div>
                   </div>
                   <div>
-                    <div class="text-xl font-bold font-mono text-amber-500 dark:text-amber-400">1068</div>
+                    <div class="text-xl font-bold font-mono text-amber-500 dark:text-amber-400" id="breadthTotalRef">929</div>
                     <div class="text-[10px] text-light-subtext dark:text-studio-muted mt-0.5">Đứng giá</div>
                   </div>
                   <div>
-                    <div class="text-xl font-bold font-mono text-rose-500">135</div>
-                    <div class="text-[10px] text-light-subtext dark:text-studio-muted mt-0.5">Giảm • <span class="text-rose-600 dark:text-rose-400 font-semibold">6 sàn</span></div>
+                    <div class="text-xl font-bold font-mono text-rose-500" id="breadthTotalDec">424</div>
+                    <div class="text-[10px] text-light-subtext dark:text-studio-muted mt-0.5">Giảm • <span class="text-rose-600 dark:text-rose-400 font-semibold" id="breadthTotalFlr">32 sàn</span></div>
                   </div>
                 </div>
 
@@ -2145,12 +2151,12 @@
                   <div class="flex items-center justify-between gap-3">
                     <span class="w-12 font-bold text-light-text dark:text-studio-text text-[11px]">HOSE</span>
                     <div class="flex-1 h-2 rounded-full overflow-hidden flex bg-gray-200 dark:bg-gray-800">
-                      <div class="bg-emerald-500 h-full" style="width: 43%;"></div>
-                      <div class="bg-amber-400 h-full" style="width: 38%;"></div>
-                      <div class="bg-rose-500 h-full" style="width: 19%;"></div>
+                      <div id="breadthHoseBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 16.9%;"></div>
+                      <div id="breadthHoseBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 27.9%;"></div>
+                      <div id="breadthHoseBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 55.2%;"></div>
                     </div>
                     <span class="text-[10px] shrink-0 text-light-subtext dark:text-studio-muted">
-                      <span class="text-emerald-500 font-semibold">175</span> • <span class="text-amber-500 font-semibold">153</span> • <span class="text-rose-500 font-semibold">78</span>
+                      <span class="text-emerald-500 font-semibold" id="breadthHoseAdv">69</span> • <span class="text-amber-500 font-semibold" id="breadthHoseRef">114</span> • <span class="text-rose-500 font-semibold" id="breadthHoseDec">225</span>
                     </span>
                   </div>
 
@@ -2158,12 +2164,12 @@
                   <div class="flex items-center justify-between gap-3">
                     <span class="w-12 font-bold text-light-text dark:text-studio-text text-[11px]">HNX</span>
                     <div class="flex-1 h-2 rounded-full overflow-hidden flex bg-gray-200 dark:bg-gray-800">
-                      <div class="bg-emerald-500 h-full" style="width: 16%;"></div>
-                      <div class="bg-amber-400 h-full" style="width: 76%;"></div>
-                      <div class="bg-rose-500 h-full" style="width: 8%;"></div>
+                      <div id="breadthHnxBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 9.4%;"></div>
+                      <div id="breadthHnxBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 61.2%;"></div>
+                      <div id="breadthHnxBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 29.4%;"></div>
                     </div>
                     <span class="text-[10px] shrink-0 text-light-subtext dark:text-studio-muted">
-                      <span class="text-emerald-500 font-semibold">47</span> • <span class="text-amber-500 font-semibold">229</span> • <span class="text-rose-500 font-semibold">23</span>
+                      <span class="text-emerald-500 font-semibold" id="breadthHnxAdv">28</span> • <span class="text-amber-500 font-semibold" id="breadthHnxRef">183</span> • <span class="text-rose-500 font-semibold" id="breadthHnxDec">88</span>
                     </span>
                   </div>
 
@@ -2171,12 +2177,12 @@
                   <div class="flex items-center justify-between gap-3">
                     <span class="w-12 font-bold text-light-text dark:text-studio-text text-[11px]">UPCOM</span>
                     <div class="flex-1 h-2 rounded-full overflow-hidden flex bg-gray-200 dark:bg-gray-800">
-                      <div class="bg-emerald-500 h-full" style="width: 12%;"></div>
-                      <div class="bg-amber-400 h-full" style="width: 84%;"></div>
-                      <div class="bg-rose-500 h-full" style="width: 4%;"></div>
+                      <div id="breadthUpcomBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 8.2%;"></div>
+                      <div id="breadthUpcomBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 78.1%;"></div>
+                      <div id="breadthUpcomBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 13.7%;"></div>
                     </div>
                     <span class="text-[10px] shrink-0 text-light-subtext dark:text-studio-muted">
-                      <span class="text-emerald-500 font-semibold">96</span> • <span class="text-amber-500 font-semibold">686</span> • <span class="text-rose-500 font-semibold">34</span>
+                      <span class="text-emerald-500 font-semibold" id="breadthUpcomAdv">66</span> • <span class="text-amber-500 font-semibold" id="breadthUpcomRef">632</span> • <span class="text-rose-500 font-semibold" id="breadthUpcomDec">111</span>
                     </span>
                   </div>
                 </div>
@@ -8196,6 +8202,10 @@
                 if (data.macro) {
                   this.applyRealMacroData(data.macro);
                 }
+                if (data.breadth) {
+                  StockApp.breadth = data.breadth;
+                  updateMarketBreadthUI(data.breadth);
+                }
                 this.applyRealStockData(data.stocks);
 
                 const allErr = Object.values(data.stocks).every(s => s.status === 'error' || s.price === 'Lỗi');
@@ -8232,6 +8242,10 @@
             const data = await snapRes.json();
             if (data && data.stocks && typeof data.stocks === 'object') {
               if (data.macro) this.applyRealMacroData(data.macro);
+              if (data.breadth) {
+                StockApp.breadth = data.breadth;
+                updateMarketBreadthUI(data.breadth);
+              }
               this.applyRealStockData(data.stocks);
               this.log('SYNC', `[Vnstock Snapshot] Đã đồng bộ ${Object.keys(data.stocks).length} mã từ bản lưu Vnstock`);
               const statusLabel = document.getElementById("realtimeStatusLabel");
@@ -12186,6 +12200,151 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
     }
 
     // 6. Bộ đếm nhịp Realtime chuẩn xác 1 lần / phút cho các chỉ số
+    
+    // 7. Cập nhật giao diện Độ rộng theo sàn (Realtime 1 phút / lần)
+    function updateMarketBreadthUI(data) {
+      if (!data) return;
+      const total = data.total;
+      const hose = data.hose;
+      const hnx = data.hnx;
+      const upcom = data.upcom;
+
+      // 1. Cập nhật thanh & số Tổng hợp (3 Big Numbers)
+      if (total) {
+        const sum = (total.adv || 0) + (total.ref || 0) + (total.dec || 0) || 1;
+        const pAdv = ((total.adv / sum) * 100).toFixed(1);
+        const pRef = ((total.ref / sum) * 100).toFixed(1);
+        const pDec = (100 - parseFloat(pAdv) - parseFloat(pRef)).toFixed(1);
+
+        const barAdv = document.getElementById("breadthTotalBarAdv");
+        const barRef = document.getElementById("breadthTotalBarRef");
+        const barDec = document.getElementById("breadthTotalBarDec");
+        if (barAdv) barAdv.style.width = pAdv + '%';
+        if (barRef) barRef.style.width = pRef + '%';
+        if (barDec) barDec.style.width = pDec + '%';
+
+        const txtAdv = document.getElementById("breadthTotalAdv");
+        const txtRef = document.getElementById("breadthTotalRef");
+        const txtDec = document.getElementById("breadthTotalDec");
+        const txtCeil = document.getElementById("breadthTotalCeil");
+        const txtFlr = document.getElementById("breadthTotalFlr");
+
+        if (txtAdv) txtAdv.innerText = total.adv;
+        if (txtRef) txtRef.innerText = total.ref;
+        if (txtDec) txtDec.innerText = total.dec;
+        if (txtCeil) txtCeil.innerText = (total.ceil || 0) + ' trần';
+        if (txtFlr) txtFlr.innerText = (total.flr || 0) + ' sàn';
+      }
+
+      // 2. Cập nhật chi tiết 3 sàn: HOSE, HNX, UPCOM
+      const updateRow = (key, exData) => {
+        if (!exData) return;
+        const sum = (exData.adv || 0) + (exData.ref || 0) + (exData.dec || 0) || 1;
+        const pAdv = ((exData.adv / sum) * 100).toFixed(1);
+        const pRef = ((exData.ref / sum) * 100).toFixed(1);
+        const pDec = (100 - parseFloat(pAdv) - parseFloat(pRef)).toFixed(1);
+
+        const cap = key.charAt(0).toUpperCase() + key.slice(1).toLowerCase();
+        const bA = document.getElementById('breadth' + cap + 'BarAdv');
+        const bR = document.getElementById('breadth' + cap + 'BarRef');
+        const bD = document.getElementById('breadth' + cap + 'BarDec');
+        if (bA) bA.style.width = pAdv + '%';
+        if (bR) bR.style.width = pRef + '%';
+        if (bD) bD.style.width = pDec + '%';
+
+        const tA = document.getElementById('breadth' + cap + 'Adv');
+        const tR = document.getElementById('breadth' + cap + 'Ref');
+        const tD = document.getElementById('breadth' + cap + 'Dec');
+        if (tA) tA.innerText = exData.adv;
+        if (tR) tR.innerText = exData.ref;
+        if (tD) tD.innerText = exData.dec;
+      };
+
+      updateRow('hose', hose);
+      updateRow('hnx', hnx);
+      updateRow('upcom', upcom);
+
+      const timeEl = document.getElementById("marketBreadthTime");
+      if (timeEl) {
+        const now = new Date();
+        const hh = String(now.getHours()).padStart(2, '0');
+        const mm = String(now.getMinutes()).padStart(2, '0');
+        timeEl.innerText = 'Cập nhật ' + hh + ':' + mm;
+      }
+    }
+
+    // 8. Tự động truy vấn độ rộng theo sàn 1 phút / lần
+    async function refreshMarketBreadth1Minute() {
+      // Cấp 1: Truy vấn thời gian thực trực tiếp từ SSI iBoard Exchange API (CORS mở, tốc độ < 1s)
+      try {
+        const exchanges = ['hose', 'hnx', 'upcom'];
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 3500);
+
+        const responses = await Promise.allSettled(
+          exchanges.map(ex => 
+            fetch('https://iboard-query.ssi.com.vn/stock/exchange/' + ex, {
+              signal: controller.signal,
+              headers: { 'Accept': 'application/json' }
+            }).then(r => r.ok ? r.json() : null)
+          )
+        );
+        clearTimeout(timer);
+
+        let hasData = false;
+        const newBreadth = {
+          total: { adv: 0, ref: 0, dec: 0, ceil: 0, flr: 0 },
+          hose: { adv: 0, ref: 0, dec: 0, ceil: 0, flr: 0 },
+          hnx: { adv: 0, ref: 0, dec: 0, ceil: 0, flr: 0 },
+          upcom: { adv: 0, ref: 0, dec: 0, ceil: 0, flr: 0 }
+        };
+
+        exchanges.forEach((ex, idx) => {
+          const res = responses[idx];
+          if (res.status === 'fulfilled' && res.value && Array.isArray(res.value.data) && res.value.data.length > 0) {
+            hasData = true;
+            let a = 0, r = 0, d = 0, c = 0, f = 0;
+            res.value.data.forEach(it => {
+              const sym = it.stockSymbol || '';
+              if (sym.length > 4) return;
+              const mp = it.matchedPrice || 0;
+              const rp = it.refPrice || 0;
+              const cp = it.ceiling || 0;
+              const fp = it.floor || 0;
+              const chg = it.priceChange || 0;
+
+              if (chg > 0 || (mp > rp && rp > 0)) {
+                a++;
+                if (cp > 0 && mp >= cp) c++;
+              } else if (chg < 0 || (mp < rp && mp > 0 && rp > 0)) {
+                d++;
+                if (fp > 0 && mp <= fp) f++;
+              } else {
+                r++;
+              }
+            });
+            newBreadth[ex] = { adv: a, ref: r, dec: d, ceil: c, flr: f };
+            newBreadth.total.adv += a;
+            newBreadth.total.ref += r;
+            newBreadth.total.dec += d;
+            newBreadth.total.ceil += c;
+            newBreadth.total.flr += f;
+          }
+        });
+
+        if (hasData) {
+          StockApp.breadth = newBreadth;
+          updateMarketBreadthUI(newBreadth);
+          return;
+        }
+      } catch (e) {}
+
+      // Cấp 2: Nếu có dữ liệu từ Server local hoặc Snapshot
+      if (StockApp.breadth) {
+        updateMarketBreadthUI(StockApp.breadth);
+      }
+    }
+
     function startMarketRealtimeMinuteTimer() {
       if (StockApp.marketRealtimeTimerId) clearInterval(StockApp.marketRealtimeTimerId);
 
@@ -12208,9 +12367,12 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
         if (window.StockRealtimeService && typeof window.StockRealtimeService.sync === 'function') {
           window.StockRealtimeService.sync(false);
         }
+        // Tự động cập nhật Độ rộng theo sàn 1 phút / lần
+        refreshMarketBreadth1Minute();
       }
 
       tickMinuteRealtime();
+      refreshMarketBreadth1Minute();
       StockApp.marketRealtimeTimerId = setInterval(tickMinuteRealtime, 60000);
     }
 
