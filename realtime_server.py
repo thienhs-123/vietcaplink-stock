@@ -692,11 +692,24 @@ def fetch_prices_from_vnstock():
                             if st.get("eps", 0) > 0:
                                 st["pe"] = round(price / st["eps"], 1)
 
-                            diff10 = round(((price - st["ma10"]) / st["ma10"]) * 100, 1)
-                            diff50 = round(((price - st["ma50"]) / st["ma50"]) * 100, 1)
-                            st["diffMA10"] = diff10
-                            st["diffMA50"] = diff50
-                            st["aboveMA10_50"] = (diff10 > 0 and diff50 > 0)
+                            if st.get("ma10", 0) > 0:
+                                diff10 = round(((price - st["ma10"]) / st["ma10"]) * 100, 1)
+                                st["diffMA10"] = diff10
+                            if st.get("ma50", 0) > 0:
+                                diff50 = round(((price - st["ma50"]) / st["ma50"]) * 100, 1)
+                                st["diffMA50"] = diff50
+                            st["aboveMA10_50"] = (st.get("diffMA10", 0) > 0 and st.get("diffMA50", 0) > 0)
+
+                            if st.get("baseMin") and st.get("baseMax"):
+                                b_min = st["baseMin"]
+                                b_max = st["baseMax"]
+                                b_mid = round(b_min + 0.5 * (b_max - b_min))
+                                st["baseMid"] = b_mid
+                                st["baseUpperHalf"] = price >= b_mid
+                                dur_ok = (st.get("baseSessions", 0) >= 60) or (st.get("baseMonths", 0) >= 3.0)
+                                tight_ok = st.get("baseTightness", 15.0) <= 20.0
+                                not_broken = price >= b_min
+                                st["baseValid"] = dur_ok and tight_ok and not_broken and st["baseUpperHalf"]
 
                             if col_open and row[col_open]:
                                 st["open"] = int(float(row[col_open]))
