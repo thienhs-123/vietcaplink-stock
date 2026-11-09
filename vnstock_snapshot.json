@@ -19,11 +19,114 @@
     "hnxPct": -0.88,
     "vnindexGtgd": "15.500 tỷ",
     "vnindexVol": "720,5 tr cp",
-    "usdVnd": 25480,
-    "usdVndBuy": 25120,
-    "goldWorld": 2658.4,
-    "goldSjc": 84.5,
-    "oilBrent": 77.85
+    "usdVnd": 25780,
+    "usdVndBuy": 25370,
+    "goldWorld": 4138.4,
+    "goldSjc": 89.5,
+    "oilBrent": 97.67,
+    "eurVnd": 29261,
+    "oilWti": 90.61,
+    "dxy": 102.14,
+    "world_indices": [
+      {
+        "label": "DOW JONES (MỸ)",
+        "val": "51,285.73",
+        "change": "-3.88%",
+        "isUp": false
+      },
+      {
+        "label": "S&P 500 (MỸ)",
+        "val": "7,376.86",
+        "change": "-4.05%",
+        "isUp": false
+      },
+      {
+        "label": "NASDAQ (MỸ)",
+        "val": "24,579.42",
+        "change": "-4.50%",
+        "isUp": false
+      },
+      {
+        "label": "NIKKEI 225 (NHẬT BẢN)",
+        "val": "59,364.88",
+        "change": "+3.36%",
+        "isUp": true
+      },
+      {
+        "label": "SHANGHAI (TRUNG QUỐC)",
+        "val": "3,674.67",
+        "change": "+0.70%",
+        "isUp": true
+      },
+      {
+        "label": "KOSPI (HÀN QUỐC)",
+        "val": "5,141.61",
+        "change": "-4.50%",
+        "isUp": false
+      },
+      {
+        "label": "HANG SENG (HỒNG KÔNG)",
+        "val": "24,619.13",
+        "change": "-0.72%",
+        "isUp": false
+      }
+    ],
+    "commodities": [
+      {
+        "label": "USD/VND (VCB BÁN)",
+        "val": "25,780",
+        "change": "+15đ",
+        "isUp": true
+      },
+      {
+        "label": "USD/VND (VCB MUA)",
+        "val": "25,370",
+        "change": "+10đ",
+        "isUp": true
+      },
+      {
+        "label": "EUR/VND",
+        "val": "29,261",
+        "change": "+0.35%",
+        "isUp": true
+      },
+      {
+        "label": "DXY (DOLLAR INDEX)",
+        "val": "102.14",
+        "change": "-0.15%",
+        "isUp": false
+      },
+      {
+        "label": "DẦU BRENT",
+        "val": "$97.67",
+        "change": "-0.66%",
+        "isUp": false
+      },
+      {
+        "label": "DẦU WTI",
+        "val": "$90.61",
+        "change": "-0.24%",
+        "isUp": false
+      },
+      {
+        "label": "VÀNG THẾ GIỚI",
+        "val": "$4,138.4",
+        "change": "+1.56%",
+        "isUp": true
+      },
+      {
+        "label": "VÀNG SJC",
+        "val": "89.50 Tr",
+        "change": "+0.50%",
+        "isUp": true
+      },
+      {
+        "label": "VÀNG NHẪN 9999",
+        "val": "88.50 Tr",
+        "change": "+0.45%",
+        "isUp": true
+      }
+    ]
   },
   "breadth": {
     "total": {

@@ -251,11 +251,34 @@ MACRO_STATE = {
     "hnxPct": -0.88,
     "vnindexGtgd": "15.500 tỷ",
     "vnindexVol": "720,5 tr cp",
-    "usdVnd": 25480,
-    "usdVndBuy": 25120,
-    "goldWorld": 2658.40,
-    "goldSjc": 84.50,
-    "oilBrent": 77.85
+    "usdVnd": 25780,
+    "usdVndBuy": 25370,
+    "eurVnd": 29261,
+    "goldWorld": 4138.40,
+    "goldSjc": 89.50,
+    "oilBrent": 97.67,
+    "oilWti": 90.61,
+    "dxy": 102.14,
+    "world_indices": [
+        {"label": "DOW JONES (MỸ)", "val": "51,285.73", "change": "-3.88%", "isUp": False},
+        {"label": "S&P 500 (MỸ)", "val": "7,376.86", "change": "-4.05%", "isUp": False},
+        {"label": "NASDAQ (MỸ)", "val": "24,579.42", "change": "-4.50%", "isUp": False},
+        {"label": "NIKKEI 225 (NHẬT BẢN)", "val": "59,364.88", "change": "+3.36%", "isUp": True},
+        {"label": "SHANGHAI (TRUNG QUỐC)", "val": "3,674.67", "change": "+0.70%", "isUp": True},
+        {"label": "KOSPI (HÀN QUỐC)", "val": "5,141.61", "change": "-4.50%", "isUp": False},
+        {"label": "HANG SENG (HỒNG KÔNG)", "val": "24,619.13", "change": "-0.72%", "isUp": False}
+    ],
+    "commodities": [
+        {"label": "USD/VND (VCB BÁN)", "val": "25,780", "change": "+15đ", "isUp": True},
+        {"label": "USD/VND (VCB MUA)", "val": "25,370", "change": "+10đ", "isUp": True},
+        {"label": "EUR/VND", "val": "29,261", "change": "+0.35%", "isUp": True},
+        {"label": "DXY (DOLLAR INDEX)", "val": "102.14", "change": "-0.15%", "isUp": False},
+        {"label": "DẦU BRENT", "val": "$97.67", "change": "-0.66%", "isUp": False},
+        {"label": "DẦU WTI", "val": "$90.61", "change": "-0.24%", "isUp": False},
+        {"label": "VÀNG THẾ GIỚI", "val": "$4,138.4", "change": "+1.56%", "isUp": True},
+        {"label": "VÀNG SJC", "val": "89.50 Tr", "change": "+0.50%", "isUp": True},
+        {"label": "VÀNG NHẪN 9999", "val": "88.50 Tr", "change": "+0.45%", "isUp": True}
+    ]
 }
 
 BREADTH_STATE = {
@@ -545,6 +568,159 @@ def fetch_market_breadth():
         return True
     except Exception:
         return False
+
+def fetch_world_indices_and_commodities():
+    """
+    Truy vấn chỉ số chứng khoán thế giới (Dow Jones, S&P 500, Nasdaq, Nikkei 225, Shanghai, Kospi, Hang Seng)
+    và Tỷ giá ngoại tệ, Hàng hóa (Vàng thế giới, Vàng SJC, Dầu Brent, Dầu WTI, DXY, USD/VND, EUR/VND).
+    """
+    global MACRO_STATE
+    import urllib.request
+    import urllib.parse
+    import json
+    import xml.etree.ElementTree as ET
+
+    # 1. World Indices qua Yahoo Finance API
+    world_map = {
+        '^DJI': 'DOW JONES (MỸ)',
+        '^GSPC': 'S&P 500 (MỸ)',
+        '^IXIC': 'NASDAQ (MỸ)',
+        '^N225': 'NIKKEI 225 (NHẬT BẢN)',
+        '000001.SS': 'SHANGHAI (TRUNG QUỐC)',
+        '^KS11': 'KOSPI (HÀN QUỐC)',
+        '^HSI': 'HANG SENG (HỒNG KÔNG)'
+    }
+
+    world_items = []
+    for sym, label in world_map.items():
+        try:
+            url = f"https://query1.finance.yahoo.com/v8/finance/chart/{urllib.parse.quote(sym)}?interval=1d&range=2d"
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
+            with urllib.request.urlopen(req, timeout=3.5) as r:
+                d = json.loads(r.read().decode('utf-8'))
+                meta = d['chart']['result'][0]['meta']
+                price = meta['regularMarketPrice']
+                prev = meta.get('chartPreviousClose') or meta.get('previousClose') or price
+                diff = price - prev
+                pct = round((diff / prev) * 100, 2) if prev else 0.0
+                world_items.append({
+                    "label": label,
+                    "val": f"{price:,.2f}",
+                    "change": f"{'+' if pct >= 0 else ''}{pct:.2f}%",
+                    "isUp": pct >= 0
+                })
+        except Exception:
+            pass
+
+    # 2. Hàng hóa & Kim loại quý qua Yahoo Finance API
+    comm_map = {
+        'GC=F': 'goldWorld',
+        'BZ=F': 'oilBrent',
+        'CL=F': 'oilWti',
+        'DX-Y.NYB': 'dxy'
+    }
+    comm_results = {}
+    for sym, key in comm_map.items():
+        try:
+            url = f"https://query1.finance.yahoo.com/v8/finance/chart/{urllib.parse.quote(sym)}?interval=1d&range=2d"
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
+            with urllib.request.urlopen(req, timeout=3.5) as r:
+                d = json.loads(r.read().decode('utf-8'))
+                meta = d['chart']['result'][0]['meta']
+                price = meta['regularMarketPrice']
+                prev = meta.get('chartPreviousClose') or meta.get('previousClose') or price
+                diff = price - prev
+                pct = round((diff / prev) * 100, 2) if prev else 0.0
+                comm_results[key] = {
+                    "price": round(price, 2),
+                    "pct": pct,
+                    "change": f"{'+' if pct >= 0 else ''}{pct:.2f}%",
+                    "isUp": pct >= 0
+                }
+        except Exception:
+            pass
+
+    # 3. Tỷ giá ngoại tệ Vietcombank XML
+    vcb_rates = {}
+    try:
+        url = "https://portal.vietcombank.com.vn/Usercontrols/TVPortal.TyGia/pXML.aspx"
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
+        with urllib.request.urlopen(req, timeout=4) as r:
+            xml_str = r.read().decode('utf-8', errors='ignore')
+            root = ET.fromstring(xml_str)
+            for ex in root.findall('.//Exrate'):
+                code = ex.get('CurrencyCode')
+                if code in ['USD', 'EUR']:
+                    def parse_num(s):
+                        try:
+                            return float(s.replace(',', ''))
+                        except Exception:
+                            return 0.0
+                    vcb_rates[code] = {
+                        "buy": parse_num(ex.get('Buy', '0')),
+                        "sell": parse_num(ex.get('Sell', '0'))
+                    }
+    except Exception:
+        pass
+
+    # Đồng bộ vào MACRO_STATE an toàn
+    with DATA_LOCK:
+        if len(world_items) >= 4:
+            MACRO_STATE["world_indices"] = world_items
+
+        if 'USD' in vcb_rates and vcb_rates['USD']['sell'] > 0:
+            MACRO_STATE['usdVnd'] = int(vcb_rates['USD']['sell'])
+            MACRO_STATE['usdVndBuy'] = int(vcb_rates['USD']['buy'])
+        if 'EUR' in vcb_rates and vcb_rates['EUR']['sell'] > 0:
+            MACRO_STATE['eurVnd'] = int(vcb_rates['EUR']['sell'])
+
+        if 'goldWorld' in comm_results:
+            MACRO_STATE['goldWorld'] = comm_results['goldWorld']['price']
+        if 'oilBrent' in comm_results:
+            MACRO_STATE['oilBrent'] = comm_results['oilBrent']['price']
+        if 'oilWti' in comm_results:
+            MACRO_STATE['oilWti'] = comm_results['oilWti']['price']
+        if 'dxy' in comm_results:
+            MACRO_STATE['dxy'] = comm_results['dxy']['price']
+
+        usd_sell = MACRO_STATE.get('usdVnd', 25780)
+        usd_buy = MACRO_STATE.get('usdVndBuy', 25370)
+        eur_sell = MACRO_STATE.get('eurVnd', 29261)
+        dxy_val = comm_results.get('dxy', {}).get('price', MACRO_STATE.get('dxy', 102.14))
+        dxy_pct = comm_results.get('dxy', {}).get('change', '-0.15%')
+        dxy_up = comm_results.get('dxy', {}).get('isUp', False)
+
+        brent_val = comm_results.get('oilBrent', {}).get('price', MACRO_STATE.get('oilBrent', 97.67))
+        brent_pct = comm_results.get('oilBrent', {}).get('change', '-0.66%')
+        brent_up = comm_results.get('oilBrent', {}).get('isUp', False)
+
+        wti_val = comm_results.get('oilWti', {}).get('price', MACRO_STATE.get('oilWti', 90.61))
+        wti_pct = comm_results.get('oilWti', {}).get('change', '-0.24%')
+        wti_up = comm_results.get('oilWti', {}).get('isUp', False)
+
+        gold_w_val = comm_results.get('goldWorld', {}).get('price', MACRO_STATE.get('goldWorld', 4138.40))
+        gold_w_pct = comm_results.get('goldWorld', {}).get('change', '+1.56%')
+        gold_w_up = comm_results.get('goldWorld', {}).get('isUp', True)
+
+        gold_sjc = MACRO_STATE.get('goldSjc', 89.50)
+
+        MACRO_STATE['commodities'] = [
+            {"label": "USD/VND (VCB BÁN)", "val": f"{usd_sell:,}", "change": "+15đ", "isUp": True},
+            {"label": "USD/VND (VCB MUA)", "val": f"{usd_buy:,}", "change": "+10đ", "isUp": True},
+            {"label": "EUR/VND", "val": f"{eur_sell:,}", "change": "+0.35%", "isUp": True},
+            {"label": "DXY (DOLLAR INDEX)", "val": f"{dxy_val:.2f}", "change": dxy_pct, "isUp": dxy_up},
+            {"label": "DẦU BRENT", "val": f"${brent_val:.2f}", "change": brent_pct, "isUp": brent_up},
+            {"label": "DẦU WTI", "val": f"${wti_val:.2f}", "change": wti_pct, "isUp": wti_up},
+            {"label": "VÀNG THẾ GIỚI", "val": f"${gold_w_val:,.1f}", "change": gold_w_pct, "isUp": gold_w_up},
+            {"label": "VÀNG SJC", "val": f"{gold_sjc:.2f} Tr", "change": "+0.50%", "isUp": True},
+            {"label": "VÀNG NHẪN 9999", "val": "88.50 Tr", "change": "+0.45%", "isUp": True}
+        ]
+
+    try:
+        update_ram_cache()
+    except Exception:
+        pass
+    return True
 
 def fetch_prices_from_vnstock():
     """
@@ -966,9 +1142,18 @@ def sync_cycle_worker():
         except Exception:
             pass
         try:
+            fetch_world_indices_and_commodities()
+        except Exception:
+            pass
+        try:
             fetch_market_breadth()
         except Exception:
             pass
+        if SERVER_PACKET_COUNT % 3 == 0:
+            try:
+                fetch_world_indices_and_commodities()
+            except Exception:
+                pass
         now_str = datetime.datetime.now().strftime("%H:%M:%S")
 
         if count > 0:
@@ -1216,6 +1401,10 @@ def main():
         print("🔄 Đang đồng bộ dữ liệu thời gian thực ban đầu từ Vnstock/API...", flush=True)
         try:
             fetch_indices_from_vnstock_or_api()
+        except Exception:
+            pass
+        try:
+            fetch_world_indices_and_commodities()
         except Exception:
             pass
         try:

@@ -500,7 +500,7 @@
         <div id="multiTickerContainer" onmouseenter="pauseTickerScroll()" onmouseleave="resumeTickerScroll()" class="relative w-full h-[36px] md:h-[38px] bg-light-elevated/85 dark:bg-studio-elevated/75 macos-blur rounded-full border border-light-border dark:border-studio-border shadow-sm flex items-center overflow-hidden px-3.5 transition-all">
           
           <!-- Module Badge & Interactive Switch Dots -->
-          <div class="shrink-0 flex items-center space-x-2 pr-3 z-20 bg-light-elevated/90 dark:bg-studio-elevated/90 select-none">
+          <div class="shrink-0 flex items-center space-x-2 pr-2.5 z-20 bg-light-elevated/90 dark:bg-studio-elevated/90 select-none">
             <span id="tickerModuleBadge" class="text-[11px] md:text-[11.5px] font-semibold px-2.5 py-0.5 rounded-full tracking-tight transition-all duration-300 bg-blue-500/10 text-blue-600 dark:text-studio-blueLight border border-blue-500/20 whitespace-nowrap">
               Chứng khoán thế giới
             </span>
@@ -510,15 +510,17 @@
               <button onclick="jumpToTickerModule(1)" id="tickerDot1" class="w-1.5 h-1.5 rounded-full bg-light-border dark:bg-studio-border transition-all opacity-60 hover:opacity-100" title="Chứng khoán Việt Nam"></button>
               <button onclick="jumpToTickerModule(2)" id="tickerDot2" class="w-1.5 h-1.5 rounded-full bg-light-border dark:bg-studio-border transition-all opacity-60 hover:opacity-100" title="Tỷ giá và hàng hóa"></button>
             </div>
+            <!-- Phân cách dọc tinh tế chống dính chữ -->
+            <div class="h-4 w-px bg-light-border dark:bg-studio-border/70 ml-2 mr-1 shrink-0"></div>
           </div>
 
           <!-- Scrolling Masked Window -->
           <div class="relative flex-1 h-full overflow-hidden flex items-center">
-            <div class="absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-light-elevated dark:from-studio-elevated to-transparent z-10 pointer-events-none"></div>
-            <div class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-light-elevated dark:from-studio-elevated to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute left-0 top-0 bottom-0 w-10 bg-gradient-to-r from-light-elevated dark:from-studio-elevated to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-light-elevated dark:from-studio-elevated to-transparent z-10 pointer-events-none"></div>
 
             <!-- Dynamic Active Module Content Track -->
-            <div id="tickerTrack" class="flex items-center text-xs font-mono whitespace-nowrap pl-3 pr-3 select-none" style="will-change: transform, opacity;">
+            <div id="tickerTrack" class="flex items-center text-xs font-mono whitespace-nowrap pl-4 pr-4 select-none" style="will-change: transform, opacity;">
               <!-- Rendered and animated dynamically by JavaScript -->
             </div>
           </div>
@@ -949,13 +951,13 @@
 
                 <div>
                   <div class="flex items-baseline space-x-2.5">
-                    <span class="text-3xl font-bold font-mono text-light-text dark:text-studio-text" id="cardUsdVndVal">25,480</span>
-                    <span class="text-xs px-2 py-0.5 rounded bg-rose-500/10 text-rose-500 font-mono font-medium">+15 VND</span>
+                    <span class="text-3xl font-bold font-mono text-light-text dark:text-studio-text" id="cardUsdVndVal">25,780</span>
+                    <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-500 font-mono font-medium">+15 VND</span>
                   </div>
                   <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
-                    <span>Mua TM: <strong class="text-light-text dark:text-studio-text font-mono">25,120</strong></span>
-                    <span>CK: <strong class="text-light-text dark:text-studio-text font-mono">25,150</strong></span>
-                    <span>Bán ra: <strong class="text-light-text dark:text-studio-text font-mono">25,480</strong></span>
+                    <span>Mua TM: <strong class="text-light-text dark:text-studio-text font-mono">25,370</strong></span>
+                    <span>CK: <strong class="text-light-text dark:text-studio-text font-mono">25,400</strong></span>
+                    <span>Bán ra: <strong class="text-light-text dark:text-studio-text font-mono">25,780</strong></span>
                   </div>
                 </div>
 
@@ -997,12 +999,12 @@
 
                 <div>
                   <div class="flex items-baseline space-x-2.5">
-                    <span class="text-3xl font-bold font-mono text-amber-500" id="cardGoldVal">$2,658.4</span>
-                    <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-500 font-mono font-medium">+0.58%</span>
+                    <span class="text-3xl font-bold font-mono text-amber-500" id="cardGoldVal">$4,138.4</span>
+                    <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-500 font-mono font-medium">+1.56%</span>
                   </div>
                   <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
-                    <span>SJC Mua: <strong class="text-light-text dark:text-studio-text font-mono">82.50 Tr</strong></span>
-                    <span>SJC Bán: <strong class="text-light-text dark:text-studio-text font-mono">84.50 Tr</strong></span>
+                    <span>SJC Mua: <strong class="text-light-text dark:text-studio-text font-mono">87.50 Tr</strong></span>
+                    <span>SJC Bán: <strong class="text-light-text dark:text-studio-text font-mono">89.50 Tr</strong></span>
                     <span>Chênh: <strong class="text-amber-500 font-mono">2.0 Tr</strong></span>
                   </div>
                 </div>
@@ -1045,11 +1047,11 @@
 
                 <div>
                   <div class="flex items-baseline space-x-2.5">
-                    <span class="text-3xl font-bold font-mono text-light-text dark:text-studio-text" id="cardOilVal">$77.85</span>
-                    <span class="text-xs px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 font-mono font-medium">-0.57%</span>
+                    <span class="text-3xl font-bold font-mono text-light-text dark:text-studio-text" id="cardOilVal">$97.67</span>
+                    <span class="text-xs px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 font-mono font-medium">-0.66%</span>
                   </div>
                   <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
-                    <span>WTI: <strong class="text-light-text dark:text-studio-text font-mono">$74.20</strong></span>
+                    <span>WTI: <strong class="text-light-text dark:text-studio-text font-mono">$90.61</strong></span>
                     <span>Biến động tuần: <strong class="text-emerald-500 font-mono">-1.8%</strong></span>
                     <span>Tác động: <span class="text-emerald-500 font-medium">Hạ nhiệt CPI</span></span>
                   </div>
@@ -3471,13 +3473,13 @@
           badgeClass: "bg-blue-500/10 text-blue-600 dark:text-studio-blueLight border-blue-500/20",
           dotColor: "bg-blue-500",
           items: [
-            { label: "DOW JONES (MỸ)", val: "39,127.14", change: "+0.67%", isUp: true },
-            { label: "S&P 500 (MỸ)", val: "5,477.90", change: "+0.81%", isUp: true },
-            { label: "NASDAQ (MỸ)", val: "17,732.60", change: "+1.11%", isUp: true },
-            { label: "NIKKEI 225 (NHẬT BẢN)", val: "38,814.56", change: "+0.43%", isUp: true },
-            { label: "SHANGHAI (TRUNG QUỐC)", val: "2,998.14", change: "-0.24%", isUp: false },
-            { label: "KOSPI (HÀN QUỐC)", val: "2,763.92", change: "+0.72%", isUp: true },
-            { label: "HANG SENG (HỒNG KÔNG)", val: "18,028.52", change: "+0.36%", isUp: true }
+            { label: "DOW JONES (MỸ)", val: "51,285.73", change: "-3.88%", isUp: false },
+            { label: "S&P 500 (MỸ)", val: "7,376.86", change: "-4.05%", isUp: false },
+            { label: "NASDAQ (MỸ)", val: "24,579.42", change: "-4.50%", isUp: false },
+            { label: "NIKKEI 225 (NHẬT BẢN)", val: "59,364.88", change: "+3.36%", isUp: true },
+            { label: "SHANGHAI (TRUNG QUỐC)", val: "3,674.67", change: "+0.70%", isUp: true },
+            { label: "KOSPI (HÀN QUỐC)", val: "5,141.61", change: "-4.50%", isUp: false },
+            { label: "HANG SENG (HỒNG KÔNG)", val: "24,619.13", change: "-0.72%", isUp: false }
           ]
         },
         // Module 2: Chỉ số Việt Nam & Cổ phiếu quan trọng
@@ -3513,15 +3515,15 @@
           badgeClass: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20",
           dotColor: "bg-amber-500",
           items: [
-            { label: "USD/VND (VCB BÁN)", val: "25,480", change: "+15đ", isUp: true },
-            { label: "USD/VND (VCB MUA)", val: "25,120", change: "+10đ", isUp: true },
-            { label: "EUR/VND", val: "27,650", change: "+0.18%", isUp: true },
-            { label: "DXY (DOLLAR INDEX)", val: "103.85", change: "+0.12%", isUp: true },
-            { label: "DẦU BRENT", val: "$77.85", change: "+0.45%", isUp: true },
-            { label: "DẦU WTI", val: "$73.60", change: "+0.38%", isUp: true },
-            { label: "VÀNG THẾ GIỚI", val: "$2,658.4", change: "+0.55%", isUp: true },
-            { label: "VÀNG SJC", val: "84.50 Tr", change: "+0.35%", isUp: true },
-            { label: "VÀNG NHẪN 9999", val: "83.80 Tr", change: "+0.40%", isUp: true }
+            { label: "USD/VND (VCB BÁN)", val: "25,780", change: "+15đ", isUp: true },
+            { label: "USD/VND (VCB MUA)", val: "25,370", change: "+10đ", isUp: true },
+            { label: "EUR/VND", val: "29,261", change: "+0.35%", isUp: true },
+            { label: "DXY (DOLLAR INDEX)", val: "102.14", change: "-0.15%", isUp: false },
+            { label: "DẦU BRENT", val: "$97.67", change: "-0.66%", isUp: false },
+            { label: "DẦU WTI", val: "$90.61", change: "-0.24%", isUp: false },
+            { label: "VÀNG THẾ GIỚI", val: "$4,138.4", change: "+1.56%", isUp: true },
+            { label: "VÀNG SJC", val: "89.50 Tr", change: "+0.50%", isUp: true },
+            { label: "VÀNG NHẪN 9999", val: "88.50 Tr", change: "+0.45%", isUp: true }
           ]
         }
       ],
@@ -3578,29 +3580,29 @@
         track.style.transform = 'translateY(0)';
         track.style.opacity = '1';
 
-        // 4. BƯỚC 2: Dừng 0.7s để định hình, sau đó BẮT ĐẦU CHẠY NGANG
+        // 4. BƯỚC 2: Dừng 3.5s để người dùng đọc rõ ràng các chỉ số đầu tiên, sau đó BẮT ĐẦU CHẠY NGANG
         this.timeoutId = setTimeout(() => {
           const containerWidth = track.parentElement ? track.parentElement.clientWidth : 800;
           const trackWidth = track.scrollWidth;
           const scrollDistance = Math.max(0, trackWidth - containerWidth + 60);
 
           if (scrollDistance > 0) {
-            // Tốc độ chạy ngang dễ đọc ~40px/giây
-            const duration = Math.max(9, scrollDistance / 40);
+            // Tốc độ chạy ngang dễ đọc ~35px/giây
+            const duration = Math.max(10, scrollDistance / 35);
             track.style.transition = `transform ${duration}s linear`;
             track.style.transform = `translateX(-${scrollDistance}px) translateY(0)`;
 
-            // 5. BƯỚC 3: Khi chạy hết thông tin, dừng 0.8s rồi trôi xuống và chuyển tiếp module sau
+            // 5. BƯỚC 3: Khi chạy hết thông tin, dừng 1.2s rồi trôi xuống và chuyển tiếp module sau
             this.timeoutId = setTimeout(() => {
               this.exitCurrentModule();
-            }, (duration * 1000) + 800);
+            }, (duration * 1000) + 1200);
           } else {
-            // Nếu nội dung vừa vặn màn hình, đứng yên 3.5s rồi chuyển tiếp
+            // Nếu nội dung vừa vặn màn hình, đứng yên 4.5s rồi chuyển tiếp
             this.timeoutId = setTimeout(() => {
               this.exitCurrentModule();
-            }, 3500);
+            }, 4500);
           }
-        }, 700);
+        }, 3500);
       },
 
       exitCurrentModule() {
@@ -3830,11 +3832,14 @@
         vnindexGtgd: "15.500 tỷ",
         vnindexVol: "720,5 tr",
         interestRate: "4.8 - 5.3%",
-        usdVnd: 25480,
-        usdVndBuy: 25120,
-        goldWorld: 2658.40,
-        goldSjc: 84.50,
-        oilBrent: 77.85,
+        usdVnd: 25780,
+        usdVndBuy: 25370,
+        eurVnd: 29261,
+        goldWorld: 4138.40,
+        goldSjc: 89.50,
+        oilBrent: 97.67,
+        oilWti: 90.61,
+        dxy: 102.14,
         sources: {
           gdp: "Tổng cục Thống kê (GSO) - Báo cáo Kinh tế Xã hội",
           pmi: "S&P Global Manufacturing PMI",
@@ -9057,15 +9062,32 @@
           }
         } catch (e) {}
 
-        // Lấy tỷ giá ngoại tệ USD/VND thời gian thực nếu có
+        // Lấy tỷ giá ngoại tệ USD/VND thời gian thực nếu có (Client-side fallback)
         try {
           const fxRes = await this.fetchClientApi("https://open.er-api.com/v6/latest/USD", 1500);
           if (fxRes.ok && fxRes.data && fxRes.data.rates && fxRes.data.rates.VND) {
             const liveRate = Math.round(fxRes.data.rates.VND);
             StockApp.macro.usdVnd = liveRate;
-            if (window.TickerController && window.TickerController.modules && window.TickerController.modules[0]) {
-              const fxItem = window.TickerController.modules[0].items?.find(it => it.label.includes("USD/VND"));
+            const cUsd = document.getElementById("cardUsdVndVal");
+            if (cUsd) cUsd.innerText = liveRate.toLocaleString('en-US');
+            if (window.TickerController && window.TickerController.modules && window.TickerController.modules[2]) {
+              const fxItem = window.TickerController.modules[2].items?.find(it => it.label.includes("USD/VND"));
               if (fxItem) fxItem.val = liveRate.toLocaleString('en-US');
+            }
+          }
+        } catch (e) {}
+
+        // Lấy giá Vàng thế giới thời gian thực nếu có (Client-side fallback)
+        try {
+          const goldRes = await this.fetchClientApi("https://api.gold-api.com/price/XAU", 1500);
+          if (goldRes.ok && goldRes.data && goldRes.data.price) {
+            const liveGold = Math.round(goldRes.data.price * 10) / 10;
+            StockApp.macro.goldWorld = liveGold;
+            const cGold = document.getElementById("cardGoldVal");
+            if (cGold) cGold.innerText = `$${liveGold.toLocaleString('en-US')}`;
+            if (window.TickerController && window.TickerController.modules && window.TickerController.modules[2]) {
+              const gItem = window.TickerController.modules[2].items?.find(it => it.label.includes("VÀNG THẾ GIỚI"));
+              if (gItem) gItem.val = `$${liveGold.toLocaleString('en-US')}`;
             }
           }
         } catch (e) {}
@@ -9193,8 +9215,31 @@
         StockApp.macro.vnindexGtgd = macro.vnindexGtgd || StockApp.macro.vnindexGtgd;
         StockApp.macro.vnindexVol = macro.vnindexVol || StockApp.macro.vnindexVol;
         if (macro.usdVnd) StockApp.macro.usdVnd = macro.usdVnd;
+        if (macro.usdVndBuy) StockApp.macro.usdVndBuy = macro.usdVndBuy;
+        if (macro.eurVnd) StockApp.macro.eurVnd = macro.eurVnd;
         if (macro.goldWorld) StockApp.macro.goldWorld = macro.goldWorld;
+        if (macro.goldSjc) StockApp.macro.goldSjc = macro.goldSjc;
         if (macro.oilBrent) StockApp.macro.oilBrent = macro.oilBrent;
+        if (macro.oilWti) StockApp.macro.oilWti = macro.oilWti;
+        if (macro.dxy) StockApp.macro.dxy = macro.dxy;
+
+        // Cập nhật giá trị hiển thị trên các thẻ Macro Dashboard
+        const cUsd = document.getElementById("cardUsdVndVal");
+        if (cUsd && macro.usdVnd) cUsd.innerText = Number(macro.usdVnd).toLocaleString('en-US');
+        const cGold = document.getElementById("cardGoldVal");
+        if (cGold && macro.goldWorld) cGold.innerText = `$${Number(macro.goldWorld).toLocaleString('en-US', {minimumFractionDigits: 1, maximumFractionDigits: 1})}`;
+        const cOil = document.getElementById("cardOilVal");
+        if (cOil && macro.oilBrent) cOil.innerText = `$${Number(macro.oilBrent).toFixed(2)}`;
+
+        // Cập nhật các danh sách Ticker Module 0 (Thế giới) và Module 2 (Tỷ giá & Hàng hóa)
+        if (window.TickerController && window.TickerController.modules) {
+          if (Array.isArray(macro.world_indices) && macro.world_indices.length > 0) {
+            window.TickerController.modules[0].items = macro.world_indices;
+          }
+          if (Array.isArray(macro.commodities) && macro.commodities.length > 0) {
+            window.TickerController.modules[2].items = macro.commodities;
+          }
+        }
       },
 
       applyRealStockData(stocksMap) {
@@ -14191,6 +14236,16 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       if (tGold) tGold.innerText = `$${StockApp.macro.goldWorld}`;
       const tOil = document.getElementById("topOilVal");
       if (tOil) tOil.innerText = `$${StockApp.macro.oilBrent}`;
+
+      // Update Ticker Module 2 (Hàng hóa & Tỷ giá)
+      if (window.TickerController && window.TickerController.modules && window.TickerController.modules[2]) {
+        const u = window.TickerController.modules[2].items?.find(it => it.label.includes("USD/VND"));
+        if (u) u.val = StockApp.macro.usdVnd.toLocaleString('en-US');
+        const g = window.TickerController.modules[2].items?.find(it => it.label.includes("VÀNG THẾ GIỚI"));
+        if (g) g.val = `$${StockApp.macro.goldWorld.toLocaleString('en-US')}`;
+        const o = window.TickerController.modules[2].items?.find(it => it.label.includes("DẦU BRENT"));
+        if (o) o.val = `$${StockApp.macro.oilBrent.toFixed(2)}`;
+      }
 
       closeDataManagementModal();
       showMacToast({
