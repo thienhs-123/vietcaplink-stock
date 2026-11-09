@@ -323,6 +323,48 @@ if (!StockApp.buyCriteria.baseDurationTiers.includes('6_12m')) {
 }
 console.log(`[PASS] Blocked unchecking 6_12m from all 3: tiers remain [${StockApp.buyCriteria.baseDurationTiers.join(', ')}]`);
 
+// --- TESTING PURE TOGGLE CYCLE (LUÂN CHUYỂN CHỌN/BỎ CHỌN & AUTO-DEACTIVATE KHI BỎ CHỌN Ô CUỐI) ---
+console.log('\n--- TESTING PURE TOGGLE CYCLE ---');
+// Step 1: Remove '12m_plus' -> leaves ['3_6m', '6_12m']
+mockDom.toggleBaseDurationTier('12m_plus');
+if (StockApp.buyCriteria.baseDurationTiers.includes('12m_plus') || StockApp.buyCriteria.baseDurationTiers.length !== 2) {
+  console.error('[FAIL] Failed to untick 12m_plus!');
+  process.exit(1);
+}
+console.log(`[PASS] Unticked 12m_plus successfully: tiers remain [${StockApp.buyCriteria.baseDurationTiers.join(', ')}]`);
+
+// Step 2: Remove '3_6m' -> leaves strictly ['6_12m']
+mockDom.toggleBaseDurationTier('3_6m');
+if (StockApp.buyCriteria.baseDurationTiers.length !== 1 || StockApp.buyCriteria.baseDurationTiers[0] !== '6_12m') {
+  console.error(`[FAIL] Expected strictly ['6_12m'] after removing 3_6m, got: [${StockApp.buyCriteria.baseDurationTiers.join(', ')}]`);
+  process.exit(1);
+}
+console.log(`[PASS] Unticked 3_6m successfully: strictly 1 tier [${StockApp.buyCriteria.baseDurationTiers.join(', ')}]`);
+
+// Step 3: Untick the ONLY remaining box ('6_12m') -> Must turn OFF Card 1 completely
+mockDom.toggleBaseDurationTier('6_12m');
+if (StockApp.buyCriteria.filterMaAndBase !== false || StockApp.buyCriteria.baseDurationTiers.length !== 0) {
+  console.error(`[FAIL] Unticking the last tier must deactivate Card 1! filterMaAndBase=${StockApp.buyCriteria.filterMaAndBase}, tiers=[${StockApp.buyCriteria.baseDurationTiers.join(', ')}]`);
+  process.exit(1);
+}
+console.log('[PASS] Unticking the last remaining tier successfully turns OFF Card 1 (filterMaAndBase=false, tiers=[]).');
+
+// Step 4: From inactive state, tick '12m_plus' -> Activates Card 1 with strictly ['12m_plus']
+mockDom.toggleBaseDurationTier('12m_plus');
+if (!StockApp.buyCriteria.filterMaAndBase || StockApp.buyCriteria.baseDurationTiers.length !== 1 || StockApp.buyCriteria.baseDurationTiers[0] !== '12m_plus') {
+  console.error(`[FAIL] Ticking tier from inactive state must activate Card 1 with strictly that tier! Got: [${StockApp.buyCriteria.baseDurationTiers.join(', ')}]`);
+  process.exit(1);
+}
+console.log('[PASS] Ticking from inactive state turns ON Card 1 with strictly 1 tier: [12m_plus].');
+
+// Step 5: Untick '12m_plus' immediately -> Turns Card 1 OFF again
+mockDom.toggleBaseDurationTier('12m_plus');
+if (StockApp.buyCriteria.filterMaAndBase !== false || StockApp.buyCriteria.baseDurationTiers.length !== 0) {
+  console.error('[FAIL] Ticking the same box second time did not toggle it OFF!');
+  process.exit(1);
+}
+console.log('[PASS] Ticking the same box again toggles it OFF and deactivates Card 1 cleanly.');
+
 // Mode: Both (Tier: 3-6m)
 mockDom.setBuyPresetMode('both');
 mockDom.setBaseDurationTier(['3_6m']);

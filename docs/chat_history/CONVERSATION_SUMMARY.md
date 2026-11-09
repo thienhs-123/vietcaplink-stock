@@ -1,5 +1,5 @@
 # 💬 LỊCH SỬ HỘI THOẠI & YÊU CẦU DỰ ÁN (VIETCAPLINK STOCK)
-> Tự động đồng bộ lúc: 13:13:58 9/11/2026
+> Tự động đồng bộ lúc: 13:35:32 9/11/2026
 
 ---
 
@@ -1101,4 +1101,17 @@ tiếp, áp dụng multi chose với khoảng thời gian đó, vd: từ 3 - 6 t
 ### Yêu cầu #189 (2026-11-09T06:00:16Z)
 ```markdown
 đang có lỗi: chọn  6 đến 12 tháng thì auto chọn luôn 3 - 6 tháng, và nhiều lỗi tương tự. tóm lại là nếu chọn 1 ô thì sẽ là một ô, nếu chọn 2 ô thì không được chọn 3 - 6 tháng và trên 12 tháng cùng lúc. và hãy tự động crosscheck theo rules đã setup trong project từ đầu
+```
+
+### Yêu cầu #190 (2026-11-09T06:19:59Z)
+```markdown
+thiết kế như thế này không thân thiện với người dùng, trước khi build hãy cho tôi giải pháp bạn sẽ thực hiện. yêu cầu của tôi rất đơn giản:
+1. Các mốc thời gian có thể chọn 1 hoặc nhiều thời gian nhưng không cho chọn 2 khoảng thời gian không liền kề
+2. trong việc tick chọn, sẽ luân chuẩn được giữ chọn và bỏ chọn. vd: tick 1 lần là chọn, 2 lần là bỏ chọn và ngược lại nếu ô đã chọn thì tick thêm lần nữa là bỏ chọn
+bạn hãy trình bày lại theo ý hiểu của mình trước khi fix lại lỗi
+```
+
+### Yêu cầu #191 (2026-11-09T06:24:46Z)
+```markdown
+ok
 ```
