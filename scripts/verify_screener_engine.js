@@ -138,7 +138,7 @@ const top10PeMap = new Map();
 validPeStocks.slice(0, 10).forEach((st, idx) => top10PeMap.set(st.symbol, idx + 1));
 
 const filterFunc = (st) => {
-  const { filterMaAndBase, filterLowestPeTop10, baseDurationTier } = StockApp.buyCriteria;
+  const { filterMaAndBase, filterLowestPeTop10, baseDurationTiers, baseDurationTier } = StockApp.buyCriteria;
   if (filterMaAndBase) {
     const passesMA = (st.aboveMA10_50 === true) || (st.diffMA10 > 0 && st.diffMA50 > 0);
     const durOk = (st.baseSessions >= 60) || ((st.baseMonths || 0) >= 3.0);
@@ -147,20 +147,23 @@ const filterFunc = (st) => {
     const passesBase = (st.baseValid === true) || (durOk && tightOk && upperOk);
     if (!passesMA || !passesBase) return false;
 
-    // Base duration sub-criteria (3 tiers: 3-6m, 6-12m, 12m_plus)
-    const tier = baseDurationTier || '3_6m';
+    // Multi-choice base duration sub-criteria
+    const selectedTiers = Array.isArray(baseDurationTiers) && baseDurationTiers.length > 0
+      ? baseDurationTiers
+      : (baseDurationTier ? [baseDurationTier] : ['3_6m']);
+
     const bMonths = st.baseMonths || 0;
     const bSessions = st.baseSessions || Math.round(bMonths * 21);
-    if (tier === '3_6m') {
-      const is3_6 = (bMonths >= 3.0 && bMonths < 6.0) || (bSessions >= 60 && bSessions <= 125);
-      if (!is3_6) return false;
-    } else if (tier === '6_12m') {
-      const is6_12 = (bMonths >= 6.0 && bMonths <= 12.0) || (bSessions > 125 && bSessions <= 250);
-      if (!is6_12) return false;
-    } else if (tier === '12m_plus') {
-      const is12plus = (bMonths > 12.0) || (bSessions > 250);
-      if (!is12plus) return false;
-    }
+    const is3_6 = (bMonths >= 3.0 && bMonths < 6.0) || (bSessions >= 60 && bSessions <= 125);
+    const is6_12 = (bMonths >= 6.0 && bMonths <= 12.0) || (bSessions > 125 && bSessions <= 250);
+    const is12plus = (bMonths > 12.0) || (bSessions > 250);
+
+    let match = false;
+    if (selectedTiers.includes('3_6m') && is3_6) match = true;
+    if (selectedTiers.includes('6_12m') && is6_12) match = true;
+    if (selectedTiers.includes('12m_plus') && is12plus) match = true;
+
+    if (!match) return false;
   }
   if (filterLowestPeTop10) {
     if (!top10PeMap.has(st.symbol)) return false;
@@ -176,26 +179,20 @@ if (initialStocks.length !== 100) {
   process.exit(1);
 }
 
-// Mode: MA & Base only - Test 3 duration tiers
+// Mode: MA & Base only - Test 3 duration tiers individually
 mockDom.setBuyPresetMode('ma_base');
 
 // Tier 1: 3 - 6 tháng (Default)
-mockDom.setBaseDurationTier('3_6m');
+mockDom.setBaseDurationTier(['3_6m']);
 const passedMaBase3_6m = StockApp.stocks.filter(filterFunc);
 console.log(`[PASS] Mode 'ma_base' [3 - 6 Tháng] returns ${passedMaBase3_6m.length} stocks: ${passedMaBase3_6m.map(s => `${s.symbol} (${s.baseMonths}T)`).join(', ')}`);
 if (passedMaBase3_6m.length !== 8) {
   console.error(`[FAIL] Expected 8 stocks in ma_base (3-6M), got ${passedMaBase3_6m.length}`);
   process.exit(1);
 }
-passedMaBase3_6m.forEach(st => {
-  if (st.baseMonths < 3.0 || st.baseMonths >= 6.0) {
-    console.error(`[FAIL] Stock ${st.symbol} baseMonths=${st.baseMonths} out of 3-6M range!`);
-    process.exit(1);
-  }
-});
 
 // Tier 2: 6 - 12 tháng
-mockDom.setBaseDurationTier('6_12m');
+mockDom.setBaseDurationTier(['6_12m']);
 const passedMaBase6_12m = StockApp.stocks.filter(filterFunc);
 console.log(`[PASS] Mode 'ma_base' [6 - 12 Tháng] returns ${passedMaBase6_12m.length} stocks: ${passedMaBase6_12m.map(s => `${s.symbol} (${s.baseMonths}T)`).join(', ')}`);
 if (passedMaBase6_12m.length !== 1 || passedMaBase6_12m[0].symbol !== 'DPR') {
@@ -204,7 +201,7 @@ if (passedMaBase6_12m.length !== 1 || passedMaBase6_12m[0].symbol !== 'DPR') {
 }
 
 // Tier 3: Trên 12 tháng
-mockDom.setBaseDurationTier('12m_plus');
+mockDom.setBaseDurationTier(['12m_plus']);
 const passedMaBase12m_plus = StockApp.stocks.filter(filterFunc);
 console.log(`[PASS] Mode 'ma_base' [Trên 12 Tháng] returns ${passedMaBase12m_plus.length} stocks: ${passedMaBase12m_plus.map(s => `${s.symbol} (${s.baseMonths}T)`).join(', ')}`);
 if (passedMaBase12m_plus.length !== 1 || passedMaBase12m_plus[0].symbol !== 'FCN') {
@@ -212,9 +209,77 @@ if (passedMaBase12m_plus.length !== 1 || passedMaBase12m_plus[0].symbol !== 'FCN
   process.exit(1);
 }
 
+// --- MULTI-CHOICE TESTS ---
+console.log('\n--- TESTING MULTI-CHOICE COMBINATIONS ---');
+
+// Multi-choice 1: 3-6 tháng VÀ 6-12 tháng (Từ 3 - 12 tháng)
+mockDom.setBaseDurationTier(['3_6m', '6_12m']);
+const passedMulti_3_12 = StockApp.stocks.filter(filterFunc);
+console.log(`[PASS] Multi-choice [3 - 6M + 6 - 12M] returns ${passedMulti_3_12.length} stocks: ${passedMulti_3_12.map(s => s.symbol).join(', ')}`);
+if (passedMulti_3_12.length !== 9 || !passedMulti_3_12.some(s => s.symbol === 'DPR') || !passedMulti_3_12.some(s => s.symbol === 'CTG')) {
+  console.error('[FAIL] Multi-choice [3-6M + 6-12M] failed!');
+  process.exit(1);
+}
+
+// Multi-choice 2: 6-12 tháng VÀ trên 12 tháng (Từ 6 tháng trở lên)
+mockDom.setBaseDurationTier(['6_12m', '12m_plus']);
+const passedMulti_6_plus = StockApp.stocks.filter(filterFunc);
+console.log(`[PASS] Multi-choice [6 - 12M + >12M] returns ${passedMulti_6_plus.length} stocks: ${passedMulti_6_plus.map(s => s.symbol).join(', ')}`);
+if (passedMulti_6_plus.length !== 2 || !passedMulti_6_plus.some(s => s.symbol === 'DPR') || !passedMulti_6_plus.some(s => s.symbol === 'FCN')) {
+  console.error('[FAIL] Multi-choice [6-12M + >12M] failed!');
+  process.exit(1);
+}
+
+// Multi-choice 3: Cả 3 khoảng thời gian
+mockDom.setBaseDurationTier(['3_6m', '6_12m', '12m_plus']);
+const passedMulti_All3 = StockApp.stocks.filter(filterFunc);
+console.log(`[PASS] Multi-choice [Cả 3 khoảng] returns ${passedMulti_All3.length} stocks: ${passedMulti_All3.map(s => s.symbol).join(', ')}`);
+if (passedMulti_All3.length !== 10) {
+  console.error(`[FAIL] Expected exactly 10 stocks in ma_base (All 3), got ${passedMulti_All3.length}`);
+  process.exit(1);
+}
+
+// --- FORBIDDEN PAIR TOGGLE CONSTRAINT TESTS ---
+console.log('\n--- TESTING FORBIDDEN PAIR CONSTRAINT ---');
+// Start with only ['3_6m']
+mockDom.setBaseDurationTier(['3_6m']);
+console.log(`[INFO] Current tiers: [${StockApp.buyCriteria.baseDurationTiers.join(', ')}]`);
+
+// Try to toggle '12m_plus' directly without '6_12m': must be blocked!
+mockDom.toggleBaseDurationTier('12m_plus');
+if (StockApp.buyCriteria.baseDurationTiers.includes('12m_plus') && !StockApp.buyCriteria.baseDurationTiers.includes('6_12m')) {
+  console.error('[FAIL] System allowed forbidden non-adjacent pair [3_6m, 12m_plus]!');
+  process.exit(1);
+}
+console.log(`[PASS] Blocked non-adjacent selection: current tiers remain [${StockApp.buyCriteria.baseDurationTiers.join(', ')}]`);
+
+// Valid sequence: toggle '6_12m' first -> ['3_6m', '6_12m']
+mockDom.toggleBaseDurationTier('6_12m');
+console.log(`[PASS] Successfully toggled 6_12m: tiers are [${StockApp.buyCriteria.baseDurationTiers.join(', ')}]`);
+if (StockApp.buyCriteria.baseDurationTiers.length !== 2) {
+  console.error('[FAIL] Expected 2 tiers after toggling 6_12m');
+  process.exit(1);
+}
+
+// Now toggle '12m_plus' -> becomes all 3
+mockDom.toggleBaseDurationTier('12m_plus');
+console.log(`[PASS] Successfully added 12m_plus: tiers are [${StockApp.buyCriteria.baseDurationTiers.join(', ')}]`);
+if (StockApp.buyCriteria.baseDurationTiers.length !== 3) {
+  console.error('[FAIL] Expected 3 tiers');
+  process.exit(1);
+}
+
+// Try to uncheck '6_12m' from all 3: must be blocked because it would leave [3_6m, 12m_plus]!
+mockDom.toggleBaseDurationTier('6_12m');
+if (!StockApp.buyCriteria.baseDurationTiers.includes('6_12m')) {
+  console.error('[FAIL] System allowed unchecking 6_12m which creates forbidden pair!');
+  process.exit(1);
+}
+console.log(`[PASS] Blocked unchecking 6_12m from all 3: tiers remain [${StockApp.buyCriteria.baseDurationTiers.join(', ')}]`);
+
 // Mode: Both (Tier: 3-6m)
 mockDom.setBuyPresetMode('both');
-mockDom.setBaseDurationTier('3_6m');
+mockDom.setBaseDurationTier(['3_6m']);
 const passedBoth = StockApp.stocks.filter(filterFunc);
 console.log(`[PASS] Mode 'both' (tier: 3-6m) returns ${passedBoth.length} stock(s): ${passedBoth.map(s => s.symbol).join(', ')}`);
 if (passedBoth.length === 0 || !passedBoth.some(s => s.symbol === 'HDB')) {

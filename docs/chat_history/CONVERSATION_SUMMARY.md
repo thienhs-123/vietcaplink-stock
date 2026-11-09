@@ -1,5 +1,5 @@
 # 💬 LỊCH SỬ HỘI THOẠI & YÊU CẦU DỰ ÁN (VIETCAPLINK STOCK)
-> Tự động đồng bộ lúc: 12:44:34 9/11/2026
+> Tự động đồng bộ lúc: 12:54:08 9/11/2026
 
 ---
 
@@ -1091,4 +1091,9 @@ thêm phần tiêu chỉ chi tiết:
 ### Yêu cầu #187 (2026-11-09T05:40:23Z)
 ```markdown
 tiếp, bỏ phần tất cả. Và mặc định không chọn 2 điều kiện mua và bỏ hiển thị phần ảnh đính kèm
+```
+
+### Yêu cầu #188 (2026-11-09T05:49:23Z)
+```markdown
+tiếp, áp dụng multi chose với khoảng thời gian đó, vd: từ 3 - 6 tháng và 6 đến 12 tháng, hoặc 6 - 12 tháng và 12 tháng trở lên hoặc cả 3 khoảng thời gian và không áp dụng cho chọn 2 khoảng thời gian 3 - 6 tháng và 12 tháng trở lên cùng lúc
 ```

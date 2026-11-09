@@ -2282,7 +2282,7 @@
                   <div class="flex items-center justify-between mb-2">
                     <span class="text-[11px] font-bold text-emerald-700 dark:text-emerald-300 uppercase tracking-wide flex items-center gap-1.5">
                       <i data-lucide="calendar-range" class="w-3.5 h-3.5 text-emerald-500"></i>
-                      Thời gian tích lũy nền chi tiết:
+                      Thời gian nền chi tiết <span class="text-[10px] lowercase font-normal opacity-75">(chọn 1 hoặc nhiều)</span>:
                     </span>
                     <span id="baseDurationSummaryBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
                       Từ 3 - 6 tháng
@@ -2291,23 +2291,23 @@
 
                   <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="baseDurationButtonGroup">
                     <!-- Option 1: Từ 3 - 6 tháng -->
-                    <button type="button" id="btnTier3_6m" onclick="setBaseDurationTier('3_6m', event)"
+                    <button type="button" id="btnTier3_6m" onclick="toggleBaseDurationTier('3_6m', event)"
                       class="base-tier-btn flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl text-[11px] font-semibold transition-all border shadow-sm">
-                      <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                      <i data-lucide="check-square" class="w-3.5 h-3.5"></i>
                       <span>Từ 3 - 6 tháng</span>
                     </button>
 
                     <!-- Option 2: Từ 6 - 12 tháng -->
-                    <button type="button" id="btnTier6_12m" onclick="setBaseDurationTier('6_12m', event)"
+                    <button type="button" id="btnTier6_12m" onclick="toggleBaseDurationTier('6_12m', event)"
                       class="base-tier-btn flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl text-[11px] font-semibold transition-all border shadow-sm">
-                      <i data-lucide="clock-4" class="w-3.5 h-3.5"></i>
+                      <i data-lucide="square" class="w-3.5 h-3.5 opacity-60"></i>
                       <span>Từ 6 - 12 tháng</span>
                     </button>
 
                     <!-- Option 3: Trên 12 tháng -->
-                    <button type="button" id="btnTier12m_plus" onclick="setBaseDurationTier('12m_plus', event)"
+                    <button type="button" id="btnTier12m_plus" onclick="toggleBaseDurationTier('12m_plus', event)"
                       class="base-tier-btn flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl text-[11px] font-semibold transition-all border shadow-sm">
-                      <i data-lucide="clock-9" class="w-3.5 h-3.5"></i>
+                      <i data-lucide="square" class="w-3.5 h-3.5 opacity-60"></i>
                       <span>Trên 12 tháng</span>
                     </button>
                   </div>
@@ -2316,6 +2316,9 @@
                     <span>(126 - 250 phiên)</span>
                     <span>(&gt; 250 phiên)</span>
                   </div>
+
+                  <!-- Alert banner when user attempts to choose non-adjacent pair (3-6m and >12m) -->
+                  <div id="baseDurationTierWarning" class="hidden"></div>
                 </div>
               </div>
 
@@ -3721,10 +3724,11 @@
 
       // Module 4: Buy Screener Filter States
       buyCriteria: {
-        filterMaAndBase: false,    // Mặc định KHÔNG chọn ĐK 1 (Kỹ thuật)
-        filterLowestPeTop10: false,// Mặc định KHÔNG chọn ĐK 2 (Định giá Top 10 P/E)
-        mode: 'all',               // 'all' = Mặc định không chọn điều kiện mua
-        baseDurationTier: '3_6m'   // 3 khung thời gian chi tiết: '3_6m' (3 - 6 tháng) | '6_12m' (6 - 12 tháng) | '12m_plus' (> 12 tháng)
+        filterMaAndBase: false,              // Mặc định KHÔNG chọn ĐK 1 (Kỹ thuật)
+        filterLowestPeTop10: false,          // Mặc định KHÔNG chọn ĐK 2 (Định giá Top 10 P/E)
+        mode: 'all',                         // 'all' = Mặc định không chọn điều kiện mua
+        baseDurationTiers: ['3_6m'],         // Multi-choice: mảng các khung thời gian đã chọn: '3_6m', '6_12m', '12m_plus'
+        baseDurationTier: '3_6m'             // Khung chính (tương thích ngược)
       },
 
       // Fundamental Filter States
@@ -13420,8 +13424,45 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       renderScreenerTable();
     }
 
-    // Set Base Consolidation Duration Tier
-    function setBaseDurationTier(tier, event) {
+    // Warning message handler for invalid non-adjacent duration tier selection
+    let durationWarningTimer = null;
+    function showDurationTierWarning(msg) {
+      const el = document.getElementById("baseDurationTierWarning");
+      if (!el) return;
+      el.className = "mt-2 p-2.5 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-900 dark:text-amber-200 text-[11px] flex items-center justify-between gap-2 shadow-sm animate-fadeIn";
+      el.innerHTML = `
+        <div class="flex items-center gap-1.5 flex-1">
+          <i data-lucide="alert-circle" class="w-4 h-4 text-amber-500 shrink-0"></i>
+          <span class="leading-tight font-medium">${msg}</span>
+        </div>
+        <div class="flex items-center gap-1.5 shrink-0">
+          <button type="button" onclick="setBaseDurationTier(['3_6m', '6_12m', '12m_plus'], event)" class="px-2 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[10px] shadow-sm transition-all whitespace-nowrap">
+            Chọn cả 3 khoảng
+          </button>
+          <button type="button" onclick="clearDurationTierWarning()" class="p-1 hover:bg-amber-500/20 rounded text-xs text-amber-700 dark:text-amber-300 font-bold" title="Đóng">✕</button>
+        </div>
+      `;
+      if (window.lucide) lucide.createIcons();
+      if (durationWarningTimer) clearTimeout(durationWarningTimer);
+      durationWarningTimer = setTimeout(() => {
+        clearDurationTierWarning();
+      }, 7000);
+    }
+
+    function clearDurationTierWarning() {
+      const el = document.getElementById("baseDurationTierWarning");
+      if (el) {
+        el.className = "hidden";
+        el.innerHTML = "";
+      }
+      if (durationWarningTimer) {
+        clearTimeout(durationWarningTimer);
+        durationWarningTimer = null;
+      }
+    }
+
+    // Toggle Base Consolidation Duration Tier (Multi-choice)
+    function toggleBaseDurationTier(tier, event) {
       if (event && event.stopPropagation) {
         event.stopPropagation();
       }
@@ -13436,7 +13477,71 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
         }
       }
 
-      StockApp.buyCriteria.baseDurationTier = tier || '3_6m';
+      if (!Array.isArray(StockApp.buyCriteria.baseDurationTiers) || StockApp.buyCriteria.baseDurationTiers.length === 0) {
+        StockApp.buyCriteria.baseDurationTiers = StockApp.buyCriteria.baseDurationTier ? [StockApp.buyCriteria.baseDurationTier] : ['3_6m'];
+      }
+
+      let current = [...StockApp.buyCriteria.baseDurationTiers];
+      const isSelected = current.includes(tier);
+
+      if (isSelected) {
+        // Trying to deselect `tier`
+        if (current.length === 1) {
+          showDurationTierWarning("Phải giữ lại ít nhất 1 khung thời gian khi áp dụng Kỹ thuật.");
+          return;
+        }
+        const next = current.filter(t => t !== tier);
+        // Check forbidden pair: ['3_6m', '12m_plus'] without '6_12m'
+        if (next.includes('3_6m') && next.includes('12m_plus') && !next.includes('6_12m')) {
+          showDurationTierWarning("Không thể bỏ chọn 6 – 12 tháng khi cả hai khoảng 3 – 6 tháng và trên 12 tháng đang bật (khoảng thời gian nền phải liên tục).");
+          return;
+        }
+        StockApp.buyCriteria.baseDurationTiers = next;
+        clearDurationTierWarning();
+      } else {
+        // Trying to select `tier`
+        const next = [...current, tier];
+        // Check forbidden pair: ['3_6m', '12m_plus'] without '6_12m'
+        if (next.includes('3_6m') && next.includes('12m_plus') && !next.includes('6_12m')) {
+          showDurationTierWarning("Không áp dụng đồng thời 3 – 6 tháng và trên 12 tháng cùng lúc (khoảng nền phải liên tục). Hãy chọn kèm 6 – 12 tháng ở giữa.");
+          return;
+        }
+        StockApp.buyCriteria.baseDurationTiers = next;
+        clearDurationTierWarning();
+      }
+
+      StockApp.buyCriteria.baseDurationTier = StockApp.buyCriteria.baseDurationTiers[0] || '3_6m';
+      updateBuyFilterUI();
+      renderScreenerTable();
+    }
+
+    // Set Base Consolidation Duration Tier directly (Backward compatible)
+    function setBaseDurationTier(tier, event) {
+      if (event && event.stopPropagation) {
+        event.stopPropagation();
+      }
+
+      if (!StockApp.buyCriteria.filterMaAndBase) {
+        StockApp.buyCriteria.filterMaAndBase = true;
+        if (StockApp.buyCriteria.filterLowestPeTop10) {
+          StockApp.buyCriteria.mode = 'both';
+        } else {
+          StockApp.buyCriteria.mode = 'ma_base';
+        }
+      }
+
+      if (Array.isArray(tier)) {
+        StockApp.buyCriteria.baseDurationTiers = tier;
+        StockApp.buyCriteria.baseDurationTier = tier[0] || '3_6m';
+      } else if (tier === 'all') {
+        StockApp.buyCriteria.baseDurationTiers = ['3_6m', '6_12m', '12m_plus'];
+        StockApp.buyCriteria.baseDurationTier = '3_6m';
+      } else {
+        StockApp.buyCriteria.baseDurationTiers = [tier || '3_6m'];
+        StockApp.buyCriteria.baseDurationTier = tier || '3_6m';
+      }
+
+      clearDurationTierWarning();
       updateBuyFilterUI();
       renderScreenerTable();
     }
@@ -13444,36 +13549,79 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
     // Update UI elements for Buy Filters
     function updateBuyFilterUI() {
       const { filterMaAndBase, filterLowestPeTop10, mode } = StockApp.buyCriteria;
-      const activeTier = StockApp.buyCriteria.baseDurationTier || '3_6m';
+
+      // Multi-choice Base Duration Tiers
+      const selectedTiers = Array.isArray(StockApp.buyCriteria.baseDurationTiers) && StockApp.buyCriteria.baseDurationTiers.length > 0
+        ? StockApp.buyCriteria.baseDurationTiers
+        : (StockApp.buyCriteria.baseDurationTier ? [StockApp.buyCriteria.baseDurationTier] : ['3_6m']);
 
       const tierMap = {
-        '3_6m': { id: 'btnTier3_6m', label: 'Từ 3 - 6 tháng', fullLabel: 'Nền từ 3 - 6 tháng (60 - 125 phiên)' },
-        '6_12m': { id: 'btnTier6_12m', label: 'Từ 6 - 12 tháng', fullLabel: 'Nền từ 6 - 12 tháng (126 - 250 phiên)' },
-        '12m_plus': { id: 'btnTier12m_plus', label: 'Trên 12 tháng', fullLabel: 'Nền trên 12 tháng (> 250 phiên)' }
+        '3_6m': { id: 'btnTier3_6m', label: 'Từ 3 - 6 tháng', short: '3 - 6T', fullLabel: 'Nền từ 3 - 6 tháng (60 - 125 phiên)' },
+        '6_12m': { id: 'btnTier6_12m', label: 'Từ 6 - 12 tháng', short: '6 - 12T', fullLabel: 'Nền từ 6 - 12 tháng (126 - 250 phiên)' },
+        '12m_plus': { id: 'btnTier12m_plus', label: 'Trên 12 tháng', short: '> 12T', fullLabel: 'Nền trên 12 tháng (> 250 phiên)' }
       };
+
+      // Compute multi-select summary label
+      let summaryText = "Từ 3 - 6 tháng";
+      let shortTitle = "3 - 6T";
+      let fullText = "nền từ 3 - 6 tháng";
+
+      const has3_6 = selectedTiers.includes('3_6m');
+      const has6_12 = selectedTiers.includes('6_12m');
+      const has12plus = selectedTiers.includes('12m_plus');
+
+      if (has3_6 && has6_12 && has12plus) {
+        summaryText = "Cả 3 khoảng (≥ 3 tháng)";
+        shortTitle = "Cả 3 khoảng (≥ 3T)";
+        fullText = "toàn bộ nền từ 3 tháng trở lên (≥ 60 phiên)";
+      } else if (has3_6 && has6_12) {
+        summaryText = "Từ 3 – 12 tháng (2 khoảng)";
+        shortTitle = "3 – 12T";
+        fullText = "nền từ 3 đến 12 tháng (60 – 250 phiên)";
+      } else if (has6_12 && has12plus) {
+        summaryText = "Từ 6 tháng trở lên (2 khoảng)";
+        shortTitle = "≥ 6T";
+        fullText = "nền từ 6 tháng trở lên (> 125 phiên)";
+      } else if (has3_6) {
+        summaryText = "Từ 3 – 6 tháng";
+        shortTitle = "3 – 6T";
+        fullText = "nền từ 3 đến 6 tháng (60 – 125 phiên)";
+      } else if (has6_12) {
+        summaryText = "Từ 6 – 12 tháng";
+        shortTitle = "6 – 12T";
+        fullText = "nền từ 6 đến 12 tháng (126 – 250 phiên)";
+      } else if (has12plus) {
+        summaryText = "Trên 12 tháng";
+        shortTitle = "> 12T";
+        fullText = "nền dài hạn trên 12 tháng (> 250 phiên)";
+      }
 
       // Update Base Duration Tier Summary Badge
       const tierBadge = document.getElementById("baseDurationSummaryBadge");
-      if (tierBadge && tierMap[activeTier]) {
-        tierBadge.innerText = tierMap[activeTier].label;
+      if (tierBadge) {
+        tierBadge.innerText = summaryText;
       }
 
-      // Update Base Duration Tier Buttons
+      // Update Base Duration Tier Buttons (Multi-choice visual state)
       Object.entries(tierMap).forEach(([tKey, tInfo]) => {
         const btn = document.getElementById(tInfo.id);
         if (!btn) return;
-        const isActive = (tKey === activeTier);
+        const isActive = selectedTiers.includes(tKey);
         if (filterMaAndBase) {
           if (isActive) {
             btn.className = "base-tier-btn flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl text-[11px] font-bold transition-all bg-emerald-600 text-white border border-emerald-500 shadow-md shadow-emerald-600/30 scale-[1.02]";
+            btn.innerHTML = `<i data-lucide="check-square" class="w-3.5 h-3.5 stroke-[2.5]"></i><span>${tInfo.label}</span>`;
           } else {
-            btn.className = "base-tier-btn flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl text-[11px] font-semibold transition-all bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20 hover:bg-emerald-500/20 hover:border-emerald-500/40";
+            btn.className = "base-tier-btn flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl text-[11px] font-semibold transition-all bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border border-emerald-500/25 hover:bg-emerald-500/20 hover:border-emerald-500/40";
+            btn.innerHTML = `<i data-lucide="square" class="w-3.5 h-3.5 opacity-60"></i><span>${tInfo.label}</span>`;
           }
         } else {
           if (isActive) {
             btn.className = "base-tier-btn flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl text-[11px] font-medium transition-all bg-light-elevated dark:bg-studio-elevated text-light-subtext dark:text-studio-muted border border-light-border dark:border-studio-border opacity-70";
+            btn.innerHTML = `<i data-lucide="check-square" class="w-3.5 h-3.5 opacity-60"></i><span>${tInfo.label}</span>`;
           } else {
             btn.className = "base-tier-btn flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl text-[11px] font-medium transition-all bg-light-surface dark:bg-studio-surface text-light-subtext/70 dark:text-studio-muted/70 border border-light-border/60 dark:border-studio-border/60 opacity-50 hover:opacity-100";
+            btn.innerHTML = `<i data-lucide="square" class="w-3.5 h-3.5 opacity-40"></i><span>${tInfo.label}</span>`;
           }
         }
       });
@@ -13482,10 +13630,10 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       const statusBadge = document.getElementById("buyFilterStatusBadge");
       if (statusBadge) {
         if (filterMaAndBase && filterLowestPeTop10) {
-          statusBadge.innerText = `Đang áp dụng: Cả 2 ĐK (${tierMap[activeTier]?.label || '3 - 6T'})`;
+          statusBadge.innerText = `Đang áp dụng: Cả 2 ĐK (${shortTitle})`;
           statusBadge.className = "px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30";
         } else if (filterMaAndBase) {
-          statusBadge.innerText = `Đang áp dụng: Tiêu chuẩn Kỹ thuật (${tierMap[activeTier]?.label || '3 - 6T'})`;
+          statusBadge.innerText = `Đang áp dụng: Tiêu chuẩn Kỹ thuật (${shortTitle})`;
           statusBadge.className = "px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30";
         } else if (filterLowestPeTop10) {
           statusBadge.innerText = "Đang áp dụng: Tiêu chuẩn Định giá (P/E)";
@@ -13514,7 +13662,7 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
           if (hintMa) {
             hintMa.innerHTML = `
               <span class="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1.5">
-                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Đang áp dụng Kỹ thuật (${tierMap[activeTier]?.label || '3 - 6T'})
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i> Đang áp dụng Kỹ thuật (${shortTitle})
               </span>
               <span class="text-[11px] text-light-subtext dark:text-studio-muted group-hover:text-rose-500 font-medium transition-colors">Bấm để bỏ chọn ✕</span>
             `;
@@ -13590,7 +13738,7 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
                 <span class="w-7 h-7 rounded-lg bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-sm"><i data-lucide="sparkles" class="w-4 h-4"></i></span>
                 <div>
                   <div class="font-bold text-xs uppercase tracking-wide">Đang lọc tối ưu: Cả 2 điều kiện (Khuyên dùng)</div>
-                  <div class="text-[11px] opacity-90">Bảng bên dưới chỉ hiển thị cổ phiếu đồng thời đạt Kỹ thuật (vượt MA10, MA50 &amp; <strong>${tierMap[activeTier]?.fullLabel || "nền 3 - 6 tháng"}</strong>, siết ≤ 20%, nửa trên nền) và Định giá (Top 10 P/E thấp nhất).</div>
+                  <div class="text-[11px] opacity-90">Bảng bên dưới chỉ hiển thị cổ phiếu đồng thời đạt Kỹ thuật (vượt MA10, MA50 &amp; <strong>${fullText}</strong>, siết ≤ 20%, nửa trên nền) và Định giá (Top 10 P/E thấp nhất).</div>
                 </div>
               </div>
               <span class="shrink-0 px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold font-mono text-xs border border-emerald-500/30" id="feedbackCountBadge">Đang cập nhật...</span>
@@ -13602,8 +13750,8 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
               <div class="flex items-center space-x-2.5">
                 <span class="w-7 h-7 rounded-lg bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-sm"><i data-lucide="trending-up" class="w-4 h-4"></i></span>
                 <div>
-                  <div class="font-bold text-xs uppercase tracking-wide">Đang lọc: Tiêu chuẩn Kỹ thuật (${tierMap[activeTier]?.label || '3 - 6T'})</div>
-                  <div class="text-[11px] opacity-90">Chỉ hiển thị cổ phiếu có giá trên MA10 &amp; MA50, đồng thời đạt tiêu chuẩn nền: <strong>${tierMap[activeTier]?.fullLabel || "thời gian 3 - 6 tháng"}</strong>, biên độ siết đỉnh - đáy ≤ 20% và giá vận động ở nửa trên vùng nền tích lũy.</div>
+                  <div class="font-bold text-xs uppercase tracking-wide">Đang lọc: Tiêu chuẩn Kỹ thuật (${shortTitle})</div>
+                  <div class="text-[11px] opacity-90">Chỉ hiển thị cổ phiếu có giá trên MA10 &amp; MA50, đồng thời đạt tiêu chuẩn nền: <strong>${fullText}</strong>, biên độ siết đỉnh - đáy ≤ 20% và giá vận động ở nửa trên vùng nền tích lũy.</div>
                 </div>
               </div>
               <span class="shrink-0 px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold font-mono text-xs border border-emerald-500/30" id="feedbackCountBadge">Đang cập nhật...</span>
@@ -13647,7 +13795,9 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
     function resetScreenerFilters() {
       const searchInput = document.getElementById("screenerSearchInput");
       if (searchInput) searchInput.value = "";
+      StockApp.buyCriteria.baseDurationTiers = ['3_6m'];
       StockApp.buyCriteria.baseDurationTier = '3_6m';
+      clearDurationTierWarning();
       setBuyPresetMode('all');
     }
 
@@ -13699,21 +13849,24 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
           const passesBase = (st.baseValid === true) || (durOk && tightOk && upperOk);
           if (!passesMA || !passesBase) return false;
 
-          // Tiêu chí chi tiết: Phân loại thời gian tích lũy nền
-          const tier = StockApp.buyCriteria.baseDurationTier || '3_6m';
+          // Tiêu chí chi tiết: Multi-choice khoảng thời gian tích lũy nền
+          const selectedTiers = Array.isArray(StockApp.buyCriteria.baseDurationTiers) && StockApp.buyCriteria.baseDurationTiers.length > 0
+            ? StockApp.buyCriteria.baseDurationTiers
+            : (StockApp.buyCriteria.baseDurationTier ? [StockApp.buyCriteria.baseDurationTier] : ['3_6m']);
+
           const bMonths = st.baseMonths || 0;
           const bSessions = st.baseSessions || Math.round(bMonths * 21);
 
-          if (tier === '3_6m') {
-            const is3_6 = (bMonths >= 3.0 && bMonths < 6.0) || (bSessions >= 60 && bSessions <= 125);
-            if (!is3_6) return false;
-          } else if (tier === '6_12m') {
-            const is6_12 = (bMonths >= 6.0 && bMonths <= 12.0) || (bSessions > 125 && bSessions <= 250);
-            if (!is6_12) return false;
-          } else if (tier === '12m_plus') {
-            const is12plus = (bMonths > 12.0) || (bSessions > 250);
-            if (!is12plus) return false;
-          }
+          const is3_6 = (bMonths >= 3.0 && bMonths < 6.0) || (bSessions >= 60 && bSessions <= 125);
+          const is6_12 = (bMonths >= 6.0 && bMonths <= 12.0) || (bSessions > 125 && bSessions <= 250);
+          const is12plus = (bMonths > 12.0) || (bSessions > 250);
+
+          let matchDuration = false;
+          if (selectedTiers.includes('3_6m') && is3_6) matchDuration = true;
+          if (selectedTiers.includes('6_12m') && is6_12) matchDuration = true;
+          if (selectedTiers.includes('12m_plus') && is12plus) matchDuration = true;
+
+          if (!matchDuration) return false;
         }
 
         // Criterion 2: 10 cổ phiếu có PE thấp nhất

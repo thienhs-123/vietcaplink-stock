@@ -32,10 +32,11 @@
 - **Mặc định khi mở trang / khởi tạo**: Cả 2 điều kiện mua đều ở trạng thái **KHÔNG CHỌN** (hiển thị danh sách tổng thể). Người dùng chủ động bấm chọn 1 hoặc cả 2 thẻ để kích hoạt lọc điểm mua.
 - **Tiêu chuẩn Kỹ thuật (MA & Nền tích lũy)**:
   - Thị giá hiện tại > cả MA 10 ngày và MA 50 ngày (`st.diffMA10 > 0 && st.diffMA50 > 0`).
-  - **Tiêu chuẩn 1 (Thời gian nền)**: Tích lũy từ 3 tháng trở lên (≥ 60 phiên). Có bộ lọc chi tiết gồm đúng 3 khung thời gian nền:
-    + **Từ 3 – 6 tháng** (60 đến 125 phiên, mặc định khi kích hoạt Thẻ Kỹ thuật)
-    + **Từ 6 – 12 tháng** (126 đến 250 phiên)
-    + **Trên 12 tháng** (> 250 phiên)
+  - **Tiêu chuẩn 1 (Thời gian nền)**: Tích lũy từ 3 tháng trở lên (≥ 60 phiên). Hỗ trợ **Multi-choice (chọn nhiều khoảng thời gian cùng lúc)**:
+    + Đơn lẻ: `Từ 3 – 6 tháng` (60–125p), `Từ 6 – 12 tháng` (126–250p), `Trên 12 tháng` (>250p).
+    + Kết hợp 2 khoảng liền kề: `3 – 6 tháng & 6 – 12 tháng` (3 đến 12 tháng), hoặc `6 – 12 tháng & trên 12 tháng` (từ 6 tháng trở lên).
+    + Kết hợp cả 3 khoảng: `Cả 3 khoảng (≥ 3 tháng)`.
+    + **Ràng buộc nghiêm ngặt**: Không áp dụng chọn đồng thời 2 khoảng cách quãng `3 – 6 tháng` và `trên 12 tháng` mà bỏ qua `6 – 12 tháng`. Hệ thống có cảnh báo và nút hỗ trợ `Chọn cả 3 khoảng`.
   - **Tiêu chuẩn 2 (Độ chặt chẽ nền)**:
     + Biên độ biến động đỉnh - đáy nền: `(Max - Min) / Min <= 20%`.
     + Thị giá vận động ở nửa trên vùng nền tích lũy (`st.price >= Mid`).
