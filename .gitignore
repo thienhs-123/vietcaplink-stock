@@ -7,3 +7,5 @@ realtime_port.json
 cloudflared.exe
 INTERNET_LINK.txt
 _archive_rac/
+scripts/watcher.log
+*.log

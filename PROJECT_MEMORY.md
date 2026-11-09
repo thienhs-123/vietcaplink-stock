@@ -32,7 +32,11 @@
 Hệ thống hỗ trợ 3 chế độ lọc chuẩn xác:
 - **Tiêu chuẩn Kỹ thuật (MA & Nền tích lũy)**:
   - Thị giá hiện tại > cả MA 10 ngày và MA 50 ngày (`st.diffMA10 > 0 && st.diffMA50 > 0`).
-  - **Tiêu chuẩn 1 (Thời gian nền)**: Tích lũy từ 3 tháng trở lên (≥ 60 phiên).
+  - **Tiêu chuẩn 1 (Thời gian nền)**: Tích lũy từ 3 tháng trở lên (≥ 60 phiên). Có bộ lọc chi tiết theo 3 khung thời gian nền:
+    + **Từ 3 – 6 tháng** (60 đến 125 phiên)
+    + **Từ 6 – 12 tháng** (126 đến 250 phiên)
+    + **Trên 12 tháng** (> 250 phiên)
+    + *Tất cả*: hiển thị toàn bộ cổ phiếu tích lũy nền từ 3 tháng trở lên (≥ 60 phiên).
   - **Tiêu chuẩn 2 (Độ chặt chẽ nền)**:
     + Biên độ biến động đỉnh - đáy nền: `(Max - Min) / Min <= 20%`.
     + Thị giá vận động ở nửa trên vùng nền tích lũy (`st.price >= Mid`).

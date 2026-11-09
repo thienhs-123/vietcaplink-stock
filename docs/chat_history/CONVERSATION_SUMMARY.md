@@ -1,5 +1,5 @@
 # 💬 LỊCH SỬ HỘI THOẠI & YÊU CẦU DỰ ÁN (VIETCAPLINK STOCK)
-> Tự động đồng bộ lúc: 10:27:01 9/11/2026
+> Tự động đồng bộ lúc: 12:35:26 9/11/2026
 
 ---
 
@@ -1033,4 +1033,57 @@ trước khi chọn, hãy giải thích cho tôi git add, git commit và git pus
 ### Yêu cầu #176 (2026-11-09T03:23:05Z)
 ```markdown
 ok, tôi chọn cách 1
+```
+
+### Yêu cầu #177 (2026-11-09T03:42:15Z)
+```markdown
+tiếp, tạo sao tôi vừa tắt antigravity nhưng không hiển thị hộp thoại thông báo
+```
+
+### Yêu cầu #178 (2026-11-09T04:01:33Z)
+```markdown
+tiếp, bạn có thế xem các rules mà hôm qua tôi đã setup ở máy tính ở nhà cho các project được không, chỉ trả lời
+```
+
+### Yêu cầu #179 (2026-11-09T04:06:41Z)
+```markdown
+4 file này khác nhau như thế nào
+```
+
+### Yêu cầu #180 (2026-11-09T04:10:45Z)
+```markdown
+vậy file nào antigravity sẽ tự động tạo ra khi bắt đầu dự án\
+```
+
+### Yêu cầu #181 (2026-11-09T04:13:06Z)
+```markdown
+tối nay tôi mở dự án đang dang dở khác hoặc tạo 1 dựa án mới và gõ "Hãy tạo file GEMINI.md và PROJECT_MEMORY.md chuẩn quy tắc 2 máy cho dự án này" thì antigravity ở nhà có làm theo như những gì bạn đã trình bày ở trên không
+```
+
+### Yêu cầu #182 (2026-11-09T04:14:19Z)
+```markdown
+tối nay tôi mở dự án đang dang dở khác hoặc tạo 1 dựa án mới và gõ "Hãy tạo file GEMINI.md và PROJECT_MEMORY.md chuẩn quy tắc 2 máy cho dự án này" thì antigravity ở nhà có làm theo như những gì bạn đã trình bày ở trên không, chỉ trả lời
+```
+
+### Yêu cầu #183 (2026-11-09T04:19:24Z)
+```markdown
+Tối nay ở nhà sau khi gõ git pull, bạn chỉ cần copy file GEMINI.md từ dự án này dán sang dự án mới là xong ngay lập tức. hướng dẫn chi tiết bước này
+```
+
+### Yêu cầu #184 (2026-11-09T04:29:10Z)
+```markdown
+trong file Gemini.md đã có quy tắc crosscheck nhằm tự động kiểm tra lại các yêu cầu của task chưa
+```
+
+### Yêu cầu #185 (2026-11-09T05:23:58Z)
+```markdown
+thêm phần tiêu chỉ chi tiết:
+```
+
+### Yêu cầu #186 (2026-11-09T05:24:42Z)
+```markdown
+thêm phần tiêu chỉ chi tiết:
+- Từ 3 - 6 tháng
+- Từ 6 - 12 tháng
+- Trên 12 tháng
 ```

@@ -133,7 +133,7 @@ const top10PeMap = new Map();
 validPeStocks.slice(0, 10).forEach((st, idx) => top10PeMap.set(st.symbol, idx + 1));
 
 const filterFunc = (st) => {
-  const { filterMaAndBase, filterLowestPeTop10 } = StockApp.buyCriteria;
+  const { filterMaAndBase, filterLowestPeTop10, baseDurationTier } = StockApp.buyCriteria;
   if (filterMaAndBase) {
     const passesMA = (st.aboveMA10_50 === true) || (st.diffMA10 > 0 && st.diffMA50 > 0);
     const durOk = (st.baseSessions >= 60) || ((st.baseMonths || 0) >= 3.0);
@@ -141,6 +141,21 @@ const filterFunc = (st) => {
     const upperOk = st.baseUpperHalf !== false;
     const passesBase = (st.baseValid === true) || (durOk && tightOk && upperOk);
     if (!passesMA || !passesBase) return false;
+
+    // Base duration sub-criteria
+    const tier = baseDurationTier || 'all';
+    const bMonths = st.baseMonths || 0;
+    const bSessions = st.baseSessions || Math.round(bMonths * 21);
+    if (tier === '3_6m') {
+      const is3_6 = (bMonths >= 3.0 && bMonths < 6.0) || (bSessions >= 60 && bSessions <= 125);
+      if (!is3_6) return false;
+    } else if (tier === '6_12m') {
+      const is6_12 = (bMonths >= 6.0 && bMonths <= 12.0) || (bSessions > 125 && bSessions <= 250);
+      if (!is6_12) return false;
+    } else if (tier === '12m_plus') {
+      const is12plus = (bMonths > 12.0) || (bSessions > 250);
+      if (!is12plus) return false;
+    }
   }
   if (filterLowestPeTop10) {
     if (!top10PeMap.has(st.symbol)) return false;
@@ -148,25 +163,66 @@ const filterFunc = (st) => {
   return true;
 };
 
-// Mode: Both
+// Mode: Both (default tier = all)
 mockDom.setBuyPresetMode('both');
+mockDom.setBaseDurationTier('all');
 const passedBoth = StockApp.stocks.filter(filterFunc);
-console.log(`[PASS] Mode 'both' returns ${passedBoth.length} stock(s): ${passedBoth.map(s => s.symbol).join(', ')}`);
+console.log(`[PASS] Mode 'both' (tier: all) returns ${passedBoth.length} stock(s): ${passedBoth.map(s => s.symbol).join(', ')}`);
 if (passedBoth.length === 0 || !passedBoth.some(s => s.symbol === 'HDB')) {
   console.error('[FAIL] HDB should be in passedBoth!');
   process.exit(1);
 }
 
-// Mode: MA & Base only
+// Mode: MA & Base only - Test all 4 duration tiers
 mockDom.setBuyPresetMode('ma_base');
-const passedMaBase = StockApp.stocks.filter(filterFunc);
-console.log(`[PASS] Mode 'ma_base' returns ${passedMaBase.length} stock(s): ${passedMaBase.map(s => s.symbol).join(', ')}`);
-if (passedMaBase.length < 5) {
-  console.error('[FAIL] Expected at least 5 stocks in ma_base');
+
+// Tier 1: All (>= 3T)
+mockDom.setBaseDurationTier('all');
+const passedMaBaseAll = StockApp.stocks.filter(filterFunc);
+console.log(`[PASS] Mode 'ma_base' [All >= 3T] returns ${passedMaBaseAll.length} stocks: ${passedMaBaseAll.map(s => s.symbol).join(', ')}`);
+if (passedMaBaseAll.length !== 10) {
+  console.error(`[FAIL] Expected exactly 10 stocks in ma_base (All >= 3T), got ${passedMaBaseAll.length}`);
   process.exit(1);
 }
-// Verify each stock in passedMaBase strictly satisfies all conditions
-passedMaBase.forEach(st => {
+
+// Tier 2: 3 - 6 tháng
+mockDom.setBaseDurationTier('3_6m');
+const passedMaBase3_6m = StockApp.stocks.filter(filterFunc);
+console.log(`[PASS] Mode 'ma_base' [3 - 6 Tháng] returns ${passedMaBase3_6m.length} stocks: ${passedMaBase3_6m.map(s => `${s.symbol} (${s.baseMonths}T)`).join(', ')}`);
+if (passedMaBase3_6m.length !== 8) {
+  console.error(`[FAIL] Expected 8 stocks in ma_base (3-6M), got ${passedMaBase3_6m.length}`);
+  process.exit(1);
+}
+passedMaBase3_6m.forEach(st => {
+  if (st.baseMonths < 3.0 || st.baseMonths >= 6.0) {
+    console.error(`[FAIL] Stock ${st.symbol} baseMonths=${st.baseMonths} out of 3-6M range!`);
+    process.exit(1);
+  }
+});
+
+// Tier 3: 6 - 12 tháng
+mockDom.setBaseDurationTier('6_12m');
+const passedMaBase6_12m = StockApp.stocks.filter(filterFunc);
+console.log(`[PASS] Mode 'ma_base' [6 - 12 Tháng] returns ${passedMaBase6_12m.length} stocks: ${passedMaBase6_12m.map(s => `${s.symbol} (${s.baseMonths}T)`).join(', ')}`);
+if (passedMaBase6_12m.length !== 1 || passedMaBase6_12m[0].symbol !== 'DPR') {
+  console.error('[FAIL] Expected DPR in ma_base (6-12M)');
+  process.exit(1);
+}
+
+// Tier 4: Trên 12 tháng
+mockDom.setBaseDurationTier('12m_plus');
+const passedMaBase12m_plus = StockApp.stocks.filter(filterFunc);
+console.log(`[PASS] Mode 'ma_base' [Trên 12 Tháng] returns ${passedMaBase12m_plus.length} stocks: ${passedMaBase12m_plus.map(s => `${s.symbol} (${s.baseMonths}T)`).join(', ')}`);
+if (passedMaBase12m_plus.length !== 1 || passedMaBase12m_plus[0].symbol !== 'FCN') {
+  console.error('[FAIL] Expected FCN in ma_base (>12M)');
+  process.exit(1);
+}
+
+// Reset tier to all
+mockDom.setBaseDurationTier('all');
+
+// Verify each stock in passedMaBaseAll strictly satisfies all conditions
+passedMaBaseAll.forEach(st => {
   const passesMA = st.diffMA10 > 0 && st.diffMA50 > 0;
   const passesBase = (st.baseSessions >= 60 || st.baseMonths >= 3.0) && st.baseTightness <= 20.0 && st.baseUpperHalf === true;
   if (!passesMA || !passesBase) {
@@ -174,7 +230,7 @@ passedMaBase.forEach(st => {
     process.exit(1);
   }
 });
-console.log('[PASS] All stocks in passedMaBase strictly satisfy both MA and Base 2-tier criteria!');
+console.log('[PASS] All stocks in passedMaBaseAll strictly satisfy both MA and Base 2-tier criteria!');
 
 // Mode: Lowest PE only
 mockDom.setBuyPresetMode('lowest_pe');
