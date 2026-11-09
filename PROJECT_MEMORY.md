@@ -55,6 +55,8 @@
   - Top 10 cổ phiếu có chỉ số P/E thấp nhất trong danh mục, có P/E dương (> 0).
 - **Kết hợp cả 2**:
   - Giao thoa giữa Tiêu chuẩn Kỹ thuật và Tiêu chuẩn Định giá (hiện tại thỏa mãn mã HDB).
+- **Bảng kết quả lọc điểm mua**:
+  - Đã lược bỏ cột "Biến động" theo yêu cầu, tập trung hiển thị 6 cột trọng tâm: Mã CP, Ngành, Giá (VND), P/E (Lần), Vị thế MA 10 & 50, Nền tích lũy. Colspan khi rỗng tự động điều chỉnh thành 6 cột.
 
 ---
 
