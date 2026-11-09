@@ -1,5 +1,5 @@
 # 💬 LỊCH SỬ HỘI THOẠI & YÊU CẦU DỰ ÁN (VIETCAPLINK STOCK)
-> Tự động đồng bộ lúc: 14:36:20 9/11/2026
+> Tự động đồng bộ lúc: 14:57:19 9/11/2026
 
 ---
 
@@ -1223,4 +1223,9 @@ ok
 ### Yêu cầu #199 (2026-11-09T07:32:58Z)
 ```markdown
 bỏ phần "biến động" trong Danh sách Cổ phiếu thỏa mãn Điều kiện Mua
+```
+
+### Yêu cầu #200 (2026-11-09T07:55:56Z)
+```markdown
+bỏ hiển thị phần này
 ```
