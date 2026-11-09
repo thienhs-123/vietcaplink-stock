@@ -8809,8 +8809,8 @@
             scChange.className = `py-3 px-3 text-right font-mono font-semibold ${isUp ? 'text-emerald-500' : 'text-rose-500'}`;
           }
           if (scPe) {
-            const isTop10 = !!this.getPeRank(sym);
-            scPe.innerHTML = `<span class="font-mono ${isTop10 ? 'font-bold text-light-text dark:text-studio-text' : 'text-light-subtext dark:text-studio-subtext'}">${stock.pe.toFixed(1)}x</span>`;
+            const peRank = this.getPeRank(sym);
+            scPe.innerHTML = `<span class="font-mono ${peRank ? 'font-bold text-light-text dark:text-studio-text' : 'font-semibold text-light-subtext dark:text-studio-subtext'}">${stock.pe.toFixed(1)}x</span>`;
           }
           if (scMa) {
             const maPassed = stock.aboveMA10_50 === true;
@@ -14035,9 +14035,7 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
 
         // P/E Badge
         const peVal = typeof st.pe === 'number' ? `${st.pe.toFixed(1)}x` : (st.pe === 'Lỗi' ? 'Lỗi' : `${st.pe}x`);
-        const peBadge = isTop10Pe
-          ? `<span class="font-mono font-bold text-light-text dark:text-studio-text">${peVal}</span>`
-          : `<span class="font-mono text-light-subtext dark:text-studio-subtext">${peVal}</span>`;
+        const peBadge = `<span class="font-mono ${isTop10Pe ? 'font-bold text-light-text dark:text-studio-text' : 'font-semibold text-light-subtext dark:text-studio-subtext'}">${peVal}</span>`;
 
         const scPriceHtml = isPriceErr ? '<span class="text-rose-500 font-bold">Lỗi</span>' : `${Number(st.price).toLocaleString('en-US')} đ`;
         const scChangeHtml = isPriceErr ? '<span class="text-rose-500 font-bold">Lỗi</span>' : `${isUp ? '+' : ''}${st.change}%`;

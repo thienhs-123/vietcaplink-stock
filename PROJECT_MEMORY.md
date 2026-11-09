@@ -59,8 +59,8 @@
   - Đã lược bỏ cột "Biến động" theo yêu cầu, tập trung hiển thị 6 cột trọng tâm: Mã CP, Ngành, Giá (VND), P/E (Lần), Vị thế MA 10 & 50, Nền tích lũy. Colspan khi rỗng tự động điều chỉnh thành 6 cột.
   - Đã gỡ bỏ hoàn toàn thanh chỉ dẫn phụ ("👉 Bấm tick chọn điều kiện lọc cổ phiếu muốn xem..." kèm 2 nút "Tick chọn cả 2" và "Bỏ chọn") nằm phía trên 2 thẻ điều kiện để giao diện thoáng, tinh tế và tập trung trực tiếp vào 2 thẻ chọn chính.
   - Đã cập nhật badge trạng thái khi chưa chọn điều kiện thành "Chưa chọn tiêu chí", đồng thời bỏ hiển thị banner cảnh báo màu cam ("Chưa chọn điều kiện lọc nào • Đang hiển thị tất cả cổ phiếu") giúp giao diện sạch và tinh tế.
-  - Đã bỏ phần đánh số thứ tự rank (`#1`, `#2`...) trong cột `P/E (Lần)`, hiển thị giá trị P/E đơn giản, rõ ràng.
-  - Đã lược bỏ cụm 2 nút bấm phụ "Đặt lại bộ lọc" và "Thêm / Sửa cổ phiếu" tại thanh tiêu đề Mục 4. Mua.
+  - Đã gỡ bỏ toàn bộ huy hiệu đánh số thứ tự (`#1`, `#2`, `#3`...) trong cột P/E (Lần), chỉ giữ số P/E thuần túy rõ ràng.
+  - Đã gỡ bỏ cụm nút thao tác ở tiêu đề Mục 4 ("Đặt lại bộ lọc" và "Thêm / Sửa cổ phiếu") theo yêu cầu tinh gọn giao diện.
 
 ---
 
