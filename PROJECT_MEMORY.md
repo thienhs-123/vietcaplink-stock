@@ -65,3 +65,13 @@
    - Luôn chạy: `git add .` $\rightarrow$ `git commit` $\rightarrow$ `git push origin main`.
 3. **Tuyệt đối không dùng lệnh Copy đè thô bạo (`Copy-Item -Force`)**:
    - Mọi thay đổi đều được kiểm soát và đồng bộ qua Git/GitHub để tránh ghi đè nhầm mã nguồn giữa 2 máy.
+
+---
+
+## 5. THƯ MỤC THIẾT KẾ GOOGLE STITCH (`design/stitch/`)
+- **Mục đích**: Lưu trữ các mẫu giao diện UI/UX HTML + Tailwind CSS xuất từ Google Stitch (`stitch.withgoogle.com`) để Antigravity tích hợp vào code chính.
+- **Cấu trúc hiện có**:
+  - `design/stitch/modal_detail.html`: Mẫu Modal xem chi tiết phân tích từng mã cổ phiếu (Thị giá, MA10/50, Nền, P/E, RSI...).
+  - `design/stitch/portfolio_card.html`: Mẫu Widget Quản lý danh mục & Cảnh báo AI thời gian thực.
+  - `design/stitch/README.md`: Hướng dẫn prompt chuẩn Design System (Dark mode, Emerald #10b981) và quy trình kết hợp Stitch $\rightarrow$ Antigravity.
+
