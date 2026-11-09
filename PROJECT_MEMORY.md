@@ -32,11 +32,13 @@
 - **Mặc định khi mở trang / khởi tạo**: Cả 2 điều kiện mua đều ở trạng thái **KHÔNG CHỌN** (hiển thị danh sách tổng thể). Người dùng chủ động bấm chọn 1 hoặc cả 2 thẻ để kích hoạt lọc điểm mua.
 - **Tiêu chuẩn Kỹ thuật (MA & Nền tích lũy)**:
   - Thị giá hiện tại > cả MA 10 ngày và MA 50 ngày (`st.diffMA10 > 0 && st.diffMA50 > 0`).
-  - **Tiêu chuẩn 1 (Thời gian nền)**: Tích lũy từ 3 tháng trở lên (≥ 60 phiên). Hỗ trợ **Multi-choice (chọn nhiều khoảng thời gian cùng lúc)**:
-    + Đơn lẻ: `Từ 3 – 6 tháng` (60–125p), `Từ 6 – 12 tháng` (126–250p), `Trên 12 tháng` (>250p).
-    + Kết hợp 2 khoảng liền kề: `3 – 6 tháng & 6 – 12 tháng` (3 đến 12 tháng), hoặc `6 – 12 tháng & trên 12 tháng` (từ 6 tháng trở lên).
-    + Kết hợp cả 3 khoảng: `Cả 3 khoảng (≥ 3 tháng)`.
-    + **Ràng buộc nghiêm ngặt**: Không áp dụng chọn đồng thời 2 khoảng cách quãng `3 – 6 tháng` và `trên 12 tháng` mà bỏ qua `6 – 12 tháng`. Hệ thống có cảnh báo và nút hỗ trợ `Chọn cả 3 khoảng`.
+  - **Tiêu chuẩn 1 (Thời gian nền)**: Tích lũy từ 3 tháng trở lên (≥ 60 phiên). Hỗ trợ chuẩn xác **Chọn 1 ô đơn lẻ & Chọn kết hợp 2-3 ô**:
+    + **Chọn 1 ô đơn lẻ ("nếu chọn 1 ô thì sẽ là một ô")**: Người dùng bấm chọn trực tiếp vào 1 trong 3 ô (`Từ 3 – 6 tháng`, `Từ 6 – 12 tháng`, `Trên 12 tháng`) thì hệ thống chỉ chọn duy nhất 1 ô đó, tuyệt đối không tự động chọn kèm hay giữ lại các ô khác.
+    + **Chọn kết hợp 2 khoảng ("nếu chọn 2 ô thì không được chọn 3 - 6 tháng và trên 12 tháng cùng lúc")**: Cung cấp nút chọn nhanh 2 khoảng liền kề:
+      * `Từ 3 – 12 tháng (2 khoảng)`: Gồm `3 – 6 tháng` & `6 – 12 tháng`.
+      * `Từ 6 tháng trở lên (2 khoảng)`: Gồm `6 – 12 tháng` & `Trên 12 tháng`.
+      * **Ràng buộc nghiêm ngặt**: Cấm tuyệt đối chọn đồng thời 2 khoảng cách quãng `3 – 6 tháng` và `trên 12 tháng` mà bỏ qua khoảng giữa.
+    + **Chọn kết hợp cả 3 khoảng**: Nút `Cả 3 khoảng (≥ 3T)` kích hoạt toàn bộ nền từ 3 tháng trở lên (≥ 60 phiên).
   - **Tiêu chuẩn 2 (Độ chặt chẽ nền)**:
     + Biên độ biến động đỉnh - đáy nền: `(Max - Min) / Min <= 20%`.
     + Thị giá vận động ở nửa trên vùng nền tích lũy (`st.price >= Mid`).

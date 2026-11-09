@@ -253,6 +253,52 @@ if (StockApp.buyCriteria.baseDurationTiers.includes('12m_plus') && !StockApp.buy
 }
 console.log(`[PASS] Blocked non-adjacent selection: current tiers remain [${StockApp.buyCriteria.baseDurationTiers.join(', ')}]`);
 
+// --- SINGLE-TIER DIRECT SELECTION TESTS (Fixing user bug: "chọn 1 ô thì sẽ là một ô") ---
+console.log('\n--- TESTING SINGLE-TIER DIRECT SELECTION ("nếu chọn 1 ô thì sẽ là một ô") ---');
+
+// Test 1: Reset to unselected/all mode, then click '6_12m' directly
+mockDom.setBuyPresetMode('all');
+console.log(`[INFO] Card 1 reset: filterMaAndBase=${StockApp.buyCriteria.filterMaAndBase}`);
+mockDom.selectSingleBaseDurationTier('6_12m');
+
+if (!StockApp.buyCriteria.filterMaAndBase) {
+  console.error('[FAIL] Selecting 6_12m should activate Card 1!');
+  process.exit(1);
+}
+if (StockApp.buyCriteria.baseDurationTiers.length !== 1 || StockApp.buyCriteria.baseDurationTiers[0] !== '6_12m') {
+  console.error(`[FAIL] Selecting 6_12m must select ONLY ['6_12m']! Got: [${StockApp.buyCriteria.baseDurationTiers.join(', ')}]`);
+  process.exit(1);
+}
+if (StockApp.buyCriteria.baseDurationTiers.includes('3_6m')) {
+  console.error('[FAIL] Selecting 6_12m MUST NOT auto-select 3_6m!');
+  process.exit(1);
+}
+console.log('[PASS] Selecting 6_12m from inactive state yields strictly 1 box: [6_12m] (no 3_6m auto-check).');
+
+// Test 2: Click '12m_plus' directly
+mockDom.selectSingleBaseDurationTier('12m_plus');
+if (StockApp.buyCriteria.baseDurationTiers.length !== 1 || StockApp.buyCriteria.baseDurationTiers[0] !== '12m_plus') {
+  console.error(`[FAIL] Selecting 12m_plus must select ONLY ['12m_plus']! Got: [${StockApp.buyCriteria.baseDurationTiers.join(', ')}]`);
+  process.exit(1);
+}
+console.log('[PASS] Selecting 12m_plus yields strictly 1 box: [12m_plus].');
+
+// Test 3: Click '3_6m' directly
+mockDom.selectSingleBaseDurationTier('3_6m');
+if (StockApp.buyCriteria.baseDurationTiers.length !== 1 || StockApp.buyCriteria.baseDurationTiers[0] !== '3_6m') {
+  console.error(`[FAIL] Selecting 3_6m must select ONLY ['3_6m']! Got: [${StockApp.buyCriteria.baseDurationTiers.join(', ')}]`);
+  process.exit(1);
+}
+console.log('[PASS] Selecting 3_6m yields strictly 1 box: [3_6m].');
+
+// Test 4: Forbidden pair via setBaseDurationTier(['3_6m', '12m_plus']) must be blocked!
+mockDom.setBaseDurationTier(['3_6m', '12m_plus']);
+if (StockApp.buyCriteria.baseDurationTiers.includes('3_6m') && StockApp.buyCriteria.baseDurationTiers.includes('12m_plus') && !StockApp.buyCriteria.baseDurationTiers.includes('6_12m')) {
+  console.error('[FAIL] System allowed setBaseDurationTier to set forbidden pair [3_6m, 12m_plus]!');
+  process.exit(1);
+}
+console.log('[PASS] setBaseDurationTier strictly blocks forbidden pair [3_6m, 12m_plus].');
+
 // Valid sequence: toggle '6_12m' first -> ['3_6m', '6_12m']
 mockDom.toggleBaseDurationTier('6_12m');
 console.log(`[PASS] Successfully toggled 6_12m: tiers are [${StockApp.buyCriteria.baseDurationTiers.join(', ')}]`);

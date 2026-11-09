@@ -1,5 +1,5 @@
 # 💬 LỊCH SỬ HỘI THOẠI & YÊU CẦU DỰ ÁN (VIETCAPLINK STOCK)
-> Tự động đồng bộ lúc: 12:54:08 9/11/2026
+> Tự động đồng bộ lúc: 13:13:58 9/11/2026
 
 ---
 
@@ -1096,4 +1096,9 @@ tiếp, bỏ phần tất cả. Và mặc định không chọn 2 điều kiện
 ### Yêu cầu #188 (2026-11-09T05:49:23Z)
 ```markdown
 tiếp, áp dụng multi chose với khoảng thời gian đó, vd: từ 3 - 6 tháng và 6 đến 12 tháng, hoặc 6 - 12 tháng và 12 tháng trở lên hoặc cả 3 khoảng thời gian và không áp dụng cho chọn 2 khoảng thời gian 3 - 6 tháng và 12 tháng trở lên cùng lúc
+```
+
+### Yêu cầu #189 (2026-11-09T06:00:16Z)
+```markdown
+đang có lỗi: chọn  6 đến 12 tháng thì auto chọn luôn 3 - 6 tháng, và nhiều lỗi tương tự. tóm lại là nếu chọn 1 ô thì sẽ là một ô, nếu chọn 2 ô thì không được chọn 3 - 6 tháng và trên 12 tháng cùng lúc. và hãy tự động crosscheck theo rules đã setup trong project từ đầu
 ```
