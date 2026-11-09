@@ -74,4 +74,6 @@
   - `design/stitch/modal_detail.html`: Mẫu Modal xem chi tiết phân tích từng mã cổ phiếu (Thị giá, MA10/50, Nền, P/E, RSI...).
   - `design/stitch/portfolio_card.html`: Mẫu Widget Quản lý danh mục & Cảnh báo AI thời gian thực.
   - `design/stitch/README.md`: Hướng dẫn prompt chuẩn Design System (Dark mode, Emerald #10b981) và quy trình kết hợp Stitch $\rightarrow$ Antigravity.
+- **Triển khai thực tế**:
+  - *Biểu đồ VN-Index (Mục 1)*: Đã khoác giao diện Stitch (nền `#131824`, viền `#1e2638`, cụm nút thời gian pill `#0b0e17`, đường sóng Area Gradient màu Vivid Cyan `#38bdf8`) trong khi vẫn bảo toàn 100% cỗ máy ApexCharts, Realtime feed tự động 1 phút/lần và các sự kiện zoom/pan.
 

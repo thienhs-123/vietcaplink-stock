@@ -1,5 +1,5 @@
 # 💬 LỊCH SỬ HỘI THOẠI & YÊU CẦU DỰ ÁN (VIETCAPLINK STOCK)
-> Tự động đồng bộ lúc: 14:05:52 9/11/2026
+> Tự động đồng bộ lúc: 14:20:30 9/11/2026
 
 ---
 
@@ -1148,4 +1148,74 @@ stock-ai-dashboard/
         └── portfolio_card.html
 
 hãy tạo theo gợi ý của bạn
+```
+
+### Yêu cầu #197 (2026-11-09T07:15:29Z)
+```markdown
+tiếp, chỉnh sửa phần chart ở phần 4.
+đây là html mà tôi dùng stich để chỉnh sửa, bạn hãy cập nhật:
+
+<!-- VN-INDEX CHART COMPONENT (Tailwind CSS ready hoặc nhúng inline) -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+<div style="background-color: #131824; border: 1px solid #1e2638; border-radius: 0.75rem; padding: 1.25rem; color: #fff; font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; max-width: 1200px; margin: 0 auto;">
+  <!-- Header Bar -->
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; border-bottom: 1px solid #1c2333; padding-bottom: 1rem; margin-bottom: 1.25rem;">
+    <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+      <span style="font-weight: 700; font-size: 0.875rem; letter-spacing: 0.05em; color: #f3f4f6;">DIỄN BIẾN CHỈ SỐ VN-INDEX (1 NĂM)</span>
+      <span style="display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.75rem; color: #10b981; background: rgba(16, 185, 129, 0.1); padding: 0.15rem 0.5rem; border-radius: 9999px;">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background-color: #10b981;"></span> Realtime • 1 lần / phút
+      </span>
+      <!-- Timeframe Filters -->
+      <div style="display: inline-flex; align-items: center; background: #0b0e17; padding: 0.2rem; border-radius: 0.375rem; font-size: 0.75rem; border: 1px solid #1f293d;">
+        <button style="background: #2563eb; color: #fff; border: none; padding: 0.25rem 0.6rem; border-radius: 0.25rem; font-weight: 600; cursor: pointer;">1 tháng (Mặc định)</button>
+        <button style="background: transparent; color: #9ca3af; border: none; padding: 0.25rem 0.6rem; cursor: pointer;">3T</button>
+        <button style="background: transparent; color: #9ca3af; border: none; padding: 0.25rem 0.6rem; cursor: pointer;">6T</button>
+        <button style="backgr
+<truncated 3271 bytes>
+font-size="10" text-anchor="end">1.760</text>
+      <text x="890" y="54" fill="#64748b" font-size="10" text-anchor="end">1.750</text>
+      <text x="890" y="84" fill="#64748b" font-size="10" text-anchor="end">1.740</text>
+      <text x="890" y="114" fill="#64748b" font-size="10" text-anchor="end">1.730</text>
+      <text x="890" y="144" fill="#64748b" font-size="10" text-anchor="end">1.720</text>
+      <text x="890" y="174" fill="#64748b" font-size="10" text-anchor="end">1.710</text>
+      <text x="890" y="204" fill="#64748b" font-size="10" text-anchor="end">1.700</text>
+
+      <!-- Vùng Gradient diện tích chỉ số -->
+      <path d="M 60 210 Q 120 185, 180 170 T 300 135 T 450 115 T 600 118 T 720 145 T 800 185 T 860 170 L 860 220 L 60 220 Z" fill="url(#vnindexGradient)" />
+
+      <!-- Đường sóng chỉ số chính (Vivid Blue Line) -->
+      <path d="M 60 210 Q 120 185, 180 170 T 300 135 T 450 115 T 600 118 T 720 145 T 800 185 T 860 170" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" />
+
+      <!-- Điểm mốc hiện tại ở đuôi biểu đồ -->
+      <circle cx="860" cy="170" r="3.5" fill="#38bdf8" />
+    </svg>
+  </div>
+
+  <!-- Trục thời gian bên dưới (X-axis labels) -->
+  <div style="display: flex; justify-content: space-between; font-size: 0.6875rem; color: #64748b; padding-left: 2.5rem; padding-right: 2rem; margin-top: 0.25rem;">
+    <span>07/10</span>
+    <span>09/10</span>
+    <span>11/10</span>
+    <span>13/10</span>
+    <span>15/10</span>
+    <span>17/10</span>
+    <span>19/10</span>
+    <span>21/10</span>
+    <span>23/10</span>
+    <span>25/10</span>
+    <span>27/10</span>
+    <span>29/10</span>
+    <span>31/10</span>
+    <span>02/11</span>
+    <span>04/11</span>
+  </div>
+</div>
+
+hãy trả lời trước khi build lại: làm như task tôi vừa giao chọn bạn thì có vấn đề gì xảy ra không?
+```
+
+### Yêu cầu #198 (2026-11-09T07:17:21Z)
+```markdown
+ok
 ```

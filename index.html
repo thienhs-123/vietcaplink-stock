@@ -2057,46 +2057,47 @@
 
               </div>
 
-              <!-- Chart Box: Diễn biến chỉ số (Line Chart thuần túy, 1 năm daily, mặc định 1 tháng, Zoom lăn chuột & kéo dãn trục tung) -->
-              <div class="flex-1 p-3.5 sm:p-4 rounded-2xl bg-light-elevated/60 dark:bg-studio-elevated/60 border border-light-border dark:border-studio-border flex flex-col justify-between space-y-3 min-w-0">
+              <!-- Chart Box: Diễn biến chỉ số VN-INDEX (Thiết kế Stitch UI: Dark #131824, Viền #1e2638, Cyan Line #38bdf8, Realtime ApexCharts) -->
+              <div class="flex-1 p-4 sm:p-5 rounded-xl bg-[#131824] border border-[#1e2638] text-white flex flex-col justify-between space-y-3.5 min-w-0 shadow-xl">
                 
-                <!-- Header Box: Tiêu đề & Nút thời gian bên trái - Chỉ số Realtime hiển thị sang BÊN PHẢI -->
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-light-border/40 dark:border-studio-border/40 pb-3">
+                <!-- Header Bar (Stitch Layout) -->
+                <div class="flex flex-wrap justify-between items-center gap-3 border-b border-[#1c2333] pb-3 mb-1">
                   <!-- Trái: Tên biểu đồ & Bộ chọn khung thời gian -->
-                  <div class="space-y-1.5">
-                    <div class="flex items-center space-x-2">
-                      <span class="text-xs font-bold uppercase tracking-wider text-light-subtext dark:text-studio-muted">DIỄN BIẾN CHỈ SỐ VN-INDEX (1 NĂM)</span>
-                      <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono text-[10.5px] font-semibold flex items-center space-x-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span id="marketRealtimeFrequencyBadge">Realtime • 1 lần / phút</span>
-                      </span>
-                    </div>
-                    <!-- Timeframe range buttons (Mặc định 1T, tối đa 1N) -->
-                    <div class="flex items-center space-x-1 overflow-x-auto text-xs scrollbar-none" id="marketTimeframeButtons">
-                      <button onclick="setMarketTimeframe('1T')" id="tf-btn-1T" class="px-3 py-1 rounded-lg font-semibold transition-all bg-[#0071e3] text-white shadow-sm">1 tháng (Mặc định)</button>
-                      <button onclick="setMarketTimeframe('3T')" id="tf-btn-3T" class="px-2.5 py-1 rounded-lg font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text">3T</button>
-                      <button onclick="setMarketTimeframe('6T')" id="tf-btn-6T" class="px-2.5 py-1 rounded-lg font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text">6T</button>
-                      <button onclick="setMarketTimeframe('1N')" id="tf-btn-1N" class="px-2.5 py-1 rounded-lg font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text">1N (Tối đa)</button>
-                      <button onclick="resetMarketChartZoom()" id="tf-btn-reset" class="px-2 py-1 rounded-lg text-[11px] font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text hover:bg-black/5 dark:hover:bg-white/5" title="Đặt lại phạm vi 1 tháng">↺ Đặt lại</button>
+                  <div class="flex items-center gap-3 flex-wrap">
+                    <span class="font-bold text-sm tracking-wider text-gray-100">DIỄN BIẾN CHỈ SỐ VN-INDEX (1 NĂM)</span>
+                    <span class="inline-flex items-center gap-1.5 text-xs text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 font-mono">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span id="marketRealtimeFrequencyBadge">Realtime • 1 lần / phút</span>
+                    </span>
+                    <!-- Timeframe Filters (Pill Container) -->
+                    <div class="inline-flex items-center bg-[#0b0e17] p-1 rounded-md text-xs border border-[#1f293d]" id="marketTimeframeButtons">
+                      <button onclick="setMarketTimeframe('1T')" id="tf-btn-1T" class="px-2.5 py-1 rounded bg-[#2563eb] text-white font-semibold transition-all shadow-sm">1 tháng (Mặc định)</button>
+                      <button onclick="setMarketTimeframe('3T')" id="tf-btn-3T" class="px-2.5 py-1 rounded text-gray-400 hover:text-white transition-all font-medium">3T</button>
+                      <button onclick="setMarketTimeframe('6T')" id="tf-btn-6T" class="px-2.5 py-1 rounded text-gray-400 hover:text-white transition-all font-medium">6T</button>
+                      <button onclick="setMarketTimeframe('1N')" id="tf-btn-1N" class="px-2.5 py-1 rounded text-gray-400 hover:text-white transition-all font-medium">1N (Tối đa)</button>
+                      <button onclick="resetMarketChartZoom()" id="tf-btn-reset" class="px-2 py-1 rounded text-gray-500 hover:text-gray-300 transition-all flex items-center gap-1" title="Đặt lại phạm vi 1 tháng">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                        <span>Đặt lại</span>
+                      </button>
                     </div>
                   </div>
 
-                  <!-- PHẦN HIỂN THỊ CHỈ SỐ SANG BÊN PHẢI (Theo yêu cầu) -->
-                  <div class="flex flex-col sm:items-end justify-center">
-                    <div class="flex items-baseline space-x-2">
-                      <span class="text-2xl md:text-3xl font-bold font-mono text-light-text dark:text-studio-text" id="marketVnindexBigVal">1.732,88</span>
-                      <span class="text-sm font-bold font-mono text-rose-500" id="marketVnindexBigChange">-7,85 (-0,45%)</span>
+                  <!-- Phải: Index Summary Realtime -->
+                  <div class="text-right flex flex-col sm:items-end justify-center">
+                    <div class="flex items-baseline gap-2 justify-end">
+                      <span class="text-2xl font-extrabold font-mono text-white tracking-tight" id="marketVnindexBigVal">1.732,88</span>
+                      <span class="text-sm font-semibold font-mono text-rose-500" id="marketVnindexBigChange">-7,85 (-0,45%)</span>
                     </div>
-                    <div class="text-xs text-light-subtext dark:text-studio-muted font-mono mt-0.5">
-                      VN-Index • 1 tháng: <strong class="text-emerald-500 font-semibold" id="marketVnindex3mPct">+1,80%</strong> • KL: <strong class="text-light-text dark:text-studio-text" id="marketVnindexVol">720,5 tr</strong>
+                    <div class="text-xs text-gray-400 font-mono mt-0.5">
+                      VN-Index • 1 tháng: <span class="text-emerald-400 font-semibold" id="marketVnindex3mPct">+1,80%</span> • KL: <span class="text-gray-200 font-semibold" id="marketVnindexVol">720,5 tr cp</span>
                     </div>
                   </div>
                 </div>
 
-                <!-- Interactive Hover Banner: Ngày, Điểm số, % Biến động -->
-                <div class="px-3 py-1.5 rounded-lg bg-light-surface/90 dark:bg-studio-surface/90 border border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-xs font-mono" id="marketChartHoverBanner">
-                  <span class="text-light-subtext dark:text-studio-muted">06/11/2026: <strong class="text-light-text dark:text-studio-text">1.732,88</strong> (<span class="text-rose-500 font-semibold">-0,98%</span>)</span>
-                  <span class="text-[11px] text-light-subtext dark:text-studio-muted">Daily VN-Index • HOSE</span>
+                <!-- Sub-header & Tooltip Preview (Stitch Hover Banner) -->
+                <div class="px-3 py-1.5 rounded bg-[#1a2234] border border-[#28354d] flex items-center justify-between text-xs font-mono text-gray-300" id="marketChartHoverBanner">
+                  <span>06/11/2026: <strong class="text-white">1.732,88</strong> (<span class="text-rose-500 font-semibold">-0,98%</span>)</span>
+                  <span class="text-slate-400 text-[11px]">Daily VN-Index • HOSE</span>
                 </div>
 
                 <!-- ApexCharts Canvas Container với Trục kéo dãn Y-Axis bên phải (Đã bỏ hoàn toàn chữ 'kéo trục') -->
@@ -12833,7 +12834,7 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
         chart: {
           id: 'market-vnindex-line-chart',
           height: 330,
-          type: 'line',
+          type: 'area',
           foreColor: foreColor,
           fontFamily: '"SF Pro Display", "SF Pro Text", -apple-system, sans-serif',
           toolbar: { show: false },
@@ -12862,8 +12863,8 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
                 const banner = document.getElementById("marketChartHoverBanner");
                 if (banner) {
                   banner.innerHTML = `
-                    <span class="text-light-subtext dark:text-studio-muted">${item.dateStr}: <strong class="text-light-text dark:text-studio-text">${item.y.toLocaleString('vi-VN', { minimumFractionDigits: 2 })}</strong> (<span class="${colorClass} font-semibold">${sign}${pct}%</span>)</span>
-                    <span class="text-[11px] text-light-subtext dark:text-studio-muted">Daily VN-Index • HOSE</span>
+                    <span>${item.dateStr}: <strong class="text-white">${item.y.toLocaleString('vi-VN', { minimumFractionDigits: 2 })}</strong> (<span class="${colorClass} font-semibold">${sign}${pct}%</span>)</span>
+                    <span class="text-slate-400 text-[11px]">Daily VN-Index • HOSE</span>
                   `;
                 }
               }
@@ -12871,9 +12872,22 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
           }
         },
         theme: { mode: themeMode },
-        colors: ['#0071e3'],
+        colors: ['#38bdf8'],
+        fill: {
+          type: 'gradient',
+          gradient: {
+            shade: 'dark',
+            type: 'vertical',
+            shadeIntensity: 0.5,
+            gradientToColors: ['#0284c7'],
+            inverseColors: false,
+            opacityFrom: 0.35,
+            opacityTo: 0.02,
+            stops: [0, 80, 100]
+          }
+        },
         stroke: {
-          width: 2.8,
+          width: 2.6,
           curve: 'smooth'
         },
         dataLabels: { enabled: false },
@@ -13084,9 +13098,9 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
         const btn = document.getElementById(`tf-btn-${t}`);
         if (!btn) return;
         if (t === tf) {
-          btn.className = "px-3 py-1 rounded-lg font-semibold transition-all bg-[#0071e3] text-white shadow-sm";
+          btn.className = "px-2.5 py-1 rounded bg-[#2563eb] text-white font-semibold transition-all shadow-sm";
         } else {
-          btn.className = "px-2.5 py-1 rounded-lg font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text";
+          btn.className = "px-2.5 py-1 rounded text-gray-400 hover:text-white transition-all font-medium";
         }
       });
     }
@@ -13107,9 +13121,9 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
         const btn = document.getElementById(`tf-btn-${t}`);
         if (!btn) return;
         if (t === activeTf) {
-          btn.className = "px-3 py-1 rounded-lg font-semibold transition-all bg-[#0071e3] text-white shadow-sm";
+          btn.className = "px-2.5 py-1 rounded bg-[#2563eb] text-white font-semibold transition-all shadow-sm";
         } else {
-          btn.className = "px-2.5 py-1 rounded-lg font-medium transition-all text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text";
+          btn.className = "px-2.5 py-1 rounded text-gray-400 hover:text-white transition-all font-medium";
         }
       });
     }
