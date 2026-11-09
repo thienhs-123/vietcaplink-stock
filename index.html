@@ -1949,25 +1949,13 @@
       <!-- ================= MODULE 4: MUA ================= -->
       <section id="module-screener" class="space-y-6 hidden">
         <!-- Section Header -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-light-border dark:border-studio-border">
-          <div>
-            <div class="flex items-center space-x-2">
-              <h1 class="text-xl md:text-2xl font-bold tracking-tight">4. Mua</h1>
-            </div>
-            <p class="text-xs md:text-sm text-light-subtext dark:text-studio-subtext mt-1">
-              Bộ lọc Điểm Mua Kỹ thuật &amp; Định giá: Giá nằm trên 2 đường MA 10 &amp; MA 50, tích lũy nền từ 3 tháng trở lên và Top 10 cổ phiếu có P/E thấp nhất.
-            </p>
+        <div class="pb-2 border-b border-light-border dark:border-studio-border">
+          <div class="flex items-center space-x-2">
+            <h1 class="text-xl md:text-2xl font-bold tracking-tight">4. Mua</h1>
           </div>
-          <div class="flex items-center space-x-2 shrink-0">
-            <button onclick="resetScreenerFilters()" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-light-elevated dark:bg-studio-elevated border border-light-border dark:border-studio-border hover:border-light-subtext text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5 transition-all">
-              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
-              <span>Đặt lại bộ lọc</span>
-            </button>
-            <button onclick="openManualEditModal('stocks')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white flex items-center space-x-1.5 transition-all shadow-sm">
-              <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
-              <span>Thêm / Sửa cổ phiếu</span>
-            </button>
-          </div>
+          <p class="text-xs md:text-sm text-light-subtext dark:text-studio-subtext mt-1">
+            Bộ lọc Điểm Mua Kỹ thuật &amp; Định giá: Giá nằm trên 2 đường MA 10 &amp; MA 50, tích lũy nền từ 3 tháng trở lên và Top 10 cổ phiếu có P/E thấp nhất.
+          </p>
         </div>
 
         <!-- ================= PHẦN THỊ TRƯỜNG TỔNG QUAN (THEO ẢNH ĐÍNH KÈM) ================= -->
@@ -8821,19 +8809,8 @@
             scChange.className = `py-3 px-3 text-right font-mono font-semibold ${isUp ? 'text-emerald-500' : 'text-rose-500'}`;
           }
           if (scPe) {
-            const peRank = this.getPeRank(sym);
-            if (peRank) {
-              scPe.innerHTML = `
-                <div class="flex items-center justify-end space-x-1">
-                  <span class="font-mono font-bold text-light-text dark:text-studio-text">${stock.pe.toFixed(1)}x</span>
-                  <span class="px-1.5 py-0.2 rounded text-[10px] font-semibold bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/25" title="Top ${peRank} P/E thấp nhất">
-                    #${peRank}
-                  </span>
-                </div>
-              `;
-            } else {
-              scPe.innerHTML = `<span class="font-mono text-light-subtext dark:text-studio-subtext">${stock.pe.toFixed(1)}x</span>`;
-            }
+            const isTop10 = !!this.getPeRank(sym);
+            scPe.innerHTML = `<span class="font-mono ${isTop10 ? 'font-bold text-light-text dark:text-studio-text' : 'text-light-subtext dark:text-studio-subtext'}">${stock.pe.toFixed(1)}x</span>`;
           }
           if (scMa) {
             const maPassed = stock.aboveMA10_50 === true;
@@ -14059,12 +14036,7 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
         // P/E Badge
         const peVal = typeof st.pe === 'number' ? `${st.pe.toFixed(1)}x` : (st.pe === 'Lỗi' ? 'Lỗi' : `${st.pe}x`);
         const peBadge = isTop10Pe
-          ? `<div class="flex items-center justify-end space-x-1">
-               <span class="font-mono font-bold text-light-text dark:text-studio-text">${peVal}</span>
-               <span class="px-1.5 py-0.2 rounded text-[10px] font-semibold bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/25" title="Top ${peRank} P/E thấp nhất">
-                 #${peRank}
-               </span>
-             </div>`
+          ? `<span class="font-mono font-bold text-light-text dark:text-studio-text">${peVal}</span>`
           : `<span class="font-mono text-light-subtext dark:text-studio-subtext">${peVal}</span>`;
 
         const scPriceHtml = isPriceErr ? '<span class="text-rose-500 font-bold">Lỗi</span>' : `${Number(st.price).toLocaleString('en-US')} đ`;

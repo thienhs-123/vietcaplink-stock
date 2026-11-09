@@ -1,5 +1,5 @@
 # 💬 LỊCH SỬ HỘI THOẠI & YÊU CẦU DỰ ÁN (VIETCAPLINK STOCK)
-> Tự động đồng bộ lúc: 15:14:40 9/11/2026
+> Tự động đồng bộ lúc: 15:22:14 9/11/2026
 
 ---
 
@@ -1239,4 +1239,14 @@ bỏ hiển thị phần này
 ```markdown
 1. bỏ phần này (ảnh đầu)
 2. sử text thành: "Chưa chọn tiêu chí"
+```
+
+### Yêu cầu #203 (2026-11-09T08:19:27Z)
+```markdown
+bỏ phần đánh số thứ tự
+```
+
+### Yêu cầu #204 (2026-11-09T08:20:13Z)
+```markdown
+bỏ phần này
 ```
