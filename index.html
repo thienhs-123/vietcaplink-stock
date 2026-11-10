@@ -2105,62 +2105,52 @@
                   <span class="text-xs font-bold uppercase tracking-wider text-light-subtext dark:text-studio-muted">ĐỘ RỘNG THEO SÀN</span>
                 </div>
 
-                <!-- Combined Multi-Segment Progress Bar (4 màu: Tím trần, Xanh tăng, Vàng cam đứng giá, Đỏ giảm & sàn) -->
+                <!-- Combined Multi-Segment Progress Bar (5 màu: Tím trần, Xanh lá tăng, Vàng cam đứng, Đỏ giảm, Xanh lơ sàn) -->
                 <div class="w-full h-2.5 rounded-full overflow-hidden flex bg-gray-200 dark:bg-gray-800 shadow-inner">
-                  <div id="breadthTotalBarCeil" class="bg-purple-500 h-full transition-all duration-500" style="width: 1.2%;"></div>
-                  <div id="breadthTotalBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 9.6%;"></div>
-                  <div id="breadthTotalBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 61.3%;"></div>
-                  <div id="breadthTotalBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 27.9%;"></div>
+                  <div id="breadthTotalBarCeil" class="bg-purple-500 h-full transition-all duration-500" style="width: 2.7%;" title="Trần"></div>
+                  <div id="breadthTotalBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 49.3%;" title="Tăng"></div>
+                  <div id="breadthTotalBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 21.0%;" title="Đứng giá"></div>
+                  <div id="breadthTotalBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 24.1%;" title="Giảm"></div>
+                  <div id="breadthTotalBarFlr" class="bg-cyan-400 h-full transition-all duration-500" style="width: 1.9%;" title="Sàn"></div>
                 </div>
 
-                <!-- 4 Thống kê tổng hợp: Tím, Xanh, Vàng cam, Đỏ -->
-                <div class="grid grid-cols-4 gap-2 text-center py-1">
+                <!-- 5 Thống kê tổng hợp: Tím, Xanh lá, Vàng cam, Đỏ, Xanh lơ (Bỏ tiêu đề text, chỉ giữ màu sắc) -->
+                <div class="grid grid-cols-5 gap-1 text-center py-1">
                   <div>
-                    <div class="text-xl font-bold font-mono text-purple-400" id="breadthTotalCeil">18</div>
-                    <div class="text-[10px] text-purple-400 font-medium mt-0.5">Tăng trần</div>
+                    <div class="text-xl font-bold font-mono text-purple-400" id="breadthTotalCeil" title="Trần">25</div>
                   </div>
                   <div>
-                    <div class="text-xl font-bold font-mono text-emerald-400" id="breadthTotalAdv">145</div>
-                    <div class="text-[10px] text-emerald-400 font-medium mt-0.5">Tăng giá</div>
+                    <div class="text-xl font-bold font-mono text-emerald-400" id="breadthTotalAdv" title="Tăng">454</div>
                   </div>
                   <div>
-                    <div class="text-xl font-bold font-mono text-amber-400" id="breadthTotalRef">929</div>
-                    <div class="text-[10px] text-amber-400 font-medium mt-0.5">Đứng giá</div>
+                    <div class="text-xl font-bold font-mono text-amber-400" id="breadthTotalRef" title="Đứng giá">193</div>
                   </div>
                   <div>
-                    <div class="text-xl font-bold font-mono text-rose-500" id="breadthTotalDec">424</div>
-                    <div class="text-[10px] text-rose-500 font-medium mt-0.5">Giảm &amp; Sàn <span id="breadthTotalFlr" class="hidden"></span></div>
+                    <div class="text-xl font-bold font-mono text-rose-500" id="breadthTotalDec" title="Giảm">222</div>
+                  </div>
+                  <div>
+                    <div class="text-xl font-bold font-mono text-cyan-400" id="breadthTotalFlr" title="Sàn">17</div>
                   </div>
                 </div>
 
-                <!-- Breakdown by Exchange: HOSE, HNX, UPCOM với 4 cột thẳng hàng (không kẻ cột) -->
-                <div class="space-y-1.5 pt-1.5 border-t border-light-border/60 dark:border-studio-border/60 font-mono text-xs">
-                  <!-- Header hàng cột thẳng tắp: Trần • Tăng • Đứng • Giảm -->
-                  <div class="flex items-center justify-between gap-3 text-[10px] text-light-subtext dark:text-studio-muted pb-0.5">
-                    <span class="w-12 font-semibold">Sàn</span>
-                    <div class="flex-1"></div>
-                    <div class="grid grid-cols-4 gap-1 text-right w-48 sm:w-56 shrink-0 font-bold">
-                      <span class="text-purple-400">Trần</span>
-                      <span class="text-emerald-400">Tăng</span>
-                      <span class="text-amber-400">Đứng</span>
-                      <span class="text-rose-400">Giảm</span>
-                    </div>
-                  </div>
-
+                <!-- Breakdown by Exchange: HOSE, HNX, UPCOM với 5 cột thẳng hàng (Bỏ hoàn toàn tiêu đề, không kẻ cột) -->
+                <div class="space-y-2 pt-1.5 border-t border-light-border/60 dark:border-studio-border/60 font-mono text-xs">
                   <!-- HOSE -->
                   <div class="flex items-center justify-between gap-3">
                     <span class="w-12 font-bold text-light-text dark:text-studio-text text-[11px]">HOSE</span>
                     <div class="flex-1 h-2 rounded-full overflow-hidden flex bg-gray-200 dark:bg-gray-800">
-                      <div id="breadthHoseBarCeil" class="bg-purple-500 h-full transition-all duration-500" style="width: 2.9%;"></div>
-                      <div id="breadthHoseBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 13.5%;"></div>
-                      <div id="breadthHoseBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 27.1%;"></div>
-                      <div id="breadthHoseBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 56.5%;"></div>
+                      <div id="breadthHoseBarCeil" class="bg-purple-500 h-full transition-all duration-500" style="width: 1.1%;" title="Trần"></div>
+                      <div id="breadthHoseBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 57.8%;" title="Tăng"></div>
+                      <div id="breadthHoseBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 13.1%;" title="Đứng giá"></div>
+                      <div id="breadthHoseBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 27.2%;" title="Giảm"></div>
+                      <div id="breadthHoseBarFlr" class="bg-cyan-400 h-full transition-all duration-500" style="width: 0.8%;" title="Sàn"></div>
                     </div>
-                    <div class="grid grid-cols-4 gap-1 text-right w-48 sm:w-56 shrink-0 text-[11px] font-mono">
-                      <span class="text-purple-400 font-bold" id="breadthHoseCeil">12</span>
-                      <span class="text-emerald-400 font-bold" id="breadthHoseAdv">69</span>
-                      <span class="text-amber-400 font-bold" id="breadthHoseRef">114</span>
-                      <span class="text-rose-400 font-bold" id="breadthHoseDec">225</span>
+                    <div class="grid grid-cols-5 gap-1.5 text-right w-52 sm:w-60 shrink-0 text-[11px] font-mono">
+                      <span class="text-purple-400 font-bold" id="breadthHoseCeil" title="Trần">4</span>
+                      <span class="text-emerald-400 font-bold" id="breadthHoseAdv" title="Tăng">208</span>
+                      <span class="text-amber-400 font-bold" id="breadthHoseRef" title="Đứng giá">47</span>
+                      <span class="text-rose-500 font-bold" id="breadthHoseDec" title="Giảm">98</span>
+                      <span class="text-cyan-400 font-bold" id="breadthHoseFlr" title="Sàn">3</span>
                     </div>
                   </div>
 
@@ -2168,16 +2158,18 @@
                   <div class="flex items-center justify-between gap-3">
                     <span class="w-12 font-bold text-light-text dark:text-studio-text text-[11px]">HNX</span>
                     <div class="flex-1 h-2 rounded-full overflow-hidden flex bg-gray-200 dark:bg-gray-800">
-                      <div id="breadthHnxBarCeil" class="bg-purple-500 h-full transition-all duration-500" style="width: 1.6%;"></div>
-                      <div id="breadthHnxBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 7.6%;"></div>
-                      <div id="breadthHnxBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 60.2%;"></div>
-                      <div id="breadthHnxBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 30.6%;"></div>
+                      <div id="breadthHnxBarCeil" class="bg-purple-500 h-full transition-all duration-500" style="width: 3.8%;" title="Trần"></div>
+                      <div id="breadthHnxBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 33.2%;" title="Tăng"></div>
+                      <div id="breadthHnxBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 32.6%;" title="Đứng giá"></div>
+                      <div id="breadthHnxBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 27.2%;" title="Giảm"></div>
+                      <div id="breadthHnxBarFlr" class="bg-cyan-400 h-full transition-all duration-500" style="width: 3.2%;" title="Sàn"></div>
                     </div>
-                    <div class="grid grid-cols-4 gap-1 text-right w-48 sm:w-56 shrink-0 text-[11px] font-mono">
-                      <span class="text-purple-400 font-bold" id="breadthHnxCeil">5</span>
-                      <span class="text-emerald-400 font-bold" id="breadthHnxAdv">28</span>
-                      <span class="text-amber-400 font-bold" id="breadthHnxRef">183</span>
-                      <span class="text-rose-400 font-bold" id="breadthHnxDec">88</span>
+                    <div class="grid grid-cols-5 gap-1.5 text-right w-52 sm:w-60 shrink-0 text-[11px] font-mono">
+                      <span class="text-purple-400 font-bold" id="breadthHnxCeil" title="Trần">7</span>
+                      <span class="text-emerald-400 font-bold" id="breadthHnxAdv" title="Tăng">62</span>
+                      <span class="text-amber-400 font-bold" id="breadthHnxRef" title="Đứng giá">61</span>
+                      <span class="text-rose-500 font-bold" id="breadthHnxDec" title="Giảm">51</span>
+                      <span class="text-cyan-400 font-bold" id="breadthHnxFlr" title="Sàn">6</span>
                     </div>
                   </div>
 
@@ -2185,19 +2177,23 @@
                   <div class="flex items-center justify-between gap-3">
                     <span class="w-12 font-bold text-light-text dark:text-studio-text text-[11px]">UPCOM</span>
                     <div class="flex-1 h-2 rounded-full overflow-hidden flex bg-gray-200 dark:bg-gray-800">
-                      <div id="breadthUpcomBarCeil" class="bg-purple-500 h-full transition-all duration-500" style="width: 1.8%;"></div>
-                      <div id="breadthUpcomBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 6.2%;"></div>
-                      <div id="breadthUpcomBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 76.7%;"></div>
-                      <div id="breadthUpcomBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 15.3%;"></div>
+                      <div id="breadthUpcomBarCeil" class="bg-purple-500 h-full transition-all duration-500" style="width: 5.3%;" title="Trần"></div>
+                      <div id="breadthUpcomBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 38.6%;" title="Tăng"></div>
+                      <div id="breadthUpcomBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 30.3%;" title="Đứng giá"></div>
+                      <div id="breadthUpcomBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 22.7%;" title="Giảm"></div>
+                      <div id="breadthUpcomBarFlr" class="bg-cyan-400 h-full transition-all duration-500" style="width: 3.1%;" title="Sàn"></div>
                     </div>
-                    <div class="grid grid-cols-4 gap-1 text-right w-48 sm:w-56 shrink-0 text-[11px] font-mono">
-                      <span class="text-purple-400 font-bold" id="breadthUpcomCeil">15</span>
-                      <span class="text-emerald-400 font-bold" id="breadthUpcomAdv">66</span>
-                      <span class="text-amber-400 font-bold" id="breadthUpcomRef">632</span>
-                      <span class="text-rose-400 font-bold" id="breadthUpcomDec">111</span>
+                    <div class="grid grid-cols-5 gap-1.5 text-right w-52 sm:w-60 shrink-0 text-[11px] font-mono">
+                      <span class="text-purple-400 font-bold" id="breadthUpcomCeil" title="Trần">14</span>
+                      <span class="text-emerald-400 font-bold" id="breadthUpcomAdv" title="Tăng">102</span>
+                      <span class="text-amber-400 font-bold" id="breadthUpcomRef" title="Đứng giá">80</span>
+                      <span class="text-rose-500 font-bold" id="breadthUpcomDec" title="Giảm">60</span>
+                      <span class="text-cyan-400 font-bold" id="breadthUpcomFlr" title="Sàn">8</span>
                     </div>
                   </div>
                 </div>
+
+              </div>
 
               </div>
 
@@ -3679,10 +3675,10 @@
       selectedCompany: 'FPT',
       selectedPortfolioKey: 'tan_cong',
       breadth: {
-        total: { adv: 145, dec: 424, ref: 929, ceil: 18, flr: 32 },
-        hose: { adv: 69, dec: 225, ref: 114, ceil: 12, flr: 15 },
-        hnx: { adv: 28, dec: 88, ref: 183, ceil: 5, flr: 7 },
-        upcom: { adv: 66, dec: 111, ref: 632, ceil: 15, flr: 10 }
+        total: { adv: 479, dec: 239, ref: 193, ceil: 25, flr: 17 },
+        hose: { adv: 212, dec: 101, ref: 47, ceil: 4, flr: 3 },
+        hnx: { adv: 69, dec: 57, ref: 61, ceil: 7, flr: 6 },
+        upcom: { adv: 116, dec: 68, ref: 80, ceil: 14, flr: 8 }
       },
       portfolioSortBy: 'weight',
 
@@ -8894,12 +8890,14 @@
           const now = Math.floor(Date.now() / 1000);
           const fromDays = now - 86400 * 5;
 
-          // 1. Truy vấn các chỉ số thị trường thời gian thực qua VPS TradingView History (CORS mở 100%, trực tiếp, không bao giờ bị chặn)
-          const [vnindexRes, vn30Res, hnxRes, upcomRes] = await Promise.allSettled([
+          // 1. Đồng bộ song song: Chỉ số thị trường (TV History) + Độ rộng toàn sàn (aggregatemarket & indexdetail)
+          const [vnindexRes, vn30Res, hnxRes, upcomRes, aggrRes, indexDetailRes] = await Promise.allSettled([
             fetch("https://histdatafeed.vps.com.vn/tradingview/history?symbol=VNINDEX&resolution=D&from=" + fromDays + "&to=" + now).then(r => r.ok ? r.json() : null),
             fetch("https://histdatafeed.vps.com.vn/tradingview/history?symbol=VN30&resolution=D&from=" + fromDays + "&to=" + now).then(r => r.ok ? r.json() : null),
             fetch("https://histdatafeed.vps.com.vn/tradingview/history?symbol=HNX&resolution=D&from=" + fromDays + "&to=" + now).then(r => r.ok ? r.json() : null),
-            fetch("https://histdatafeed.vps.com.vn/tradingview/history?symbol=UPCOM&resolution=D&from=" + fromDays + "&to=" + now).then(r => r.ok ? r.json() : null)
+            fetch("https://histdatafeed.vps.com.vn/tradingview/history?symbol=UPCOM&resolution=D&from=" + fromDays + "&to=" + now).then(r => r.ok ? r.json() : null),
+            fetch("https://bgapidatafeed.vps.com.vn/aggregate/market/aggregatemarket", { headers: { 'Accept': 'application/json' } }).then(r => r.ok ? r.json() : null).catch(() => null),
+            fetch("https://bgapidatafeed.vps.com.vn/getlistindexdetail/10,11,02,03", { headers: { 'Accept': 'application/json' } }).then(r => r.ok ? r.json() : null).catch(() => null)
           ]);
 
           const macroUpdates = {};
@@ -8953,107 +8951,72 @@
             this.updateAllUIIndicators();
           }
 
-          // 2. Truy vấn trực tiếp toàn bộ 100 mã cổ phiếu qua VPS Realtime Datafeed (CORS mở 100%)
-          const symList = (StockApp.stocks && StockApp.stocks.length)
-            ? StockApp.stocks.map(s => s.symbol).filter(Boolean).join(",")
-            : "ACB,BCM,BID,BVH,CTG,FPT,GAS,GVR,HDB,HPG,MBB,MSN,MWG,PLX,POW,SAB,SHB,SSB,SSI,STB,TCB,TPB,VCB,VHM,VIB,VIC,VJC,VNM,VPB,VRE";
+          // 2. Xử lý dữ liệu Độ rộng thị trường thực tế 100% từ Sở giao dịch (HOSE, HNX, UPCOM)
+          const aggr = (aggrRes && aggrRes.status === 'fulfilled') ? (aggrRes.value || {}) : {};
+          const indexList = (indexDetailRes && indexDetailRes.status === 'fulfilled' && Array.isArray(indexDetailRes.value)) ? indexDetailRes.value : [];
 
-          let vpsList = null;
-          try {
-            const vpsRes = await fetch("https://bgapidatafeed.vps.com.vn/getliststockdata/" + symList, {
-              headers: { 'Accept': 'application/json' }
-            });
-            if (vpsRes.ok) {
-              vpsList = await vpsRes.json();
-            }
-          } catch(e) {}
-
-          const stockMap = {};
-          let totalCount = 0;
-          let totalAdv = 0, totalDec = 0, totalRef = 0, totalCeil = 0, totalFlr = 0;
-
-          const exchangeMap = {};
-          if (Array.isArray(StockApp.stocks)) {
-            StockApp.stocks.forEach(s => {
-              if (s && s.symbol) {
-                exchangeMap[s.symbol.toUpperCase()] = (s.exchange || 'HOSE').toUpperCase();
-              }
-            });
-          }
-
-          const exStats = {
-            hose: { adv: 0, dec: 0, ref: 0, ceil: 0, flr: 0 },
-            hnx: { adv: 0, dec: 0, ref: 0, ceil: 0, flr: 0 },
-            upcom: { adv: 0, dec: 0, ref: 0, ceil: 0, flr: 0 }
+          const parseOt = (otStr) => {
+            if (!otStr) return { adv: 0, dec: 0, ref: 0 };
+            const parts = otStr.split('|');
+            return {
+              adv: parseInt(parts[3]) || 0,
+              dec: parseInt(parts[4]) || 0,
+              ref: parseInt(parts[5]) || 0
+            };
           };
 
-          if (Array.isArray(vpsList) && vpsList.length > 0) {
-            vpsList.forEach(it => {
-              if (!it || !it.sym) return;
-              const rawPrice = it.lastPrice && it.lastPrice > 0 ? it.lastPrice : (it.r || 0);
-              const priceVND = Math.round(rawPrice * 1000);
-              const refVND = Math.round((it.r || 0) * 1000);
-              const ceilVND = Math.round((it.c || 0) * 1000);
-              const floorVND = Math.round((it.f || 0) * 1000);
-              const chgPct = (it.changePc !== undefined && it.changePc !== null && it.changePc !== '')
-                ? parseFloat(it.changePc)
-                : (refVND > 0 ? parseFloat((((priceVND - refVND) / refVND) * 100).toFixed(2)) : 0);
-              const vol = (it.lot || 0) * 10;
+          const hoseDetail = indexList.find(d => d && d.mc === '10');
+          const hnxDetail = indexList.find(d => d && d.mc === '02');
+          const upcomDetail = indexList.find(d => d && d.mc === '03');
 
-              stockMap[it.sym] = {
-                price: priceVND,
-                change: chgPct,
-                volume: vol,
-                ref: refVND,
-                high: Math.round((it.highPrice || 0) * 1000),
-                low: Math.round((it.lowPrice || 0) * 1000),
-                open: Math.round((it.openPrice || 0) * 1000),
-                ceiling: ceilVND,
-                floor: floorVND,
-                status: "success"
-              };
-              totalCount++;
+          const hoseOt = parseOt(hoseDetail?.ot);
+          const hnxOt = parseOt(hnxDetail?.ot);
+          const upcomOt = parseOt(upcomDetail?.ot);
 
-              const symUpper = it.sym.toUpperCase();
-              const ex = exchangeMap[symUpper] || 'HOSE';
-              const target = (ex === 'HNX') ? exStats.hnx : ((ex === 'UPCOM') ? exStats.upcom : exStats.hose);
+          const hoseData = {
+            ceil: aggr.hsx_ce !== undefined ? Number(aggr.hsx_ce) : (StockApp.breadth?.hose?.ceil || 4),
+            adv: hoseOt.adv || (StockApp.breadth?.hose?.adv || 212),
+            ref: hoseOt.ref || (StockApp.breadth?.hose?.ref || 47),
+            dec: hoseOt.dec || (StockApp.breadth?.hose?.dec || 101),
+            flr: aggr.hsx_fl !== undefined ? Number(aggr.hsx_fl) : (StockApp.breadth?.hose?.flr || 3)
+          };
 
-              if (priceVND > refVND && refVND > 0) {
-                totalAdv++;
-                target.adv++;
-                if (ceilVND > 0 && priceVND >= ceilVND) {
-                  totalCeil++;
-                  target.ceil++;
-                }
-              } else if (priceVND < refVND && priceVND > 0 && refVND > 0) {
-                totalDec++;
-                target.dec++;
-                if (floorVND > 0 && priceVND <= floorVND) {
-                  totalFlr++;
-                  target.flr++;
-                }
-              } else {
-                totalRef++;
-                target.ref++;
-              }
-            });
-          }
+          const hnxData = {
+            ceil: aggr.hnx_ce !== undefined ? Number(aggr.hnx_ce) : (StockApp.breadth?.hnx?.ceil || 7),
+            adv: hnxOt.adv || (StockApp.breadth?.hnx?.adv || 69),
+            ref: hnxOt.ref || (StockApp.breadth?.hnx?.ref || 61),
+            dec: hnxOt.dec || (StockApp.breadth?.hnx?.dec || 57),
+            flr: aggr.hnx_fl !== undefined ? Number(aggr.hnx_fl) : (StockApp.breadth?.hnx?.flr || 6)
+          };
 
-          if (totalAdv + totalDec + totalRef > 0) {
-            StockApp.breadth = {
-              total: { adv: totalAdv, dec: totalDec, ref: totalRef, ceil: totalCeil, flr: totalFlr },
-              hose: exStats.hose,
-              hnx: exStats.hnx,
-              upcom: exStats.upcom,
-              advancers: totalAdv,
-              decliners: totalDec,
-              unchanged: totalRef,
-              ceiling: totalCeil,
-              floor: totalFlr
-            };
-            if (typeof updateMarketBreadthUI === "function") {
-              updateMarketBreadthUI(StockApp.breadth);
-            }
+          const upcomData = {
+            ceil: aggr.upcom_ce !== undefined ? Number(aggr.upcom_ce) : (StockApp.breadth?.upcom?.ceil || 14),
+            adv: upcomOt.adv || (StockApp.breadth?.upcom?.adv || 116),
+            ref: upcomOt.ref || (StockApp.breadth?.upcom?.ref || 80),
+            dec: upcomOt.dec || (StockApp.breadth?.upcom?.dec || 68),
+            flr: aggr.upcom_fl !== undefined ? Number(aggr.upcom_fl) : (StockApp.breadth?.upcom?.flr || 8)
+          };
+
+          const totalCeil = (hoseData.ceil + hnxData.ceil + upcomData.ceil);
+          const totalFlr = (hoseData.flr + hnxData.flr + upcomData.flr);
+          const totalAdv = aggr.up ? Number(aggr.up) : (hoseData.adv + hnxData.adv + upcomData.adv);
+          const totalRef = aggr.ref ? Number(aggr.ref) : (hoseData.ref + hnxData.ref + upcomData.ref);
+          const totalDec = aggr.down ? Number(aggr.down) : (hoseData.dec + hnxData.dec + upcomData.dec);
+
+          StockApp.breadth = {
+            total: { adv: totalAdv, dec: totalDec, ref: totalRef, ceil: totalCeil, flr: totalFlr },
+            hose: hoseData,
+            hnx: hnxData,
+            upcom: upcomData,
+            advancers: totalAdv,
+            decliners: totalDec,
+            unchanged: totalRef,
+            ceiling: totalCeil,
+            floor: totalFlr
+          };
+
+          if (typeof updateMarketBreadthUI === "function") {
+            updateMarketBreadthUI(StockApp.breadth);
           }
 
           if (totalCount > 0) {
@@ -13342,43 +13305,50 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       const hnx = data.hnx;
       const upcom = data.upcom;
 
-      // Helper tính tỷ lệ 4 màu: Tím (Trần), Xanh (Tăng), Vàng cam (Đứng giá), Đỏ (Giảm & Sàn)
+      // Helper tính tỷ lệ 5 màu: Tím (Trần), Xanh lá (Tăng), Vàng cam (Đứng giá), Đỏ (Giảm), Xanh lơ (Sàn)
       const calcPercents = (item) => {
-        if (!item) return { pCeil: '0.0', pAdv: '0.0', pRef: '0.0', pDec: '0.0' };
+        if (!item) return { pCeil: '0.0', pAdv: '0.0', pRef: '0.0', pDec: '0.0', pFlr: '0.0' };
         const ceil = Math.max(0, Number(item.ceil) || 0);
         const adv = Math.max(0, Number(item.adv) || 0);
         const ref = Math.max(0, Number(item.ref) || 0);
         const dec = Math.max(0, Number(item.dec) || 0);
+        const flr = Math.max(0, Number(item.flr) || 0);
 
-        // adv bao gồm cả ceil, tách phần tăng thường pureAdv = max(0, adv - ceil)
+        // adv bao gồm cả ceil, tách pureAdv = max(0, adv - ceil)
         const pureAdv = Math.max(0, adv - ceil);
-        const sum = (ceil + pureAdv + ref + dec) || 1;
+        // dec bao gồm cả flr, tách pureDec = max(0, dec - flr)
+        const pureDec = Math.max(0, dec - flr);
+        const sum = (ceil + pureAdv + ref + pureDec + flr) || 1;
 
         const pCeil = (ceil / sum) * 100;
         const pAdv = (pureAdv / sum) * 100;
         const pRef = (ref / sum) * 100;
-        const pDec = Math.max(0, 100 - pCeil - pAdv - pRef);
+        const pDec = (pureDec / sum) * 100;
+        const pFlr = Math.max(0, 100 - pCeil - pAdv - pRef - pDec);
 
         return {
           pCeil: pCeil.toFixed(1),
           pAdv: pAdv.toFixed(1),
           pRef: pRef.toFixed(1),
-          pDec: pDec.toFixed(1)
+          pDec: pDec.toFixed(1),
+          pFlr: pFlr.toFixed(1)
         };
       };
 
-      // 1. Cập nhật thanh & số Tổng hợp (4 thông số tương ứng 4 màu)
+      // 1. Cập nhật thanh & số Tổng hợp (5 màu: Tím, Xanh lá, Vàng cam, Đỏ, Xanh lơ)
       if (total) {
-        const { pCeil, pAdv, pRef, pDec } = calcPercents(total);
+        const { pCeil, pAdv, pRef, pDec, pFlr } = calcPercents(total);
 
         const barCeil = document.getElementById("breadthTotalBarCeil");
         const barAdv = document.getElementById("breadthTotalBarAdv");
         const barRef = document.getElementById("breadthTotalBarRef");
         const barDec = document.getElementById("breadthTotalBarDec");
+        const barFlr = document.getElementById("breadthTotalBarFlr");
         if (barCeil) barCeil.style.width = pCeil + '%';
         if (barAdv) barAdv.style.width = pAdv + '%';
         if (barRef) barRef.style.width = pRef + '%';
         if (barDec) barDec.style.width = pDec + '%';
+        if (barFlr) barFlr.style.width = pFlr + '%';
 
         const txtCeil = document.getElementById("breadthTotalCeil");
         const txtAdv = document.getElementById("breadthTotalAdv");
@@ -13387,35 +13357,39 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
         const txtFlr = document.getElementById("breadthTotalFlr");
 
         if (txtCeil) txtCeil.innerText = total.ceil || 0;
-        if (txtAdv) txtAdv.innerText = total.adv || 0;
+        if (txtAdv) txtAdv.innerText = Math.max(0, (total.adv || 0) - (total.ceil || 0));
         if (txtRef) txtRef.innerText = total.ref || 0;
-        if (txtDec) txtDec.innerText = total.dec || 0;
-        if (txtFlr) txtFlr.innerText = (total.flr || 0) + ' sàn';
+        if (txtDec) txtDec.innerText = Math.max(0, (total.dec || 0) - (total.flr || 0));
+        if (txtFlr) txtFlr.innerText = total.flr || 0;
       }
 
-      // 2. Cập nhật chi tiết 3 sàn: HOSE, HNX, UPCOM (4 thanh & 4 số thẳng cột)
+      // 2. Cập nhật chi tiết 3 sàn: HOSE, HNX, UPCOM (5 thanh & 5 số thẳng cột)
       const updateRow = (key, exData) => {
         if (!exData) return;
-        const { pCeil, pAdv, pRef, pDec } = calcPercents(exData);
+        const { pCeil, pAdv, pRef, pDec, pFlr } = calcPercents(exData);
 
         const cap = key.charAt(0).toUpperCase() + key.slice(1).toLowerCase();
         const bC = document.getElementById('breadth' + cap + 'BarCeil');
         const bA = document.getElementById('breadth' + cap + 'BarAdv');
         const bR = document.getElementById('breadth' + cap + 'BarRef');
         const bD = document.getElementById('breadth' + cap + 'BarDec');
+        const bF = document.getElementById('breadth' + cap + 'BarFlr');
         if (bC) bC.style.width = pCeil + '%';
         if (bA) bA.style.width = pAdv + '%';
         if (bR) bR.style.width = pRef + '%';
         if (bD) bD.style.width = pDec + '%';
+        if (bF) bF.style.width = pFlr + '%';
 
         const tC = document.getElementById('breadth' + cap + 'Ceil');
         const tA = document.getElementById('breadth' + cap + 'Adv');
         const tR = document.getElementById('breadth' + cap + 'Ref');
         const tD = document.getElementById('breadth' + cap + 'Dec');
+        const tF = document.getElementById('breadth' + cap + 'Flr');
         if (tC) tC.innerText = exData.ceil || 0;
-        if (tA) tA.innerText = exData.adv || 0;
+        if (tA) tA.innerText = Math.max(0, (exData.adv || 0) - (exData.ceil || 0));
         if (tR) tR.innerText = exData.ref || 0;
-        if (tD) tD.innerText = exData.dec || 0;
+        if (tD) tD.innerText = Math.max(0, (exData.dec || 0) - (exData.flr || 0));
+        if (tF) tF.innerText = exData.flr || 0;
       };
 
       updateRow('hose', hose);
@@ -13433,13 +13407,10 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
 
     // 8. Tự động truy vấn độ rộng theo sàn 1 phút / lần
     async function refreshMarketBreadth1Minute() {
-      // Tự động sử dụng độ rộng thị trường đã đồng bộ thời gian thực từ VPS / Vnstock
-      if (StockApp.breadth) {
-        updateMarketBreadthUI(StockApp.breadth);
-        return;
-      }
       if (window.StockRealtimeService && typeof window.StockRealtimeService.fetchClientLiveMarketData === 'function') {
         await window.StockRealtimeService.fetchClientLiveMarketData();
+      } else if (StockApp.breadth) {
+        updateMarketBreadthUI(StockApp.breadth);
       }
     }
 
