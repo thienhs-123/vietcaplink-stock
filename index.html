@@ -2053,10 +2053,6 @@
                   <!-- Trái: Tên biểu đồ & Bộ chọn khung thời gian -->
                   <div class="flex items-center gap-3 flex-wrap">
                     <span class="font-bold text-sm tracking-wider text-gray-100">DIỄN BIẾN CHỈ SỐ VN-INDEX (1 NĂM)</span>
-                    <span class="inline-flex items-center gap-1.5 text-xs text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 font-mono">
-                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                      <span id="marketRealtimeFrequencyBadge">Realtime • 1 lần / phút</span>
-                    </span>
                     <!-- Timeframe Filters (Pill Container) -->
                     <div class="inline-flex items-center bg-[#0b0e17] p-1 rounded-md text-xs border border-[#1f293d]" id="marketTimeframeButtons">
                       <button onclick="setMarketTimeframe('1T')" id="tf-btn-1T" class="px-2.5 py-1 rounded bg-[#2563eb] text-white font-semibold transition-all shadow-sm">1 tháng (Mặc định)</button>
@@ -9515,13 +9511,6 @@
         if (banner) {
           const vnValFormatted = StockApp.macro.vnindex ? StockApp.macro.vnindex.toLocaleString("vi-VN", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : "1.740,92";
           banner.innerHTML = "<span>" + dateStr + ": <strong class=\"text-white\">" + vnValFormatted + "</strong> (<span class=\"" + colorClass + " font-semibold\">" + sign + StockApp.macro.vnindexPct + "%</span>)</span><span class=\"text-slate-400 text-[11px]\">Daily VN-Index • HOSE • Realtime 1p</span>";
-        }
-
-        // Cap nhat Frequency Badge voi thoi gian sync moi nhat
-        const freqBadge = document.getElementById("marketRealtimeFrequencyBadge");
-        if (freqBadge) {
-          const syncTime = this.lastSyncTime || timeStr;
-          freqBadge.innerText = "Realtime • " + syncTime + " • 1 lần / phút";
         }
 
         // Cap nhat diem cuoi tren Line Chart VN-Index & tỷ lệ 1 tháng theo nhip realtime
