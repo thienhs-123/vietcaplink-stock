@@ -2107,33 +2107,38 @@
 
                 <!-- Combined Multi-Segment Progress Bar (5 màu: Tím trần, Xanh lá tăng, Vàng cam đứng, Đỏ giảm, Xanh lơ sàn) -->
                 <div class="w-full h-2.5 rounded-full overflow-hidden flex bg-gray-200 dark:bg-gray-800 shadow-inner">
-                  <div id="breadthTotalBarCeil" class="bg-purple-500 h-full transition-all duration-500" style="width: 2.7%;" title="Trần"></div>
-                  <div id="breadthTotalBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 49.3%;" title="Tăng"></div>
-                  <div id="breadthTotalBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 21.0%;" title="Đứng giá"></div>
-                  <div id="breadthTotalBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 24.1%;" title="Giảm"></div>
-                  <div id="breadthTotalBarFlr" class="bg-cyan-400 h-full transition-all duration-500" style="width: 1.9%;" title="Sàn"></div>
+                  <div id="breadthTotalBarCeil" class="bg-purple-500 h-full transition-all duration-500" style="width: 2.7%;" title="Tăng trần"></div>
+                  <div id="breadthTotalBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 49.3%;" title="Tăng giá"></div>
+                  <div id="breadthTotalBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 21.0%;" title="Tham chiếu"></div>
+                  <div id="breadthTotalBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 24.1%;" title="Giảm giá"></div>
+                  <div id="breadthTotalBarFlr" class="bg-cyan-400 h-full transition-all duration-500" style="width: 1.9%;" title="Giảm sàn"></div>
                 </div>
 
-                <!-- 5 Thống kê tổng hợp: Tím, Xanh lá, Vàng cam, Đỏ, Xanh lơ (Bỏ tiêu đề text, chỉ giữ màu sắc) -->
+                <!-- 5 Thống kê tổng hợp: Tím, Xanh lá, Vàng cam, Đỏ, Xanh lơ kèm nhãn bên dưới -->
                 <div class="grid grid-cols-5 gap-1 text-center py-1">
                   <div>
-                    <div class="text-xl font-bold font-mono text-purple-400" id="breadthTotalCeil" title="Trần">25</div>
+                    <div class="text-xl font-bold font-mono text-purple-400" id="breadthTotalCeil">8</div>
+                    <div class="text-[10px] text-purple-400/90 font-medium mt-0.5 whitespace-nowrap">Tăng trần</div>
                   </div>
                   <div>
-                    <div class="text-xl font-bold font-mono text-emerald-400" id="breadthTotalAdv" title="Tăng">454</div>
+                    <div class="text-xl font-bold font-mono text-emerald-400" id="breadthTotalAdv">330</div>
+                    <div class="text-[10px] text-emerald-400/90 font-medium mt-0.5 whitespace-nowrap">Tăng giá</div>
                   </div>
                   <div>
-                    <div class="text-xl font-bold font-mono text-amber-400" id="breadthTotalRef" title="Đứng giá">193</div>
+                    <div class="text-xl font-bold font-mono text-amber-400" id="breadthTotalRef">992</div>
+                    <div class="text-[10px] text-amber-400/90 font-medium mt-0.5 whitespace-nowrap">Tham chiếu</div>
                   </div>
                   <div>
-                    <div class="text-xl font-bold font-mono text-rose-500" id="breadthTotalDec" title="Giảm">222</div>
+                    <div class="text-xl font-bold font-mono text-rose-500" id="breadthTotalDec">181</div>
+                    <div class="text-[10px] text-rose-500/90 font-medium mt-0.5 whitespace-nowrap">Giảm giá</div>
                   </div>
                   <div>
-                    <div class="text-xl font-bold font-mono text-cyan-400" id="breadthTotalFlr" title="Sàn">17</div>
+                    <div class="text-xl font-bold font-mono text-cyan-400" id="breadthTotalFlr">6</div>
+                    <div class="text-[10px] text-cyan-400/90 font-medium mt-0.5 whitespace-nowrap">Giảm sàn</div>
                   </div>
                 </div>
 
-                <!-- Breakdown by Exchange: HOSE, HNX, UPCOM với 5 cột thẳng hàng (Bỏ hoàn toàn tiêu đề, không kẻ cột) -->
+                <!-- Breakdown by Exchange: HOSE, HNX, UPCOM với 5 cột thẳng hàng (Bỏ tiêu đề, không kẻ cột) -->
                 <div class="space-y-2 pt-1.5 border-t border-light-border/60 dark:border-studio-border/60 font-mono text-xs">
                   <!-- HOSE -->
                   <div class="flex items-center justify-between gap-3">
@@ -2192,8 +2197,6 @@
                     </div>
                   </div>
                 </div>
-
-              </div>
 
               </div>
 
@@ -9017,6 +9020,53 @@
 
           if (typeof updateMarketBreadthUI === "function") {
             updateMarketBreadthUI(StockApp.breadth);
+          }
+
+          // 3. Đồng bộ giá thời gian thực cho toàn bộ 100 mã cổ phiếu trong Danh mục / Bộ lọc (StockApp.stocks)
+          const symList = (StockApp.stocks && StockApp.stocks.length)
+            ? StockApp.stocks.map(s => s.symbol).filter(Boolean).join(",")
+            : "ACB,BCM,BID,BVH,CTG,FPT,GAS,GVR,HDB,HPG,MBB,MSN,MWG,PLX,POW,SAB,SHB,SSB,SSI,STB,TCB,TPB,VCB,VHM,VIB,VIC,VJC,VNM,VPB,VRE";
+
+          let vpsList = null;
+          try {
+            const vpsRes = await fetch("https://bgapidatafeed.vps.com.vn/getliststockdata/" + symList, {
+              headers: { 'Accept': 'application/json' }
+            });
+            if (vpsRes.ok) {
+              vpsList = await vpsRes.json();
+            }
+          } catch(e) {}
+
+          const stockMap = {};
+          let totalCount = 0;
+
+          if (Array.isArray(vpsList) && vpsList.length > 0) {
+            vpsList.forEach(it => {
+              if (!it || !it.sym) return;
+              const rawPrice = it.lastPrice && it.lastPrice > 0 ? it.lastPrice : (it.r || 0);
+              const priceVND = Math.round(rawPrice * 1000);
+              const refVND = Math.round((it.r || 0) * 1000);
+              const ceilVND = Math.round((it.c || 0) * 1000);
+              const floorVND = Math.round((it.f || 0) * 1000);
+              const chgPct = (it.changePc !== undefined && it.changePc !== null && it.changePc !== '')
+                ? parseFloat(it.changePc)
+                : (refVND > 0 ? parseFloat((((priceVND - refVND) / refVND) * 100).toFixed(2)) : 0);
+              const vol = (it.lot || 0) * 10;
+
+              stockMap[it.sym] = {
+                price: priceVND,
+                change: chgPct,
+                volume: vol,
+                ref: refVND,
+                high: Math.round((it.highPrice || 0) * 1000),
+                low: Math.round((it.lowPrice || 0) * 1000),
+                open: Math.round((it.openPrice || 0) * 1000),
+                ceiling: ceilVND,
+                floor: floorVND,
+                status: "success"
+              };
+              totalCount++;
+            });
           }
 
           if (totalCount > 0) {
