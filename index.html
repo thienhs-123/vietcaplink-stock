@@ -8856,28 +8856,32 @@
           const now = Math.floor(Date.now() / 1000);
           const fromDays = now - 86400 * 5;
 
-          // 1. Truy vấn các chỉ số thị trường thời gian thực qua VNDIRECT DCHART (CORS mở 100% không bao giờ bị chặn)
+          // 1. Truy vấn các chỉ số thị trường thời gian thực qua VPS TradingView History (CORS mở 100%, trực tiếp, không bao giờ bị chặn)
           const [vnindexRes, vn30Res, hnxRes, upcomRes] = await Promise.allSettled([
-            fetch("https://dchart-api.vndirect.com.vn/dchart/history?symbol=VNINDEX&resolution=D&from=" + fromDays + "&to=" + now, { headers: { 'Accept': 'application/json' } }).then(r => r.ok ? r.json() : null),
-            fetch("https://dchart-api.vndirect.com.vn/dchart/history?symbol=VN30&resolution=D&from=" + fromDays + "&to=" + now, { headers: { 'Accept': 'application/json' } }).then(r => r.ok ? r.json() : null),
-            fetch("https://dchart-api.vndirect.com.vn/dchart/history?symbol=HNX&resolution=D&from=" + fromDays + "&to=" + now, { headers: { 'Accept': 'application/json' } }).then(r => r.ok ? r.json() : null),
-            fetch("https://dchart-api.vndirect.com.vn/dchart/history?symbol=UPCOM&resolution=D&from=" + fromDays + "&to=" + now, { headers: { 'Accept': 'application/json' } }).then(r => r.ok ? r.json() : null)
+            fetch("https://histdatafeed.vps.com.vn/tradingview/history?symbol=VNINDEX&resolution=D&from=" + fromDays + "&to=" + now).then(r => r.ok ? r.json() : null),
+            fetch("https://histdatafeed.vps.com.vn/tradingview/history?symbol=VN30&resolution=D&from=" + fromDays + "&to=" + now).then(r => r.ok ? r.json() : null),
+            fetch("https://histdatafeed.vps.com.vn/tradingview/history?symbol=HNX&resolution=D&from=" + fromDays + "&to=" + now).then(r => r.ok ? r.json() : null),
+            fetch("https://histdatafeed.vps.com.vn/tradingview/history?symbol=UPCOM&resolution=D&from=" + fromDays + "&to=" + now).then(r => r.ok ? r.json() : null)
           ]);
 
           const macroUpdates = {};
 
-          function parseVndirectIndex(res) {
-            if (!res || res.status !== 'fulfilled' || !res.value || !res.value.c || !res.value.c.length) return null;
-            const c = res.value.c;
-            const last = parseFloat(c[c.length - 1].toFixed(2));
-            const ref = c.length >= 2 ? parseFloat(c[c.length - 2].toFixed(2)) : last;
-            const chg = parseFloat((last - ref).toFixed(2));
-            const pct = ref > 0 ? parseFloat(((chg / ref) * 100).toFixed(2)) : 0;
-            const v = res.value.v && res.value.v.length ? res.value.v[res.value.v.length - 1] : 0;
-            return { last, ref, chg, pct, vol: (v / 1e6).toFixed(1) + " tr cp" };
+          function parseIndexFeed(res) {
+            if (!res || res.status !== 'fulfilled' || !res.value) return null;
+            const val = res.value;
+            if (val.c && Array.isArray(val.c) && val.c.length > 0) {
+              const c = val.c;
+              const last = parseFloat(c[c.length - 1].toFixed(2));
+              const ref = c.length >= 2 ? parseFloat(c[c.length - 2].toFixed(2)) : last;
+              const chg = parseFloat((last - ref).toFixed(2));
+              const pct = ref > 0 ? parseFloat(((chg / ref) * 100).toFixed(2)) : 0;
+              const v = val.v && val.v.length ? val.v[val.v.length - 1] : 0;
+              return { last, ref, chg, pct, vol: (v / 1e6).toFixed(1) + " tr cp" };
+            }
+            return null;
           }
 
-          const vnParsed = parseVndirectIndex(vnindexRes);
+          const vnParsed = parseIndexFeed(vnindexRes);
           if (vnParsed) {
             macroUpdates.vnindex = vnParsed.last;
             macroUpdates.vnindexChange = vnParsed.chg;
@@ -8885,21 +8889,21 @@
             macroUpdates.vnindexVol = vnParsed.vol;
           }
 
-          const vn30Parsed = parseVndirectIndex(vn30Res);
+          const vn30Parsed = parseIndexFeed(vn30Res);
           if (vn30Parsed) {
             macroUpdates.vn30 = vn30Parsed.last;
             macroUpdates.vn30Change = vn30Parsed.chg;
             macroUpdates.vn30Pct = vn30Parsed.pct;
           }
 
-          const hnxParsed = parseVndirectIndex(hnxRes);
+          const hnxParsed = parseIndexFeed(hnxRes);
           if (hnxParsed) {
             macroUpdates.hnx = hnxParsed.last;
             macroUpdates.hnxChange = hnxParsed.chg;
             macroUpdates.hnxPct = hnxParsed.pct;
           }
 
-          const upcomParsed = parseVndirectIndex(upcomRes);
+          const upcomParsed = parseIndexFeed(upcomRes);
           if (upcomParsed) {
             macroUpdates.upcom = upcomParsed.last;
             macroUpdates.upcomChange = upcomParsed.chg;
@@ -8908,6 +8912,7 @@
 
           if (Object.keys(macroUpdates).length > 0) {
             this.applyRealMacroData(macroUpdates);
+            this.updateAllUIIndicators();
           }
 
           // 2. Truy vấn trực tiếp toàn bộ 100 mã cổ phiếu qua VPS Realtime Datafeed (CORS mở 100%)
@@ -9453,7 +9458,7 @@
         const m4VnVal = document.getElementById("m4CardVnindexVal");
         const m4VnChange = document.getElementById("m4CardVnindexChange");
         if (m4VnVal && m4VnChange) {
-          m4VnVal.innerText = StockApp.macro.vnindex.toLocaleString("vi-VN");
+          m4VnVal.innerText = StockApp.macro.vnindex.toLocaleString("vi-VN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
           m4VnChange.innerText = sign + StockApp.macro.vnindexChange + " (" + sign + StockApp.macro.vnindexPct + "%)";
           m4VnChange.className = "text-[10px] md:text-[11px] font-mono font-semibold " + colorClass;
         }
@@ -9519,13 +9524,29 @@
           freqBadge.innerText = "Realtime • " + syncTime + " • 1 lần / phút";
         }
 
-        // Cap nhat diem cuoi tren Line Chart VN-Index theo nhip realtime
-        if (StockApp.charts && StockApp.charts.marketOverview && StockApp.marketOverview && StockApp.marketOverview.full1YearData) {
+        // Cap nhat diem cuoi tren Line Chart VN-Index & tỷ lệ 1 tháng theo nhip realtime
+        if (StockApp.marketOverview && StockApp.marketOverview.full1YearData) {
           const fullData = StockApp.marketOverview.full1YearData;
           if (fullData.length > 0 && StockApp.macro.vnindex) {
             fullData[fullData.length - 1].y = StockApp.macro.vnindex;
             const updatedSeries = fullData.map(d => [d.x, d.y]);
-            StockApp.charts.marketOverview.updateSeries([{ name: "VN-Index", data: updatedSeries }], false);
+            if (StockApp.charts && StockApp.charts.marketOverview) {
+              StockApp.charts.marketOverview.updateSeries([{ name: "VN-Index", data: updatedSeries }], false);
+            }
+            const default1MonthTs = fullData[fullData.length - 1].x - (30 * 86400000);
+            const month1Data = fullData.filter(d => d.x >= default1MonthTs);
+            if (month1Data.length > 0) {
+              const startP = month1Data[0].y;
+              const endP = month1Data[month1Data.length - 1].y;
+              const diff = endP - startP;
+              const pct = ((diff / startP) * 100).toFixed(2);
+              const sgn = diff >= 0 ? '+' : '';
+              const badge = document.getElementById("marketVnindex3mPct");
+              if (badge) {
+                badge.innerText = `${sgn}${pct}%`;
+                badge.className = `${diff >= 0 ? 'text-emerald-500' : 'text-rose-500'} font-semibold`;
+              }
+            }
           }
         }
 
@@ -12784,8 +12805,12 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
         clockEl.innerText = `Trực tiếp ${hh}:${mm}:${ss}`;
       }
       tick();
-      setInterval(tick, 1000);
+      if (!window.__marketClockTimer) {
+        window.__marketClockTimer = setInterval(tick, 1000);
+      }
     }
+    // Kích hoạt ngay lập tức nhịp đồng hồ trực tiếp Section 4
+    try { startMarketClock(); } catch(e) {}
 
     // Generate realistic multi-timeframe VN-Index market series with Moving Averages & Volume
     // 1. Tạo chuỗi dữ liệu 1 năm ngày (Daily Chart) neo mốc đóng phiên hôm nay
@@ -12981,6 +13006,64 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       // Kích hoạt Zoom bằng lăn chuột & Kéo dãn trục tung bên phải
       initChartMouseWheelZoom();
       initYAxisDragInteraction();
+      loadRealMarket1YearHistory();
+    }
+
+    // Tự động tải chuỗi dữ liệu 1 năm lịch sử VN-Index thực tế từ VPS TradingView API
+    async function loadRealMarket1YearHistory() {
+      try {
+        const now = Math.floor(Date.now() / 1000);
+        const from1Year = now - 86400 * 365;
+        const res = await fetch(`https://histdatafeed.vps.com.vn/tradingview/history?symbol=VNINDEX&resolution=D&from=${from1Year}&to=${now}`);
+        if (res.ok) {
+          const j = await res.json();
+          if (j && j.s === 'ok' && Array.isArray(j.t) && j.t.length > 50) {
+            const fullData = [];
+            for (let i = 0; i < j.t.length; i++) {
+              const d = new Date(j.t[i] * 1000);
+              const dateStr = `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
+              fullData.push({
+                x: d.getTime(),
+                y: parseFloat(j.c[i].toFixed(2)),
+                dateStr: dateStr
+              });
+            }
+            if (StockApp.macro && StockApp.macro.vnindex) {
+              fullData[fullData.length - 1].y = StockApp.macro.vnindex;
+            }
+            StockApp.marketOverview.full1YearData = fullData;
+            const maxTs = fullData[fullData.length - 1].x;
+            const min1YearTs = fullData[0].x;
+            const default1MonthTs = maxTs - (30 * 86400000);
+
+            StockApp.marketOverview.minAllowedTs = min1YearTs;
+            StockApp.marketOverview.maxAllowedTs = maxTs;
+            StockApp.marketOverview.currentMin = default1MonthTs;
+            StockApp.marketOverview.currentMax = maxTs;
+
+            if (StockApp.charts && StockApp.charts.marketOverview) {
+              const seriesData = fullData.map(d => [d.x, d.y]);
+              StockApp.charts.marketOverview.updateSeries([{ name: 'VN-Index', data: seriesData }], false);
+
+              const month1Data = fullData.filter(d => d.x >= default1MonthTs);
+              if (month1Data.length > 0) {
+                const startP = month1Data[0].y;
+                const endP = month1Data[month1Data.length - 1].y;
+                const diff = endP - startP;
+                const pct = ((diff / startP) * 100).toFixed(2);
+                const sgn = diff >= 0 ? '+' : '';
+                const badge = document.getElementById("marketVnindex3mPct");
+                if (badge) {
+                  badge.innerText = `${sgn}${pct}%`;
+                  badge.className = `${diff >= 0 ? 'text-emerald-500' : 'text-rose-500'} font-semibold`;
+                }
+              }
+            }
+          }
+        }
+      } catch (e) {
+        console.warn('[loadRealMarket1YearHistory] Fallback to synthetic data:', e);
+      }
     }
 
     // 3. Zoom bằng lăn chuột (Mouse Wheel Zoom)
@@ -14697,6 +14780,7 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
     // KHỞI CHẠY TOÀN BỘ DASHBOARD (ĐẢM BẢO CHẠY CHUẨN XÁC 100% KHI TRUY CẬP HOẶC NHẤN F5)
     // =========================================================================
     window.initializeStockApp = function() {
+      try { startMarketClock(); } catch(e) {}
       if (window.__appInitialized) return;
       window.__appInitialized = true;
 

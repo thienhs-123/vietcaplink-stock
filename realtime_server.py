@@ -435,7 +435,42 @@ def fetch_indices_from_vnstock_or_api():
     from_ts = now - 86400 * 5
     fetched_any = False
 
-    # 1. Ưu tiên VNDIRECT DCHART API (Daily resolution) - Tốc độ cực nhanh, ổn định 100%
+    # 1. Ưu tiên VPS TradingView History API (CORS mở, ổn định 100%, cập nhật trực tiếp)
+    try:
+        mapping = {
+            'VNINDEX': 'vnindex',
+            'VN30': 'vn30',
+            'HNX': 'hnx',
+            'UPCOM': 'upcom'
+        }
+        for sym, state_key in mapping.items():
+            try:
+                url = f"https://histdatafeed.vps.com.vn/tradingview/history?symbol={sym}&resolution=D&from={from_ts}&to={now}"
+                req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
+                with urllib.request.urlopen(req, timeout=4.0) as resp:
+                    d = json.loads(resp.read().decode('utf-8'))
+                    if d and d.get('s') == 'ok' and d.get('c') and len(d['c']) >= 1:
+                        c = d['c']
+                        v = d.get('v', [])
+                        last = round(float(c[-1]), 2)
+                        ref = round(float(c[-2]), 2) if len(c) >= 2 else last
+                        chg = round(last - ref, 2)
+                        pct = round((chg / ref) * 100, 2) if ref else 0.0
+                        with DATA_LOCK:
+                            MACRO_STATE[state_key] = last
+                            MACRO_STATE[f"{state_key}Change"] = chg
+                            MACRO_STATE[f"{state_key}Pct"] = pct
+                            if sym == 'VNINDEX' and v:
+                                MACRO_STATE['vnindexVol'] = f"{round(v[-1] / 1e6, 1)} tr cp"
+                        fetched_any = True
+            except Exception:
+                pass
+        if fetched_any:
+            return True
+    except Exception:
+        pass
+
+    # 2. Dự phòng 1: VNDIRECT DCHART API
     try:
         mapping = {
             'VNINDEX': 'vnindex',
