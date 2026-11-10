@@ -362,6 +362,22 @@
       margin-left: 4px;
       animation: pulse-dot 1.5s infinite;
     }
+    /* Ẩn hoàn toàn biểu tượng quay lại (reset zoom) và thanh toolbar của ApexCharts */
+    .apexcharts-toolbar,
+    .apexcharts-reset-icon,
+    .apexcharts-zoom-icon,
+    .apexcharts-zoomin-icon,
+    .apexcharts-zoomout-icon,
+    .apexcharts-pan-icon,
+    .apexcharts-selection-icon,
+    .apexcharts-menu-icon {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
   </style>
 </head>
 <body class="bg-light-bg dark:bg-studio-bg text-light-text dark:text-studio-text min-h-screen flex flex-col font-sans transition-colors duration-200">
@@ -7869,7 +7885,18 @@
         chart: {
           type: 'area',
           height: 260,
-          toolbar: { show: false },
+          toolbar: {
+            show: false,
+            tools: {
+              download: false,
+              selection: false,
+              zoom: false,
+              zoomin: false,
+              zoomout: false,
+              pan: false,
+              reset: false
+            }
+          },
           zoom: { enabled: false },
           foreColor: foreColor,
           fontFamily: '"SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif',
@@ -12892,7 +12919,18 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
           type: 'area',
           foreColor: foreColor,
           fontFamily: '"SF Pro Display", "SF Pro Text", -apple-system, sans-serif',
-          toolbar: { show: false },
+          toolbar: {
+            show: false,
+            tools: {
+              download: false,
+              selection: false,
+              zoom: false,
+              zoomin: false,
+              zoomout: false,
+              pan: false,
+              reset: false
+            }
+          },
           zoom: {
             enabled: true,
             type: 'x',
