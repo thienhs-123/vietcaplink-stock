@@ -424,23 +424,59 @@ def init_vnstock_auth():
 
 def fetch_indices_from_vnstock_or_api():
     """
-    Tự động truy vấn các chỉ số VNINDEX, VN30, HNX, UPCOM trực tiếp từ API bảng giá chính xác nhất
+    Tự động truy vấn các chỉ số VNINDEX, VN30, HNX, UPCOM trực tiếp từ API bảng giá chính xác nhất (VNDIRECT / SSI / Entrade)
     """
     global MACRO_STATE
     import urllib.request
     import json
     import time
 
-    # 1. Ưu tiên SSI Chart API (Daily resolution) để tính giá tham chiếu và biến động chính xác 100%
+    now = int(time.time())
+    from_ts = now - 86400 * 5
+    fetched_any = False
+
+    # 1. Ưu tiên VNDIRECT DCHART API (Daily resolution) - Tốc độ cực nhanh, ổn định 100%
     try:
-        now = int(time.time())
-        from_ts = now - 86400 * 10
-        fetched_any = False
+        mapping = {
+            'VNINDEX': 'vnindex',
+            'VN30': 'vn30',
+            'HNX': 'hnx',
+            'UPCOM': 'upcom'
+        }
+        for sym, state_key in mapping.items():
+            try:
+                url = f"https://dchart-api.vndirect.com.vn/dchart/history?symbol={sym}&resolution=D&from={from_ts}&to={now}"
+                req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
+                with urllib.request.urlopen(req, timeout=3.0) as resp:
+                    d = json.loads(resp.read().decode('utf-8'))
+                    if d and d.get('c') and len(d['c']) >= 1:
+                        c = d['c']
+                        v = d.get('v', [])
+                        last = round(float(c[-1]), 2)
+                        ref = round(float(c[-2]), 2) if len(c) >= 2 else last
+                        chg = round(last - ref, 2)
+                        pct = round((chg / ref) * 100, 2) if ref else 0.0
+                        with DATA_LOCK:
+                            MACRO_STATE[state_key] = last
+                            MACRO_STATE[f"{state_key}Change"] = chg
+                            MACRO_STATE[f"{state_key}Pct"] = pct
+                            if sym == 'VNINDEX' and v:
+                                MACRO_STATE['vnindexVol'] = f"{round(v[-1] / 1e6, 1)} tr cp"
+                        fetched_any = True
+            except Exception:
+                pass
+        if fetched_any:
+            return True
+    except Exception:
+        pass
+
+    # 2. Dự phòng: SSI Chart API
+    try:
         for sym, state_key in [('VNINDEX', 'vnindex'), ('VN30', 'vn30'), ('HNXINDEX', 'hnx')]:
             try:
                 url = f"https://iboard-api.ssi.com.vn/statistics/charts/history?symbol={sym}&resolution=D&from={from_ts}&to={now}"
                 req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
-                with urllib.request.urlopen(req, timeout=3.5) as resp:
+                with urllib.request.urlopen(req, timeout=3.0) as resp:
                     d = json.loads(resp.read().decode('utf-8'))
                     if d and d.get('data') and d['data'].get('c') and len(d['data']['c']) >= 2:
                         c = d['data']['c']
@@ -458,82 +494,12 @@ def fetch_indices_from_vnstock_or_api():
                         fetched_any = True
             except Exception:
                 pass
-
-        # UPCOM qua Entrade
-        try:
-            url_upcom = "https://services.entrade.com.vn/chart-api/v2/ohlcs/index?symbol=UPCOM&resolution=1"
-            req_u = urllib.request.Request(url_upcom, headers={'User-Agent': 'Mozilla/5.0'})
-            with urllib.request.urlopen(req_u, timeout=3) as r:
-                d = json.loads(r.read().decode('utf-8'))
-                if d and d.get('c') and len(d['c']) > 0:
-                    last_u = round(float(d['c'][-1]), 2)
-                    ref_u = d['c'][0] if d.get('c') else 121.31
-                    with DATA_LOCK:
-                        MACRO_STATE['upcom'] = last_u
-                        MACRO_STATE['upcomChange'] = round(last_u - ref_u, 2)
-                        MACRO_STATE['upcomPct'] = round(((last_u - ref_u) / ref_u) * 100, 2)
-                    fetched_any = True
-        except Exception:
-            pass
-
         if fetched_any:
             return True
     except Exception:
         pass
-
-    # 2. Dự phòng: Entrade Chart API resolution=1
-    try:
-        symbols = {'VNINDEX': 'vnindex', 'VN30': 'vn30', 'HNX': 'hnx', 'UPCOM': 'upcom'}
-        ref_prices = {'vnindex': 1714.32, 'vn30': 1830.13, 'hnx': 255.24, 'upcom': 121.31}
-        fetched_any = False
-        for sym, state_key in symbols.items():
-            try:
-                url = f"https://services.entrade.com.vn/chart-api/v2/ohlcs/index?symbol={sym}&resolution=1"
-                req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
-                with urllib.request.urlopen(req, timeout=3) as resp:
-                    d = json.loads(resp.read().decode('utf-8'))
-                    if d and d.get('c') and len(d['c']) > 0:
-                        close = round(float(d['c'][-1]), 2)
-                        ref = ref_prices.get(state_key, close)
-                        chg = round(close - ref, 2)
-                        pct = round((chg / ref) * 100, 2) if ref else 0.0
-                        with DATA_LOCK:
-                            MACRO_STATE[state_key] = close
-                            MACRO_STATE[f"{state_key}Change"] = chg
-                            MACRO_STATE[f"{state_key}Pct"] = pct
-                        fetched_any = True
-            except Exception:
-                pass
-        if fetched_any:
-            return True
-    except Exception:
-        pass
-
-    # 3. Thử qua vnstock
-    vnstock = try_import_vnstock()
-    if vnstock and hasattr(vnstock, 'Market'):
-        try:
-            m = vnstock.Market()
-            for idx_name, state_key in [('VNINDEX', 'vnindex'), ('VN30', 'vn30'), ('HNXINDEX', 'hnx'), ('UPCOMINDEX', 'upcom')]:
-                try:
-                    df = m.index(idx_name).ohlcv(length=2)
-                    if df is not None and not df.empty:
-                        close = float(df.iloc[-1].get('close', df.iloc[-1].get('Close', 0)))
-                        prev = float(df.iloc[-2].get('close', df.iloc[-2].get('Close', close))) if len(df) > 1 else close
-                        chg = round(close - prev, 2)
-                        pct = round((chg / prev) * 100, 2) if prev else 0.0
-                        with DATA_LOCK:
-                            MACRO_STATE[state_key] = close
-                            MACRO_STATE[f"{state_key}Change"] = chg
-                            MACRO_STATE[f"{state_key}Pct"] = pct
-                except Exception:
-                    pass
-            return True
-        except Exception:
-            pass
 
     return False
-
 
 def fetch_market_breadth():
     """

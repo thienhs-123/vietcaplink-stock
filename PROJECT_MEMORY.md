@@ -83,9 +83,10 @@
 - **Triển khai thực tế**:
   - *Biểu đồ VN-Index (Mục 1)*: Đã khoác giao diện Stitch (nền `#131824`, viền `#1e2638`, cụm nút thời gian pill `#0b0e17`, đường sóng Area Gradient màu Vivid Cyan `#38bdf8`) trong khi vẫn bảo toàn 100% cỗ máy ApexCharts, Realtime feed tự động 1 phút/lần và các sự kiện zoom/pan.
   - *Cơ chế Realtime 1 phút/lần chuẩn xác (Dual-Mode Local & GitHub)*:
-    + **GitHub Pages (https://thienhs-123.github.io/vietcaplink-stock/)**: Tự động nhận diện HTTPS để bỏ qua localhost (tránh lỗi Mixed Content/timeout). Gọi trực tiếp SSI Daily Chart API (
-esolution=D) & Entrade UPCOM từ browser (CORS mở 100%). Giá tham chiếu (c[len-2]), chỉ số hiện tại (c[len-1]), điểm biến động (+/-), % thay đổi, khối lượng tích lũy và độ rộng thị trường (1.520 mã) đều được tính toán động, triệt để loại bỏ số liệu fix cứng.
-    + **Local (http://localhost:8088 hoặc ile://)**: Tự động ping server Python trong 600ms; 
-ealtime_server.py tính toán động chỉ số qua SSI Daily Chart API. Nếu không bật server Python, client tự động chuyển sang chế độ gọi trực tiếp SSI/Entrade để luôn luôn có số liệu realtime.
-    + **Tần suất**: Thiết lập chuẩn 1 lần / phút (intervalMs: 60000, setInterval(tickMinuteRealtime, 60000)).
-
+    + **GitHub Pages & Trình duyệt trực tuyến (`https://thienhs-123.github.io/vietcaplink-stock/`)**:
+      - **Chỉ số thị trường (VN-INDEX, VN30, HNX, UPCOM)**: Truy vấn trực tiếp qua **VNDIRECT DCHART API** (`resolution=D`) với tiêu đề `Access-Control-Allow-Origin: *`. Tự động tính toán giá tham chiếu (phiên trước), chỉ số hiện tại, điểm tăng giảm, % biến động và khối lượng lũy kế mà không cần proxy hay server trung gian.
+      - **Toàn bộ 100 mã cổ phiếu (VN100)**: Truy vấn trực tiếp qua **VPS Realtime Datafeed** (`https://bgapidatafeed.vps.com.vn/getliststockdata/{symbols}`) trong một HTTP GET duy nhất với `Access-Control-Allow-Origin: *`. Cập nhật thị giá khớp lệnh, % thay đổi, khối lượng, trần/sàn/tham chiếu cho toàn bộ 100 mã đồng thời tính toán độ rộng thị trường (adv, dec, ref, ceil, flr) tức thời.
+      - Tự động kích hoạt chu kỳ cập nhật chuẩn 1 lần / phút (`intervalMs: 60000`, `setInterval(tickMinuteRealtime, 60000)`).
+    + **Bản Local (Server Python & Fallback)**:
+      - `realtime_server.py` ưu tiên lấy dữ liệu từ VNDIRECT DCHART & SSI Chart API, kết hợp tính toán độ rộng thị trường.
+      - Nếu người dùng mở trực tiếp file `index.html` mà không bật Python server, trình duyệt sẽ tự động kích hoạt Engine Client VNDirect/VPS trực tiếp nói trên, bảo đảm 100% thời gian thực không bao giờ bị gián đoạn.

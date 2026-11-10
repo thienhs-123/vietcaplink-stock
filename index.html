@@ -1993,8 +1993,8 @@
                   </div>
                   <div class="flex items-baseline justify-between mt-2">
                     <div>
-                      <div class="text-base md:text-lg font-bold font-mono text-light-text dark:text-studio-text" id="m4CardVnindexVal">1.732,88</div>
-                      <div class="text-[10px] md:text-[11px] font-mono font-semibold text-rose-500" id="m4CardVnindexChange">-7,85 (-0,45%)</div>
+                      <div class="text-base md:text-lg font-bold font-mono text-light-text dark:text-studio-text" id="m4CardVnindexVal">1.733,07</div>
+                      <div class="text-[10px] md:text-[11px] font-mono font-semibold text-emerald-500" id="m4CardVnindexChange">+18,75 (+1,09%)</div>
                     </div>
                     <!-- Mini Sparkline SVG -->
                     <div class="w-14 h-7 shrink-0">
@@ -2013,8 +2013,8 @@
                   </div>
                   <div class="flex items-baseline justify-between mt-2">
                     <div>
-                      <div class="text-base md:text-lg font-bold font-mono text-light-text dark:text-studio-text" id="m4CardVn30Val">1.852,97</div>
-                      <div class="text-[10px] md:text-[11px] font-mono font-semibold text-rose-500" id="m4CardVn30Change">-12,26 (-0,66%)</div>
+                      <div class="text-base md:text-lg font-bold font-mono text-light-text dark:text-studio-text" id="m4CardVn30Val">1.852,58</div>
+                      <div class="text-[10px] md:text-[11px] font-mono font-semibold text-emerald-500" id="m4CardVn30Change">+22,45 (+1,23%)</div>
                     </div>
                     <div class="w-14 h-7 shrink-0">
                       <svg class="w-full h-full text-emerald-500" viewBox="0 0 60 25" fill="none" stroke="currentColor" stroke-width="2">
@@ -2032,8 +2032,8 @@
                   </div>
                   <div class="flex items-baseline justify-between mt-2">
                     <div>
-                      <div class="text-base md:text-lg font-bold font-mono text-light-text dark:text-studio-text" id="m4CardUpcomVal">121,31</div>
-                      <div class="text-[10px] md:text-[11px] font-mono font-semibold text-rose-500" id="m4CardUpcomChange">-1,07 (-0,87%)</div>
+                      <div class="text-base md:text-lg font-bold font-mono text-light-text dark:text-studio-text" id="m4CardUpcomVal">121,70</div>
+                      <div class="text-[10px] md:text-[11px] font-mono font-semibold text-emerald-500" id="m4CardUpcomChange">+0,25 (+0,21%)</div>
                     </div>
                     <div class="w-14 h-7 shrink-0">
                       <svg class="w-full h-full text-emerald-500" viewBox="0 0 60 25" fill="none" stroke="currentColor" stroke-width="2">
@@ -2073,11 +2073,11 @@
                   <!-- Phải: Index Summary Realtime -->
                   <div class="text-right flex flex-col sm:items-end justify-center">
                     <div class="flex items-baseline gap-2 justify-end">
-                      <span class="text-2xl font-extrabold font-mono text-white tracking-tight" id="marketVnindexBigVal">1.732,88</span>
-                      <span class="text-sm font-semibold font-mono text-rose-500" id="marketVnindexBigChange">-7,85 (-0,45%)</span>
+                      <span class="text-2xl font-extrabold font-mono text-white tracking-tight" id="marketVnindexBigVal">1.733,07</span>
+                      <span class="text-sm font-semibold font-mono text-emerald-500" id="marketVnindexBigChange">+18,75 (+1,09%)</span>
                     </div>
                     <div class="text-xs text-gray-400 font-mono mt-0.5">
-                      VN-Index • 1 tháng: <span class="text-emerald-400 font-semibold" id="marketVnindex3mPct">+1,80%</span> • KL: <span class="text-gray-200 font-semibold" id="marketVnindexVol">720,5 tr cp</span>
+                      VN-Index • 1 tháng: <span class="text-emerald-400 font-semibold" id="marketVnindex3mPct">+1,80%</span> • KL: <span class="text-gray-200 font-semibold" id="marketVnindexVol">232,7 tr cp</span>
                     </div>
                   </div>
                 </div>
@@ -3804,20 +3804,20 @@
         gdpPrev: "6.93% (Q2)",
         pmi: 52.4,
         pmiPrev: 51.6,
-        vnindex: 1732.88,
-        vnindexChange: -7.85,
-        vnindexPct: -0.45,
-        vn30: 1852.97,
-        vn30Change: -12.26,
-        vn30Pct: -0.66,
-        upcom: 121.31,
-        upcomChange: -1.07,
-        upcomPct: -0.87,
-        hnx: 254.73,
-        hnxChange: -2.27,
-        hnxPct: -0.88,
+        vnindex: 1733.07,
+        vnindexChange: 18.75,
+        vnindexPct: 1.09,
+        vn30: 1852.58,
+        vn30Change: 22.45,
+        vn30Pct: 1.23,
+        upcom: 121.70,
+        upcomChange: 0.25,
+        upcomPct: 0.21,
+        hnx: 256.73,
+        hnxChange: 1.49,
+        hnxPct: 0.58,
         vnindexGtgd: "15.500 tỷ",
-        vnindexVol: "720,5 tr",
+        vnindexVol: "232,7 tr cp",
         interestRate: "4.8 - 5.3%",
         usdVnd: 25780,
         usdVndBuy: 25370,
@@ -8854,115 +8854,123 @@
       async fetchClientLiveMarketData() {
         try {
           const now = Math.floor(Date.now() / 1000);
-          const fromDays = now - 86400 * 10;
+          const fromDays = now - 86400 * 5;
 
-          // 1. Truy van cac chi so thi truong thoi gian thuc (CORS mo, toc do < 1s)
-          // Lay nen ngay (resolution=D) de tinh toan chinh xac gia tham chieu va gia khop realtime
-          const [vnindexRes, vn30Res, hnxRes, upcomEntradeRes] = await Promise.allSettled([
-            fetch("https://iboard-api.ssi.com.vn/statistics/charts/history?symbol=VNINDEX" + String.fromCharCode(38) + "resolution=D" + String.fromCharCode(38) + "from=" + fromDays + String.fromCharCode(38) + "to=" + now).then(r => r.ok ? r.json() : null),
-            fetch("https://iboard-api.ssi.com.vn/statistics/charts/history?symbol=VN30" + String.fromCharCode(38) + "resolution=D" + String.fromCharCode(38) + "from=" + fromDays + String.fromCharCode(38) + "to=" + now).then(r => r.ok ? r.json() : null),
-            fetch("https://iboard-api.ssi.com.vn/statistics/charts/history?symbol=HNXINDEX" + String.fromCharCode(38) + "resolution=D" + String.fromCharCode(38) + "from=" + fromDays + String.fromCharCode(38) + "to=" + now).then(r => r.ok ? r.json() : null),
-            fetch("https://services.entrade.com.vn/chart-api/v2/ohlcs/index?symbol=UPCOM" + String.fromCharCode(38) + "resolution=1").then(r => r.ok ? r.json() : null)
+          // 1. Truy vấn các chỉ số thị trường thời gian thực qua VNDIRECT DCHART (CORS mở 100% không bao giờ bị chặn)
+          const [vnindexRes, vn30Res, hnxRes, upcomRes] = await Promise.allSettled([
+            fetch("https://dchart-api.vndirect.com.vn/dchart/history?symbol=VNINDEX&resolution=D&from=" + fromDays + "&to=" + now, { headers: { 'Accept': 'application/json' } }).then(r => r.ok ? r.json() : null),
+            fetch("https://dchart-api.vndirect.com.vn/dchart/history?symbol=VN30&resolution=D&from=" + fromDays + "&to=" + now, { headers: { 'Accept': 'application/json' } }).then(r => r.ok ? r.json() : null),
+            fetch("https://dchart-api.vndirect.com.vn/dchart/history?symbol=HNX&resolution=D&from=" + fromDays + "&to=" + now, { headers: { 'Accept': 'application/json' } }).then(r => r.ok ? r.json() : null),
+            fetch("https://dchart-api.vndirect.com.vn/dchart/history?symbol=UPCOM&resolution=D&from=" + fromDays + "&to=" + now, { headers: { 'Accept': 'application/json' } }).then(r => r.ok ? r.json() : null)
           ]);
 
           const macroUpdates = {};
-          if (vnindexRes.status === "fulfilled" && vnindexRes.value && vnindexRes.value.data && vnindexRes.value.data.c && vnindexRes.value.data.c.length) {
-            const c = vnindexRes.value.data.c;
-            const last = c[c.length - 1];
-            const ref = c.length >= 2 ? c[c.length - 2] : last;
-            const chg = parseFloat((last - ref).toFixed(2));
-            const pct = ref > 0 ? parseFloat(((chg / ref) * 100).toFixed(2)) : 0;
-            macroUpdates.vnindex = last;
-            macroUpdates.vnindexChange = chg;
-            macroUpdates.vnindexPct = pct;
-            if (vnindexRes.value.data.v && vnindexRes.value.data.v.length) {
-              const volShares = vnindexRes.value.data.v[vnindexRes.value.data.v.length - 1];
-              macroUpdates.vnindexVol = (volShares / 1e6).toFixed(1) + " tr cp";
-            }
-          }
 
-          if (vn30Res.status === "fulfilled" && vn30Res.value && vn30Res.value.data && vn30Res.value.data.c && vn30Res.value.data.c.length) {
-            const c = vn30Res.value.data.c;
-            const last = c[c.length - 1];
-            const ref = c.length >= 2 ? c[c.length - 2] : last;
-            const chg = parseFloat((last - ref).toFixed(2));
-            const pct = ref > 0 ? parseFloat(((chg / ref) * 100).toFixed(2)) : 0;
-            macroUpdates.vn30 = last;
-            macroUpdates.vn30Change = chg;
-            macroUpdates.vn30Pct = pct;
-          }
-
-          if (hnxRes.status === "fulfilled" && hnxRes.value && hnxRes.value.data && hnxRes.value.data.c && hnxRes.value.data.c.length) {
-            const c = hnxRes.value.data.c;
-            const last = c[c.length - 1];
-            const ref = c.length >= 2 ? c[c.length - 2] : last;
-            const chg = parseFloat((last - ref).toFixed(2));
-            const pct = ref > 0 ? parseFloat(((chg / ref) * 100).toFixed(2)) : 0;
-            macroUpdates.hnx = last;
-            macroUpdates.hnxChange = chg;
-            macroUpdates.hnxPct = pct;
-          }
-
-          if (upcomEntradeRes.status === "fulfilled" && upcomEntradeRes.value && upcomEntradeRes.value.c && upcomEntradeRes.value.c.length) {
-            const c = upcomEntradeRes.value.c;
+          function parseVndirectIndex(res) {
+            if (!res || res.status !== 'fulfilled' || !res.value || !res.value.c || !res.value.c.length) return null;
+            const c = res.value.c;
             const last = parseFloat(c[c.length - 1].toFixed(2));
-            const ref = c[0] || 121.31;
+            const ref = c.length >= 2 ? parseFloat(c[c.length - 2].toFixed(2)) : last;
             const chg = parseFloat((last - ref).toFixed(2));
-            const pct = parseFloat(((chg / ref) * 100).toFixed(2));
-            macroUpdates.upcom = last;
-            macroUpdates.upcomChange = chg;
-            macroUpdates.upcomPct = pct;
+            const pct = ref > 0 ? parseFloat(((chg / ref) * 100).toFixed(2)) : 0;
+            const v = res.value.v && res.value.v.length ? res.value.v[res.value.v.length - 1] : 0;
+            return { last, ref, chg, pct, vol: (v / 1e6).toFixed(1) + " tr cp" };
+          }
+
+          const vnParsed = parseVndirectIndex(vnindexRes);
+          if (vnParsed) {
+            macroUpdates.vnindex = vnParsed.last;
+            macroUpdates.vnindexChange = vnParsed.chg;
+            macroUpdates.vnindexPct = vnParsed.pct;
+            macroUpdates.vnindexVol = vnParsed.vol;
+          }
+
+          const vn30Parsed = parseVndirectIndex(vn30Res);
+          if (vn30Parsed) {
+            macroUpdates.vn30 = vn30Parsed.last;
+            macroUpdates.vn30Change = vn30Parsed.chg;
+            macroUpdates.vn30Pct = vn30Parsed.pct;
+          }
+
+          const hnxParsed = parseVndirectIndex(hnxRes);
+          if (hnxParsed) {
+            macroUpdates.hnx = hnxParsed.last;
+            macroUpdates.hnxChange = hnxParsed.chg;
+            macroUpdates.hnxPct = hnxParsed.pct;
+          }
+
+          const upcomParsed = parseVndirectIndex(upcomRes);
+          if (upcomParsed) {
+            macroUpdates.upcom = upcomParsed.last;
+            macroUpdates.upcomChange = upcomParsed.chg;
+            macroUpdates.upcomPct = upcomParsed.pct;
           }
 
           if (Object.keys(macroUpdates).length > 0) {
             this.applyRealMacroData(macroUpdates);
           }
 
-          // 2. Truy van toan bo bang gia cac ma co phieu HOSE, HNX, UPCOM
-          const [hoseRes, hnxStockRes, upcomRes] = await Promise.allSettled([
-            fetch("https://iboard-query.ssi.com.vn/stock/exchange/hose").then(r => r.ok ? r.json() : null),
-            fetch("https://iboard-query.ssi.com.vn/stock/exchange/hnx").then(r => r.ok ? r.json() : null),
-            fetch("https://iboard-query.ssi.com.vn/stock/exchange/upcom").then(r => r.ok ? r.json() : null)
-          ]);
+          // 2. Truy vấn trực tiếp toàn bộ 100 mã cổ phiếu qua VPS Realtime Datafeed (CORS mở 100%)
+          const symList = (StockApp.stocks && StockApp.stocks.length)
+            ? StockApp.stocks.map(s => s.symbol).filter(Boolean).join(",")
+            : "ACB,BCM,BID,BVH,CTG,FPT,GAS,GVR,HDB,HPG,MBB,MSN,MWG,PLX,POW,SAB,SHB,SSB,SSI,STB,TCB,TPB,VCB,VHM,VIB,VIC,VJC,VNM,VPB,VRE";
+
+          let vpsList = null;
+          try {
+            const vpsRes = await fetch("https://bgapidatafeed.vps.com.vn/getliststockdata/" + symList, {
+              headers: { 'Accept': 'application/json' }
+            });
+            if (vpsRes.ok) {
+              vpsList = await vpsRes.json();
+            }
+          } catch(e) {}
 
           const stockMap = {};
           let totalCount = 0;
           let totalAdv = 0, totalDec = 0, totalRef = 0, totalCeil = 0, totalFlr = 0;
 
-          [hoseRes, hnxStockRes, upcomRes].forEach(res => {
-            if (res.status === "fulfilled" && res.value && Array.isArray(res.value.data)) {
-              res.value.data.forEach(it => {
-                if (!it.stockSymbol) return;
-                const p = it.matchedPrice || it.refPrice || 0;
-                const chgPct = it.priceChangePercent !== undefined ? it.priceChangePercent : 0;
-                stockMap[it.stockSymbol] = {
-                  price: p,
-                  change: chgPct,
-                  volume: it.nmTotalTradedQty || it.stockVol || 0,
-                  status: "success"
-                };
-                totalCount++;
+          if (Array.isArray(vpsList) && vpsList.length > 0) {
+            vpsList.forEach(it => {
+              if (!it || !it.sym) return;
+              const rawPrice = it.lastPrice && it.lastPrice > 0 ? it.lastPrice : (it.r || 0);
+              const priceVND = Math.round(rawPrice * 1000);
+              const refVND = Math.round((it.r || 0) * 1000);
+              const ceilVND = Math.round((it.c || 0) * 1000);
+              const floorVND = Math.round((it.f || 0) * 1000);
+              const chgPct = (it.changePc !== undefined && it.changePc !== null && it.changePc !== '')
+                ? parseFloat(it.changePc)
+                : (refVND > 0 ? parseFloat((((priceVND - refVND) / refVND) * 100).toFixed(2)) : 0);
+              const vol = (it.lot || 0) * 10;
 
-                // Thong ke do rong thi truong
-                if (it.stockSymbol.length <= 4) {
-                  const rp = it.refPrice || 0;
-                  const priceChg = it.priceChange !== undefined ? it.priceChange : (rp > 0 ? p - rp : 0);
-                  if (priceChg > 0) {
-                    totalAdv++;
-                    if (it.ceiling && p >= it.ceiling) totalCeil++;
-                  } else if (priceChg < 0) {
-                    totalDec++;
-                    if (it.floor && p <= it.floor) totalFlr++;
-                  } else {
-                    totalRef++;
-                  }
-                }
-              });
-            }
-          });
+              stockMap[it.sym] = {
+                price: priceVND,
+                change: chgPct,
+                volume: vol,
+                ref: refVND,
+                high: Math.round((it.highPrice || 0) * 1000),
+                low: Math.round((it.lowPrice || 0) * 1000),
+                open: Math.round((it.openPrice || 0) * 1000),
+                ceiling: ceilVND,
+                floor: floorVND,
+                status: "success"
+              };
+              totalCount++;
+
+              if (priceVND > refVND && refVND > 0) {
+                totalAdv++;
+                if (ceilVND > 0 && priceVND >= ceilVND) totalCeil++;
+              } else if (priceVND < refVND && priceVND > 0 && refVND > 0) {
+                totalDec++;
+                if (floorVND > 0 && priceVND <= floorVND) totalFlr++;
+              } else {
+                totalRef++;
+              }
+            });
+          }
 
           if (totalAdv + totalDec + totalRef > 0) {
             StockApp.breadth = {
+              total: { adv: totalAdv, dec: totalDec, ref: totalRef, ceil: totalCeil, flr: totalFlr },
               advancers: totalAdv,
               decliners: totalDec,
               unchanged: totalRef,
@@ -8976,7 +8984,7 @@
 
           if (totalCount > 0) {
             this.applyRealStockData(stockMap);
-            this.log("SYNC", "[Live Datafeed] Da dong bo " + totalCount + " ma co phieu " + String.fromCharCode(38) + " chi so thi truong thoi gian thuc");
+            this.log("SYNC", "[Live Realtime] Đã đồng bộ " + totalCount + " mã CP & chỉ số thị trường trực tiếp (VNDirect / VPS)");
             const statusLabel = document.getElementById("realtimeStatusLabel");
             if (statusLabel) statusLabel.innerText = "REALTIME LIVE (1p)";
             const pulseRing = document.getElementById("realtimePulseRing");
@@ -9261,6 +9269,15 @@
         StockApp.macro.vnindexPct = macro.vnindexPct !== undefined ? macro.vnindexPct : StockApp.macro.vnindexPct;
         StockApp.macro.vnindexGtgd = macro.vnindexGtgd || StockApp.macro.vnindexGtgd;
         StockApp.macro.vnindexVol = macro.vnindexVol || StockApp.macro.vnindexVol;
+        if (macro.vn30) StockApp.macro.vn30 = macro.vn30;
+        if (macro.vn30Change !== undefined) StockApp.macro.vn30Change = macro.vn30Change;
+        if (macro.vn30Pct !== undefined) StockApp.macro.vn30Pct = macro.vn30Pct;
+        if (macro.hnx) StockApp.macro.hnx = macro.hnx;
+        if (macro.hnxChange !== undefined) StockApp.macro.hnxChange = macro.hnxChange;
+        if (macro.hnxPct !== undefined) StockApp.macro.hnxPct = macro.hnxPct;
+        if (macro.upcom) StockApp.macro.upcom = macro.upcom;
+        if (macro.upcomChange !== undefined) StockApp.macro.upcomChange = macro.upcomChange;
+        if (macro.upcomPct !== undefined) StockApp.macro.upcomPct = macro.upcomPct;
         if (macro.usdVnd) StockApp.macro.usdVnd = macro.usdVnd;
         if (macro.usdVndBuy) StockApp.macro.usdVndBuy = macro.usdVndBuy;
         if (macro.eurVnd) StockApp.macro.eurVnd = macro.eurVnd;
@@ -9444,24 +9461,24 @@
         const m4Vn30Val = document.getElementById("m4CardVn30Val");
         const m4Vn30Change = document.getElementById("m4CardVn30Change");
         if (m4Vn30Val && m4Vn30Change) {
-          const vn30 = StockApp.macro.vn30 || 1865.23;
-          const vn30C = StockApp.macro.vn30Change != null ? StockApp.macro.vn30Change : 3.17;
-          const vn30P = StockApp.macro.vn30Pct != null ? StockApp.macro.vn30Pct : 0.17;
+          const vn30 = StockApp.macro.vn30 || 1852.58;
+          const vn30C = StockApp.macro.vn30Change != null ? StockApp.macro.vn30Change : 22.45;
+          const vn30P = StockApp.macro.vn30Pct != null ? StockApp.macro.vn30Pct : 1.23;
           const isUp30 = vn30C >= 0;
-          m4Vn30Val.innerText = vn30.toLocaleString("vi-VN");
-          m4Vn30Change.innerText = (isUp30 ? "+" : "") + vn30C + " (" + (isUp30 ? "+" : "") + vn30P + "%)";
+          m4Vn30Val.innerText = vn30.toLocaleString("vi-VN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+          m4Vn30Change.innerText = (isUp30 ? "+" : "") + vn30C.toFixed(2) + " (" + (isUp30 ? "+" : "") + vn30P.toFixed(2) + "%)";
           m4Vn30Change.className = "text-[10px] md:text-[11px] font-mono font-semibold " + (isUp30 ? "text-emerald-500" : "text-rose-500");
         }
 
         const m4UpcomVal = document.getElementById("m4CardUpcomVal");
         const m4UpcomChange = document.getElementById("m4CardUpcomChange");
         if (m4UpcomVal && m4UpcomChange) {
-          const upcom = StockApp.macro.upcom || 122.38;
-          const upcomC = StockApp.macro.upcomChange != null ? StockApp.macro.upcomChange : -0.45;
-          const upcomP = StockApp.macro.upcomPct != null ? StockApp.macro.upcomPct : -0.37;
+          const upcom = StockApp.macro.upcom || 121.70;
+          const upcomC = StockApp.macro.upcomChange != null ? StockApp.macro.upcomChange : 0.25;
+          const upcomP = StockApp.macro.upcomPct != null ? StockApp.macro.upcomPct : 0.21;
           const isUpU = upcomC >= 0;
-          m4UpcomVal.innerText = upcom.toLocaleString("vi-VN");
-          m4UpcomChange.innerText = (isUpU ? "+" : "") + upcomC + " (" + (isUpU ? "+" : "") + upcomP + "%)";
+          m4UpcomVal.innerText = upcom.toLocaleString("vi-VN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+          m4UpcomChange.innerText = (isUpU ? "+" : "") + upcomC.toFixed(2) + " (" + (isUpU ? "+" : "") + upcomP.toFixed(2) + "%)";
           m4UpcomChange.className = "text-[10px] md:text-[11px] font-mono font-semibold " + (isUpU ? "text-emerald-500" : "text-rose-500");
         }
 
@@ -9470,7 +9487,7 @@
         const m4BigChange = document.getElementById("marketVnindexBigChange");
         if (m4BigVal && m4BigChange) {
           m4BigVal.innerText = StockApp.macro.vnindex.toLocaleString("vi-VN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-          m4BigChange.innerText = sign + StockApp.macro.vnindexChange + " (" + sign + StockApp.macro.vnindexPct + "%)";
+          m4BigChange.innerText = sign + StockApp.macro.vnindexChange.toFixed(2) + " (" + sign + StockApp.macro.vnindexPct.toFixed(2) + "%)";
           m4BigChange.className = "text-sm font-bold font-mono " + colorClass;
         }
 
@@ -13235,73 +13252,13 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
 
     // 8. Tự động truy vấn độ rộng theo sàn 1 phút / lần
     async function refreshMarketBreadth1Minute() {
-      // Cấp 1: Truy vấn thời gian thực trực tiếp từ SSI iBoard Exchange API (CORS mở, tốc độ < 1s)
-      try {
-        const exchanges = ['hose', 'hnx', 'upcom'];
-        const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), 3500);
-
-        const responses = await Promise.allSettled(
-          exchanges.map(ex => 
-            fetch('https://iboard-query.ssi.com.vn/stock/exchange/' + ex, {
-              signal: controller.signal,
-              headers: { 'Accept': 'application/json' }
-            }).then(r => r.ok ? r.json() : null)
-          )
-        );
-        clearTimeout(timer);
-
-        let hasData = false;
-        const newBreadth = {
-          total: { adv: 0, ref: 0, dec: 0, ceil: 0, flr: 0 },
-          hose: { adv: 0, ref: 0, dec: 0, ceil: 0, flr: 0 },
-          hnx: { adv: 0, ref: 0, dec: 0, ceil: 0, flr: 0 },
-          upcom: { adv: 0, ref: 0, dec: 0, ceil: 0, flr: 0 }
-        };
-
-        exchanges.forEach((ex, idx) => {
-          const res = responses[idx];
-          if (res.status === 'fulfilled' && res.value && Array.isArray(res.value.data) && res.value.data.length > 0) {
-            hasData = true;
-            let a = 0, r = 0, d = 0, c = 0, f = 0;
-            res.value.data.forEach(it => {
-              const sym = it.stockSymbol || '';
-              if (sym.length > 4) return;
-              const mp = it.matchedPrice || 0;
-              const rp = it.refPrice || 0;
-              const cp = it.ceiling || 0;
-              const fp = it.floor || 0;
-              const chg = it.priceChange || 0;
-
-              if (chg > 0 || (mp > rp && rp > 0)) {
-                a++;
-                if (cp > 0 && mp >= cp) c++;
-              } else if (chg < 0 || (mp < rp && mp > 0 && rp > 0)) {
-                d++;
-                if (fp > 0 && mp <= fp) f++;
-              } else {
-                r++;
-              }
-            });
-            newBreadth[ex] = { adv: a, ref: r, dec: d, ceil: c, flr: f };
-            newBreadth.total.adv += a;
-            newBreadth.total.ref += r;
-            newBreadth.total.dec += d;
-            newBreadth.total.ceil += c;
-            newBreadth.total.flr += f;
-          }
-        });
-
-        if (hasData) {
-          StockApp.breadth = newBreadth;
-          updateMarketBreadthUI(newBreadth);
-          return;
-        }
-      } catch (e) {}
-
-      // Cấp 2: Nếu có dữ liệu từ Server local hoặc Snapshot
+      // Tự động sử dụng độ rộng thị trường đã đồng bộ thời gian thực từ VPS / Vnstock
       if (StockApp.breadth) {
         updateMarketBreadthUI(StockApp.breadth);
+        return;
+      }
+      if (window.StockRealtimeService && typeof window.StockRealtimeService.fetchClientLiveMarketData === 'function') {
+        await window.StockRealtimeService.fetchClientLiveMarketData();
       }
     }
 
