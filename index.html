@@ -14734,6 +14734,9 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       if (window.StockRealtimeService) {
         window.StockRealtimeService.startTimer();
       }
+      if (typeof startMarketRealtimeMinuteTimer === "function") {
+        startMarketRealtimeMinuteTimer();
+      }
 
       // 6. Khởi tạo các biểu đồ Vĩ mô & Báo cáo nhận định tuần
       initMacroCharts();
