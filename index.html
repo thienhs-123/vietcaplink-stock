@@ -4144,7 +4144,7 @@
     "industry": "Ngân hàng",
     "exchange": "HOSE",
     "shares": 5370103455,
-    "price": 31850,
+    "price": 31900,
     "change": 0.79,
     "volume": 3797800,
     "marketCapTỷ": 171038,
@@ -4158,8 +4158,8 @@
     "ma10": 30695,
     "ma50": 30467,
     "aboveMA10_50": true,
-    "diffMA10": 3.8,
-    "diffMA50": 4.5,
+    "diffMA10": 3.93,
+    "diffMA50": 4.70,
     "baseMonths": 4,
     "buySignals": [
       "higher_low",
@@ -4648,8 +4648,8 @@
     "ma10": 19745,
     "ma50": 20186,
     "aboveMA10_50": true,
-    "diffMA10": 3.3,
-    "diffMA50": 1.1,
+    "diffMA10": 3.32,
+    "diffMA50": 1.06,
     "baseMonths": 3.3,
     "buySignals": [
       "oversold_rebound"
@@ -8789,8 +8789,8 @@
         const v = this.verifiedPrices[sym] || {};
         const ma10 = v.ma10 || Math.round(price * 0.98);
         const ma50 = v.ma50 || Math.round(price * 0.96);
-        stock.diffMA10 = parseFloat((((price - ma10) / ma10) * 100).toFixed(1));
-        stock.diffMA50 = parseFloat((((price - ma50) / ma50) * 100).toFixed(1));
+        stock.diffMA10 = parseFloat((((price - ma10) / ma10) * 100).toFixed(2));
+        stock.diffMA50 = parseFloat((((price - ma50) / ma50) * 100).toFixed(2));
         stock.aboveMA10_50 = (stock.diffMA10 > 0 && stock.diffMA50 > 0);
 
         // ĐỒNG BỘ SANG MODEL PORTFOLIO & TICKER BAR
@@ -8854,11 +8854,11 @@
             scMa.innerHTML = maPassed
               ? `<div class="inline-flex items-center text-emerald-600 dark:text-emerald-400 font-medium">
                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5 mr-1 text-emerald-500 shrink-0"></i>
-                   <span>Trên MA10 (+${stock.diffMA10}%) &amp; MA50 (+${stock.diffMA50}%)</span>
+                   <span>Trên MA10 (+${typeof stock.diffMA10 === "number" ? stock.diffMA10.toFixed(2) : stock.diffMA10}%) &amp; MA50 (+${typeof stock.diffMA50 === "number" ? stock.diffMA50.toFixed(2) : stock.diffMA50}%)</span>
                  </div>`
               : `<div class="inline-flex items-center text-rose-500 font-medium">
                    <i data-lucide="alert-circle" class="w-3.5 h-3.5 mr-1 text-rose-500 shrink-0"></i>
-                   <span>Dưới MA (${stock.diffMA10 < 0 ? 'MA10 ' + stock.diffMA10 + '%' : 'MA50 ' + stock.diffMA50 + '%'})</span>
+                   <span>Dưới MA (${stock.diffMA10 < 0 ? "MA10 " + (typeof stock.diffMA10 === "number" ? stock.diffMA10.toFixed(2) : stock.diffMA10) + "%" : "MA50 " + (typeof stock.diffMA50 === "number" ? stock.diffMA50.toFixed(2) : stock.diffMA50) + "%"})</span>
                  </div>`;
             if (window.lucide) lucide.createIcons({ root: scMa });
           }
@@ -9433,10 +9433,10 @@
               // Tự động tính toán lại MA 10, MA 50 và Nền tích lũy (2 tiêu chuẩn) theo giá thời gian thực
               if (typeof st.price === 'number' && st.price > 0) {
                 if (st.ma10 > 0) {
-                  st.diffMA10 = parseFloat((((st.price - st.ma10) / st.ma10) * 100).toFixed(1));
+                  st.diffMA10 = parseFloat((((st.price - st.ma10) / st.ma10) * 100).toFixed(2));
                 }
                 if (st.ma50 > 0) {
-                  st.diffMA50 = parseFloat((((st.price - st.ma50) / st.ma50) * 100).toFixed(1));
+                  st.diffMA50 = parseFloat((((st.price - st.ma50) / st.ma50) * 100).toFixed(2));
                 }
                 st.aboveMA10_50 = (st.diffMA10 > 0 && st.diffMA50 > 0);
 
@@ -14239,11 +14239,11 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
           : (maPassed
             ? `<div class="inline-flex items-center text-emerald-600 dark:text-emerald-400 font-medium">
                  <i data-lucide="check-circle-2" class="w-3.5 h-3.5 mr-1 text-emerald-500 shrink-0"></i>
-                 <span>Trên MA10 (+${st.diffMA10}%) &amp; MA50 (+${st.diffMA50}%)</span>
+                 <span>Trên MA10 (+${typeof st.diffMA10 === "number" ? st.diffMA10.toFixed(2) : st.diffMA10}%) &amp; MA50 (+${typeof st.diffMA50 === "number" ? st.diffMA50.toFixed(2) : st.diffMA50}%)</span>
                </div>`
             : `<div class="inline-flex items-center text-rose-500 font-medium">
                  <i data-lucide="alert-circle" class="w-3.5 h-3.5 mr-1 text-rose-500 shrink-0"></i>
-                 <span>Dưới MA (${st.diffMA10 < 0 ? 'MA10 ' + st.diffMA10 + '%' : 'MA50 ' + st.diffMA50 + '%'})</span>
+                 <span>Dưới MA (${st.diffMA10 < 0 ? "MA10 " + (typeof st.diffMA10 === "number" ? st.diffMA10.toFixed(2) : st.diffMA10) + "%" : "MA50 " + (typeof st.diffMA50 === "number" ? st.diffMA50.toFixed(2) : st.diffMA50) + "%"})</span>
                </div>`);
 
         // Base Consolidation Status (2 Tiêu chuẩn: Thời gian >= 3T/60p VÀ Siết <= 20% + Nửa trên nền)
