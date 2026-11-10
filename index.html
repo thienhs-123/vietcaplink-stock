@@ -2105,68 +2105,97 @@
                   <span class="text-xs font-bold uppercase tracking-wider text-light-subtext dark:text-studio-muted">ĐỘ RỘNG THEO SÀN</span>
                 </div>
 
-                <!-- Combined Multi-Segment Progress Bar -->
+                <!-- Combined Multi-Segment Progress Bar (4 màu: Tím trần, Xanh tăng, Vàng cam đứng giá, Đỏ giảm & sàn) -->
                 <div class="w-full h-2.5 rounded-full overflow-hidden flex bg-gray-200 dark:bg-gray-800 shadow-inner">
-                  <div id="breadthTotalBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 10.8%;"></div>
+                  <div id="breadthTotalBarCeil" class="bg-purple-500 h-full transition-all duration-500" style="width: 1.2%;"></div>
+                  <div id="breadthTotalBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 9.6%;"></div>
                   <div id="breadthTotalBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 61.3%;"></div>
                   <div id="breadthTotalBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 27.9%;"></div>
                 </div>
 
-                <!-- 3 Big Numbers (Tăng / Đứng giá / Giảm) -->
-                <div class="grid grid-cols-3 gap-2 text-center py-0.5">
+                <!-- 4 Thống kê tổng hợp: Tím, Xanh, Vàng cam, Đỏ -->
+                <div class="grid grid-cols-4 gap-2 text-center py-1">
                   <div>
-                    <div class="text-xl font-bold font-mono text-emerald-500" id="breadthTotalAdv">163</div>
-                    <div class="text-[10px] text-light-subtext dark:text-studio-muted mt-0.5">Tăng • <span class="text-emerald-600 dark:text-emerald-400 font-semibold" id="breadthTotalCeil">18 trần</span></div>
+                    <div class="text-xl font-bold font-mono text-purple-400" id="breadthTotalCeil">18</div>
+                    <div class="text-[10px] text-purple-400 font-medium mt-0.5">Tăng trần</div>
                   </div>
                   <div>
-                    <div class="text-xl font-bold font-mono text-amber-500 dark:text-amber-400" id="breadthTotalRef">929</div>
-                    <div class="text-[10px] text-light-subtext dark:text-studio-muted mt-0.5">Đứng giá</div>
+                    <div class="text-xl font-bold font-mono text-emerald-400" id="breadthTotalAdv">145</div>
+                    <div class="text-[10px] text-emerald-400 font-medium mt-0.5">Tăng giá</div>
+                  </div>
+                  <div>
+                    <div class="text-xl font-bold font-mono text-amber-400" id="breadthTotalRef">929</div>
+                    <div class="text-[10px] text-amber-400 font-medium mt-0.5">Đứng giá</div>
                   </div>
                   <div>
                     <div class="text-xl font-bold font-mono text-rose-500" id="breadthTotalDec">424</div>
-                    <div class="text-[10px] text-light-subtext dark:text-studio-muted mt-0.5">Giảm • <span class="text-rose-600 dark:text-rose-400 font-semibold" id="breadthTotalFlr">32 sàn</span></div>
+                    <div class="text-[10px] text-rose-500 font-medium mt-0.5">Giảm &amp; Sàn <span id="breadthTotalFlr" class="hidden"></span></div>
                   </div>
                 </div>
 
-                <!-- Breakdown by Exchange: HOSE, HNX, UPCOM -->
+                <!-- Breakdown by Exchange: HOSE, HNX, UPCOM với 4 cột thẳng hàng (không kẻ cột) -->
                 <div class="space-y-1.5 pt-1.5 border-t border-light-border/60 dark:border-studio-border/60 font-mono text-xs">
+                  <!-- Header hàng cột thẳng tắp: Trần • Tăng • Đứng • Giảm -->
+                  <div class="flex items-center justify-between gap-3 text-[10px] text-light-subtext dark:text-studio-muted pb-0.5">
+                    <span class="w-12 font-semibold">Sàn</span>
+                    <div class="flex-1"></div>
+                    <div class="grid grid-cols-4 gap-1 text-right w-48 sm:w-56 shrink-0 font-bold">
+                      <span class="text-purple-400">Trần</span>
+                      <span class="text-emerald-400">Tăng</span>
+                      <span class="text-amber-400">Đứng</span>
+                      <span class="text-rose-400">Giảm</span>
+                    </div>
+                  </div>
+
                   <!-- HOSE -->
                   <div class="flex items-center justify-between gap-3">
                     <span class="w-12 font-bold text-light-text dark:text-studio-text text-[11px]">HOSE</span>
                     <div class="flex-1 h-2 rounded-full overflow-hidden flex bg-gray-200 dark:bg-gray-800">
-                      <div id="breadthHoseBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 16.9%;"></div>
-                      <div id="breadthHoseBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 27.9%;"></div>
-                      <div id="breadthHoseBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 55.2%;"></div>
+                      <div id="breadthHoseBarCeil" class="bg-purple-500 h-full transition-all duration-500" style="width: 2.9%;"></div>
+                      <div id="breadthHoseBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 13.5%;"></div>
+                      <div id="breadthHoseBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 27.1%;"></div>
+                      <div id="breadthHoseBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 56.5%;"></div>
                     </div>
-                    <span class="text-[10px] shrink-0 text-light-subtext dark:text-studio-muted">
-                      <span class="text-emerald-500 font-semibold" id="breadthHoseAdv">69</span> • <span class="text-amber-500 font-semibold" id="breadthHoseRef">114</span> • <span class="text-rose-500 font-semibold" id="breadthHoseDec">225</span>
-                    </span>
+                    <div class="grid grid-cols-4 gap-1 text-right w-48 sm:w-56 shrink-0 text-[11px] font-mono">
+                      <span class="text-purple-400 font-bold" id="breadthHoseCeil">12</span>
+                      <span class="text-emerald-400 font-bold" id="breadthHoseAdv">69</span>
+                      <span class="text-amber-400 font-bold" id="breadthHoseRef">114</span>
+                      <span class="text-rose-400 font-bold" id="breadthHoseDec">225</span>
+                    </div>
                   </div>
 
                   <!-- HNX -->
                   <div class="flex items-center justify-between gap-3">
                     <span class="w-12 font-bold text-light-text dark:text-studio-text text-[11px]">HNX</span>
                     <div class="flex-1 h-2 rounded-full overflow-hidden flex bg-gray-200 dark:bg-gray-800">
-                      <div id="breadthHnxBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 9.4%;"></div>
-                      <div id="breadthHnxBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 61.2%;"></div>
-                      <div id="breadthHnxBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 29.4%;"></div>
+                      <div id="breadthHnxBarCeil" class="bg-purple-500 h-full transition-all duration-500" style="width: 1.6%;"></div>
+                      <div id="breadthHnxBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 7.6%;"></div>
+                      <div id="breadthHnxBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 60.2%;"></div>
+                      <div id="breadthHnxBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 30.6%;"></div>
                     </div>
-                    <span class="text-[10px] shrink-0 text-light-subtext dark:text-studio-muted">
-                      <span class="text-emerald-500 font-semibold" id="breadthHnxAdv">28</span> • <span class="text-amber-500 font-semibold" id="breadthHnxRef">183</span> • <span class="text-rose-500 font-semibold" id="breadthHnxDec">88</span>
-                    </span>
+                    <div class="grid grid-cols-4 gap-1 text-right w-48 sm:w-56 shrink-0 text-[11px] font-mono">
+                      <span class="text-purple-400 font-bold" id="breadthHnxCeil">5</span>
+                      <span class="text-emerald-400 font-bold" id="breadthHnxAdv">28</span>
+                      <span class="text-amber-400 font-bold" id="breadthHnxRef">183</span>
+                      <span class="text-rose-400 font-bold" id="breadthHnxDec">88</span>
+                    </div>
                   </div>
 
                   <!-- UPCOM -->
                   <div class="flex items-center justify-between gap-3">
                     <span class="w-12 font-bold text-light-text dark:text-studio-text text-[11px]">UPCOM</span>
                     <div class="flex-1 h-2 rounded-full overflow-hidden flex bg-gray-200 dark:bg-gray-800">
-                      <div id="breadthUpcomBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 8.2%;"></div>
-                      <div id="breadthUpcomBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 78.1%;"></div>
-                      <div id="breadthUpcomBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 13.7%;"></div>
+                      <div id="breadthUpcomBarCeil" class="bg-purple-500 h-full transition-all duration-500" style="width: 1.8%;"></div>
+                      <div id="breadthUpcomBarAdv" class="bg-emerald-500 h-full transition-all duration-500" style="width: 6.2%;"></div>
+                      <div id="breadthUpcomBarRef" class="bg-amber-400 h-full transition-all duration-500" style="width: 76.7%;"></div>
+                      <div id="breadthUpcomBarDec" class="bg-rose-500 h-full transition-all duration-500" style="width: 15.3%;"></div>
                     </div>
-                    <span class="text-[10px] shrink-0 text-light-subtext dark:text-studio-muted">
-                      <span class="text-emerald-500 font-semibold" id="breadthUpcomAdv">66</span> • <span class="text-amber-500 font-semibold" id="breadthUpcomRef">632</span> • <span class="text-rose-500 font-semibold" id="breadthUpcomDec">111</span>
-                    </span>
+                    <div class="grid grid-cols-4 gap-1 text-right w-48 sm:w-56 shrink-0 text-[11px] font-mono">
+                      <span class="text-purple-400 font-bold" id="breadthUpcomCeil">15</span>
+                      <span class="text-emerald-400 font-bold" id="breadthUpcomAdv">66</span>
+                      <span class="text-amber-400 font-bold" id="breadthUpcomRef">632</span>
+                      <span class="text-rose-400 font-bold" id="breadthUpcomDec">111</span>
+                    </div>
                   </div>
                 </div>
 
@@ -3649,6 +3678,12 @@
       realtimeIntervalId: null,
       selectedCompany: 'FPT',
       selectedPortfolioKey: 'tan_cong',
+      breadth: {
+        total: { adv: 145, dec: 424, ref: 929, ceil: 18, flr: 32 },
+        hose: { adv: 69, dec: 225, ref: 114, ceil: 12, flr: 15 },
+        hnx: { adv: 28, dec: 88, ref: 183, ceil: 5, flr: 7 },
+        upcom: { adv: 66, dec: 111, ref: 632, ceil: 15, flr: 10 }
+      },
       portfolioSortBy: 'weight',
 
       // Market Overview interactive state
@@ -8937,6 +8972,21 @@
           let totalCount = 0;
           let totalAdv = 0, totalDec = 0, totalRef = 0, totalCeil = 0, totalFlr = 0;
 
+          const exchangeMap = {};
+          if (Array.isArray(StockApp.stocks)) {
+            StockApp.stocks.forEach(s => {
+              if (s && s.symbol) {
+                exchangeMap[s.symbol.toUpperCase()] = (s.exchange || 'HOSE').toUpperCase();
+              }
+            });
+          }
+
+          const exStats = {
+            hose: { adv: 0, dec: 0, ref: 0, ceil: 0, flr: 0 },
+            hnx: { adv: 0, dec: 0, ref: 0, ceil: 0, flr: 0 },
+            upcom: { adv: 0, dec: 0, ref: 0, ceil: 0, flr: 0 }
+          };
+
           if (Array.isArray(vpsList) && vpsList.length > 0) {
             vpsList.forEach(it => {
               if (!it || !it.sym) return;
@@ -8964,14 +9014,27 @@
               };
               totalCount++;
 
+              const symUpper = it.sym.toUpperCase();
+              const ex = exchangeMap[symUpper] || 'HOSE';
+              const target = (ex === 'HNX') ? exStats.hnx : ((ex === 'UPCOM') ? exStats.upcom : exStats.hose);
+
               if (priceVND > refVND && refVND > 0) {
                 totalAdv++;
-                if (ceilVND > 0 && priceVND >= ceilVND) totalCeil++;
+                target.adv++;
+                if (ceilVND > 0 && priceVND >= ceilVND) {
+                  totalCeil++;
+                  target.ceil++;
+                }
               } else if (priceVND < refVND && priceVND > 0 && refVND > 0) {
                 totalDec++;
-                if (floorVND > 0 && priceVND <= floorVND) totalFlr++;
+                target.dec++;
+                if (floorVND > 0 && priceVND <= floorVND) {
+                  totalFlr++;
+                  target.flr++;
+                }
               } else {
                 totalRef++;
+                target.ref++;
               }
             });
           }
@@ -8979,6 +9042,9 @@
           if (totalAdv + totalDec + totalRef > 0) {
             StockApp.breadth = {
               total: { adv: totalAdv, dec: totalDec, ref: totalRef, ceil: totalCeil, flr: totalFlr },
+              hose: exStats.hose,
+              hnx: exStats.hnx,
+              upcom: exStats.upcom,
               advancers: totalAdv,
               decliners: totalDec,
               unchanged: totalRef,
@@ -13276,55 +13342,80 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       const hnx = data.hnx;
       const upcom = data.upcom;
 
-      // 1. Cập nhật thanh & số Tổng hợp (3 Big Numbers)
-      if (total) {
-        const sum = (total.adv || 0) + (total.ref || 0) + (total.dec || 0) || 1;
-        const pAdv = ((total.adv / sum) * 100).toFixed(1);
-        const pRef = ((total.ref / sum) * 100).toFixed(1);
-        const pDec = (100 - parseFloat(pAdv) - parseFloat(pRef)).toFixed(1);
+      // Helper tính tỷ lệ 4 màu: Tím (Trần), Xanh (Tăng), Vàng cam (Đứng giá), Đỏ (Giảm & Sàn)
+      const calcPercents = (item) => {
+        if (!item) return { pCeil: '0.0', pAdv: '0.0', pRef: '0.0', pDec: '0.0' };
+        const ceil = Math.max(0, Number(item.ceil) || 0);
+        const adv = Math.max(0, Number(item.adv) || 0);
+        const ref = Math.max(0, Number(item.ref) || 0);
+        const dec = Math.max(0, Number(item.dec) || 0);
 
+        // adv bao gồm cả ceil, tách phần tăng thường pureAdv = max(0, adv - ceil)
+        const pureAdv = Math.max(0, adv - ceil);
+        const sum = (ceil + pureAdv + ref + dec) || 1;
+
+        const pCeil = (ceil / sum) * 100;
+        const pAdv = (pureAdv / sum) * 100;
+        const pRef = (ref / sum) * 100;
+        const pDec = Math.max(0, 100 - pCeil - pAdv - pRef);
+
+        return {
+          pCeil: pCeil.toFixed(1),
+          pAdv: pAdv.toFixed(1),
+          pRef: pRef.toFixed(1),
+          pDec: pDec.toFixed(1)
+        };
+      };
+
+      // 1. Cập nhật thanh & số Tổng hợp (4 thông số tương ứng 4 màu)
+      if (total) {
+        const { pCeil, pAdv, pRef, pDec } = calcPercents(total);
+
+        const barCeil = document.getElementById("breadthTotalBarCeil");
         const barAdv = document.getElementById("breadthTotalBarAdv");
         const barRef = document.getElementById("breadthTotalBarRef");
         const barDec = document.getElementById("breadthTotalBarDec");
+        if (barCeil) barCeil.style.width = pCeil + '%';
         if (barAdv) barAdv.style.width = pAdv + '%';
         if (barRef) barRef.style.width = pRef + '%';
         if (barDec) barDec.style.width = pDec + '%';
 
+        const txtCeil = document.getElementById("breadthTotalCeil");
         const txtAdv = document.getElementById("breadthTotalAdv");
         const txtRef = document.getElementById("breadthTotalRef");
         const txtDec = document.getElementById("breadthTotalDec");
-        const txtCeil = document.getElementById("breadthTotalCeil");
         const txtFlr = document.getElementById("breadthTotalFlr");
 
-        if (txtAdv) txtAdv.innerText = total.adv;
-        if (txtRef) txtRef.innerText = total.ref;
-        if (txtDec) txtDec.innerText = total.dec;
-        if (txtCeil) txtCeil.innerText = (total.ceil || 0) + ' trần';
+        if (txtCeil) txtCeil.innerText = total.ceil || 0;
+        if (txtAdv) txtAdv.innerText = total.adv || 0;
+        if (txtRef) txtRef.innerText = total.ref || 0;
+        if (txtDec) txtDec.innerText = total.dec || 0;
         if (txtFlr) txtFlr.innerText = (total.flr || 0) + ' sàn';
       }
 
-      // 2. Cập nhật chi tiết 3 sàn: HOSE, HNX, UPCOM
+      // 2. Cập nhật chi tiết 3 sàn: HOSE, HNX, UPCOM (4 thanh & 4 số thẳng cột)
       const updateRow = (key, exData) => {
         if (!exData) return;
-        const sum = (exData.adv || 0) + (exData.ref || 0) + (exData.dec || 0) || 1;
-        const pAdv = ((exData.adv / sum) * 100).toFixed(1);
-        const pRef = ((exData.ref / sum) * 100).toFixed(1);
-        const pDec = (100 - parseFloat(pAdv) - parseFloat(pRef)).toFixed(1);
+        const { pCeil, pAdv, pRef, pDec } = calcPercents(exData);
 
         const cap = key.charAt(0).toUpperCase() + key.slice(1).toLowerCase();
+        const bC = document.getElementById('breadth' + cap + 'BarCeil');
         const bA = document.getElementById('breadth' + cap + 'BarAdv');
         const bR = document.getElementById('breadth' + cap + 'BarRef');
         const bD = document.getElementById('breadth' + cap + 'BarDec');
+        if (bC) bC.style.width = pCeil + '%';
         if (bA) bA.style.width = pAdv + '%';
         if (bR) bR.style.width = pRef + '%';
         if (bD) bD.style.width = pDec + '%';
 
+        const tC = document.getElementById('breadth' + cap + 'Ceil');
         const tA = document.getElementById('breadth' + cap + 'Adv');
         const tR = document.getElementById('breadth' + cap + 'Ref');
         const tD = document.getElementById('breadth' + cap + 'Dec');
-        if (tA) tA.innerText = exData.adv;
-        if (tR) tR.innerText = exData.ref;
-        if (tD) tD.innerText = exData.dec;
+        if (tC) tC.innerText = exData.ceil || 0;
+        if (tA) tA.innerText = exData.adv || 0;
+        if (tR) tR.innerText = exData.ref || 0;
+        if (tD) tD.innerText = exData.dec || 0;
       };
 
       updateRow('hose', hose);
