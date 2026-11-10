@@ -1,5 +1,5 @@
 # 💬 LỊCH SỬ HỘI THOẠI & YÊU CẦU DỰ ÁN (VIETCAPLINK STOCK)
-> Tự động đồng bộ lúc: 10:16:22 10/11/2026
+> Tự động đồng bộ lúc: 10:45:02 10/11/2026
 
 ---
 
@@ -1279,4 +1279,9 @@ tiếp, bạn đã thực hiện realtime ở github trong các task trước đ
 ### Yêu cầu #210 (2026-11-10T03:02:45Z)
 ```markdown
 tiếp , hãy fix lại lỗi trên với những phân tích của bạn. yêu cầu bắt buộc phải real time, không cần liên tục, chỉ cần 1 lần/ phút, cho cả bản local và bản github
+```
+
+### Yêu cầu #211 (2026-11-10T03:28:37Z)
+```markdown
+giá vẫn chưa thể real time, bạn sửa thêm phần đính kèm cũng phải real time và lấy dữ liệu 1 lần/ phút
 ```
