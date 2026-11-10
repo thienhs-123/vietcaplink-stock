@@ -427,12 +427,64 @@ def fetch_indices_from_vnstock_or_api():
     Tự động truy vấn các chỉ số VNINDEX, VN30, HNX, UPCOM trực tiếp từ API bảng giá chính xác nhất
     """
     global MACRO_STATE
-    # 1. Ưu tiên Entrade Chart API (Cực nhanh, thời gian thực 1 phút/lần, không cần token)
+    import urllib.request
+    import json
+    import time
+
+    # 1. Ưu tiên SSI Chart API (Daily resolution) để tính giá tham chiếu và biến động chính xác 100%
     try:
-        import urllib.request
-        import json
+        now = int(time.time())
+        from_ts = now - 86400 * 10
+        fetched_any = False
+        for sym, state_key in [('VNINDEX', 'vnindex'), ('VN30', 'vn30'), ('HNXINDEX', 'hnx')]:
+            try:
+                url = f"https://iboard-api.ssi.com.vn/statistics/charts/history?symbol={sym}&resolution=D&from={from_ts}&to={now}"
+                req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
+                with urllib.request.urlopen(req, timeout=3.5) as resp:
+                    d = json.loads(resp.read().decode('utf-8'))
+                    if d and d.get('data') and d['data'].get('c') and len(d['data']['c']) >= 2:
+                        c = d['data']['c']
+                        v = d['data'].get('v', [])
+                        ref = c[-2]
+                        last = c[-1]
+                        chg = round(last - ref, 2)
+                        pct = round((chg / ref) * 100, 2) if ref else 0.0
+                        with DATA_LOCK:
+                            MACRO_STATE[state_key] = last
+                            MACRO_STATE[f"{state_key}Change"] = chg
+                            MACRO_STATE[f"{state_key}Pct"] = pct
+                            if sym == 'VNINDEX' and v:
+                                MACRO_STATE['vnindexVol'] = f"{round(v[-1] / 1e6, 1)} tr cp"
+                        fetched_any = True
+            except Exception:
+                pass
+
+        # UPCOM qua Entrade
+        try:
+            url_upcom = "https://services.entrade.com.vn/chart-api/v2/ohlcs/index?symbol=UPCOM&resolution=1"
+            req_u = urllib.request.Request(url_upcom, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req_u, timeout=3) as r:
+                d = json.loads(r.read().decode('utf-8'))
+                if d and d.get('c') and len(d['c']) > 0:
+                    last_u = round(float(d['c'][-1]), 2)
+                    ref_u = d['c'][0] if d.get('c') else 121.31
+                    with DATA_LOCK:
+                        MACRO_STATE['upcom'] = last_u
+                        MACRO_STATE['upcomChange'] = round(last_u - ref_u, 2)
+                        MACRO_STATE['upcomPct'] = round(((last_u - ref_u) / ref_u) * 100, 2)
+                    fetched_any = True
+        except Exception:
+            pass
+
+        if fetched_any:
+            return True
+    except Exception:
+        pass
+
+    # 2. Dự phòng: Entrade Chart API resolution=1
+    try:
         symbols = {'VNINDEX': 'vnindex', 'VN30': 'vn30', 'HNX': 'hnx', 'UPCOM': 'upcom'}
-        ref_prices = {'vnindex': 1740.73, 'vn30': 1865.23, 'hnx': 257.00, 'upcom': 122.38}
+        ref_prices = {'vnindex': 1714.32, 'vn30': 1830.13, 'hnx': 255.24, 'upcom': 121.31}
         fetched_any = False
         for sym, state_key in symbols.items():
             try:
@@ -457,7 +509,7 @@ def fetch_indices_from_vnstock_or_api():
     except Exception:
         pass
 
-    # 2. Thử qua vnstock
+    # 3. Thử qua vnstock
     vnstock = try_import_vnstock()
     if vnstock and hasattr(vnstock, 'Market'):
         try:
@@ -480,46 +532,8 @@ def fetch_indices_from_vnstock_or_api():
         except Exception:
             pass
 
-    # 2. Dự phòng: Thử qua API công khai VNDIRECT
-    try:
-        import urllib.request
-        import json
-        req = urllib.request.Request(
-            'https://mkw.vndirect.com.vn/mkws/indices',
-            headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
-        )
-        with urllib.request.urlopen(req, timeout=4) as resp:
-            data = json.loads(resp.read().decode('utf-8'))
-            indices_data = data.get('data', [])
-            for item in indices_data:
-                code = str(item.get('code', '')).upper()
-                idx_val = float(item.get('indexValue', 0))
-                chg_val = float(item.get('change', 0))
-                pct_val = float(item.get('changePercent', 0))
-                if code == 'VNINDEX':
-                    with DATA_LOCK:
-                        MACRO_STATE["vnindex"] = idx_val
-                        MACRO_STATE["vnindexChange"] = chg_val
-                        MACRO_STATE["vnindexPct"] = pct_val
-                elif code == 'VN30':
-                    with DATA_LOCK:
-                        MACRO_STATE["vn30"] = idx_val
-                        MACRO_STATE["vn30Change"] = chg_val
-                        MACRO_STATE["vn30Pct"] = pct_val
-                elif code in ['UPCOM', 'UPCOMINDEX']:
-                    with DATA_LOCK:
-                        MACRO_STATE["upcom"] = idx_val
-                        MACRO_STATE["upcomChange"] = chg_val
-                        MACRO_STATE["upcomPct"] = pct_val
-                elif code in ['HNX', 'HNXINDEX']:
-                    with DATA_LOCK:
-                        MACRO_STATE["hnx"] = idx_val
-                        MACRO_STATE["hnxChange"] = chg_val
-                        MACRO_STATE["hnxPct"] = pct_val
-            return True
-    except Exception:
-        pass
     return False
+
 
 def fetch_market_breadth():
     """

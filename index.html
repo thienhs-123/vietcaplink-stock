@@ -2084,8 +2084,8 @@
 
                 <!-- Sub-header & Tooltip Preview (Stitch Hover Banner) -->
                 <div class="px-3 py-1.5 rounded bg-[#1a2234] border border-[#28354d] flex items-center justify-between text-xs font-mono text-gray-300" id="marketChartHoverBanner">
-                  <span>06/11/2026: <strong class="text-white">1.732,88</strong> (<span class="text-rose-500 font-semibold">-0,98%</span>)</span>
-                  <span class="text-slate-400 text-[11px]">Daily VN-Index • HOSE</span>
+                  <span id="marketChartHoverInfo">Đang đồng bộ dữ liệu VN-Index Realtime...</span>
+                  <span class="text-slate-400 text-[11px]">Daily VN-Index • HOSE • Realtime 1p</span>
                 </div>
 
                 <!-- ApexCharts Canvas Container với Trục kéo dãn Y-Axis bên phải (Đã bỏ hoàn toàn chữ 'kéo trục') -->
@@ -8854,72 +8854,129 @@
       async fetchClientLiveMarketData() {
         try {
           const now = Math.floor(Date.now() / 1000);
-          const from = now - 3600;
+          const fromDays = now - 86400 * 10;
 
-          // 1. Truy vấn các chỉ số thị trường thời gian thực (CORS mở, tốc độ < 1s)
-          const [vnindexRes, vn30Res, hnxRes] = await Promise.allSettled([
-            fetch(`https://iboard-api.ssi.com.vn/statistics/charts/history?symbol=VNINDEX&resolution=1&from=${from}&to=${now}`).then(r => r.ok ? r.json() : null),
-            fetch(`https://iboard-api.ssi.com.vn/statistics/charts/history?symbol=VN30&resolution=1&from=${from}&to=${now}`).then(r => r.ok ? r.json() : null),
-            fetch(`https://iboard-api.ssi.com.vn/statistics/charts/history?symbol=HNXINDEX&resolution=1&from=${from}&to=${now}`).then(r => r.ok ? r.json() : null)
+          // 1. Truy van cac chi so thi truong thoi gian thuc (CORS mo, toc do < 1s)
+          // Lay nen ngay (resolution=D) de tinh toan chinh xac gia tham chieu va gia khop realtime
+          const [vnindexRes, vn30Res, hnxRes, upcomEntradeRes] = await Promise.allSettled([
+            fetch("https://iboard-api.ssi.com.vn/statistics/charts/history?symbol=VNINDEX" + String.fromCharCode(38) + "resolution=D" + String.fromCharCode(38) + "from=" + fromDays + String.fromCharCode(38) + "to=" + now).then(r => r.ok ? r.json() : null),
+            fetch("https://iboard-api.ssi.com.vn/statistics/charts/history?symbol=VN30" + String.fromCharCode(38) + "resolution=D" + String.fromCharCode(38) + "from=" + fromDays + String.fromCharCode(38) + "to=" + now).then(r => r.ok ? r.json() : null),
+            fetch("https://iboard-api.ssi.com.vn/statistics/charts/history?symbol=HNXINDEX" + String.fromCharCode(38) + "resolution=D" + String.fromCharCode(38) + "from=" + fromDays + String.fromCharCode(38) + "to=" + now).then(r => r.ok ? r.json() : null),
+            fetch("https://services.entrade.com.vn/chart-api/v2/ohlcs/index?symbol=UPCOM" + String.fromCharCode(38) + "resolution=1").then(r => r.ok ? r.json() : null)
           ]);
 
           const macroUpdates = {};
-          if (vnindexRes.status === 'fulfilled' && vnindexRes.value?.data?.c?.length) {
+          if (vnindexRes.status === "fulfilled" && vnindexRes.value && vnindexRes.value.data && vnindexRes.value.data.c && vnindexRes.value.data.c.length) {
             const c = vnindexRes.value.data.c;
             const last = c[c.length - 1];
+            const ref = c.length >= 2 ? c[c.length - 2] : last;
+            const chg = parseFloat((last - ref).toFixed(2));
+            const pct = ref > 0 ? parseFloat(((chg / ref) * 100).toFixed(2)) : 0;
             macroUpdates.vnindex = last;
-            macroUpdates.vnindexChange = parseFloat((last - 1740.73).toFixed(2));
-            macroUpdates.vnindexPct = parseFloat((((last - 1740.73) / 1740.73) * 100).toFixed(2));
+            macroUpdates.vnindexChange = chg;
+            macroUpdates.vnindexPct = pct;
+            if (vnindexRes.value.data.v && vnindexRes.value.data.v.length) {
+              const volShares = vnindexRes.value.data.v[vnindexRes.value.data.v.length - 1];
+              macroUpdates.vnindexVol = (volShares / 1e6).toFixed(1) + " tr cp";
+            }
           }
 
-          if (vn30Res.status === 'fulfilled' && vn30Res.value?.data?.c?.length) {
+          if (vn30Res.status === "fulfilled" && vn30Res.value && vn30Res.value.data && vn30Res.value.data.c && vn30Res.value.data.c.length) {
             const c = vn30Res.value.data.c;
             const last = c[c.length - 1];
+            const ref = c.length >= 2 ? c[c.length - 2] : last;
+            const chg = parseFloat((last - ref).toFixed(2));
+            const pct = ref > 0 ? parseFloat(((chg / ref) * 100).toFixed(2)) : 0;
             macroUpdates.vn30 = last;
-            macroUpdates.vn30Change = parseFloat((last - 1865.23).toFixed(2));
-            macroUpdates.vn30Pct = parseFloat((((last - 1865.23) / 1865.23) * 100).toFixed(2));
+            macroUpdates.vn30Change = chg;
+            macroUpdates.vn30Pct = pct;
           }
 
-          if (hnxRes.status === 'fulfilled' && hnxRes.value?.data?.c?.length) {
+          if (hnxRes.status === "fulfilled" && hnxRes.value && hnxRes.value.data && hnxRes.value.data.c && hnxRes.value.data.c.length) {
             const c = hnxRes.value.data.c;
             const last = c[c.length - 1];
+            const ref = c.length >= 2 ? c[c.length - 2] : last;
+            const chg = parseFloat((last - ref).toFixed(2));
+            const pct = ref > 0 ? parseFloat(((chg / ref) * 100).toFixed(2)) : 0;
             macroUpdates.hnx = last;
-            macroUpdates.hnxChange = parseFloat((last - 257.00).toFixed(2));
-            macroUpdates.hnxPct = parseFloat((((last - 257.00) / 257.00) * 100).toFixed(2));
+            macroUpdates.hnxChange = chg;
+            macroUpdates.hnxPct = pct;
+          }
+
+          if (upcomEntradeRes.status === "fulfilled" && upcomEntradeRes.value && upcomEntradeRes.value.c && upcomEntradeRes.value.c.length) {
+            const c = upcomEntradeRes.value.c;
+            const last = parseFloat(c[c.length - 1].toFixed(2));
+            const ref = c[0] || 121.31;
+            const chg = parseFloat((last - ref).toFixed(2));
+            const pct = parseFloat(((chg / ref) * 100).toFixed(2));
+            macroUpdates.upcom = last;
+            macroUpdates.upcomChange = chg;
+            macroUpdates.upcomPct = pct;
           }
 
           if (Object.keys(macroUpdates).length > 0) {
             this.applyRealMacroData(macroUpdates);
           }
 
-          // 2. Truy vấn toàn bộ bảng giá các mã cổ phiếu HOSE, HNX, UPCOM
+          // 2. Truy van toan bo bang gia cac ma co phieu HOSE, HNX, UPCOM
           const [hoseRes, hnxStockRes, upcomRes] = await Promise.allSettled([
-            fetch('https://iboard-query.ssi.com.vn/stock/exchange/hose').then(r => r.ok ? r.json() : null),
-            fetch('https://iboard-query.ssi.com.vn/stock/exchange/hnx').then(r => r.ok ? r.json() : null),
-            fetch('https://iboard-query.ssi.com.vn/stock/exchange/upcom').then(r => r.ok ? r.json() : null)
+            fetch("https://iboard-query.ssi.com.vn/stock/exchange/hose").then(r => r.ok ? r.json() : null),
+            fetch("https://iboard-query.ssi.com.vn/stock/exchange/hnx").then(r => r.ok ? r.json() : null),
+            fetch("https://iboard-query.ssi.com.vn/stock/exchange/upcom").then(r => r.ok ? r.json() : null)
           ]);
 
           const stockMap = {};
           let totalCount = 0;
+          let totalAdv = 0, totalDec = 0, totalRef = 0, totalCeil = 0, totalFlr = 0;
+
           [hoseRes, hnxStockRes, upcomRes].forEach(res => {
-            if (res.status === 'fulfilled' && Array.isArray(res.value?.data)) {
+            if (res.status === "fulfilled" && res.value && Array.isArray(res.value.data)) {
               res.value.data.forEach(it => {
                 if (!it.stockSymbol) return;
                 const p = it.matchedPrice || it.refPrice || 0;
+                const chgPct = it.priceChangePercent !== undefined ? it.priceChangePercent : 0;
                 stockMap[it.stockSymbol] = {
                   price: p,
-                  change: it.priceChangePercent !== undefined ? it.priceChangePercent : 0,
+                  change: chgPct,
                   volume: it.nmTotalTradedQty || it.stockVol || 0,
-                  status: 'success'
+                  status: "success"
                 };
                 totalCount++;
+
+                // Thong ke do rong thi truong
+                if (it.stockSymbol.length <= 4) {
+                  const rp = it.refPrice || 0;
+                  const priceChg = it.priceChange !== undefined ? it.priceChange : (rp > 0 ? p - rp : 0);
+                  if (priceChg > 0) {
+                    totalAdv++;
+                    if (it.ceiling && p >= it.ceiling) totalCeil++;
+                  } else if (priceChg < 0) {
+                    totalDec++;
+                    if (it.floor && p <= it.floor) totalFlr++;
+                  } else {
+                    totalRef++;
+                  }
+                }
               });
             }
           });
 
+          if (totalAdv + totalDec + totalRef > 0) {
+            StockApp.breadth = {
+              advancers: totalAdv,
+              decliners: totalDec,
+              unchanged: totalRef,
+              ceiling: totalCeil,
+              floor: totalFlr
+            };
+            if (typeof updateMarketBreadthUI === "function") {
+              updateMarketBreadthUI(StockApp.breadth);
+            }
+          }
+
           if (totalCount > 0) {
             this.applyRealStockData(stockMap);
-            this.log('SYNC', `[Live Datafeed] Đã đồng bộ ${totalCount} mã cổ phiếu & chỉ số thị trường thời gian thực`);
+            this.log("SYNC", "[Live Datafeed] Da dong bo " + totalCount + " ma co phieu " + String.fromCharCode(38) + " chi so thi truong thoi gian thuc");
             const statusLabel = document.getElementById("realtimeStatusLabel");
             if (statusLabel) statusLabel.innerText = "REALTIME LIVE (1p)";
             const pulseRing = document.getElementById("realtimePulseRing");
@@ -8937,37 +8994,51 @@
       async fetchRealMarketData() {
         let liveConnected = false;
 
-        // 1. Thử kết nối tự động Local Vnstock Bridge Server hoặc Cloud Backend (Render / VPS)
+        const isHttps = window.location.protocol === "https:" || (window.location.hostname && window.location.hostname.includes("github.io"));
+        const customCloudUrl = localStorage.getItem("vietcaplink_backend_url");
+
+        // Khi chay tren GitHub Pages hoac bat ky moi truong HTTPS nao:
+        // Lay ngay du lieu truc tiep tu Live Market Datafeed (khong ton thoi gian thu localhost)
+        if (isHttps && !customCloudUrl) {
+          const clientLiveOk = await this.fetchClientLiveMarketData();
+          if (clientLiveOk) {
+            liveConnected = true;
+            return;
+          }
+        }
+
+        // 1. Thu ket noi Local Vnstock Bridge Server (neu chay local) hoac Cloud Backend
         const endpoints = [];
-        const customCloudUrl = localStorage.getItem('vietcaplink_backend_url');
         if (customCloudUrl) {
-          const clean = customCloudUrl.trim().replace(/\/+$/, '');
-          endpoints.push(clean.endsWith('/api/stocks/realtime') ? clean : `${clean}/api/stocks/realtime`);
+          const clean = customCloudUrl.trim().replace(/\/+$/, "");
+          endpoints.push(clean.endsWith("/api/stocks/realtime") ? clean : clean + "/api/stocks/realtime");
         }
 
-        if (window.location && window.location.protocol && window.location.protocol.startsWith('http')) {
-          endpoints.push(`${window.location.origin}/api/stocks/realtime`);
-        }
+        if (!isHttps) {
+          if (window.location && window.location.protocol && window.location.protocol.startsWith("http")) {
+            endpoints.push(window.location.origin + "/api/stocks/realtime");
+          }
 
-        const candidatePorts = [8088, 8899, 8080, 5050, 3000, 8000];
-        if (this.activePort && candidatePorts.includes(this.activePort)) {
-          candidatePorts.sort((a, b) => (a === this.activePort ? -1 : (b === this.activePort ? 1 : 0)));
+          const candidatePorts = [8088, 8899, 8080];
+          if (this.activePort && candidatePorts.includes(this.activePort)) {
+            candidatePorts.sort((a, b) => (a === this.activePort ? -1 : (b === this.activePort ? 1 : 0)));
+          }
+          candidatePorts.forEach(p => {
+            const u = "http://127.0.0.1:" + p + "/api/stocks/realtime";
+            if (!endpoints.includes(u)) endpoints.push(u);
+          });
         }
-        candidatePorts.forEach(p => {
-          const u = `http://127.0.0.1:${p}/api/stocks/realtime`;
-          if (!endpoints.includes(u)) endpoints.push(u);
-        });
 
         for (const ep of endpoints) {
           try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 2500);
+            const timeoutId = setTimeout(() => controller.abort(), 600);
             const res = await fetch(ep, { signal: controller.signal });
             clearTimeout(timeoutId);
 
             if (res.ok) {
               const data = await res.json();
-              if (data && data.stocks && typeof data.stocks === 'object') {
+              if (data && data.stocks && typeof data.stocks === "object") {
                 const portMatch = ep.match(/:(\d+)\//);
                 if (portMatch) this.activePort = parseInt(portMatch[1]);
                 if (data.macro) {
@@ -8979,9 +9050,9 @@
                 }
                 this.applyRealStockData(data.stocks);
 
-                const allErr = Object.values(data.stocks).every(s => s.status === 'error' || s.price === 'Lỗi');
+                const allErr = Object.values(data.stocks).every(s => s.status === "error" || s.price === "Lỗi");
                 if (allErr) {
-                  this.log('ERROR', `[Vnstock Bridge] Báo lỗi dữ liệu từ Vnstock API.`);
+                  this.log("ERROR", "[Vnstock Bridge] Bao loi du lieu tu Vnstock API.");
                   const statusLabel = document.getElementById("realtimeStatusLabel");
                   if (statusLabel) statusLabel.innerText = "LỖI VNSTOCK";
                   const pulseRing = document.getElementById("realtimePulseRing");
@@ -8989,7 +9060,7 @@
                   const pulseDot = document.getElementById("realtimePulseDot");
                   if (pulseDot) pulseDot.className = "relative inline-flex rounded-full h-2 w-2 bg-rose-500";
                 } else {
-                  this.log('SYNC', `[Vnstock Live] Cập nhật thành công ${Object.keys(data.stocks).length} mã (${this.latencyMs}ms)`);
+                  this.log("SYNC", "[Vnstock Live] Cap nhat thanh cong " + Object.keys(data.stocks).length + " ma (" + this.latencyMs + "ms)");
                   const statusLabel = document.getElementById("realtimeStatusLabel");
                   if (statusLabel) statusLabel.innerText = "VNSTOCK LIVE (1p)";
                   const pulseRing = document.getElementById("realtimePulseRing");
@@ -9002,30 +9073,30 @@
               }
             }
           } catch (e) {
-            // Thử cổng tiếp theo
+            // Thu cong tiep theo
           }
         }
 
-        // 2. Trực tiếp từ Live Market Datafeed (SSI Live Exchange & Statistics - CORS mở)
+        // 2. Truc tiep tu Live Market Datafeed (SSI Live Exchange & Statistics - CORS mo)
         const clientLiveOk = await this.fetchClientLiveMarketData();
         if (clientLiveOk) {
           liveConnected = true;
           return;
         }
 
-        // 3. Dự phòng: Đọc bản snapshot mới nhất từ Vnstock (tạo bởi realtime_server.py)
+        // 3. Du phong: Doc ban snapshot moi nhat tu Vnstock (tao boi realtime_server.py)
         try {
-          const snapRes = await fetch('vnstock_snapshot.json?t=' + Date.now());
+          const snapRes = await fetch("vnstock_snapshot.json?t=" + Date.now());
           if (snapRes.ok) {
             const data = await snapRes.json();
-            if (data && data.stocks && typeof data.stocks === 'object') {
+            if (data && data.stocks && typeof data.stocks === "object") {
               if (data.macro) this.applyRealMacroData(data.macro);
               if (data.breadth) {
                 StockApp.breadth = data.breadth;
                 updateMarketBreadthUI(data.breadth);
               }
               this.applyRealStockData(data.stocks);
-              this.log('SYNC', `[Vnstock Snapshot] Đã đồng bộ ${Object.keys(data.stocks).length} mã từ bản lưu Vnstock`);
+              this.log("SYNC", "[Vnstock Snapshot] Da dong bo " + Object.keys(data.stocks).length + " ma tu ban luu Vnstock");
               const statusLabel = document.getElementById("realtimeStatusLabel");
               if (statusLabel) statusLabel.innerText = "VNSTOCK 1P/LẦN";
               const pulseRing = document.getElementById("realtimePulseRing");
@@ -9038,32 +9109,32 @@
           }
         } catch (e) {}
 
-        // Lấy tỷ giá ngoại tệ USD/VND thời gian thực nếu có (Client-side fallback)
+        // Lay ty gia ngoai te USD/VND thoi gian thuc neu co (Client-side fallback)
         try {
           const fxRes = await this.fetchClientApi("https://open.er-api.com/v6/latest/USD", 1500);
           if (fxRes.ok && fxRes.data && fxRes.data.rates && fxRes.data.rates.VND) {
             const liveRate = Math.round(fxRes.data.rates.VND);
             StockApp.macro.usdVnd = liveRate;
             const cUsd = document.getElementById("cardUsdVndVal");
-            if (cUsd) cUsd.innerText = liveRate.toLocaleString('en-US');
+            if (cUsd) cUsd.innerText = liveRate.toLocaleString("en-US");
             if (window.TickerController && window.TickerController.modules && window.TickerController.modules[2]) {
-              const fxItem = window.TickerController.modules[2].items?.find(it => it.label.includes("USD/VND"));
-              if (fxItem) fxItem.val = liveRate.toLocaleString('en-US');
+              const fxItem = window.TickerController.modules[2].items && window.TickerController.modules[2].items.find(it => it.label.includes("USD/VND"));
+              if (fxItem) fxItem.val = liveRate.toLocaleString("en-US");
             }
           }
         } catch (e) {}
 
-        // Lấy giá Vàng thế giới thời gian thực nếu có (Client-side fallback)
+        // Lay gia Vang the gioi thoi gian thuc neu co (Client-side fallback)
         try {
           const goldRes = await this.fetchClientApi("https://api.gold-api.com/price/XAU", 1500);
           if (goldRes.ok && goldRes.data && goldRes.data.price) {
             const liveGold = Math.round(goldRes.data.price * 10) / 10;
             StockApp.macro.goldWorld = liveGold;
             const cGold = document.getElementById("cardGoldVal");
-            if (cGold) cGold.innerText = `$${liveGold.toLocaleString('en-US')}`;
+            if (cGold) cGold.innerText = "$" + liveGold.toLocaleString("en-US");
             if (window.TickerController && window.TickerController.modules && window.TickerController.modules[2]) {
-              const gItem = window.TickerController.modules[2].items?.find(it => it.label.includes("VÀNG THẾ GIỚI"));
-              if (gItem) gItem.val = `$${liveGold.toLocaleString('en-US')}`;
+              const gItem = window.TickerController.modules[2].items && window.TickerController.modules[2].items.find(it => it.label.includes("VÀNG THẾ GIỚI"));
+              if (gItem) gItem.val = "$" + liveGold.toLocaleString("en-US");
             }
           }
         } catch (e) {}
@@ -9348,26 +9419,26 @@
         // 1. Top bar indicator
         const topVn = document.getElementById("topVnindexVal");
         if (topVn) {
-          topVn.innerText = `${StockApp.macro.vnindex.toLocaleString('en-US')} (${sign}${StockApp.macro.vnindexPct}%)`;
-          topVn.className = `font-semibold ${colorClass}`;
+          topVn.innerText = StockApp.macro.vnindex.toLocaleString("en-US") + " (" + sign + StockApp.macro.vnindexPct + "%)";
+          topVn.className = "font-semibold " + colorClass;
         }
 
         // 2. Module 2 Card VN-Index
         const cardVn = document.getElementById("cardVnindexVal");
         const cardVnChange = document.getElementById("cardVnindexChange");
         if (cardVn && cardVnChange) {
-          cardVn.innerText = StockApp.macro.vnindex.toLocaleString('en-US');
-          cardVnChange.innerText = `${sign}${StockApp.macro.vnindexChange} (${sign}${StockApp.macro.vnindexPct}%)`;
-          cardVnChange.className = `text-2xl font-bold font-mono ${colorClass}`;
+          cardVn.innerText = StockApp.macro.vnindex.toLocaleString("en-US");
+          cardVnChange.innerText = sign + StockApp.macro.vnindexChange + " (" + sign + StockApp.macro.vnindexPct + "%)";
+          cardVnChange.className = "text-2xl font-bold font-mono " + colorClass;
         }
 
         // Module 4 Market Overview Cards
         const m4VnVal = document.getElementById("m4CardVnindexVal");
         const m4VnChange = document.getElementById("m4CardVnindexChange");
         if (m4VnVal && m4VnChange) {
-          m4VnVal.innerText = StockApp.macro.vnindex.toLocaleString('vi-VN');
-          m4VnChange.innerText = `${sign}${StockApp.macro.vnindexChange} (${sign}${StockApp.macro.vnindexPct}%)`;
-          m4VnChange.className = `text-[10px] md:text-[11px] font-mono font-semibold ${colorClass}`;
+          m4VnVal.innerText = StockApp.macro.vnindex.toLocaleString("vi-VN");
+          m4VnChange.innerText = sign + StockApp.macro.vnindexChange + " (" + sign + StockApp.macro.vnindexPct + "%)";
+          m4VnChange.className = "text-[10px] md:text-[11px] font-mono font-semibold " + colorClass;
         }
 
         const m4Vn30Val = document.getElementById("m4CardVn30Val");
@@ -9377,9 +9448,9 @@
           const vn30C = StockApp.macro.vn30Change != null ? StockApp.macro.vn30Change : 3.17;
           const vn30P = StockApp.macro.vn30Pct != null ? StockApp.macro.vn30Pct : 0.17;
           const isUp30 = vn30C >= 0;
-          m4Vn30Val.innerText = vn30.toLocaleString('vi-VN');
-          m4Vn30Change.innerText = `${isUp30 ? '+' : ''}${vn30C} (${isUp30 ? '+' : ''}${vn30P}%)`;
-          m4Vn30Change.className = `text-[10px] md:text-[11px] font-mono font-semibold ${isUp30 ? 'text-emerald-500' : 'text-rose-500'}`;
+          m4Vn30Val.innerText = vn30.toLocaleString("vi-VN");
+          m4Vn30Change.innerText = (isUp30 ? "+" : "") + vn30C + " (" + (isUp30 ? "+" : "") + vn30P + "%)";
+          m4Vn30Change.className = "text-[10px] md:text-[11px] font-mono font-semibold " + (isUp30 ? "text-emerald-500" : "text-rose-500");
         }
 
         const m4UpcomVal = document.getElementById("m4CardUpcomVal");
@@ -9389,18 +9460,18 @@
           const upcomC = StockApp.macro.upcomChange != null ? StockApp.macro.upcomChange : -0.45;
           const upcomP = StockApp.macro.upcomPct != null ? StockApp.macro.upcomPct : -0.37;
           const isUpU = upcomC >= 0;
-          m4UpcomVal.innerText = upcom.toLocaleString('vi-VN');
-          m4UpcomChange.innerText = `${isUpU ? '+' : ''}${upcomC} (${isUpU ? '+' : ''}${upcomP}%)`;
-          m4UpcomChange.className = `text-[10px] md:text-[11px] font-mono font-semibold ${isUpU ? 'text-emerald-500' : 'text-rose-500'}`;
+          m4UpcomVal.innerText = upcom.toLocaleString("vi-VN");
+          m4UpcomChange.innerText = (isUpU ? "+" : "") + upcomC + " (" + (isUpU ? "+" : "") + upcomP + "%)";
+          m4UpcomChange.className = "text-[10px] md:text-[11px] font-mono font-semibold " + (isUpU ? "text-emerald-500" : "text-rose-500");
         }
 
-        // Module 4 Big Readout
+        // Module 4 Big Readout (Section 4 Stitch)
         const m4BigVal = document.getElementById("marketVnindexBigVal");
         const m4BigChange = document.getElementById("marketVnindexBigChange");
         if (m4BigVal && m4BigChange) {
-          m4BigVal.innerText = StockApp.macro.vnindex.toLocaleString('vi-VN');
-          m4BigChange.innerText = `${sign}${StockApp.macro.vnindexChange} (${sign}${StockApp.macro.vnindexPct}%)`;
-          m4BigChange.className = `text-sm font-bold font-mono ${colorClass}`;
+          m4BigVal.innerText = StockApp.macro.vnindex.toLocaleString("vi-VN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+          m4BigChange.innerText = sign + StockApp.macro.vnindexChange + " (" + sign + StockApp.macro.vnindexPct + "%)";
+          m4BigChange.className = "text-sm font-bold font-mono " + colorClass;
         }
 
         const m4Vol = document.getElementById("marketVnindexVol");
@@ -9408,49 +9479,66 @@
           m4Vol.innerText = StockApp.macro.vnindexVol;
         }
 
+        const now = new Date();
+        const dateStr = String(now.getDate()).padStart(2, "0") + "/" + String(now.getMonth() + 1).padStart(2, "0") + "/" + now.getFullYear();
+        const timeStr = String(now.getHours()).padStart(2, "0") + ":" + String(now.getMinutes()).padStart(2, "0");
+
         const m4Date = document.getElementById("m4MarketDateHeader");
         if (m4Date) {
-          const now = new Date();
-          m4Date.innerText = `Cập nhật ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} ${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
+          m4Date.innerText = "Cập nhật " + timeStr + " " + dateStr;
         }
 
-        // Cập nhật điểm cuối trên Line Chart VN-Index theo nhịp realtime
+        // Cap nhat Sub-header Banner (Stitch Hover Banner) voi ngay va diem so Realtime
+        const banner = document.getElementById("marketChartHoverBanner");
+        if (banner) {
+          const vnValFormatted = StockApp.macro.vnindex ? StockApp.macro.vnindex.toLocaleString("vi-VN", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : "1.740,92";
+          banner.innerHTML = "<span>" + dateStr + ": <strong class=\"text-white\">" + vnValFormatted + "</strong> (<span class=\"" + colorClass + " font-semibold\">" + sign + StockApp.macro.vnindexPct + "%</span>)</span><span class=\"text-slate-400 text-[11px]\">Daily VN-Index • HOSE • Realtime 1p</span>";
+        }
+
+        // Cap nhat Frequency Badge voi thoi gian sync moi nhat
+        const freqBadge = document.getElementById("marketRealtimeFrequencyBadge");
+        if (freqBadge) {
+          const syncTime = this.lastSyncTime || timeStr;
+          freqBadge.innerText = "Realtime • " + syncTime + " • 1 lần / phút";
+        }
+
+        // Cap nhat diem cuoi tren Line Chart VN-Index theo nhip realtime
         if (StockApp.charts && StockApp.charts.marketOverview && StockApp.marketOverview && StockApp.marketOverview.full1YearData) {
           const fullData = StockApp.marketOverview.full1YearData;
           if (fullData.length > 0 && StockApp.macro.vnindex) {
             fullData[fullData.length - 1].y = StockApp.macro.vnindex;
             const updatedSeries = fullData.map(d => [d.x, d.y]);
-            StockApp.charts.marketOverview.updateSeries([{ name: 'VN-Index', data: updatedSeries }], false);
+            StockApp.charts.marketOverview.updateSeries([{ name: "VN-Index", data: updatedSeries }], false);
           }
         }
 
         // 3. Ticker Bar VNINDEX item
         if (window.TickerController && window.TickerController.modules && window.TickerController.modules[1]) {
-          const vnItem = window.TickerController.modules[1].items?.find(it => it.label === "VNINDEX");
+          const vnItem = window.TickerController.modules[1].items && window.TickerController.modules[1].items.find(it => it.label === "VNINDEX");
           if (vnItem) {
-            vnItem.val = StockApp.macro.vnindex.toLocaleString('en-US');
-            vnItem.change = `${sign}${StockApp.macro.vnindexPct}%`;
+            vnItem.val = StockApp.macro.vnindex.toLocaleString("en-US");
+            vnItem.change = sign + StockApp.macro.vnindexPct + "%";
             vnItem.isUp = isUp;
           }
         }
 
         // 4. Header Badge Status & Latency
         const latBadge = document.getElementById("realtimeLatencyBadge");
-        if (latBadge) latBadge.innerText = `${this.latencyMs}ms`;
+        if (latBadge) latBadge.innerText = this.latencyMs + "ms";
 
         // 5. Quick menu labels
         const qLastSync = document.getElementById("quickMenuLastSyncTime");
         if (qLastSync) qLastSync.innerText = this.lastSyncTime || "Vừa xong";
         const qPackets = document.getElementById("quickMenuPacketCount");
-        if (qPackets) qPackets.innerText = `${this.packetCount} gói`;
+        if (qPackets) qPackets.innerText = this.packetCount + " gói";
 
         // 6. Modal labels
         const mLatency = document.getElementById("modalLatencyVal");
-        if (mLatency) mLatency.innerText = `${this.latencyMs} ms`;
+        if (mLatency) mLatency.innerText = this.latencyMs + " ms";
         const mLastSync = document.getElementById("modalLastSyncVal");
         if (mLastSync) mLastSync.innerText = this.lastSyncTime || "--:--:--";
         const mPackets = document.getElementById("modalPacketCountVal");
-        if (mPackets) mPackets.innerText = `${this.packetCount} gói`;
+        if (mPackets) mPackets.innerText = this.packetCount + " gói";
       },
 
       getProviderName() {
@@ -12687,7 +12775,10 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
     function generateMarket1YearDaily(targetPrice = 1732.88) {
       const count = 250; // 250 phiên giao dịch trong 1 năm
       const rawDates = new Array(count);
-      let curDate = new Date(2026, 10, 6); // 06/11/2026
+      let curDate = new Date();
+      while (curDate.getDay() === 0 || curDate.getDay() === 6) {
+        curDate.setDate(curDate.getDate() - 1);
+      }
 
       for (let i = count - 1; i >= 0; i--) {
         while (curDate.getDay() === 0 || curDate.getDay() === 6) {
