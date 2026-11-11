@@ -64,12 +64,15 @@
 
 ---
 
-## 4. QUY TẮC ĐỒNG BỘ 2 MÁY (BẮT BUỘC TUÂN THỦ)
-1. **Khi ngồi vào máy (ở nhà hoặc cơ quan)**:
+## 4. QUY TẮC ĐỒNG BỘ 2 MÁY & TIẾP NHẬN TASK (BẮT BUỘC TUÂN THỦ)
+1. **Quy tắc tiếp nhận task (Task Intake & Alignment Protocol)**:
+   - Trước khi bắt đầu build, fix, chỉnh sửa code hoặc thực hiện bất kỳ nhiệm vụ chính thức nào, Agent **BẮT BUỘC** phải trình bày rõ ý hiểu của mình về task đó (yêu cầu chi tiết, phạm vi thay đổi, giao diện/logic xử lý) trong phản hồi chat để người dùng kiểm tra và xác nhận.
+   - Tuyệt đối không tự ý can thiệp code hay sửa file trước khi trình bày ý hiểu.
+2. **Khi ngồi vào máy (ở nhà hoặc cơ quan)**:
    - Luôn chạy: `git pull origin main` trước khi thực hiện bất kỳ sửa đổi nào.
-2. **Khi chuẩn bị rời máy / tắt máy**:
+3. **Khi chuẩn bị rời máy / tắt máy**:
    - Luôn chạy: `git add .` $\rightarrow$ `git commit` $\rightarrow$ `git push origin main`.
-3. **Tuyệt đối không dùng lệnh Copy đè thô bạo (`Copy-Item -Force`)**:
+4. **Tuyệt đối không dùng lệnh Copy đè thô bạo (`Copy-Item -Force`)**:
    - Mọi thay đổi đều được kiểm soát và đồng bộ qua Git/GitHub để tránh ghi đè nhầm mã nguồn giữa 2 máy.
 
 ---
