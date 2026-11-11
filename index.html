@@ -2569,7 +2569,7 @@
       <div class="flex items-center justify-between pb-3 border-b border-light-border dark:border-studio-border">
         <div class="flex items-center space-x-2">
           <i data-lucide="layers" class="w-5 h-5 text-emerald-500"></i>
-          <h3 class="text-base font-bold text-light-text dark:text-studio-text" id="baseDetailModalTitle">Chi tiết Nền Tích Lũy</h3>
+          <h3 class="text-base font-bold text-light-text dark:text-studio-text" id="baseDetailModalTitle">Thông tin nền tích lũy</h3>
         </div>
         <button type="button" onclick="closeBaseDetailModal()" class="p-1 rounded-lg text-light-subtext dark:text-studio-muted hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
           <i data-lucide="x" class="w-5 h-5"></i>
@@ -14177,12 +14177,13 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       const isNearTop = durOk && span > 0 && typeof st.price === 'number' && (st.price >= (minPrice + 0.8 * span));
 
       // Tooltip chi tiết theo đúng format yêu cầu:
-      // - Phương pháp: Nền Tạo Đáy
+      // - Loại: Nền Tạo Đáy
       // - Lý do: Cổ phiếu tích lũy gom hàng sau nhịp tạo đáy tháng 7, chưa breakout khỏi hộp để chuyển sang nền tiếp diễn
       // - Độ siết nền: 13.04%
       // - Đáy: 28.75 ngày 27/07/2026; Đỉnh: 32.50 ngày 07/08/2026
-      // - Số phiên đi nền 76 phiên (tương đương 3.6 tháng)
-      const tooltipText = `Phương pháp: ${methodName}\nLý do: ${methodDesc}\nĐộ siết nền: ${tightness}%\nĐáy: ${minFormatted} ngày ${minDate}; Đỉnh: ${maxFormatted} ngày ${maxDate}\nSố phiên đi nền ${baseSessions} phiên (tương đương ${baseMonths} tháng)`;
+      // - Số phiên đi nền: 76 phiên
+      // - Thời gian đi nền: 3.6 tháng
+      const tooltipText = `Loại: ${methodName}\nLý do: ${methodDesc}\nĐộ siết nền: ${tightness}%\nĐáy: ${minFormatted} ngày ${minDate}; Đỉnh: ${maxFormatted} ngày ${maxDate}\nSố phiên đi nền: ${baseSessions} phiên\nThời gian đi nền: ${baseMonths} tháng`;
 
       return {
         durOk,
@@ -14211,7 +14212,7 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
 
       const titleEl = document.getElementById("baseDetailModalTitle");
       if (titleEl) {
-        titleEl.innerText = `Chi tiết Nền Tích Lũy • ${st.symbol}`;
+        titleEl.innerText = `Thông tin nền tích lũy`;
       }
 
       const contentEl = document.getElementById("baseDetailModalContent");
@@ -14224,17 +14225,14 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
                 <span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-mono text-xs font-bold">${st.symbol}</span>
                 <span>${st.name}</span>
               </span>
-              <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full ${d.durOk ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20' : 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20'}">
-                ${d.durOk ? d.tierLabel : 'Chưa đạt nền (< 3 tháng)'}
-              </span>
             </div>
-            <div class="grid grid-cols-2 gap-2 pt-2 text-[11px] border-t border-black/5 dark:border-white/5 font-mono">
-              <div><span class="text-light-subtext dark:text-studio-muted">Phương pháp:</span> <strong class="text-light-text dark:text-studio-text">${d.methodName}</strong></div>
+            <div class="grid grid-cols-2 gap-2 pt-2 text-[11px] border-t border-black/5 dark:border-white/5">
+              <div><span class="text-light-subtext dark:text-studio-muted">Loại:</span> <strong class="text-light-text dark:text-studio-text">${d.methodName}</strong></div>
               <div><span class="text-light-subtext dark:text-studio-muted">Độ siết nền:</span> <strong class="text-emerald-600 dark:text-emerald-400">${d.tightness}%</strong></div>
-              <div><span class="text-light-subtext dark:text-studio-muted">Đáy hộp:</span> <strong>${d.minFormatted}</strong> (${d.minDate})</div>
-              <div><span class="text-light-subtext dark:text-studio-muted">Đỉnh hộp:</span> <strong>${d.maxFormatted}</strong> (${d.maxDate})</div>
-              <div><span class="text-light-subtext dark:text-studio-muted">Số phiên đi nền:</span> <strong>${d.baseSessions} phiên</strong> (${d.baseMonths} tháng)</div>
-              <div><span class="text-light-subtext dark:text-studio-muted">Vị thế nến:</span> <strong class="${d.isNearTop ? 'text-emerald-500 font-bold' : 'text-light-subtext dark:text-studio-muted'}">${d.isNearTop ? 'Tiệm cận vùng đỉnh nền (≥ 80%)' : 'Trong vùng tích lũy'}</strong></div>
+              <div><span class="text-light-subtext dark:text-studio-muted">Đáy hộp:</span> <strong class="text-light-text dark:text-studio-text">${d.minFormatted}</strong> (${d.minDate})</div>
+              <div><span class="text-light-subtext dark:text-studio-muted">Đỉnh hộp:</span> <strong class="text-light-text dark:text-studio-text">${d.maxFormatted}</strong> (${d.maxDate})</div>
+              <div><span class="text-light-subtext dark:text-studio-muted">Số phiên đi nền:</span> <strong class="text-light-text dark:text-studio-text">${d.baseSessions} phiên</strong></div>
+              <div><span class="text-light-subtext dark:text-studio-muted">Thời gian đi nền:</span> <strong class="text-light-text dark:text-studio-text">${d.baseMonths} tháng</strong></div>
             </div>
             ${d.methodDesc ? `<div class="pt-2 text-[11px] border-t border-black/5 dark:border-white/5"><span class="text-light-subtext dark:text-studio-muted">Lý do chọn phương pháp:</span> <span class="text-light-text dark:text-studio-text font-medium">${d.methodDesc}</span></div>` : ''}
           </div>
