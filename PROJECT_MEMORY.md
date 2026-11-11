@@ -75,9 +75,8 @@
       * **Thẻ cổ phiếu**: Bỏ badge thời gian (`3 – 6 tháng`) ở góc phải header.
       * **Cụm 6 thông số (Grid 2 cột)**:
         - `Loại: Nền Tạo Đáy` kèm nút **`[ⓘ Chi tiết]`** ngay sau tên loại nền:
-          + Giao diện mặc định tinh gọn: Bỏ hoàn toàn khối tĩnh "Giải thích 2 Phương Pháp Xác Định Nền" ở bên dưới và dòng lý do ở đáy thẻ. Modal ban đầu chỉ hiển thị thẻ thông số 6 ô tinh tế, thoáng mắt.
-          + Cơ chế tương tác: Khi bấm nút `[ⓘ Chi tiết]`, hộp chi tiết bung mở ngay bên dưới gồm: 1) **Lý do nhận diện loại nền** của cổ phiếu đó (DPR, CTG, SSI...); 2) Toàn bộ nội dung chuẩn **Giải thích 2 Phương Pháp Xác Định Nền** (Nền Tạo Đáy & Nền Phẳng Tiếp Diễn).
-          + Khi bấm lại: Thu gọn lại sạch sẽ.
+          + **Lý do nhận diện loại nền**: Hiển thị trực tiếp ra bên ngoài ngay dưới lưới 6 ô thông số (trong khung bo góc viền xanh emerald đẹp mắt), người dùng mở Modal ra là thấy ngay phân tích chuyên môn của cổ phiếu đó mà **không cần bấm Chi tiết**.
+          + **Nút `[ⓘ Chi tiết]`**: Dùng để đóng / mở khối lý thuyết **"Giải thích 2 Phương Pháp Xác Định Nền:"** (1. Nền Tạo Đáy & 2. Nền Phẳng Tiếp Diễn). Mặc định khối lý thuyết được ẩn gọn gàng, khi bấm nút `[ⓘ Chi tiết]` thì bung mở bên dưới, bấm lại thì thu gọn.
         - `Độ siết nền: XX.XX%`.
         - `Đáy hộp: XX.XX (dd/mm/yyyy)`.
         - `Đỉnh hộp: YY.YY (dd/mm/yyyy)`.

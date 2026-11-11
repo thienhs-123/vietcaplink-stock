@@ -14244,40 +14244,39 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
               <div><span class="text-light-subtext dark:text-studio-muted">Số phiên đi nền:</span> <strong class="text-light-text dark:text-studio-text">${d.baseSessions} phiên</strong></div>
               <div><span class="text-light-subtext dark:text-studio-muted">Thời gian đi nền:</span> <strong class="text-light-text dark:text-studio-text">${d.baseMonths} tháng</strong></div>
             </div>
-            <!-- Khối chi tiết bung mở khi bấm nút [ⓘ Chi tiết] (kết hợp Lý do & Giải thích 2 phương pháp) -->
-            <div id="baseReasonDetailBox" class="hidden pt-3 border-t border-black/5 dark:border-white/5 space-y-2.5 text-[11px] leading-relaxed">
-              <div class="p-3 rounded-xl bg-emerald-500/5 border border-emerald-500/20 space-y-1">
+            <!-- Lý do nhận diện loại nền hiển thị trực tiếp ra bên ngoài không cần bấm chi tiết -->
+            <div class="mt-2.5 p-3 rounded-xl bg-emerald-500/5 border border-emerald-500/20 space-y-1 text-[11px] leading-relaxed">
+              <div class="font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                Lý do nhận diện loại nền (${st.symbol}):
+              </div>
+              <p class="text-light-subtext dark:text-studio-muted leading-relaxed">
+                ${d.methodDesc}
+              </p>
+            </div>
+
+            <!-- Khối giải thích 2 phương pháp bung mở khi bấm nút [ⓘ Chi tiết] -->
+            <div id="baseMethodsDetailBox" class="hidden pt-3 border-t border-black/5 dark:border-white/5 space-y-2 text-[11px] leading-relaxed">
+              <h4 class="font-bold text-[11px] uppercase tracking-wider text-light-text dark:text-studio-text">Giải thích 2 Phương Pháp Xác Định Nền:</h4>
+              
+              <div class="p-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 space-y-1">
                 <div class="font-bold text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  Lý do nhận diện loại nền (${st.symbol}):
+                  1. Nền Tạo Đáy (Bottoming / Reversal Base):
                 </div>
                 <p class="text-light-subtext dark:text-studio-muted leading-relaxed">
-                  ${d.methodDesc}
+                  Áp dụng khi cổ phiếu vừa trải qua nhịp giảm sâu/bán tháo. Điểm gốc đáy hộp được xác định từ <strong>cụm 2 - 3 cây nến đảo chiều thấp nhất</strong>, lấy <strong>giá đóng cửa thấp nhất</strong> làm sàn hộp (T0). Đỉnh hộp là giá đóng cửa cao nhất của nhịp hồi phục đầu tiên. Thời gian tích lũy được đếm liên tục từ ngày tạo đáy T0 đến phiên hiện tại (phản ánh toàn bộ chu kỳ gom hàng và rũ bỏ).
                 </p>
               </div>
 
-              <div class="space-y-2 pt-1">
-                <h4 class="font-bold text-[11px] uppercase tracking-wider text-light-text dark:text-studio-text">Giải thích 2 Phương Pháp Xác Định Nền:</h4>
-                
-                <div class="p-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 space-y-1">
-                  <div class="font-bold text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                    1. Nền Tạo Đáy (Bottoming / Reversal Base):
-                  </div>
-                  <p class="text-light-subtext dark:text-studio-muted leading-relaxed">
-                    Áp dụng khi cổ phiếu vừa trải qua nhịp giảm sâu/bán tháo. Điểm gốc đáy hộp được xác định từ <strong>cụm 2 - 3 cây nến đảo chiều thấp nhất</strong>, lấy <strong>giá đóng cửa thấp nhất</strong> làm sàn hộp (T0). Đỉnh hộp là giá đóng cửa cao nhất của nhịp hồi phục đầu tiên. Thời gian tích lũy được đếm liên tục từ ngày tạo đáy T0 đến phiên hiện tại (phản ánh toàn bộ chu kỳ gom hàng và rũ bỏ).
-                  </p>
+              <div class="p-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 space-y-1">
+                <div class="font-bold text-blue-700 dark:text-blue-400 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                  2. Nền Phẳng Tiếp Diễn (Continuation Flat Base / High Tight Box):
                 </div>
-
-                <div class="p-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 space-y-1">
-                  <div class="font-bold text-blue-700 dark:text-blue-400 flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-                    2. Nền Phẳng Tiếp Diễn (Continuation Flat Base / High Tight Box):
-                  </div>
-                  <p class="text-light-subtext dark:text-studio-muted leading-relaxed">
-                    Áp dụng khi cổ phiếu đang trong xu hướng tăng mạnh hoặc tái tích lũy kênh trên (nền chồng nền). Điểm gốc đỉnh hộp là <strong>phiên đóng cửa cao nhất chững lại trong 3 ngày</strong> (chuẩn Darvas nguyên bản, T0). Đáy hộp là giá đóng cửa thấp nhất của nhịp kiểm định (retest) đi ngang sau đỉnh đó. Thời gian tính từ đỉnh hộp T0 đến phiên hiện tại (phản ánh giai đoạn hấp thụ cung chốt lời).
-                  </p>
-                </div>
+                <p class="text-light-subtext dark:text-studio-muted leading-relaxed">
+                  Áp dụng khi cổ phiếu đang trong xu hướng tăng mạnh hoặc tái tích lũy kênh trên (nền chồng nền). Điểm gốc đỉnh hộp là <strong>phiên đóng cửa cao nhất chững lại trong 3 ngày</strong> (chuẩn Darvas nguyên bản, T0). Đáy hộp là giá đóng cửa thấp nhất của nhịp kiểm định (retest) đi ngang sau đỉnh đó. Thời gian tính từ đỉnh hộp T0 đến phiên hiện tại (phản ánh giai đoạn hấp thụ cung chốt lời).
+                </p>
               </div>
             </div>
           </div>
@@ -14290,7 +14289,7 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
     }
 
     function toggleBaseReasonDetail() {
-      const box = document.getElementById("baseReasonDetailBox");
+      const box = document.getElementById("baseMethodsDetailBox") || document.getElementById("baseReasonDetailBox");
       if (box) {
         box.classList.toggle("hidden");
       }
