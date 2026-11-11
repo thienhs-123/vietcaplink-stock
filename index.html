@@ -2380,10 +2380,10 @@
 
           <!-- Table Container -->
           <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
+            <table id="screenerTable" class="w-full text-left text-xs">
               <thead class="bg-light-elevated dark:bg-studio-elevated text-light-subtext dark:text-studio-muted font-medium uppercase tracking-wider border-b border-light-border dark:border-studio-border">
                 <tr>
-                  <th class="resizable-th py-3 px-3" data-col="symbol" data-table="screener">
+                  <th class="resizable-th py-3 px-3 w-[18%]" data-col="symbol" data-table="screener">
                     <div class="inline-flex items-center space-x-1">
                       <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('screener', 'symbol')" title="Bấm để sắp xếp">Mã CP</span>
                       <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('screener', 'symbol')" id="sort-screener-symbol" title="Bấm để sắp xếp">⇅</span>
@@ -2393,7 +2393,7 @@
                     </div>
                     <div class="col-resizer" onmousedown="initColumnResize(event)"></div>
                   </th>
-                  <th class="resizable-th py-3 px-3" data-col="industry" data-table="screener">
+                  <th class="resizable-th py-3 px-3 w-[16%]" data-col="industry" data-table="screener">
                     <div class="inline-flex items-center space-x-1">
                       <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('screener', 'industry')" title="Bấm để sắp xếp">Ngành</span>
                       <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('screener', 'industry')" id="sort-screener-industry" title="Bấm để sắp xếp">⇅</span>
@@ -2403,7 +2403,7 @@
                     </div>
                     <div class="col-resizer" onmousedown="initColumnResize(event)"></div>
                   </th>
-                  <th class="resizable-th py-3 px-3 text-right" data-col="price" data-table="screener">
+                  <th class="resizable-th py-3 px-3 text-right w-[13%]" data-col="price" data-table="screener">
                     <div class="inline-flex items-center justify-end space-x-1 w-full">
                       <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('screener', 'price')" title="Bấm để sắp xếp">Giá (VND)</span>
                       <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('screener', 'price')" id="sort-screener-price" title="Bấm để sắp xếp">⇅</span>
@@ -2413,8 +2413,8 @@
                     </div>
                     <div class="col-resizer" onmousedown="initColumnResize(event)"></div>
                   </th>
-                  <th class="resizable-th py-3 px-3 text-right" data-col="pe" data-table="screener">
-                    <div class="inline-flex items-center justify-end space-x-1 w-full">
+                  <th class="resizable-th py-3 px-3 text-center w-[11%]" data-col="pe" data-table="screener">
+                    <div class="inline-flex items-center justify-center space-x-1 w-full">
                       <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('screener', 'pe')" title="Bấm để sắp xếp">P/E (Lần)</span>
                       <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('screener', 'pe')" id="sort-screener-pe" title="Bấm để sắp xếp">⇅</span>
                       <button type="button" class="excel-filter-btn p-0.5 rounded hover:bg-black/10 dark:hover:bg-white/10 text-light-subtext dark:text-studio-muted" onclick="openExcelFilter(event, 'screener', 'pe', 'P/E (Lần)')" title="Lọc cột P/E">
@@ -2423,7 +2423,7 @@
                     </div>
                     <div class="col-resizer" onmousedown="initColumnResize(event)"></div>
                   </th>
-                  <th class="resizable-th py-3 px-3 text-center" data-col="aboveMA10_50" data-table="screener">
+                  <th class="resizable-th py-3 px-3 text-center w-[17%]" data-col="aboveMA10_50" data-table="screener">
                     <div class="inline-flex items-center justify-center space-x-1 w-full">
                       <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('screener', 'aboveMA10_50')" title="Bấm để sắp xếp">Trên đường MA10 và MA50</span>
                       <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('screener', 'aboveMA10_50')" id="sort-screener-aboveMA10_50" title="Bấm để sắp xếp">⇅</span>
@@ -2433,7 +2433,7 @@
                     </div>
                     <div class="col-resizer" onmousedown="initColumnResize(event)"></div>
                   </th>
-                  <th class="resizable-th py-3 px-3 text-center" data-col="baseMonths" data-table="screener">
+                  <th class="resizable-th py-3 px-3 text-center w-[25%]" data-col="baseMonths" data-table="screener">
                     <div class="inline-flex items-center justify-center space-x-1 w-full">
                       <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('screener', 'baseMonths')" title="Bấm để sắp xếp">Nền tích lũy</span>
                       <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('screener', 'baseMonths')" id="sort-screener-baseMonths" title="Bấm để sắp xếp">⇅</span>
@@ -9322,7 +9322,7 @@
             if (scPrice) scPrice.innerText = `${Number(st.price).toLocaleString('en-US')} đ`;
             const scChange = document.getElementById(`screener-change-${st.symbol}`);
             if (scChange) {
-              scChange.className = `py-3 px-3 text-right font-mono font-semibold ${changeColor}`;
+              scChange.className = `py-3 px-3 text-right font-semibold ${changeColor}`;
               scChange.innerText = `${isUp ? '+' : ''}${st.change}%`;
             }
           });
@@ -14499,26 +14499,26 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
           baseBadge = `<div class="flex items-center justify-center text-light-subtext dark:text-studio-muted text-xs">-</div>`;
         } else {
           baseBadge = `
-            <div class="inline-flex flex-col items-center justify-center">
-              <div class="inline-flex items-center gap-1.5">
-                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+            <div class="flex flex-col items-center justify-center w-full">
+              <div class="relative inline-flex items-center justify-center">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 whitespace-nowrap">
                   ${baseDetails.tierLabel}
                 </span>
-                <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-medium text-light-subtext dark:text-studio-muted hover:text-emerald-600 dark:hover:text-emerald-400 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 cursor-pointer"
-                      title="${escapeHtml(baseDetails.tooltipText)}"
-                      onclick="openBaseDetailModal('${st.symbol}')">
-                  <i data-lucide="info" class="w-3 h-3 text-emerald-500"></i>
-                  <span>Chi tiết</span>
-                </span>
+                <button type="button"
+                        onclick="openBaseDetailModal('${st.symbol}')"
+                        title="${escapeHtml(baseDetails.tooltipText)}"
+                        class="absolute left-full ml-1.5 text-[10px] text-light-subtext/60 dark:text-studio-muted/60 hover:text-emerald-500 dark:hover:text-emerald-400 hover:underline cursor-pointer whitespace-nowrap transition-colors border-none bg-transparent p-0 font-normal">
+                  chi tiết
+                </button>
               </div>
-              ${baseDetails.isNearTop ? `<span class="text-[9px] text-emerald-600 dark:text-emerald-400 font-medium mt-0.5">Tiệm cận vùng đỉnh nền</span>` : ''}
+              ${baseDetails.isNearTop ? `<span class="text-[9px] text-emerald-600 dark:text-emerald-400 font-medium mt-0.5 whitespace-nowrap">Tiệm cận vùng đỉnh nền</span>` : ''}
             </div>
           `;
         }
 
         // P/E Badge
         const peVal = typeof st.pe === 'number' ? `${st.pe.toFixed(1)}x` : (st.pe === 'Lỗi' ? 'Lỗi' : `${st.pe}x`);
-        const peBadge = `<span class="font-mono ${isTop10Pe ? 'font-bold text-light-text dark:text-studio-text' : 'font-semibold text-light-subtext dark:text-studio-subtext'}">${peVal}</span>`;
+        const peBadge = `<span class="${isTop10Pe ? 'font-bold text-light-text dark:text-studio-text' : 'font-semibold text-light-subtext dark:text-studio-subtext'}">${peVal}</span>`;
 
         const scPriceHtml = isPriceErr ? '<span class="text-rose-500 font-bold">Lỗi</span>' : `${Number(st.price).toLocaleString('en-US')} đ`;
         const scChangeHtml = isPriceErr ? '<span class="text-rose-500 font-bold">Lỗi</span>' : `${isUp ? '+' : ''}${st.change}%`;
@@ -14527,15 +14527,15 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
         return `
           <tr id="screener-row-${st.symbol}" class="hover:bg-light-elevated/60 dark:hover:bg-studio-elevated/60 transition-colors">
             <td class="py-3 px-3">
-              <div class="font-bold font-mono text-sm text-blue-600 dark:text-studio-blueLight cursor-pointer hover:underline flex items-center space-x-1.5" onclick="openCompanyModalBySymbol('${st.symbol}')">
+              <div class="font-bold text-sm text-blue-600 dark:text-studio-blueLight cursor-pointer hover:underline flex items-center space-x-1.5" onclick="openCompanyModalBySymbol('${st.symbol}')">
                 <span>${st.symbol}</span>
                 ${(maPassed && basePassed && isTop10Pe) ? '<span class="w-2 h-2 rounded-full bg-emerald-500" title="Đạt cả 2 điều kiện Mua"></span>' : ''}
               </div>
               <div class="text-[10px] text-light-subtext dark:text-studio-muted truncate max-w-[130px]">${st.name}</div>
             </td>
             <td class="py-3 px-3 text-light-subtext dark:text-studio-subtext text-[11px]">${st.industry}</td>
-            <td id="screener-price-${st.symbol}" class="py-3 px-3 text-right font-mono font-semibold">${scPriceHtml}</td>
-            <td id="screener-pe-${st.symbol}" class="py-3 px-3 text-right">
+            <td id="screener-price-${st.symbol}" class="py-3 px-3 text-right font-semibold">${scPriceHtml}</td>
+            <td id="screener-pe-${st.symbol}" class="py-3 px-3 text-center">
               ${peBadge}
             </td>
             <td id="screener-ma-${st.symbol}" class="py-3 px-3 text-center">
