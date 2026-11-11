@@ -7634,6 +7634,10 @@
         st.sortDir = 'asc';
       }
 
+      if (StockApp.pagination && StockApp.pagination[tableKey]) {
+        StockApp.pagination[tableKey].page = 1;
+      }
+
       refreshTargetTable(tableKey);
     }
 
@@ -14401,16 +14405,61 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       const { sortCol, sortDir } = StockApp.tableStates.screener || {};
       if (sortCol && sortDir) {
         filtered.sort((a, b) => {
-          let valA = a[sortCol];
-          let valB = b[sortCol];
+          if (sortCol === 'symbol') {
+            return sortDir === 'asc' 
+              ? a.symbol.localeCompare(b.symbol, 'vi') 
+              : b.symbol.localeCompare(a.symbol, 'vi');
+          }
+          if (sortCol === 'industry') {
+            const indCmp = sortDir === 'asc' 
+              ? (a.industry || "").localeCompare(b.industry || "", 'vi') 
+              : (b.industry || "").localeCompare(a.industry || "", 'vi');
+            if (indCmp !== 0) return indCmp;
+            return a.symbol.localeCompare(b.symbol, 'vi');
+          }
+          if (sortCol === 'price') {
+            const prA = (typeof a.price === 'number' && !isNaN(a.price)) ? a.price : -1;
+            const prB = (typeof b.price === 'number' && !isNaN(b.price)) ? b.price : -1;
+            if (prA !== prB) return sortDir === 'asc' ? prA - prB : prB - prA;
+            return a.symbol.localeCompare(b.symbol, 'vi');
+          }
+          if (sortCol === 'pe') {
+            const isNumA = typeof a.pe === 'number' && !isNaN(a.pe) && a.pe > 0;
+            const isNumB = typeof b.pe === 'number' && !isNaN(b.pe) && b.pe > 0;
+            if (isNumA && isNumB) {
+              if (a.pe !== b.pe) return sortDir === 'asc' ? a.pe - b.pe : b.pe - a.pe;
+              return a.symbol.localeCompare(b.symbol, 'vi');
+            }
+            if (isNumA && !isNumB) return -1;
+            if (!isNumA && isNumB) return 1;
+            return a.symbol.localeCompare(b.symbol, 'vi');
+          }
           if (sortCol === 'aboveMA10_50') {
-            valA = a.aboveMA10_50 ? 1 : 0;
-            valB = b.aboveMA10_50 ? 1 : 0;
+            const passA = a.aboveMA10_50 === true || (typeof a.diffMA10 === 'number' && typeof a.diffMA50 === 'number' && a.diffMA10 > 0 && a.diffMA50 > 0);
+            const passB = b.aboveMA10_50 === true || (typeof b.diffMA10 === 'number' && typeof b.diffMA50 === 'number' && b.diffMA10 > 0 && b.diffMA50 > 0);
+            if (passA !== passB) {
+              return sortDir === 'asc' ? (passA ? -1 : 1) : (passA ? 1 : -1);
+            }
+            return a.symbol.localeCompare(b.symbol, 'vi');
           }
           if (sortCol === 'baseMonths') {
-            valA = a.baseValid ? (a.baseMonths || 0) : -1;
-            valB = b.baseValid ? (b.baseMonths || 0) : -1;
+            const dA = getStockBaseDetails(a);
+            const dB = getStockBaseDetails(b);
+            if (dA.durOk && dB.durOk) {
+              const durA = typeof a.baseMonths === 'number' ? a.baseMonths : (a.baseSessions ? a.baseSessions / 21 : 3.0);
+              const durB = typeof b.baseMonths === 'number' ? b.baseMonths : (b.baseSessions ? b.baseSessions / 21 : 3.0);
+              if (durA !== durB) {
+                return sortDir === 'asc' ? durA - durB : durB - durA;
+              }
+              return a.symbol.localeCompare(b.symbol, 'vi');
+            }
+            if (dA.durOk && !dB.durOk) return -1;
+            if (!dA.durOk && dB.durOk) return 1;
+            return a.symbol.localeCompare(b.symbol, 'vi');
           }
+
+          let valA = a[sortCol];
+          let valB = b[sortCol];
           if (typeof valA === 'number' && typeof valB === 'number') {
             return sortDir === 'asc' ? valA - valB : valB - valA;
           }
