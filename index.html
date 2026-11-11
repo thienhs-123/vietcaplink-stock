@@ -6285,17 +6285,22 @@
     "aboveMA10_50": true,
     "diffMA10": 0.42,
     "diffMA50": 0.64,
-    "baseMonths": 7.5,
+    "baseMonths": 3.5,
     "buySignals": [
       "higher_low",
       "rsi_bullish",
       "volume_breakout"
     ],
-    "baseSessions": 158,
-    "baseTightness": 19.3,
-    "baseMin": 34400,
-    "baseMax": 41050,
-    "baseMid": 37725,
+    "baseSessions": 73,
+    "baseTightness": 10.54,
+    "baseMin": 35100,
+    "baseMax": 38800,
+    "baseMinDate": "29/07/2026",
+    "baseMaxDate": "29/10/2026",
+    "baseMethod": "bottom",
+    "baseMethodName": "Nền Tạo Đáy",
+    "baseMethodDesc": "Cổ phiếu tích lũy gom hàng sau nhịp tạo đáy tháng 7, chưa breakout khỏi hộp để chuyển sang nền tiếp diễn",
+    "baseMid": 36950,
     "baseUpperHalf": true,
     "baseValid": true
   },
@@ -14172,11 +14177,12 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       const isNearTop = durOk && span > 0 && typeof st.price === 'number' && (st.price >= (minPrice + 0.8 * span));
 
       // Tooltip chi tiết theo đúng format yêu cầu:
-      // - Phương pháp: Nền Tạo Đáy (Đo từ cụm nến đóng cửa thấp nhất vùng đảo chiều tạo đáy)
+      // - Phương pháp: Nền Tạo Đáy
+      // - Lý do: Cổ phiếu tích lũy gom hàng sau nhịp tạo đáy tháng 7, chưa breakout khỏi hộp để chuyển sang nền tiếp diễn
       // - Độ siết nền: 13.04%
       // - Đáy: 28.75 ngày 27/07/2026; Đỉnh: 32.50 ngày 07/08/2026
       // - Số phiên đi nền 76 phiên (tương đương 3.6 tháng)
-      const tooltipText = `Phương pháp: ${methodName} (${methodDesc})\nĐộ siết nền: ${tightness}%\nĐáy: ${minFormatted} ngày ${minDate}; Đỉnh: ${maxFormatted} ngày ${maxDate}\nSố phiên đi nền ${baseSessions} phiên (tương đương ${baseMonths} tháng)`;
+      const tooltipText = `Phương pháp: ${methodName}\nLý do: ${methodDesc}\nĐộ siết nền: ${tightness}%\nĐáy: ${minFormatted} ngày ${minDate}; Đỉnh: ${maxFormatted} ngày ${maxDate}\nSố phiên đi nền ${baseSessions} phiên (tương đương ${baseMonths} tháng)`;
 
       return {
         durOk,
@@ -14230,6 +14236,7 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
               <div><span class="text-light-subtext dark:text-studio-muted">Số phiên đi nền:</span> <strong>${d.baseSessions} phiên</strong> (${d.baseMonths} tháng)</div>
               <div><span class="text-light-subtext dark:text-studio-muted">Vị thế nến:</span> <strong class="${d.isNearTop ? 'text-emerald-500 font-bold' : 'text-light-subtext dark:text-studio-muted'}">${d.isNearTop ? 'Tiệm cận vùng đỉnh nền (≥ 80%)' : 'Trong vùng tích lũy'}</strong></div>
             </div>
+            ${d.methodDesc ? `<div class="pt-2 text-[11px] border-t border-black/5 dark:border-white/5"><span class="text-light-subtext dark:text-studio-muted">Lý do chọn phương pháp:</span> <span class="text-light-text dark:text-studio-text font-medium">${d.methodDesc}</span></div>` : ''}
           </div>
 
           <!-- Bảng giải thích chi tiết 2 phương pháp -->

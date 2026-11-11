@@ -63,6 +63,7 @@
     + **Dữ liệu chuẩn hóa mẫu**:
       * CTG: Đáy `28.75` ngày 27/07/2026; Đỉnh `32.50` ngày 07/08/2026. Độ siết `13.04%`, 76 phiên (3.6 tháng). Giá 31.90 >= 31.75 => Hiển thị `Tiệm cận vùng đỉnh nền`.
       * SSI: Đáy `17.58` ngày 27/07/2026; Đỉnh `21.65` ngày 26/08/2026. Độ siết `23.15%`, 75 phiên (3.6 tháng). Giá 20.40 < 20.84 => Không hiển thị dòng tiệm cận.
+      * DPR: Đáy `35.10` ngày 29/07/2026; Đỉnh `38.80` ngày 29/10/2026. Độ siết `10.54%`, 73 phiên (3.5 tháng). Phương pháp: Nền Tạo Đáy (chưa breakout khỏi đỉnh hộp để chuyển sang nền tiếp diễn). Giá 38.00 < 38.06 => Không hiển thị dòng tiệm cận.
   - *Lưu ý*: Cả MA và Nền đều được tính toán lại động theo thị giá thời gian thực mỗi giây/phút.
 - **Tiêu chuẩn Định giá (P/E rẻ nhất)**:
   - Top 10 cổ phiếu có chỉ số P/E thấp nhất trong danh mục, có P/E dương (> 0).
