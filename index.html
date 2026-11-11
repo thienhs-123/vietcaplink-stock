@@ -3412,7 +3412,7 @@
         <input type="checkbox" id="excelFilterSelectAll" onchange="toggleExcelFilterSelectAll(this.checked)" class="rounded text-blue-500 focus:ring-0">
         <span>(Chọn tất cả)</span>
       </label>
-      <span id="excelFilterCountBadge" class="font-mono text-[10px] text-light-subtext dark:text-studio-muted"></span>
+      <span id="excelFilterCountBadge" class="text-[10px] text-light-subtext dark:text-studio-muted"></span>
     </div>
 
     <!-- Checkbox items list -->
@@ -7695,12 +7695,25 @@
       });
 
       // Sort values alphabetically / numerically
-      const uniqueVals = Array.from(valCounts.keys()).sort((a, b) => {
+      let uniqueVals = Array.from(valCounts.keys()).sort((a, b) => {
         const numA = parseFloat(String(a).replace(/,/g, ''));
         const numB = parseFloat(String(b).replace(/,/g, ''));
         if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
         return String(a).localeCompare(String(b), 'vi');
       });
+
+      // Bổ sung tiêu chí "Tiệm cận vùng đỉnh nền" cho cột Nền tích lũy (screener)
+      if (tableKey === 'screener' && colKey === 'baseMonths') {
+        let nearTopCount = 0;
+        data.forEach(item => {
+          const d = (typeof getStockBaseDetails === 'function') ? getStockBaseDetails(item) : null;
+          if (d && d.isNearTop) nearTopCount++;
+        });
+        valCounts.set('Tiệm cận vùng đỉnh nền', nearTopCount);
+
+        const ordered = ['-', '3 - 6 tháng', '6 - 12 tháng', 'Trên 12 tháng', 'Tiệm cận vùng đỉnh nền'];
+        uniqueVals = ordered.filter(v => valCounts.has(v));
+      }
 
       // Active filters for this column
       const currentFilters = StockApp.tableStates[tableKey]?.filters[colKey];
@@ -7717,7 +7730,7 @@
               <input type="checkbox" value="${escapeHtml(String(val))}" ${isChecked ? 'checked' : ''} onchange="onExcelOptionCheckboxChange()" class="rounded text-blue-500 focus:ring-0">
               <span class="truncate">${escapeHtml(String(val))}</span>
             </div>
-            <span class="text-[10px] text-light-subtext dark:text-studio-muted font-mono shrink-0 ml-1">(${count})</span>
+            <span class="text-[10px] text-light-subtext dark:text-studio-muted shrink-0 ml-1">(${count})</span>
           </label>
         `;
       }).join('');
@@ -14394,6 +14407,14 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       const screenerFilters = StockApp.tableStates.screener?.filters || {};
       filtered = filtered.filter(st => {
         for (const [col, valSet] of Object.entries(screenerFilters)) {
+          if (col === 'baseMonths') {
+            const d = getStockBaseDetails(st);
+            const tier = d.durOk ? d.tierLabel : "-";
+            const matchTier = valSet.has(tier);
+            const matchNearTop = d.isNearTop && valSet.has("Tiệm cận vùng đỉnh nền");
+            if (!matchTier && !matchNearTop) return false;
+            continue;
+          }
           let v = getTableRowColValue('screener', st, col);
           if (typeof v === 'number') v = v.toLocaleString('en-US');
           if (!valSet.has(String(v))) return false;
