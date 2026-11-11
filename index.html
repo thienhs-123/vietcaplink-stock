@@ -2569,7 +2569,7 @@
       <div class="flex items-center justify-between pb-3 border-b border-light-border dark:border-studio-border">
         <div class="flex items-center space-x-2">
           <i data-lucide="layers" class="w-5 h-5 text-emerald-500"></i>
-          <h3 class="text-base font-bold text-light-text dark:text-studio-text" id="baseDetailModalTitle">Thông tin nền tích lũy</h3>
+          <h3 class="text-base font-bold text-light-text dark:text-studio-text" id="baseDetailModalTitle">Thông tin nền tích lũy của cổ phiếu</h3>
         </div>
         <button type="button" onclick="closeBaseDetailModal()" class="p-1 rounded-lg text-light-subtext dark:text-studio-muted hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
           <i data-lucide="x" class="w-5 h-5"></i>
@@ -4197,7 +4197,7 @@
     "baseMaxDate": "07/08/2026",
     "baseMethod": "bottom",
     "baseMethodName": "Nền Tạo Đáy",
-    "baseMethodDesc": "Đo từ cụm nến đóng cửa thấp nhất vùng đảo chiều tạo đáy",
+    "baseMethodDesc": "Cổ phiếu CTG hình thành vùng đáy đảo chiều ngày 27/07/2026 với giá đóng cửa thấp nhất 28.75. Sau nhịp hồi đầu tiên chạm đỉnh 32.50 (ngày 07/08/2026), cổ phiếu dao động đi ngang trong biên độ siết chặt 13.04% suốt 76 phiên (3.6 tháng) và chưa vượt đỉnh 32.50. Vì vậy, hệ thống nhận diện theo Nền Tạo Đáy nhằm đo lường trọn vẹn chu kỳ tích lũy tạo đáy lớn.",
     "baseMid": 30625,
     "baseUpperHalf": true,
     "baseValid": true
@@ -4690,7 +4690,7 @@
     "baseMaxDate": "26/08/2026",
     "baseMethod": "bottom",
     "baseMethodName": "Nền Tạo Đáy",
-    "baseMethodDesc": "Đo từ cụm nến đóng cửa thấp nhất vùng đảo chiều tạo đáy",
+    "baseMethodDesc": "Cổ phiếu SSI xác lập đáy điều chỉnh ngày 27/07/2026 tại giá đóng cửa thấp nhất 17.58, đỉnh nhịp hồi đầu tiên 21.65 (ngày 26/08/2026). Cổ phiếu hiện dao động tích lũy 75 phiên (3.6 tháng) trong hộp giá gom hàng lớn và chưa bứt phá chuyển pha sang nền tiếp diễn kênh trên.",
     "baseMid": 19615,
     "baseUpperHalf": true,
     "baseValid": false
@@ -6299,7 +6299,7 @@
     "baseMaxDate": "29/10/2026",
     "baseMethod": "bottom",
     "baseMethodName": "Nền Tạo Đáy",
-    "baseMethodDesc": "Cổ phiếu tích lũy gom hàng sau nhịp tạo đáy tháng 7, chưa breakout khỏi hộp để chuyển sang nền tiếp diễn",
+    "baseMethodDesc": "Cổ phiếu DPR tạo đáy tại mức giá đóng cửa 35.10 (phiên 29/07/2026) sau nhịp điều chỉnh sâu của thị trường chung. Từ đó đến nay, cổ phiếu vận động tích lũy trong chiếc hộp giá 35.10 – 38.80 (đỉnh lập ngày 29/10/2026) và chưa có phiên bứt phá (breakout) vượt đỉnh để chuyển sang xu hướng Uptrend mới. Do vẫn nằm trọn vẹn trong biên độ gom hàng đầu tiên, cổ phiếu được nhận diện chuẩn xác theo Nền Tạo Đáy với thời gian đi nền 73 phiên (3.5 tháng), phản ánh đúng chu kỳ tích lũy gom hàng của dòng tiền lớn thay vì tính nhịp ngắn cục bộ.",
     "baseMid": 36950,
     "baseUpperHalf": true,
     "baseValid": true
@@ -14142,8 +14142,8 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       const method = st.baseMethod || 'bottom';
       const methodName = st.baseMethodName || (method === 'continuation' ? 'Nền Phẳng Tiếp Diễn' : 'Nền Tạo Đáy');
       const methodDesc = st.baseMethodDesc || (method === 'continuation' 
-        ? 'Xác định từ đỉnh bứt phá và nhịp retest tái tích lũy kênh trên' 
-        : 'Đo từ cụm nến đóng cửa thấp nhất vùng đảo chiều tạo đáy');
+        ? 'Cổ phiếu đã bứt phá khỏi nền giá tạo đáy trước đó và đang hình thành một chiếc hộp tích lũy mới ở kênh trên (nền chồng nền) để hấp thụ lượng cung chốt lời.' 
+        : 'Cổ phiếu tích lũy gom hàng sau nhịp tạo đáy tháng 7/2026, vận động trong chiếc hộp giá giữa đáy đảo chiều và đỉnh nhịp hồi đầu tiên, chưa breakout chuyển pha sang xu hướng mới.');
 
       // Giá Đáy và Đỉnh
       const minPrice = st.baseMin || (st.price ? Math.round(st.price * 0.9) : 0);
@@ -14183,7 +14183,7 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       // - Đáy: 28.75 ngày 27/07/2026; Đỉnh: 32.50 ngày 07/08/2026
       // - Số phiên đi nền: 76 phiên
       // - Thời gian đi nền: 3.6 tháng
-      const tooltipText = `Loại: ${methodName}\nLý do: ${methodDesc}\nĐộ siết nền: ${tightness}%\nĐáy: ${minFormatted} ngày ${minDate}; Đỉnh: ${maxFormatted} ngày ${maxDate}\nSố phiên đi nền: ${baseSessions} phiên\nThời gian đi nền: ${baseMonths} tháng`;
+      const tooltipText = `Loại: ${methodName}\nLý do nhận diện loại nền: ${methodDesc}\nĐộ siết nền: ${tightness}%\nĐáy: ${minFormatted} ngày ${minDate}; Đỉnh: ${maxFormatted} ngày ${maxDate}\nSố phiên đi nền: ${baseSessions} phiên\nThời gian đi nền: ${baseMonths} tháng`;
 
       return {
         durOk,
@@ -14212,7 +14212,7 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
 
       const titleEl = document.getElementById("baseDetailModalTitle");
       if (titleEl) {
-        titleEl.innerText = `Thông tin nền tích lũy`;
+        titleEl.innerText = `Thông tin nền tích lũy của cổ phiếu`;
       }
 
       const contentEl = document.getElementById("baseDetailModalContent");
@@ -14227,14 +14227,27 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
               </span>
             </div>
             <div class="grid grid-cols-2 gap-2 pt-2 text-[11px] border-t border-black/5 dark:border-white/5">
-              <div><span class="text-light-subtext dark:text-studio-muted">Loại:</span> <strong class="text-light-text dark:text-studio-text">${d.methodName}</strong></div>
+              <div class="flex items-center flex-wrap gap-1">
+                <span class="text-light-subtext dark:text-studio-muted">Loại:</span>
+                <strong class="text-light-text dark:text-studio-text">${d.methodName}</strong>
+                <button type="button" 
+                        onclick="toggleBaseReasonDetail()"
+                        title="Lý do nhận diện loại nền: ${escapeHtml(d.methodDesc)}"
+                        class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-medium text-light-subtext dark:text-studio-muted hover:text-emerald-600 dark:hover:text-emerald-400 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 transition-colors cursor-pointer">
+                  <i data-lucide="info" class="w-3 h-3 text-emerald-500"></i>
+                  <span>Chi tiết</span>
+                </button>
+              </div>
               <div><span class="text-light-subtext dark:text-studio-muted">Độ siết nền:</span> <strong class="text-emerald-600 dark:text-emerald-400">${d.tightness}%</strong></div>
               <div><span class="text-light-subtext dark:text-studio-muted">Đáy hộp:</span> <strong class="text-light-text dark:text-studio-text">${d.minFormatted}</strong> (${d.minDate})</div>
               <div><span class="text-light-subtext dark:text-studio-muted">Đỉnh hộp:</span> <strong class="text-light-text dark:text-studio-text">${d.maxFormatted}</strong> (${d.maxDate})</div>
               <div><span class="text-light-subtext dark:text-studio-muted">Số phiên đi nền:</span> <strong class="text-light-text dark:text-studio-text">${d.baseSessions} phiên</strong></div>
               <div><span class="text-light-subtext dark:text-studio-muted">Thời gian đi nền:</span> <strong class="text-light-text dark:text-studio-text">${d.baseMonths} tháng</strong></div>
             </div>
-            ${d.methodDesc ? `<div class="pt-2 text-[11px] border-t border-black/5 dark:border-white/5"><span class="text-light-subtext dark:text-studio-muted">Lý do chọn phương pháp:</span> <span class="text-light-text dark:text-studio-text font-medium">${d.methodDesc}</span></div>` : ''}
+            <div id="baseReasonDetailBox" class="hidden pt-2 text-[11px] border-t border-black/5 dark:border-white/5 leading-relaxed">
+              <span class="text-emerald-600 dark:text-emerald-400 font-bold">Lý do nhận diện loại nền:</span> 
+              <span class="text-light-text dark:text-studio-text">${d.methodDesc}</span>
+            </div>
           </div>
 
           <!-- Bảng giải thích chi tiết 2 phương pháp -->
@@ -14269,6 +14282,13 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       if (modal) modal.classList.remove("hidden");
     }
 
+    function toggleBaseReasonDetail() {
+      const box = document.getElementById("baseReasonDetailBox");
+      if (box) {
+        box.classList.toggle("hidden");
+      }
+    }
+
     function closeBaseDetailModal() {
       const modal = document.getElementById("baseDetailModal");
       if (modal) modal.classList.add("hidden");
@@ -14276,6 +14296,7 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
 
     window.openBaseDetailModal = openBaseDetailModal;
     window.closeBaseDetailModal = closeBaseDetailModal;
+    window.toggleBaseReasonDetail = toggleBaseReasonDetail;
     window.getStockBaseDetails = getStockBaseDetails;
 
     function renderScreenerTable(updateCounter = true) {

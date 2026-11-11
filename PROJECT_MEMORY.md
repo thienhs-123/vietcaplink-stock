@@ -63,18 +63,20 @@
       * Bên phải mốc có icon & nút `[ⓘ Chi tiết]`: Khi trỏ chuột hiển thị Tooltip format chuẩn:
         ```text
         Loại: [Tên loại nền]
-        Lý do: [Lý do chọn phương pháp]
+        Lý do nhận diện loại nền: [Lý do chi tiết theo phân tích kỹ thuật]
         Độ siết nền: XX.XX%
         Đáy: XX.XX ngày dd/mm/yyyy; Đỉnh: YY.YY ngày dd/mm/yyyy
         Số phiên đi nền: XX phiên
         Thời gian đi nền: YY tháng
         ```
       * Dòng ghi chú bên dưới mốc: Hiển thị `Tiệm cận vùng đỉnh nền` (chữ xanh). Điều kiện: Chỉ hiển thị khi thị giá hiện tại nằm ở >= 80% biên độ hộp (`Price >= Min + 0.8 * (Max - Min)`). Nếu không tiệm cận vùng đỉnh thì tuyệt đối KHÔNG hiển thị dòng này.
-    + **Giao diện Modal "Thông tin nền tích lũy" (Chuẩn hóa UX/UI)**:
-      * **Tiêu đề Modal**: Chỉ hiển thị duy nhất text `Thông tin nền tích lũy` (loại bỏ chữ "Chi tiết" và bỏ tên mã CP).
+    + **Giao diện Modal "Thông tin nền tích lũy của cổ phiếu" (Chuẩn hóa UX/UI)**:
+      * **Tiêu đề Modal**: Chỉ hiển thị duy nhất text `Thông tin nền tích lũy của cổ phiếu` (loại bỏ chữ "Chi tiết" và bỏ tên mã CP).
       * **Thẻ cổ phiếu**: Bỏ badge thời gian (`3 – 6 tháng`) ở góc phải header.
       * **Cụm 6 thông số (Grid 2 cột)**:
-        - `Loại: Nền Tạo Đáy` (thay từ "Phương pháp" thành "Loại").
+        - `Loại: Nền Tạo Đáy` kèm nút **`[ⓘ Chi tiết]`** ngay sau tên loại nền (Hover hiện tooltip lý do, click toggle đóng/mở hộp giải thích chi tiết).
+        - Bỏ hiển thị dòng "Lý do..." cố định ở đáy thẻ mặc định để giao diện gọn gàng, tinh tế.
+        - Chuẩn hóa nhãn giải thích thành: **`Lý do nhận diện loại nền:`** kèm phân tích cặn kẽ bản chất kỹ thuật cho từng mã (DPR, CTG, SSI...).
         - `Độ siết nền: XX.XX%`.
         - `Đáy hộp: XX.XX (dd/mm/yyyy)`.
         - `Đỉnh hộp: YY.YY (dd/mm/yyyy)`.

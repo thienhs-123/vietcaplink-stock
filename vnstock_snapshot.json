@@ -2564,7 +2564,7 @@
       "baseMaxDate": "29/10/2026",
       "baseMethod": "bottom",
       "baseMethodName": "Nền Tạo Đáy",
-      "baseMethodDesc": "Cổ phiếu tích lũy gom hàng sau nhịp tạo đáy tháng 7, chưa breakout khỏi hộp để chuyển sang nền tiếp diễn",
+      "baseMethodDesc": "Cổ phiếu DPR tạo đáy tại mức giá đóng cửa 35.10 (phiên 29/07/2026) sau nhịp điều chỉnh sâu của thị trường chung. Từ đó đến nay, cổ phiếu vận động tích lũy trong chiếc hộp giá 35.10 – 38.80 (đỉnh lập ngày 29/10/2026) và chưa có phiên bứt phá (breakout) vượt đỉnh để chuyển sang xu hướng Uptrend mới. Do vẫn nằm trọn vẹn trong biên độ gom hàng đầu tiên, cổ phiếu được nhận diện chuẩn xác theo Nền Tạo Đáy với thời gian đi nền 73 phiên (3.5 tháng), phản ánh đúng chu kỳ tích lũy gom hàng của dòng tiền lớn thay vì tính nhịp ngắn cục bộ.",
       "baseMid": 36950,
       "baseUpperHalf": true,
       "baseValid": true
