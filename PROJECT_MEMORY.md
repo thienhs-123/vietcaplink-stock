@@ -93,11 +93,11 @@
 - **Kết hợp cả 2**:
   - Giao thoa giữa Tiêu chuẩn Kỹ thuật và Tiêu chuẩn Định giá (hiện tại thỏa mãn mã HDB).
 - **Bảng kết quả lọc điểm mua & Modal thông tin nền tích lũy**:
-  - Đã lược bỏ cột "Biến động" theo yêu cầu, tập trung hiển thị 6 cột trọng tâm: Mã CP (18%), Ngành (16%), Giá VND (13%), P/E Lần (11%), Trên đường MA10 và MA50 (17%), Nền tích lũy (25%) - tổng cộng 100% cân đối, hài hòa.
-  - **Tiêu đề các cột**: Giữ nguyên trên 1 dòng duy nhất (không ngắt 2 dòng). Cột "Nền tích lũy" và cột "P/E (Lần)" được căn giữa cả tiêu đề lẫn nội dung.
+  - Đã lược bỏ cột "Biến động" theo yêu cầu, tập trung hiển thị 6 cột trọng tâm với bảng cố định tỷ lệ `table-fixed`: Mã CP (24%), Ngành (15%), Giá VND (12%), P/E Lần (10%), Trên đường MA10 và MA50 (18%), Nền tích lũy (21%) - tổng cộng 100% chuẩn xác, cân đối.
+  - **Tiêu đề các cột**: Chỉ ngắt dòng ở tiêu đề dài Cột 5 ("Trên đường" / "MA10 và MA50"), tất cả các cột khác giữ nguyên 1 dòng duy nhất. Cột "Nền tích lũy", cột "P/E (Lần)" và cột "Trên đường MA10 và MA50" được căn giữa cả tiêu đề lẫn nội dung.
   - **Badge Nền tích lũy**: Nội dung badge "3 – 6 tháng" được căn giữa tuyệt đối theo tâm cột.
   - **Nút "chi tiết" trong bảng**: Đã bỏ icon chữ "i", bỏ viền, nền trong suốt, chữ thường với màu sắc nhẹ nhàng nép sát bên phải badge, không lấn át badge và định vị absolute không kéo lệch tâm căn giữa của badge so với tiêu đề. Đã loại bỏ hoàn toàn thuộc tính `title` (không còn pop-up tooltip nền trắng khi rê chuột/hover), chỉ xuất hiện hộp thoại modal khi người dùng bấm click trực tiếp vào chữ `chi tiết`.
-  - **Phông chữ bảng**: Đồng nhất toàn bộ sang phông sans-serif chuẩn (loại bỏ `font-mono` ở Mã CP, Giá, P/E), đồng bộ hài hòa với giao diện giải thích của modal.
+  - **Phông chữ bảng**: Gỡ bỏ thẻ `td` khỏi CSS rule `SF Mono !important`, đồng thời bổ sung rule CSS ưu tiên cao áp đặt toàn bộ `#screenerTable` và các phần tử con dùng chuẩn phông sans-serif (`-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important`), đồng nhất hoàn toàn với giao diện giải thích của modal.
   - **Modal thông tin nền tích lũy**:
     + Tiêu đề modal: `Thông tin nền tích lũy của cổ phiếu`.
     + Tiêu đề khối lý do: `Lý do nhận diện loại nền:`. Hiển thị trực tiếp ra bên ngoài ngay khi mở modal từ bảng bên ngoài dashboard, người dùng không cần phải click thêm lần nữa.
