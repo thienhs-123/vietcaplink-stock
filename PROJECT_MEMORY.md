@@ -74,9 +74,10 @@
       * **Tiêu đề Modal**: Chỉ hiển thị duy nhất text `Thông tin nền tích lũy của cổ phiếu` (loại bỏ chữ "Chi tiết" và bỏ tên mã CP).
       * **Thẻ cổ phiếu**: Bỏ badge thời gian (`3 – 6 tháng`) ở góc phải header.
       * **Cụm 6 thông số (Grid 2 cột)**:
-        - `Loại: Nền Tạo Đáy` kèm nút **`[ⓘ Chi tiết]`** ngay sau tên loại nền (Hover hiện tooltip lý do, click toggle đóng/mở hộp giải thích chi tiết).
-        - Bỏ hiển thị dòng "Lý do..." cố định ở đáy thẻ mặc định để giao diện gọn gàng, tinh tế.
-        - Chuẩn hóa nhãn giải thích thành: **`Lý do nhận diện loại nền:`** kèm phân tích cặn kẽ bản chất kỹ thuật cho từng mã (DPR, CTG, SSI...).
+        - `Loại: Nền Tạo Đáy` kèm nút **`[ⓘ Chi tiết]`** ngay sau tên loại nền:
+          + Giao diện mặc định tinh gọn: Bỏ hoàn toàn khối tĩnh "Giải thích 2 Phương Pháp Xác Định Nền" ở bên dưới và dòng lý do ở đáy thẻ. Modal ban đầu chỉ hiển thị thẻ thông số 6 ô tinh tế, thoáng mắt.
+          + Cơ chế tương tác: Khi bấm nút `[ⓘ Chi tiết]`, hộp chi tiết bung mở ngay bên dưới gồm: 1) **Lý do nhận diện loại nền** của cổ phiếu đó (DPR, CTG, SSI...); 2) Toàn bộ nội dung chuẩn **Giải thích 2 Phương Pháp Xác Định Nền** (Nền Tạo Đáy & Nền Phẳng Tiếp Diễn).
+          + Khi bấm lại: Thu gọn lại sạch sẽ.
         - `Độ siết nền: XX.XX%`.
         - `Đáy hộp: XX.XX (dd/mm/yyyy)`.
         - `Đỉnh hộp: YY.YY (dd/mm/yyyy)`.
