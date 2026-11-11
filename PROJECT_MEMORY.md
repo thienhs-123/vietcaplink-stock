@@ -47,9 +47,22 @@
       * Cho phép chọn 2 khoảng liền kề (`[3-6T] + [6-12T]`, `[6-12T] + [>12T]`).
       * Cho phép chọn cả 3 khoảng (`[3-6T] + [6-12T] + [>12T]`).
       * **Ngăn chặn tuyệt đối**: Không cho phép chọn cùng lúc 2 ô cách quãng `3 – 6 tháng` và `trên 12 tháng` (nếu người dùng bấm tạo khoảng cách quãng hoặc cố tình bỏ chọn ô giữa khi cả 3 ô đang bật, hệ thống sẽ hiện thông báo hướng dẫn và giữ nguyên trạng thái hợp lệ).
-  - **Tiêu chuẩn 2 (Độ chặt chẽ nền)**:
-    + Biên độ biến động đỉnh - đáy nền: `(Max - Min) / Min <= 20%`.
-    + Thị giá vận động ở nửa trên vùng nền tích lũy (`st.price >= Mid`).
+  - **Tiêu chuẩn 2 (Độ chặt chẽ nền & Phương pháp tính)**:
+    + **Hai phương pháp xác định nền giá**:
+      1. *Phương pháp 1: Nền Tạo Đáy (Bottoming / Reversal Base)*: Áp dụng sau nhịp giảm sâu/bán tháo. Điểm gốc Đáy hộp (Floor) lấy từ cụm 2 - 3 cây nến đảo chiều thấp nhất (giá Close thấp nhất làm T0). Đỉnh hộp (Ceiling) là giá Close cao nhất của nhịp hồi phục đầu tiên. Thời gian tích lũy tính từ T0 đến phiên hiện tại.
+      2. *Phương pháp 2: Nền Phẳng Tiếp Diễn (Continuation Flat Base / High Tight Box)*: Áp dụng khi cổ phiếu trong xu hướng tăng mạnh/tái tích lũy kênh trên (nền chồng nền). Điểm gốc Đỉnh hộp (Ceiling) là phiên Close cao nhất chững đà tăng trong 3 ngày (T0). Đáy hộp (Floor) là giá Close thấp nhất của nhịp retest đi ngang. Thời gian tính từ đỉnh T0 đến phiên hiện tại.
+    + **Quy ước đọc nến**: Bắt buộc lấy **giá đóng cửa (Close)** của vùng nến (không lấy râu nến High/Low). Vùng đáy/đỉnh xác định từ nhóm 2 – 3 cây nến cực trị.
+    + **Độ siết nền**: `(Đỉnh - Đáy) / Đáy * 100% <= 20%`.
+    + **Hiển thị cột Nền tích lũy (Module 4)**:
+      * Chỉ hiển thị theo 3 mốc: `3 – 6 tháng`, `6 – 12 tháng`, `Trên 12 tháng`.
+      * Nếu thời gian < 3 tháng (< 60 phiên): Hiển thị `-` (không hiển thị gì, loại bỏ hoàn toàn chữ "Dưới 3 tháng").
+      * Bên phải mốc có icon & nút `[ⓘ Chi tiết]`: Khi trỏ chuột hiển thị Tooltip format chuẩn:
+        `Phương pháp: ...\nĐộ siết nền: ...%\nĐáy: XX.XX ngày dd/mm/yyyy; Đỉnh: YY.YY ngày dd/mm/yyyy\nSố phiên đi nền XX phiên (tương đương YY tháng)`.
+      * Khi bấm vào `[ⓘ Chi tiết]`: Mở Modal `baseDetailModal` hiển thị thông số chi tiết của cổ phiếu và bài giảng phân tích kỹ thuật của cả 2 phương pháp.
+      * Dòng ghi chú bên dưới: Hiển thị `Tiệm cận vùng đỉnh nền` (chữ xanh). Điều kiện: Chỉ hiển thị khi thị giá hiện tại nằm ở >= 80% biên độ hộp (`Price >= Min + 0.8 * (Max - Min)`). Nếu không tiệm cận vùng đỉnh thì tuyệt đối KHÔNG hiển thị dòng này.
+    + **Dữ liệu chuẩn hóa mẫu**:
+      * CTG: Đáy `28.75` ngày 27/07/2026; Đỉnh `32.50` ngày 07/08/2026. Độ siết `13.04%`, 76 phiên (3.6 tháng). Giá 31.90 >= 31.75 => Hiển thị `Tiệm cận vùng đỉnh nền`.
+      * SSI: Đáy `17.58` ngày 27/07/2026; Đỉnh `21.65` ngày 26/08/2026. Độ siết `23.15%`, 75 phiên (3.6 tháng). Giá 20.40 < 20.84 => Không hiển thị dòng tiệm cận.
   - *Lưu ý*: Cả MA và Nền đều được tính toán lại động theo thị giá thời gian thực mỗi giây/phút.
 - **Tiêu chuẩn Định giá (P/E rẻ nhất)**:
   - Top 10 cổ phiếu có chỉ số P/E thấp nhất trong danh mục, có P/E dương (> 0).

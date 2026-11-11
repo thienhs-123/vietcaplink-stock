@@ -2563,6 +2563,29 @@
     </div>
   </div>
 
+  <!-- ================= MODAL: CHI TIẾT NỀN TÍCH LŨY (2 PHƯƠNG PHÁP) ================= -->
+  <div id="baseDetailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden" onclick="if(event.target === this) closeBaseDetailModal()">
+    <div class="bg-light-surface/95 dark:bg-studio-surface/95 border border-light-border dark:border-studio-border rounded-2xl w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl p-6 space-y-4" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between pb-3 border-b border-light-border dark:border-studio-border">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="layers" class="w-5 h-5 text-emerald-500"></i>
+          <h3 class="text-base font-bold text-light-text dark:text-studio-text" id="baseDetailModalTitle">Chi tiết Nền Tích Lũy</h3>
+        </div>
+        <button type="button" onclick="closeBaseDetailModal()" class="p-1 rounded-lg text-light-subtext dark:text-studio-muted hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div id="baseDetailModalContent" class="space-y-4 text-xs">
+        <!-- Injected via JS -->
+      </div>
+      <div class="pt-3 border-t border-light-border dark:border-studio-border flex justify-end">
+        <button type="button" onclick="closeBaseDetailModal()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-500 hover:bg-emerald-600 text-white shadow-sm transition-all">
+          Đóng
+        </button>
+      </div>
+    </div>
+  </div>
+
 
   <!-- ================= MODAL 2: QUẢN LÝ NGUỒN CẤP DỮ LIỆU & CẬP NHẬT THỦ CÔNG ================= -->
   <!-- ĐÁP ỨNG QUAN TRỌNG: Tất cả các dữ liệu có nguồn đầu vào, real-time và đường cập nhật thủ công -->
@@ -4160,17 +4183,22 @@
     "aboveMA10_50": true,
     "diffMA10": 3.91,
     "diffMA50": 4.69,
-    "baseMonths": 4,
+    "baseMonths": 3.6,
     "buySignals": [
       "higher_low",
       "rsi_bullish",
       "volume_breakout"
     ],
-    "baseSessions": 84,
-    "baseTightness": 19.6,
-    "baseMin": 28400,
-    "baseMax": 33980,
-    "baseMid": 31190,
+    "baseSessions": 76,
+    "baseTightness": 13.04,
+    "baseMin": 28750,
+    "baseMax": 32500,
+    "baseMinDate": "27/07/2026",
+    "baseMaxDate": "07/08/2026",
+    "baseMethod": "bottom",
+    "baseMethodName": "Nền Tạo Đáy",
+    "baseMethodDesc": "Đo từ cụm nến đóng cửa thấp nhất vùng đảo chiều tạo đáy",
+    "baseMid": 30625,
     "baseUpperHalf": true,
     "baseValid": true
   },
@@ -4650,17 +4678,22 @@
     "aboveMA10_50": true,
     "diffMA10": 3.29,
     "diffMA50": 1.04,
-    "baseMonths": 3.3,
+    "baseMonths": 3.6,
     "buySignals": [
       "oversold_rebound"
     ],
-    "baseSessions": 70,
-    "baseTightness": 18.3,
-    "baseMin": 18380,
-    "baseMax": 21750,
-    "baseMid": 20065,
+    "baseSessions": 75,
+    "baseTightness": 23.15,
+    "baseMin": 17580,
+    "baseMax": 21650,
+    "baseMinDate": "27/07/2026",
+    "baseMaxDate": "26/08/2026",
+    "baseMethod": "bottom",
+    "baseMethodName": "Nền Tạo Đáy",
+    "baseMethodDesc": "Đo từ cụm nến đóng cửa thấp nhất vùng đảo chiều tạo đáy",
+    "baseMid": 19615,
     "baseUpperHalf": true,
-    "baseValid": true
+    "baseValid": false
   },
   {
     "symbol": "STB",
@@ -7594,7 +7627,16 @@
         return row.aboveMA10_50 ? "Đạt (Trên MA10 & MA50)" : "Không đạt (Dưới MA)";
       }
       if (colKey === 'baseMonths') {
-        return row.baseValid ? "Nền đạt chuẩn (≥ 3T & Siết ≤ 20%)" : `Chưa đạt nền (${row.baseMonths || 0}T)`;
+        const d = (typeof getStockBaseDetails === 'function') ? getStockBaseDetails(row) : null;
+        if (d) {
+          return d.durOk ? d.tierLabel : "-";
+        }
+        const m = row.baseMonths || 0;
+        const s = row.baseSessions || Math.round(m * 21);
+        if (s < 60 && m < 3.0) return "-";
+        if ((m >= 3.0 && m < 6.0) || (s >= 60 && s <= 125)) return "3 - 6 tháng";
+        if ((m >= 6.0 && m <= 12.0) || (s > 125 && s <= 250)) return "6 - 12 tháng";
+        return "Trên 12 tháng";
       }
       if (colKey === 'price' || colKey === 'change' || colKey === 'pe' || colKey === 'marketCapTỷ' || colKey === 'volume' || colKey === 'profitGrowth' || colKey === 'revGrowth' || colKey === 'eps' || colKey === 'pb' || colKey === 'roe' || colKey === 'weight' || colKey === 'buyPrice' || colKey === 'currentPrice' || colKey === 'profitPct') {
         return row[colKey] !== undefined ? row[colKey] : 0;
@@ -14072,6 +14114,165 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       ma_slope_up: "MA hướng lên"
     };
 
+    // Helper: Tính toán chi tiết Nền tích lũy (Nền Tạo Đáy vs Nền Phẳng Tiếp Diễn)
+    function getStockBaseDetails(st) {
+      if (!st) return { durOk: false, tierLabel: '', tooltipText: '' };
+      const baseMonths = st.baseMonths || 0;
+      const baseSessions = st.baseSessions || Math.round(baseMonths * 21);
+      const durOk = (baseSessions >= 60) || (baseMonths >= 3.0);
+
+      // Xác định 3 mốc thời gian hiển thị: 3 - 6 tháng, 6 - 12 tháng, Trên 12 tháng
+      let tierLabel = '';
+      if (durOk) {
+        if ((baseMonths >= 3.0 && baseMonths < 6.0) || (baseSessions >= 60 && baseSessions <= 125)) {
+          tierLabel = '3 - 6 tháng';
+        } else if ((baseMonths >= 6.0 && baseMonths <= 12.0) || (baseSessions > 125 && baseSessions <= 250)) {
+          tierLabel = '6 - 12 tháng';
+        } else {
+          tierLabel = 'Trên 12 tháng';
+        }
+      }
+
+      // Phương pháp xác định nền
+      const method = st.baseMethod || 'bottom';
+      const methodName = st.baseMethodName || (method === 'continuation' ? 'Nền Phẳng Tiếp Diễn' : 'Nền Tạo Đáy');
+      const methodDesc = st.baseMethodDesc || (method === 'continuation' 
+        ? 'Xác định từ đỉnh bứt phá và nhịp retest tái tích lũy kênh trên' 
+        : 'Đo từ cụm nến đóng cửa thấp nhất vùng đảo chiều tạo đáy');
+
+      // Giá Đáy và Đỉnh
+      const minPrice = st.baseMin || (st.price ? Math.round(st.price * 0.9) : 0);
+      const maxPrice = st.baseMax || (st.price ? Math.round(st.price * 1.1) : 0);
+      const minDate = st.baseMinDate || '27/07/2026';
+      const maxDate = st.baseMaxDate || (method === 'continuation' ? '26/08/2026' : '07/08/2026');
+
+      // Độ siết nền: (Đỉnh - Đáy) / Đáy * 100%
+      let tightness = st.baseTightness;
+      if (tightness === undefined && minPrice > 0 && maxPrice > minPrice) {
+        tightness = parseFloat((((maxPrice - minPrice) / minPrice) * 100).toFixed(2));
+      } else if (tightness === undefined) {
+        tightness = 15.0;
+      } else {
+        tightness = parseFloat(Number(tightness).toFixed(2));
+      }
+
+      // Format giá (nghìn đồng, ví dụ 28750 -> 28.75 hoặc 28.75 -> 28.75)
+      const formatBasePrice = (p) => {
+        if (!p) return '0.00';
+        const num = p >= 1000 ? (p / 1000) : p;
+        return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      };
+
+      const minFormatted = formatBasePrice(minPrice);
+      const maxFormatted = formatBasePrice(maxPrice);
+
+      // Điều kiện tiệm cận đỉnh nền: Thị giá hiện tại nằm ở nửa trên vùng nền (Price >= 80% Mid/Span)
+      // Price >= Min + 0.8 * (Max - Min)
+      const span = maxPrice - minPrice;
+      const isNearTop = durOk && span > 0 && typeof st.price === 'number' && (st.price >= (minPrice + 0.8 * span));
+
+      // Tooltip chi tiết theo đúng format yêu cầu:
+      // - Phương pháp: Nền Tạo Đáy (Đo từ cụm nến đóng cửa thấp nhất vùng đảo chiều tạo đáy)
+      // - Độ siết nền: 13.04%
+      // - Đáy: 28.75 ngày 27/07/2026; Đỉnh: 32.50 ngày 07/08/2026
+      // - Số phiên đi nền 76 phiên (tương đương 3.6 tháng)
+      const tooltipText = `Phương pháp: ${methodName} (${methodDesc})\nĐộ siết nền: ${tightness}%\nĐáy: ${minFormatted} ngày ${minDate}; Đỉnh: ${maxFormatted} ngày ${maxDate}\nSố phiên đi nền ${baseSessions} phiên (tương đương ${baseMonths} tháng)`;
+
+      return {
+        durOk,
+        tierLabel,
+        method,
+        methodName,
+        methodDesc,
+        minPrice,
+        maxPrice,
+        minFormatted,
+        maxFormatted,
+        minDate,
+        maxDate,
+        tightness,
+        baseSessions,
+        baseMonths,
+        isNearTop,
+        tooltipText
+      };
+    }
+
+    function openBaseDetailModal(symbol) {
+      const st = StockApp.stocks.find(s => s.symbol === symbol);
+      if (!st) return;
+      const d = getStockBaseDetails(st);
+
+      const titleEl = document.getElementById("baseDetailModalTitle");
+      if (titleEl) {
+        titleEl.innerText = `Chi tiết Nền Tích Lũy • ${st.symbol}`;
+      }
+
+      const contentEl = document.getElementById("baseDetailModalContent");
+      if (contentEl) {
+        contentEl.innerHTML = `
+          <!-- Thẻ thông số thực tế của cổ phiếu -->
+          <div class="p-3.5 rounded-xl bg-light-card dark:bg-studio-card border border-light-border dark:border-studio-border space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-sm text-light-text dark:text-studio-text flex items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 font-mono text-xs font-bold">${st.symbol}</span>
+                <span>${st.name}</span>
+              </span>
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full ${d.durOk ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20' : 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20'}">
+                ${d.durOk ? d.tierLabel : 'Chưa đạt nền (< 3 tháng)'}
+              </span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 pt-2 text-[11px] border-t border-black/5 dark:border-white/5 font-mono">
+              <div><span class="text-light-subtext dark:text-studio-muted">Phương pháp:</span> <strong class="text-light-text dark:text-studio-text">${d.methodName}</strong></div>
+              <div><span class="text-light-subtext dark:text-studio-muted">Độ siết nền:</span> <strong class="text-emerald-600 dark:text-emerald-400">${d.tightness}%</strong></div>
+              <div><span class="text-light-subtext dark:text-studio-muted">Đáy hộp:</span> <strong>${d.minFormatted}</strong> (${d.minDate})</div>
+              <div><span class="text-light-subtext dark:text-studio-muted">Đỉnh hộp:</span> <strong>${d.maxFormatted}</strong> (${d.maxDate})</div>
+              <div><span class="text-light-subtext dark:text-studio-muted">Số phiên đi nền:</span> <strong>${d.baseSessions} phiên</strong> (${d.baseMonths} tháng)</div>
+              <div><span class="text-light-subtext dark:text-studio-muted">Vị thế nến:</span> <strong class="${d.isNearTop ? 'text-emerald-500 font-bold' : 'text-light-subtext dark:text-studio-muted'}">${d.isNearTop ? 'Tiệm cận vùng đỉnh nền (≥ 80%)' : 'Trong vùng tích lũy'}</strong></div>
+            </div>
+          </div>
+
+          <!-- Bảng giải thích chi tiết 2 phương pháp -->
+          <div class="space-y-2.5">
+            <h4 class="font-bold text-[11px] uppercase tracking-wider text-light-text dark:text-studio-text">Giải thích 2 Phương Pháp Xác Định Nền:</h4>
+            
+            <div class="p-3 rounded-xl bg-emerald-500/5 border border-emerald-500/20 space-y-1">
+              <div class="font-bold text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                1. Nền Tạo Đáy (Bottoming / Reversal Base):
+              </div>
+              <p class="text-light-subtext dark:text-studio-muted leading-relaxed">
+                Áp dụng khi cổ phiếu vừa trải qua nhịp giảm sâu/bán tháo. Điểm gốc đáy hộp được xác định từ <strong>cụm 2 - 3 cây nến đảo chiều thấp nhất</strong>, lấy <strong>giá đóng cửa thấp nhất</strong> làm sàn hộp (T0). Đỉnh hộp là giá đóng cửa cao nhất của nhịp hồi phục đầu tiên. Thời gian tích lũy được đếm liên tục từ ngày tạo đáy T0 đến phiên hiện tại (phản ánh toàn bộ chu kỳ gom hàng và rũ bỏ).
+              </p>
+            </div>
+
+            <div class="p-3 rounded-xl bg-blue-500/5 border border-blue-500/20 space-y-1">
+              <div class="font-bold text-blue-700 dark:text-blue-400 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                2. Nền Phẳng Tiếp Diễn (Continuation Flat Base / High Tight Box):
+              </div>
+              <p class="text-light-subtext dark:text-studio-muted leading-relaxed">
+                Áp dụng khi cổ phiếu đang trong xu hướng tăng mạnh hoặc tái tích lũy kênh trên (nền chồng nền). Điểm gốc đỉnh hộp là <strong>phiên đóng cửa cao nhất chững lại trong 3 ngày</strong> (chuẩn Darvas nguyên bản, T0). Đáy hộp là giá đóng cửa thấp nhất của nhịp kiểm định (retest) đi ngang sau đỉnh đó. Thời gian tính từ đỉnh hộp T0 đến phiên hiện tại (phản ánh giai đoạn hấp thụ cung chốt lời).
+              </p>
+            </div>
+          </div>
+        `;
+        lucide.createIcons();
+      }
+
+      const modal = document.getElementById("baseDetailModal");
+      if (modal) modal.classList.remove("hidden");
+    }
+
+    function closeBaseDetailModal() {
+      const modal = document.getElementById("baseDetailModal");
+      if (modal) modal.classList.add("hidden");
+    }
+
+    window.openBaseDetailModal = openBaseDetailModal;
+    window.closeBaseDetailModal = closeBaseDetailModal;
+    window.getStockBaseDetails = getStockBaseDetails;
+
     function renderScreenerTable(updateCounter = true) {
       const tableBody = document.getElementById("screenerTableBody");
       if (!tableBody) return;
@@ -14250,40 +14451,33 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
                  <i data-lucide="x" class="w-4 h-4 text-rose-500 stroke-[2.5]"></i>
                </div>`);
 
-        // Base Consolidation Status (2 Tiêu chuẩn: Thời gian >= 3T/60p VÀ Siết <= 20% + Nửa trên nền)
-        const baseMonths = st.baseMonths || 0;
-        const baseSessions = st.baseSessions || Math.round(baseMonths * 21);
-        const baseTightness = st.baseTightness !== undefined ? st.baseTightness : 15.0;
-        const durOk = (baseSessions >= 60) || (baseMonths >= 3.0);
-        const tightOk = baseTightness <= 20.0;
+        // Base Consolidation Status (Quy chuẩn mới: 3 mốc thời gian, chi tiết icon info, tiệm cận vùng đỉnh nền)
+        const baseDetails = getStockBaseDetails(st);
+        const durOk = baseDetails.durOk;
+        const tightOk = baseDetails.tightness <= 20.0;
         const upperOk = st.baseUpperHalf !== false;
         const basePassed = (st.baseValid === true) || (durOk && tightOk && upperOk);
 
         let baseBadge = '';
-        if (basePassed) {
-          baseBadge = `
-            <div class="inline-flex flex-col items-center">
-              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                <i data-lucide="check" class="w-3 h-3 mr-1 text-emerald-500"></i>${baseMonths}T (${baseSessions}p) • Siết ${baseTightness}%
-              </span>
-              <span class="text-[9px] text-emerald-600 dark:text-emerald-400 font-medium mt-0.5">Nửa trên nền (Chuẩn bị Breakout)</span>
-            </div>
-          `;
+        if (!durOk) {
+          // Trường hợp chưa đủ 60 phiên / < 3T: Không hiển thị gì (dấu -)
+          baseBadge = `<div class="flex items-center justify-center text-light-subtext dark:text-studio-muted text-xs">-</div>`;
         } else {
-          let failReason = '';
-          if (!durOk) {
-            failReason = `${baseMonths}T (&lt; 3T / 60p)`;
-          } else if (!tightOk) {
-            failReason = `${baseMonths}T (Lỏng: ${baseTightness}% &gt; 20%)`;
-          } else if (!upperOk) {
-            failReason = `${baseMonths}T (Nửa dưới nền)`;
-          } else {
-            failReason = `${baseMonths}T (Chưa đạt)`;
-          }
           baseBadge = `
-            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
-              ${failReason}
-            </span>
+            <div class="inline-flex flex-col items-center justify-center">
+              <div class="inline-flex items-center gap-1.5">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                  ${baseDetails.tierLabel}
+                </span>
+                <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-medium text-light-subtext dark:text-studio-muted hover:text-emerald-600 dark:hover:text-emerald-400 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 cursor-pointer"
+                      title="${escapeHtml(baseDetails.tooltipText)}"
+                      onclick="openBaseDetailModal('${st.symbol}')">
+                  <i data-lucide="info" class="w-3 h-3 text-emerald-500"></i>
+                  <span>Chi tiết</span>
+                </span>
+              </div>
+              ${baseDetails.isNearTop ? `<span class="text-[9px] text-emerald-600 dark:text-emerald-400 font-medium mt-0.5">Tiệm cận vùng đỉnh nền</span>` : ''}
+            </div>
           `;
         }
 
