@@ -6,7 +6,7 @@ const snapshotPath = path.join(__dirname, '..', 'vnstock_snapshot.json');
 const snapshot = JSON.parse(fs.readFileSync(snapshotPath, 'utf8'));
 const symbols = Object.keys(snapshot.stocks);
 
-console.log(`Starting Technical & Base computation for ${symbols.length} stocks...`);
+console.log(`Starting Technical & Base computation for ${symbols.length} stocks (Cách 1 + Spring info)...`);
 
 function fetchHistory(symbol) {
   const to = Math.floor(Date.now() / 1000);
@@ -65,11 +65,14 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
   // 2. Base Consolidation Detection
   const candidates = [];
 
-  // Method 1: Bottom Reversal / Accumulation Base with Spring <= 5%
+  // Method 1: Bottom Reversal Base (Starting at initial trough T0, Spring <= 5%)
   for (let t0 = Math.max(0, len - 180); t0 <= len - 60; t0++) {
     const t0Close = closesVND[t0];
-    const isTrough = (t0 === 0 || t0Close <= closesVND[t0 - 1]) &&
-                     (t0 >= len - 1 || t0Close <= closesVND[t0 + 1]);
+    // t0 must be the lowest close in a 3-bar cluster (t0-3 to t0+3)
+    let isTrough = true;
+    for (let r = Math.max(0, t0 - 3); r <= Math.min(len - 1, t0 + 3); r++) {
+      if (closesVND[r] < t0Close) { isTrough = false; break; }
+    }
 
     if (!isTrough) continue;
 
@@ -98,33 +101,43 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
 
     if (invalidBreakdown) continue;
 
-    const tightness = parseFloat((((maxClose - minClose) / minClose) * 100).toFixed(1));
+    // In Cách 1: Đáy hộp is anchored to t0Close (the initial reversal trough)
+    const baseMin = t0Close;
+    const baseMinDate = formatDateVN(timestamps[t0]);
+    const baseMax = maxClose;
+    const baseMaxDate = formatDateVN(timeSlice[maxIdx]);
+
+    const tightness = parseFloat((((baseMax - baseMin) / baseMin) * 100).toFixed(1));
 
     if (tightness <= 20.0 && price >= minClose) {
-      const minDate = formatDateVN(timeSlice[minIdx]);
-      const maxDate = formatDateVN(timeSlice[maxIdx]);
       const months = parseFloat((sessions / 21).toFixed(1));
+      let springPrice = null;
+      let springDate = null;
 
       let methodDesc = '';
       if (hasSpring) {
-        methodDesc = `Cổ phiếu tích lũy gom hàng sau nhịp tạo đáy tháng 7/2026, có nhịp rũ bỏ quét đáy (Spring) ngày ${minDate} về ${formatPriceK(minClose)} rồi bật tăng mạnh trở lại kênh trên, vận động siết chặt trong chiếc hộp ${formatPriceK(minClose)} - ${formatPriceK(maxClose)} (${tightness}%), chưa breakout chuyển pha sang xu hướng mới.`;
+        springPrice = minClose;
+        springDate = formatDateVN(timeSlice[minIdx]);
+        methodDesc = `Cổ phiếu tích lũy gom hàng sau nhịp tạo đáy ngày ${baseMinDate}, có nhịp rũ bỏ quét đáy (Spring) ngày ${springDate} về ${formatPriceK(springPrice)} rồi bật tăng mạnh trở lại kênh trên, vận động siết chặt trong chiếc hộp ${formatPriceK(baseMin)} - ${formatPriceK(baseMax)} (${tightness}%), chưa breakout chuyển pha sang xu hướng mới.`;
       } else {
-        methodDesc = `Cổ phiếu tích lũy gom hàng sau nhịp tạo đáy ngày ${minDate}, vận động trong chiếc hộp giá giữa đáy đảo chiều (${formatPriceK(minClose)}) và đỉnh nhịp hồi (${formatPriceK(maxClose)}), độ siết ${tightness}%, chưa breakout chuyển pha sang xu hướng mới.`;
+        methodDesc = `Cổ phiếu tích lũy gom hàng sau nhịp tạo đáy ngày ${baseMinDate}, vận động trong chiếc hộp giá giữa đáy đảo chiều (${formatPriceK(baseMin)}) và đỉnh nhịp hồi (${formatPriceK(baseMax)}), độ siết ${tightness}%, chưa breakout chuyển pha sang xu hướng mới.`;
       }
 
       candidates.push({
         method: 'bottom',
         methodName: 'Nền Tạo Đáy',
         methodDesc,
-        baseMin: minClose,
-        baseMax: maxClose,
-        baseMinDate: minDate,
-        baseMaxDate: maxDate,
+        baseMin: baseMin,
+        baseMax: baseMax,
+        baseMinDate: baseMinDate,
+        baseMaxDate: baseMaxDate,
         baseSessions: sessions,
         baseMonths: months,
         baseTightness: tightness,
         hasSpring,
-        score: (25 - tightness) * 8 + Math.min(sessions, 120)
+        springPrice,
+        springDate,
+        score: sessions * 1.5 + (25 - tightness) * 4
       });
     }
   }
@@ -132,8 +145,11 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
   // Method 2: Continuation Flat Base (High Tight Box starting at peak T0)
   for (let t0 = Math.max(0, len - 180); t0 <= len - 60; t0++) {
     const t0Close = closesVND[t0];
-    const isPeak = (t0 === 0 || t0Close >= closesVND[t0 - 1]) &&
-                   (t0 >= len - 1 || t0Close >= closesVND[t0 + 1]);
+    // t0 must be the highest close in a 3-bar cluster (t0-3 to t0+3)
+    let isPeak = true;
+    for (let r = Math.max(0, t0 - 3); r <= Math.min(len - 1, t0 + 3); r++) {
+      if (closesVND[r] > t0Close) { isPeak = false; break; }
+    }
 
     if (!isPeak) continue;
 
@@ -155,31 +171,35 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
       }
     }
 
-    // For continuation flat base, peak should be near beginning of window
     if (maxIdx > Math.round(sessions * 0.15)) continue;
 
-    const tightness = parseFloat((((maxClose - minClose) / minClose) * 100).toFixed(1));
+    const baseMax = maxClose;
+    const baseMaxDate = formatDateVN(timeSlice[maxIdx]);
+    const baseMin = minClose;
+    const baseMinDate = formatDateVN(timeSlice[minIdx]);
+
+    const tightness = parseFloat((((baseMax - baseMin) / baseMin) * 100).toFixed(1));
 
     if (tightness <= 20.0 && price >= minClose) {
-      const minDate = formatDateVN(timeSlice[minIdx]);
-      const maxDate = formatDateVN(timeSlice[maxIdx]);
       const months = parseFloat((sessions / 21).toFixed(1));
 
-      const methodDesc = `Cổ phiếu đã bứt phá khỏi nền giá tạo đáy trước đó và đang hình thành một chiếc hộp tích lũy mới ở kênh trên (nền chồng nền) từ ngày ${maxDate} để hấp thụ lượng cung chốt lời với độ siết ${tightness}%.`;
+      const methodDesc = `Cổ phiếu đã bứt phá khỏi nền giá tạo đáy trước đó và đang hình thành một chiếc hộp tích lũy mới ở kênh trên (nền chồng nền) từ ngày ${baseMaxDate} để hấp thụ lượng cung chốt lời với độ siết ${tightness}%.`;
 
       candidates.push({
         method: 'continuation',
         methodName: 'Nền Phẳng Tiếp Diễn',
         methodDesc,
-        baseMin: minClose,
-        baseMax: maxClose,
-        baseMinDate: minDate,
-        baseMaxDate: maxDate,
+        baseMin: baseMin,
+        baseMax: baseMax,
+        baseMinDate: baseMinDate,
+        baseMaxDate: baseMaxDate,
         baseSessions: sessions,
         baseMonths: months,
         baseTightness: tightness,
         hasSpring: false,
-        score: (25 - tightness) * 8 + Math.min(sessions, 120)
+        springPrice: null,
+        springDate: null,
+        score: sessions * 1.5 + (25 - tightness) * 4
       });
     }
   }
@@ -213,7 +233,9 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
       baseSessions: 0,
       baseMonths: 0,
       baseTightness: tightness,
-      hasSpring: false
+      hasSpring: false,
+      springPrice: null,
+      springDate: null
     };
   }
 
@@ -238,6 +260,8 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
     baseMethodName: baseResult.methodName,
     baseMethodDesc: baseResult.methodDesc,
     baseHasSpring: baseResult.hasSpring,
+    springPrice: baseResult.springPrice,
+    springDate: baseResult.springDate,
     baseMid,
     baseUpperHalf,
     baseValid: baseResult.baseValid
@@ -310,6 +334,8 @@ async function run() {
       s.baseMethodName = tech.baseMethodName;
       s.baseMethodDesc = tech.baseMethodDesc;
       s.baseHasSpring = tech.baseHasSpring;
+      s.springPrice = tech.springPrice;
+      s.springDate = tech.springDate;
       s.baseMid = tech.baseMid;
       s.baseUpperHalf = tech.baseUpperHalf;
       s.baseValid = tech.baseValid;
@@ -328,6 +354,9 @@ async function run() {
       s.baseMonths = 0;
       s.baseTightness = 25.0;
       s.baseValid = false;
+      s.baseHasSpring = false;
+      s.springPrice = null;
+      s.springDate = null;
     }
   }
 

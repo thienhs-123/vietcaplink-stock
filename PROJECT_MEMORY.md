@@ -82,6 +82,7 @@
         - `Đỉnh hộp: YY.YY (dd/mm/yyyy)`.
         - `Số phiên đi nền: XX phiên` (bỏ số tháng trong ngoặc).
         - `Thời gian đi nền: YY tháng` (thay thế cho ô "Vị thế nến" đã bị loại bỏ hoàn toàn).
+        - `Spring: XX.XX (ngày dd/mm/yyyy)` (ở phần cuối lưới thông số; nếu không có Spring thì hiển thị `Spring: Không xuất hiện`).
       * **Đồng nhất phông chữ**: Bỏ class `font-mono` ở khối lưới thông số, đồng nhất hoàn toàn sang phông sans-serif hiện đại cùng kiểu với khối bài giảng phân tích kỹ thuật 2 phương pháp bên dưới.
     + **Dữ liệu chuẩn hóa mẫu đã qua rà soát**:
       * CTG: Đáy `28.75` ngày 27/07/2026; Đỉnh `32.50` ngày 07/08/2026. Độ siết `13.04%`, 76 phiên (3.6 tháng). Giá 31.90 >= 31.75 => Hiển thị `Tiệm cận vùng đỉnh nền`.
