@@ -7,22 +7,14 @@ const snapPath = path.join(__dirname, '..', 'vnstock_snapshot.json');
 const snap = JSON.parse(fs.readFileSync(snapPath, 'utf8'));
 const content = fs.readFileSync(indexPath, 'utf8');
 
-const startTag = 'stocks: \n[';
-const startIdx = content.indexOf(startTag);
-if (startIdx === -1) {
-  console.error('Cannot find startTag');
+const regex = /stocks:\s*\r?\n(\[[\s\S]*?\r?\n\])\r?\n\s*\};/;
+const match = content.match(regex);
+if (!match) {
+  console.error('Cannot find stocks array in index.html');
   process.exit(1);
 }
 
-const endTag = '\n]\n    };';
-const endIdx = content.indexOf(endTag, startIdx);
-if (endIdx === -1) {
-  console.error('Cannot find endTag');
-  process.exit(1);
-}
-
-const originalJsonStr = content.slice(startIdx + 'stocks: \n'.length, endIdx + 2);
-const stocksList = JSON.parse(originalJsonStr);
+const stocksList = JSON.parse(match[1]);
 console.log(`Loaded ${stocksList.length} stocks from index.html`);
 
 // Merge updated properties from snapshot
@@ -51,6 +43,12 @@ stocksList.forEach(st => {
     st.baseTightness = incoming.baseTightness;
     st.baseMin = incoming.baseMin;
     st.baseMax = incoming.baseMax;
+    st.baseMinDate = incoming.baseMinDate;
+    st.baseMaxDate = incoming.baseMaxDate;
+    st.baseMethod = incoming.baseMethod;
+    st.baseMethodName = incoming.baseMethodName;
+    st.baseMethodDesc = incoming.baseMethodDesc;
+    st.baseHasSpring = incoming.baseHasSpring;
     st.baseMid = incoming.baseMid;
     st.baseUpperHalf = incoming.baseUpperHalf;
     st.baseValid = incoming.baseValid;
@@ -58,7 +56,7 @@ stocksList.forEach(st => {
 });
 
 const newJsonStr = JSON.stringify(stocksList, null, 2);
-const newContent = content.slice(0, startIdx + 'stocks: \n'.length) + newJsonStr + content.slice(endIdx + 2);
+const newContent = content.slice(0, match.index) + `stocks: \n${newJsonStr}\n    };` + content.slice(match.index + match[0].length);
 
 fs.writeFileSync(indexPath, newContent, 'utf8');
 console.log('Successfully synchronized StockApp.stocks into index.html');

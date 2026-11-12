@@ -10,7 +10,7 @@ console.log(`Starting Technical & Base computation for ${symbols.length} stocks.
 
 function fetchHistory(symbol) {
   const to = Math.floor(Date.now() / 1000);
-  const from = to - (300 * 86400); // 300 days of history
+  const from = to - (365 * 86400); // 365 days of history
   const url = `https://iboard-api.ssi.com.vn/statistics/charts/history?symbol=${symbol}&resolution=D&from=${from}&to=${to}`;
   
   return new Promise((resolve) => {
@@ -31,87 +31,194 @@ function fetchHistory(symbol) {
   });
 }
 
-function analyzeStockTechnical(bars, currentPriceVND) {
+function formatDateVN(timestampSec) {
+  const d = new Date(timestampSec * 1000);
+  const day = String(d.getDate()).padStart(2, '0');
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const year = d.getFullYear();
+  return `${day}/${month}/${year}`;
+}
+
+function formatPriceK(valVND) {
+  return (valVND / 1000).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function analyzeStockTechnical(bars, currentPriceVND, symbol) {
   if (!bars || !bars.c || bars.c.length < 50) return null;
   const len = bars.c.length;
   // Convert from thousands to VND
-  const closes = bars.c.map(v => Math.round(v * 1000));
-  const highs = bars.h.map(v => Math.round(v * 1000));
-  const lows = bars.l.map(v => Math.round(v * 1000));
-  
-  const price = currentPriceVND || closes[len - 1];
+  const closesVND = bars.c.map(v => Math.round(v * 1000));
+  const timestamps = bars.t;
+  const price = currentPriceVND || closesVND[len - 1];
 
-  // MA10
-  const last10 = closes.slice(-10);
+  // 1. Moving Averages (MA10 & MA50)
+  const last10 = closesVND.slice(-10);
   const ma10 = Math.round(last10.reduce((a, b) => a + b, 0) / 10);
   const diffMA10 = parseFloat((((price - ma10) / ma10) * 100).toFixed(1));
 
-  // MA50
-  const last50 = closes.slice(-50);
+  const last50 = closesVND.slice(-50);
   const ma50 = Math.round(last50.reduce((a, b) => a + b, 0) / 50);
   const diffMA50 = parseFloat((((price - ma50) / ma50) * 100).toFixed(1));
 
   const aboveMA10_50 = (diffMA10 > 0 && diffMA50 > 0);
 
-  // 60-session window
-  const win = Math.min(60, len);
-  let min60 = Infinity, max60 = -Infinity;
-  for (let i = len - win; i < len; i++) {
-    if (lows[i] < min60) min60 = lows[i];
-    if (highs[i] > max60) max60 = highs[i];
-  }
-  const tightness60 = parseFloat((((max60 - min60) / min60) * 100).toFixed(1));
+  // 2. Base Consolidation Detection
+  const candidates = [];
 
-  let bestSessions = win;
-  let bestTightness = tightness60;
-  let bestMin = min60;
-  let bestMax = max60;
+  // Method 1: Bottom Reversal / Accumulation Base with Spring <= 5%
+  for (let t0 = Math.max(0, len - 180); t0 <= len - 60; t0++) {
+    const t0Close = closesVND[t0];
+    const isTrough = (t0 === 0 || t0Close <= closesVND[t0 - 1]) &&
+                     (t0 >= len - 1 || t0Close <= closesVND[t0 + 1]);
 
-  if (tightness60 <= 20.0) {
-    let curMin = min60, curMax = max60;
-    let ext = win;
-    for (let i = len - win - 1; i >= 0; i--) {
-      const nextMin = Math.min(curMin, lows[i]);
-      const nextMax = Math.max(curMax, highs[i]);
-      const nextTightness = ((nextMax - nextMin) / nextMin) * 100;
-      if (nextTightness <= 20.0) {
-        curMin = nextMin;
-        curMax = nextMax;
-        ext++;
-      } else {
-        break;
+    if (!isTrough) continue;
+
+    const baseSlice = closesVND.slice(t0);
+    const timeSlice = timestamps.slice(t0);
+    const sessions = baseSlice.length;
+
+    let minClose = Infinity, minIdx = -1;
+    let maxClose = -Infinity, maxIdx = -1;
+
+    for (let i = 0; i < baseSlice.length; i++) {
+      if (baseSlice[i] < minClose) {
+        minClose = baseSlice[i];
+        minIdx = i;
+      }
+      if (baseSlice[i] > maxClose) {
+        maxClose = baseSlice[i];
+        maxIdx = i;
       }
     }
-    bestSessions = ext;
-    bestTightness = parseFloat((((curMax - curMin) / curMin) * 100).toFixed(1));
-    bestMin = curMin;
-    bestMax = curMax;
+
+    // Spring Condition: dip below t0Close by <= 5% is accepted as a valid Spring/Shakeout
+    const dipPct = ((t0Close - minClose) / t0Close) * 100;
+    const hasSpring = (minIdx > 0 && dipPct > 0.05 && dipPct <= 5.0);
+    const invalidBreakdown = (minIdx > 0 && dipPct > 5.0);
+
+    if (invalidBreakdown) continue;
+
+    const tightness = parseFloat((((maxClose - minClose) / minClose) * 100).toFixed(1));
+
+    if (tightness <= 20.0 && price >= minClose) {
+      const minDate = formatDateVN(timeSlice[minIdx]);
+      const maxDate = formatDateVN(timeSlice[maxIdx]);
+      const months = parseFloat((sessions / 21).toFixed(1));
+
+      let methodDesc = '';
+      if (hasSpring) {
+        methodDesc = `Cổ phiếu tích lũy gom hàng sau nhịp tạo đáy tháng 7/2026, có nhịp rũ bỏ quét đáy (Spring) ngày ${minDate} về ${formatPriceK(minClose)} rồi bật tăng mạnh trở lại kênh trên, vận động siết chặt trong chiếc hộp ${formatPriceK(minClose)} - ${formatPriceK(maxClose)} (${tightness}%), chưa breakout chuyển pha sang xu hướng mới.`;
+      } else {
+        methodDesc = `Cổ phiếu tích lũy gom hàng sau nhịp tạo đáy ngày ${minDate}, vận động trong chiếc hộp giá giữa đáy đảo chiều (${formatPriceK(minClose)}) và đỉnh nhịp hồi (${formatPriceK(maxClose)}), độ siết ${tightness}%, chưa breakout chuyển pha sang xu hướng mới.`;
+      }
+
+      candidates.push({
+        method: 'bottom',
+        methodName: 'Nền Tạo Đáy',
+        methodDesc,
+        baseMin: minClose,
+        baseMax: maxClose,
+        baseMinDate: minDate,
+        baseMaxDate: maxDate,
+        baseSessions: sessions,
+        baseMonths: months,
+        baseTightness: tightness,
+        hasSpring,
+        score: (25 - tightness) * 8 + Math.min(sessions, 120)
+      });
+    }
+  }
+
+  // Method 2: Continuation Flat Base (High Tight Box starting at peak T0)
+  for (let t0 = Math.max(0, len - 180); t0 <= len - 60; t0++) {
+    const t0Close = closesVND[t0];
+    const isPeak = (t0 === 0 || t0Close >= closesVND[t0 - 1]) &&
+                   (t0 >= len - 1 || t0Close >= closesVND[t0 + 1]);
+
+    if (!isPeak) continue;
+
+    const baseSlice = closesVND.slice(t0);
+    const timeSlice = timestamps.slice(t0);
+    const sessions = baseSlice.length;
+
+    let minClose = Infinity, minIdx = -1;
+    let maxClose = -Infinity, maxIdx = -1;
+
+    for (let i = 0; i < baseSlice.length; i++) {
+      if (baseSlice[i] < minClose) {
+        minClose = baseSlice[i];
+        minIdx = i;
+      }
+      if (baseSlice[i] > maxClose) {
+        maxClose = baseSlice[i];
+        maxIdx = i;
+      }
+    }
+
+    // For continuation flat base, peak should be near beginning of window
+    if (maxIdx > Math.round(sessions * 0.15)) continue;
+
+    const tightness = parseFloat((((maxClose - minClose) / minClose) * 100).toFixed(1));
+
+    if (tightness <= 20.0 && price >= minClose) {
+      const minDate = formatDateVN(timeSlice[minIdx]);
+      const maxDate = formatDateVN(timeSlice[maxIdx]);
+      const months = parseFloat((sessions / 21).toFixed(1));
+
+      const methodDesc = `Cổ phiếu đã bứt phá khỏi nền giá tạo đáy trước đó và đang hình thành một chiếc hộp tích lũy mới ở kênh trên (nền chồng nền) từ ngày ${maxDate} để hấp thụ lượng cung chốt lời với độ siết ${tightness}%.`;
+
+      candidates.push({
+        method: 'continuation',
+        methodName: 'Nền Phẳng Tiếp Diễn',
+        methodDesc,
+        baseMin: minClose,
+        baseMax: maxClose,
+        baseMinDate: minDate,
+        baseMaxDate: maxDate,
+        baseSessions: sessions,
+        baseMonths: months,
+        baseTightness: tightness,
+        hasSpring: false,
+        score: (25 - tightness) * 8 + Math.min(sessions, 120)
+      });
+    }
+  }
+
+  let baseResult = null;
+  if (candidates.length > 0) {
+    candidates.sort((a, b) => b.score - a.score);
+    baseResult = candidates[0];
+    baseResult.baseValid = true;
   } else {
-    // If 60-session tightness > 20%, find most recent consolidation span where tightness <= 20%
-    let curMinR = lows[len - 1], curMaxR = highs[len - 1];
-    let recent = 1;
-    for (let i = len - 2; i >= 0; i--) {
-      const nMin = Math.min(curMinR, lows[i]);
-      const nMax = Math.max(curMaxR, highs[i]);
-      if (((nMax - nMin) / nMin) * 100 <= 20.0) {
-        curMinR = nMin;
-        curMaxR = nMax;
-        recent++;
-      } else {
-        break;
-      }
+    // No valid base <= 20%
+    const win = 60;
+    const baseSlice = closesVND.slice(len - win);
+    const timeSlice = timestamps.slice(len - win);
+    let minClose = Infinity, minIdx = -1;
+    let maxClose = -Infinity, maxIdx = -1;
+    for (let i = 0; i < baseSlice.length; i++) {
+      if (baseSlice[i] < minClose) { minClose = baseSlice[i]; minIdx = i; }
+      if (baseSlice[i] > maxClose) { maxClose = baseSlice[i]; maxIdx = i; }
     }
-    bestSessions = recent;
-    bestTightness = tightness60;
-    bestMin = min60;
-    bestMax = max60;
+    const tightness = parseFloat((((maxClose - minClose) / minClose) * 100).toFixed(1));
+    baseResult = {
+      baseValid: false,
+      method: 'bottom',
+      methodName: 'Nền Tạo Đáy',
+      methodDesc: `Cổ phiếu chưa hình thành vùng nền tích lũy siết chặt đạt chuẩn (độ biến động ${tightness}% > 20%).`,
+      baseMin: minClose,
+      baseMax: maxClose,
+      baseMinDate: formatDateVN(timeSlice[minIdx]),
+      baseMaxDate: formatDateVN(timeSlice[maxIdx]),
+      baseSessions: 0,
+      baseMonths: 0,
+      baseTightness: tightness,
+      hasSpring: false
+    };
   }
 
-  const baseMonths = parseFloat((bestSessions / 21).toFixed(1));
-  const baseMid = Math.round(bestMin + 0.5 * (bestMax - bestMin));
+  const baseMid = Math.round(baseResult.baseMin + 0.5 * (baseResult.baseMax - baseResult.baseMin));
   const baseUpperHalf = price >= baseMid;
-  const baseNotBroken = price >= bestMin;
-  const baseValid = (bestSessions >= 60) && (bestTightness <= 20.0) && baseNotBroken && baseUpperHalf;
 
   return {
     price,
@@ -120,14 +227,20 @@ function analyzeStockTechnical(bars, currentPriceVND) {
     diffMA10,
     diffMA50,
     aboveMA10_50,
-    baseSessions: bestSessions,
-    baseMonths,
-    baseTightness: bestTightness,
-    baseMin: bestMin,
-    baseMax: bestMax,
+    baseSessions: baseResult.baseSessions,
+    baseMonths: baseResult.baseMonths,
+    baseTightness: baseResult.baseTightness,
+    baseMin: baseResult.baseMin,
+    baseMax: baseResult.baseMax,
+    baseMinDate: baseResult.baseMinDate,
+    baseMaxDate: baseResult.baseMaxDate,
+    baseMethod: baseResult.method,
+    baseMethodName: baseResult.methodName,
+    baseMethodDesc: baseResult.methodDesc,
+    baseHasSpring: baseResult.hasSpring,
     baseMid,
     baseUpperHalf,
-    baseValid
+    baseValid: baseResult.baseValid
   };
 }
 
@@ -141,11 +254,10 @@ async function run() {
     const promises = chunk.map(async (sym) => {
       let bars = await fetchHistory(sym);
       if (!bars || !bars.c || bars.c.length < 50) {
-        // Retry once
         bars = await fetchHistory(sym);
       }
       const st = snapshot.stocks[sym];
-      const res = analyzeStockTechnical(bars, st ? st.price : null);
+      const res = analyzeStockTechnical(bars, st ? st.price : null, sym);
       if (res) {
         results[sym] = res;
       } else {
@@ -161,7 +273,7 @@ async function run() {
     for (const sym of failed) {
       const bars = await fetchHistory(sym);
       const st = snapshot.stocks[sym];
-      const res = analyzeStockTechnical(bars, st ? st.price : null);
+      const res = analyzeStockTechnical(bars, st ? st.price : null, sym);
       if (res) {
         results[sym] = res;
       }
@@ -192,6 +304,12 @@ async function run() {
       s.baseTightness = tech.baseTightness;
       s.baseMin = tech.baseMin;
       s.baseMax = tech.baseMax;
+      s.baseMinDate = tech.baseMinDate;
+      s.baseMaxDate = tech.baseMaxDate;
+      s.baseMethod = tech.baseMethod;
+      s.baseMethodName = tech.baseMethodName;
+      s.baseMethodDesc = tech.baseMethodDesc;
+      s.baseHasSpring = tech.baseHasSpring;
       s.baseMid = tech.baseMid;
       s.baseUpperHalf = tech.baseUpperHalf;
       s.baseValid = tech.baseValid;
@@ -203,13 +321,12 @@ async function run() {
         }
       }
     } else {
-      // Fallback reasonable parameters if API missed a bar
       s.diffMA10 = s.diffMA10 || 0;
       s.diffMA50 = s.diffMA50 || 0;
       s.aboveMA10_50 = s.diffMA10 > 0 && s.diffMA50 > 0;
-      s.baseSessions = s.baseSessions || 45;
-      s.baseMonths = s.baseMonths || 2.1;
-      s.baseTightness = s.baseTightness || 25.0;
+      s.baseSessions = 0;
+      s.baseMonths = 0;
+      s.baseTightness = 25.0;
       s.baseValid = false;
     }
   }
