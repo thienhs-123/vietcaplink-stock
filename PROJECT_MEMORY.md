@@ -142,3 +142,21 @@
     + **Bản Local (Server Python & Fallback)**:
       - `realtime_server.py` ưu tiên lấy dữ liệu từ VNDIRECT DCHART & SSI Chart API, kết hợp tính toán độ rộng thị trường.
       - Nếu người dùng mở trực tiếp file `index.html` mà không bật Python server, trình duyệt sẽ tự động kích hoạt Engine Client VNDirect/VPS trực tiếp nói trên, bảo đảm 100% thời gian thực không bao giờ bị gián đoạn.
+
+
+---
+
+## 6. CHUẨN HÓA THUẬT TOÁN NỀN GIÁ, SPRING & KHỐI LƯỢNG ĐỘT BIẾN (MA20 VOLUME)
+1. **Khối lượng đột biến (Volume Surge / Volume Breakout)**:
+   - **Bắt buộc**: Luôn so sánh khối lượng của phiên với **đường trung bình 20 phiên của khối lượng (MA20 Volume)**:
+     $$\text{Volume Surge Ratio} = \frac{\text{Volume}}{\text{MA20(Volume)}}$$
+   - **Nguyên tắc kỹ thuật**: Tuyệt đối không so sánh với 1 phiên trước vì phiên đơn lẻ trước đó dễ bị nhiễu do nghỉ lễ hoặc thanh khoản teo tóp cục bộ. Ngưỡng xác nhận đột biến dòng tiền lớn hấp thụ là $\ge 1.3\times - 1.5\times$ MA20 Volume.
+2. **Quy tắc xác định Đáy hộp & Cú Spring (Wyckoff Phase C)**:
+   - **Đáy hộp**: Neo theo giá đóng cửa tại điểm tạo đáy đảo chiều $T_0$.
+   - **Spring hợp lệ**:
+     + Nhúng thủng đáy hộp $T_0$ với độ lệch $\le 5\%$.
+     + Phải phục hồi nhanh chóng và không được đóng cửa dưới đáy quá 3 phiên liên tiếp (tránh nhầm lẫn với các nhịp bán tháo gãy nền kéo dài nhiều tuần).
+     + Nếu nến tại $T_0$ là nến rút chân mạnh mẽ (Pinbar / Doji chuồn chuồn) có râu nến quét thủng đáy với volume đột biến $\ge 1.3\times$ MA20 Volume, phiên đó được ghi nhận là cú Spring Reversal trong phiên (rũ bỏ cướp hàng).
+3. **Chuẩn hóa các mã tiêu biểu**:
+   - **GMD**: Nền bắt đầu ngày **23/07/2026** (78 phiên, 3.7 tháng, nhóm 3 – 6 tháng), Đáy hộp `48.00`, Đỉnh hộp `57.50`, Độ siết `19.8%` ($\le 20\%$). Cú Spring rũ bỏ râu nến ngày 23/07/2026 nhúng về `44.67` với thanh khoản đạt 3.4M cổ phiếu (gấp **2.43 lần** MA20 Volume 1.4M cp).
+   - **TPB**: Nền bắt đầu ngày **27/07/2026** (76 phiên, 3.6 tháng, nhóm 3 – 6 tháng), Đáy hộp `11.67`, Đỉnh hộp `13.10`, Độ siết `12.3%`. Cú Spring ngày 09/10/2026 nhúng về `11.45` rồi hồi phục ngay trong 2 phiên tiếp theo.

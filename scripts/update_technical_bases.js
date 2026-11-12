@@ -48,8 +48,17 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
   const len = bars.c.length;
   // Convert from thousands to VND
   const closesVND = bars.c.map(v => Math.round(v * 1000));
+  const lowsVND = bars.l ? bars.l.map(v => Math.round(v * 1000)) : closesVND;
+  const highsVND = bars.h ? bars.h.map(v => Math.round(v * 1000)) : closesVND;
+  const volumes = bars.v || [];
   const timestamps = bars.t;
   const price = currentPriceVND || closesVND[len - 1];
+
+  function getMA20Vol(idx) {
+    if (idx < 20) return 0;
+    const slice = volumes.slice(idx - 20, idx);
+    return slice.reduce((a, b) => a + b, 0) / 20;
+  }
 
   // 1. Moving Averages (MA10 & MA50)
   const last10 = closesVND.slice(-10);
@@ -77,6 +86,7 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
     if (!isTrough) continue;
 
     const baseSlice = closesVND.slice(t0);
+    const lowSlice = lowsVND.slice(t0);
     const timeSlice = timestamps.slice(t0);
     const sessions = baseSlice.length;
 
@@ -96,10 +106,49 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
 
     // Spring Condition: dip below t0Close by <= 5% is accepted as a valid Spring/Shakeout
     const dipPct = ((t0Close - minClose) / t0Close) * 100;
-    const hasSpring = (minIdx > 0 && dipPct > 0.05 && dipPct <= 5.0);
-    const invalidBreakdown = (minIdx > 0 && dipPct > 5.0);
+    let invalidBreakdown = false;
+    if (minIdx > 0 && dipPct > 5.0) invalidBreakdown = true;
+
+    // Check if any subsequent intraday low dropped > 5% below t0Close
+    for (let j = 1; j < lowSlice.length; j++) {
+      if (((t0Close - lowSlice[j]) / t0Close) * 100 > 5.0) {
+        invalidBreakdown = true;
+        break;
+      }
+    }
+
+    // Check prompt recovery if closing price dipped below t0Close
+    let hasSpring = false;
+    if (minIdx > 0 && dipPct > 0.05) {
+      let belowCount = 0;
+      for (let k = minIdx; k < Math.min(baseSlice.length, minIdx + 15); k++) {
+        if (baseSlice[k] < t0Close) belowCount++;
+      }
+      if (belowCount > 3) invalidBreakdown = true;
+      else hasSpring = true;
+    }
 
     if (invalidBreakdown) continue;
+
+    let springPrice = null;
+    let springDate = null;
+    let isIntradaySpringAtT0 = false;
+
+    if (hasSpring) {
+      springPrice = minClose;
+      springDate = formatDateVN(timeSlice[minIdx]);
+    } else if (lowsVND[t0] < t0Close * 0.95) {
+      // Intraday dip > 5% below close but closed high (Dragonfly Doji / Pinbar)
+      const ma20Vol = getMA20Vol(t0);
+      const volRatio = ma20Vol > 0 ? (volumes[t0] / ma20Vol) : 1;
+      // Volume surge >= 1.3x MA20 Volume confirms Spring/Shakeout absorption
+      if (volRatio >= 1.3) {
+        hasSpring = true;
+        springPrice = lowsVND[t0];
+        springDate = formatDateVN(timestamps[t0]);
+        isIntradaySpringAtT0 = true;
+      }
+    }
 
     // In Cách 1: Đáy hộp is anchored to t0Close (the initial reversal trough)
     const baseMin = t0Close;
@@ -111,14 +160,14 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
 
     if (tightness <= 20.0 && price >= minClose) {
       const months = parseFloat((sessions / 21).toFixed(1));
-      let springPrice = null;
-      let springDate = null;
 
       let methodDesc = '';
       if (hasSpring) {
-        springPrice = minClose;
-        springDate = formatDateVN(timeSlice[minIdx]);
-        methodDesc = `Cổ phiếu tích lũy gom hàng sau nhịp tạo đáy ngày ${baseMinDate}, có nhịp rũ bỏ quét đáy (Spring) ngày ${springDate} về ${formatPriceK(springPrice)} rồi bật tăng mạnh trở lại kênh trên, vận động siết chặt trong chiếc hộp ${formatPriceK(baseMin)} - ${formatPriceK(baseMax)} (${tightness}%), chưa breakout chuyển pha sang xu hướng mới.`;
+        if (isIntradaySpringAtT0) {
+          methodDesc = `Cổ phiếu tích lũy gom hàng sau cú rũ bỏ quét đáy kinh điển (Spring / Shakeout) ngày ${springDate} nhúng râu về ${formatPriceK(springPrice)} với khối lượng đột biến (vượt MA20 Volume) rồi rút chân mạnh mẽ đóng cửa tại ${formatPriceK(baseMin)}, sau đó vận động siết chặt trong chiếc hộp ${formatPriceK(baseMin)} - ${formatPriceK(baseMax)} (${tightness}%), chưa breakout chuyển pha sang xu hướng mới.`;
+        } else {
+          methodDesc = `Cổ phiếu tích lũy gom hàng sau nhịp tạo đáy ngày ${baseMinDate}, có nhịp rũ bỏ quét đáy (Spring) ngày ${springDate} về ${formatPriceK(springPrice)} rồi bật tăng mạnh trở lại kênh trên, vận động siết chặt trong chiếc hộp ${formatPriceK(baseMin)} - ${formatPriceK(baseMax)} (${tightness}%), chưa breakout chuyển pha sang xu hướng mới.`;
+        }
       } else {
         methodDesc = `Cổ phiếu tích lũy gom hàng sau nhịp tạo đáy ngày ${baseMinDate}, vận động trong chiếc hộp giá giữa đáy đảo chiều (${formatPriceK(baseMin)}) và đỉnh nhịp hồi (${formatPriceK(baseMax)}), độ siết ${tightness}%, chưa breakout chuyển pha sang xu hướng mới.`;
       }
@@ -137,7 +186,7 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
         hasSpring,
         springPrice,
         springDate,
-        score: sessions * 1.5 + (25 - tightness) * 4
+        score: sessions * 2.0 + (25 - tightness) * 2
       });
     }
   }
@@ -199,7 +248,7 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
         hasSpring: false,
         springPrice: null,
         springDate: null,
-        score: sessions * 1.5 + (25 - tightness) * 4
+        score: sessions * 2.0 + (25 - tightness) * 2
       });
     }
   }
