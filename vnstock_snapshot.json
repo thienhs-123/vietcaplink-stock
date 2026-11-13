@@ -203,7 +203,11 @@
       "baseHasSpring": true,
       "springPrice": 18700,
       "springDate": "09/03/2026",
-      "baseStartDate": "12/12/2025"
+      "baseStartDate": "12/12/2025",
+      "foreignBuyVal": 87330585000,
+      "foreignSellVal": 84544540000,
+      "foreignNetValTy": 2.79,
+      "foreignNetQty": 132700
     },
     "BCM": {
       "symbol": "BCM",
@@ -249,7 +253,11 @@
       "baseHasSpring": true,
       "springPrice": 37100,
       "springDate": "03/11/2026",
-      "baseStartDate": "14/10/2026"
+      "baseStartDate": "14/10/2026",
+      "foreignBuyVal": 0,
+      "foreignSellVal": 3623550000,
+      "foreignNetValTy": -3.62,
+      "foreignNetQty": -96300
     },
     "BID": {
       "symbol": "BID",
@@ -295,7 +303,11 @@
       "baseHasSpring": true,
       "springPrice": 31700,
       "springDate": "03/11/2026",
-      "baseStartDate": "28/07/2026"
+      "baseStartDate": "28/07/2026",
+      "foreignBuyVal": 2552226000,
+      "foreignSellVal": 39962880500,
+      "foreignNetValTy": -37.41,
+      "foreignNetQty": -1173655
     },
     "BVH": {
       "symbol": "BVH",
@@ -341,7 +353,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": null
+      "baseStartDate": null,
+      "foreignBuyVal": 10407550000,
+      "foreignSellVal": 1388730000,
+      "foreignNetValTy": 9.02,
+      "foreignNetQty": 140100
     },
     "CTG": {
       "symbol": "CTG",
@@ -387,7 +403,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "27/07/2026"
+      "baseStartDate": "27/07/2026",
+      "foreignBuyVal": 72377850000,
+      "foreignSellVal": 63803555000,
+      "foreignNetValTy": 8.57,
+      "foreignNetQty": 269600
     },
     "FPT": {
       "symbol": "FPT",
@@ -433,7 +453,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": null
+      "baseStartDate": null,
+      "foreignBuyVal": 101848083500,
+      "foreignSellVal": 323369809300,
+      "foreignNetValTy": -221.52,
+      "foreignNetQty": -4442068
     },
     "GAS": {
       "symbol": "GAS",
@@ -479,7 +503,11 @@
       "baseHasSpring": true,
       "springPrice": 73000,
       "springDate": "09/11/2026",
-      "baseStartDate": "14/08/2026"
+      "baseStartDate": "14/08/2026",
+      "foreignBuyVal": 1129570000,
+      "foreignSellVal": 2473350000,
+      "foreignNetValTy": -1.34,
+      "foreignNetQty": -18300
     },
     "GVR": {
       "symbol": "GVR",
@@ -525,7 +553,11 @@
       "baseHasSpring": true,
       "springPrice": 28700,
       "springDate": "02/11/2026",
-      "baseStartDate": "14/09/2026"
+      "baseStartDate": "14/09/2026",
+      "foreignBuyVal": 0,
+      "foreignSellVal": 79230000,
+      "foreignNetValTy": -0.08,
+      "foreignNetQty": -2700
     },
     "HDB": {
       "symbol": "HDB",
@@ -571,7 +603,11 @@
       "baseHasSpring": true,
       "springPrice": 17790,
       "springDate": "15/12/2025",
-      "baseStartDate": "01/12/2025"
+      "baseStartDate": "01/12/2025",
+      "foreignBuyVal": 71060880000,
+      "foreignSellVal": 13451920000,
+      "foreignNetValTy": 57.61,
+      "foreignNetQty": 2558800
     },
     "HPG": {
       "symbol": "HPG",
@@ -617,7 +653,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "13/05/2026"
+      "baseStartDate": "13/05/2026",
+      "foreignBuyVal": 34469635000,
+      "foreignSellVal": 9908700000,
+      "foreignNetValTy": 24.56,
+      "foreignNetQty": 1163100
     },
     "MBB": {
       "symbol": "MBB",
@@ -663,7 +703,11 @@
       "baseHasSpring": true,
       "springPrice": 18030,
       "springDate": "27/07/2026",
-      "baseStartDate": "01/12/2025"
+      "baseStartDate": "01/12/2025",
+      "foreignBuyVal": 72714095000,
+      "foreignSellVal": 42051628000,
+      "foreignNetValTy": 30.66,
+      "foreignNetQty": 1599080
     },
     "MSN": {
       "symbol": "MSN",
@@ -709,7 +753,11 @@
       "baseHasSpring": true,
       "springPrice": 63900,
       "springDate": "22/07/2026",
-      "baseStartDate": "10/03/2026"
+      "baseStartDate": "10/03/2026",
+      "foreignBuyVal": 65906460000,
+      "foreignSellVal": 9822486700,
+      "foreignNetValTy": 56.08,
+      "foreignNetQty": 786647
     },
     "MWG": {
       "symbol": "MWG",
@@ -755,7 +803,11 @@
       "baseHasSpring": true,
       "springPrice": 68880,
       "springDate": "14/09/2026",
-      "baseStartDate": "06/08/2026"
+      "baseStartDate": "06/08/2026",
+      "foreignBuyVal": 414960000,
+      "foreignSellVal": 480110000,
+      "foreignNetValTy": -0.07,
+      "foreignNetQty": -900
     },
     "PLX": {
       "symbol": "PLX",
@@ -801,7 +853,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "21/07/2026"
+      "baseStartDate": "21/07/2026",
+      "foreignBuyVal": 888790000,
+      "foreignSellVal": 2531010100,
+      "foreignNetValTy": -1.64,
+      "foreignNetQty": -49041
     },
     "POW": {
       "symbol": "POW",
@@ -847,7 +903,11 @@
       "baseHasSpring": true,
       "springPrice": 12000,
       "springDate": "03/11/2026",
-      "baseStartDate": "23/03/2026"
+      "baseStartDate": "23/03/2026",
+      "foreignBuyVal": 89756140000,
+      "foreignSellVal": 3345945000,
+      "foreignNetValTy": 86.41,
+      "foreignNetQty": 6731700
     },
     "SAB": {
       "symbol": "SAB",
@@ -893,7 +953,11 @@
       "baseHasSpring": true,
       "springPrice": 39720,
       "springDate": "09/03/2026",
-      "baseStartDate": "28/11/2025"
+      "baseStartDate": "28/11/2025",
+      "foreignBuyVal": 3016075000,
+      "foreignSellVal": 1003660000,
+      "foreignNetValTy": 2.01,
+      "foreignNetQty": 46800
     },
     "SHB": {
       "symbol": "SHB",
@@ -939,7 +1003,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "09/10/2026"
+      "baseStartDate": "09/10/2026",
+      "foreignBuyVal": 5007108850,
+      "foreignSellVal": 38272039400,
+      "foreignNetValTy": -33.26,
+      "foreignNetQty": -3043253
     },
     "SSB": {
       "symbol": "SSB",
@@ -985,7 +1053,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": null
+      "baseStartDate": null,
+      "foreignBuyVal": 4093460000,
+      "foreignSellVal": 599465000,
+      "foreignNetValTy": 3.49,
+      "foreignNetQty": 233500
     },
     "SSI": {
       "symbol": "SSI",
@@ -1031,7 +1103,11 @@
       "baseHasSpring": true,
       "springPrice": 17580,
       "springDate": "27/07/2026",
-      "baseStartDate": "22/07/2026"
+      "baseStartDate": "22/07/2026",
+      "foreignBuyVal": 21965352000,
+      "foreignSellVal": 16144273800,
+      "foreignNetValTy": 5.82,
+      "foreignNetQty": 282699
     },
     "STB": {
       "symbol": "STB",
@@ -1077,7 +1153,11 @@
       "baseHasSpring": true,
       "springPrice": 61800,
       "springDate": "19/10/2026",
-      "baseStartDate": "16/04/2026"
+      "baseStartDate": "16/04/2026",
+      "foreignBuyVal": 22092430000,
+      "foreignSellVal": 33268480000,
+      "foreignNetValTy": -11.18,
+      "foreignNetQty": -158200
     },
     "TCB": {
       "symbol": "TCB",
@@ -1123,7 +1203,11 @@
       "baseHasSpring": true,
       "springPrice": 18740,
       "springDate": "07/04/2026",
-      "baseStartDate": "09/03/2026"
+      "baseStartDate": "09/03/2026",
+      "foreignBuyVal": 99167905000,
+      "foreignSellVal": 46167900000,
+      "foreignNetValTy": 53,
+      "foreignNetQty": 2443600
     },
     "TPB": {
       "symbol": "TPB",
@@ -1169,7 +1253,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "08/07/2026"
+      "baseStartDate": "08/07/2026",
+      "foreignBuyVal": 28529925000,
+      "foreignSellVal": 5172815000,
+      "foreignNetValTy": 23.36,
+      "foreignNetQty": 1789220
     },
     "VCB": {
       "symbol": "VCB",
@@ -1215,7 +1303,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "27/07/2026"
+      "baseStartDate": "27/07/2026",
+      "foreignBuyVal": 17988730000,
+      "foreignSellVal": 7293033300,
+      "foreignNetValTy": 10.7,
+      "foreignNetQty": 198524
     },
     "VHM": {
       "symbol": "VHM",
@@ -1261,7 +1353,11 @@
       "baseHasSpring": true,
       "springPrice": 57800,
       "springDate": "20/10/2026",
-      "baseStartDate": "15/10/2026"
+      "baseStartDate": "15/10/2026",
+      "foreignBuyVal": 56691764800,
+      "foreignSellVal": 14108190000,
+      "foreignNetValTy": 42.58,
+      "foreignNetQty": 685353
     },
     "VIB": {
       "symbol": "VIB",
@@ -1307,7 +1403,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "17/12/2025"
+      "baseStartDate": "17/12/2025",
+      "foreignBuyVal": 9853475000,
+      "foreignSellVal": 1211106250,
+      "foreignNetValTy": 8.64,
+      "foreignNetQty": 615430
     },
     "VIC": {
       "symbol": "VIC",
@@ -1353,7 +1453,11 @@
       "baseHasSpring": true,
       "springPrice": 207000,
       "springDate": "19/10/2026",
-      "baseStartDate": "02/10/2026"
+      "baseStartDate": "02/10/2026",
+      "foreignBuyVal": 57335107700,
+      "foreignSellVal": 63430203200,
+      "foreignNetValTy": -6.1,
+      "foreignNetQty": -25715
     },
     "VJC": {
       "symbol": "VJC",
@@ -1399,7 +1503,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "09/03/2026"
+      "baseStartDate": "09/03/2026",
+      "foreignBuyVal": 64812560000,
+      "foreignSellVal": 7060230000,
+      "foreignNetValTy": 57.75,
+      "foreignNetQty": 417300
     },
     "VNM": {
       "symbol": "VNM",
@@ -1445,7 +1553,11 @@
       "baseHasSpring": true,
       "springPrice": 52430,
       "springDate": "30/06/2026",
-      "baseStartDate": "09/03/2026"
+      "baseStartDate": "09/03/2026",
+      "foreignBuyVal": 6606369000,
+      "foreignSellVal": 22348452100,
+      "foreignNetValTy": -15.74,
+      "foreignNetQty": -292800
     },
     "VPB": {
       "symbol": "VPB",
@@ -1491,7 +1603,11 @@
       "baseHasSpring": true,
       "springPrice": 18710,
       "springDate": "23/03/2026",
-      "baseStartDate": "10/03/2026"
+      "baseStartDate": "10/03/2026",
+      "foreignBuyVal": 64282240000,
+      "foreignSellVal": 63531925000,
+      "foreignNetValTy": 0.75,
+      "foreignNetQty": 28200
     },
     "VRE": {
       "symbol": "VRE",
@@ -1537,7 +1653,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "14/10/2026"
+      "baseStartDate": "14/10/2026",
+      "foreignBuyVal": 6986625000,
+      "foreignSellVal": 18793785000,
+      "foreignNetValTy": -11.81,
+      "foreignNetQty": -485700
     },
     "VND": {
       "symbol": "VND",
@@ -1583,7 +1703,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "13/10/2026"
+      "baseStartDate": "13/10/2026",
+      "foreignBuyVal": 14081570000,
+      "foreignSellVal": 4196455000,
+      "foreignNetValTy": 9.89,
+      "foreignNetQty": 681500
     },
     "VCI": {
       "symbol": "VCI",
@@ -1629,7 +1753,11 @@
       "baseHasSpring": true,
       "springPrice": 18350,
       "springDate": "13/10/2026",
-      "baseStartDate": "28/07/2026"
+      "baseStartDate": "28/07/2026",
+      "foreignBuyVal": 1433290000,
+      "foreignSellVal": 3340390000,
+      "foreignNetValTy": -1.91,
+      "foreignNetQty": -95500
     },
     "HCM": {
       "symbol": "HCM",
@@ -1675,7 +1803,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "24/04/2026"
+      "baseStartDate": "24/04/2026",
+      "foreignBuyVal": 6895000,
+      "foreignSellVal": 1521308500,
+      "foreignNetValTy": -1.51,
+      "foreignNetQty": -65497
     },
     "FTS": {
       "symbol": "FTS",
@@ -1721,7 +1853,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "14/10/2026"
+      "baseStartDate": "14/10/2026",
+      "foreignBuyVal": 1757765000,
+      "foreignSellVal": 1069065000,
+      "foreignNetValTy": 0.69,
+      "foreignNetQty": 35300
     },
     "BSI": {
       "symbol": "BSI",
@@ -1767,7 +1903,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": null
+      "baseStartDate": null,
+      "foreignBuyVal": 1008875000,
+      "foreignSellVal": 241923950,
+      "foreignNetValTy": 0.77,
+      "foreignNetQty": 26712
     },
     "CTS": {
       "symbol": "CTS",
@@ -1813,7 +1953,11 @@
       "baseHasSpring": true,
       "springPrice": 19150,
       "springDate": "13/10/2026",
-      "baseStartDate": "28/07/2026"
+      "baseStartDate": "28/07/2026",
+      "foreignBuyVal": 435370000,
+      "foreignSellVal": 4346084650,
+      "foreignNetValTy": -3.91,
+      "foreignNetQty": -165423
     },
     "VIX": {
       "symbol": "VIX",
@@ -1859,7 +2003,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "08/10/2026"
+      "baseStartDate": "08/10/2026",
+      "foreignBuyVal": 323993437600,
+      "foreignSellVal": 15945605000,
+      "foreignNetValTy": 308.05,
+      "foreignNetQty": 22928789
     },
     "ORS": {
       "symbol": "ORS",
@@ -1905,7 +2053,11 @@
       "baseHasSpring": true,
       "springPrice": 12200,
       "springDate": "23/03/2026",
-      "baseStartDate": "15/12/2025"
+      "baseStartDate": "15/12/2025",
+      "foreignBuyVal": 6364395000,
+      "foreignSellVal": 2246990000,
+      "foreignNetValTy": 4.12,
+      "foreignNetQty": 288900
     },
     "AGR": {
       "symbol": "AGR",
@@ -1951,7 +2103,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "08/10/2026"
+      "baseStartDate": "08/10/2026",
+      "foreignBuyVal": 19720000,
+      "foreignSellVal": 11650000,
+      "foreignNetValTy": 0.01,
+      "foreignNetQty": 700
     },
     "LPB": {
       "symbol": "LPB",
@@ -1997,7 +2153,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": null
+      "baseStartDate": null,
+      "foreignBuyVal": 45413500000,
+      "foreignSellVal": 2660935000,
+      "foreignNetValTy": 42.75,
+      "foreignNetQty": 1170200
     },
     "EIB": {
       "symbol": "EIB",
@@ -2043,7 +2203,11 @@
       "baseHasSpring": true,
       "springPrice": 16000,
       "springDate": "14/09/2026",
-      "baseStartDate": "22/07/2026"
+      "baseStartDate": "22/07/2026",
+      "foreignBuyVal": 186300000,
+      "foreignSellVal": 828290000,
+      "foreignNetValTy": -0.64,
+      "foreignNetQty": -39600
     },
     "MSB": {
       "symbol": "MSB",
@@ -2089,7 +2253,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "05/10/2026"
+      "baseStartDate": "05/10/2026",
+      "foreignBuyVal": 14999740000,
+      "foreignSellVal": 23958724050,
+      "foreignNetValTy": -8.96,
+      "foreignNetQty": -557998
     },
     "OCB": {
       "symbol": "OCB",
@@ -2135,7 +2303,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "13/03/2026"
+      "baseStartDate": "13/03/2026",
+      "foreignBuyVal": 2401105000,
+      "foreignSellVal": 356187800,
+      "foreignNetValTy": 2.04,
+      "foreignNetQty": 191762
     },
     "NAB": {
       "symbol": "NAB",
@@ -2181,7 +2353,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "14/04/2026"
+      "baseStartDate": "14/04/2026",
+      "foreignBuyVal": 7491820000,
+      "foreignSellVal": 2515920000,
+      "foreignNetValTy": 4.98,
+      "foreignNetQty": 381600
     },
     "NKG": {
       "symbol": "NKG",
@@ -2227,7 +2403,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": null
+      "baseStartDate": null,
+      "foreignBuyVal": 1184490000,
+      "foreignSellVal": 3927519300,
+      "foreignNetValTy": -2.74,
+      "foreignNetQty": -219019
     },
     "HSG": {
       "symbol": "HSG",
@@ -2273,7 +2453,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "29/06/2026"
+      "baseStartDate": "29/06/2026",
+      "foreignBuyVal": 427690000,
+      "foreignSellVal": 1565265000,
+      "foreignNetValTy": -1.14,
+      "foreignNetQty": -103100
     },
     "VGS": {
       "symbol": "VGS",
@@ -2319,7 +2503,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": null
+      "baseStartDate": null,
+      "foreignBuyVal": 0,
+      "foreignSellVal": 181720000,
+      "foreignNetValTy": -0.18,
+      "foreignNetQty": -8900
     },
     "KSB": {
       "symbol": "KSB",
@@ -2365,7 +2553,11 @@
       "baseHasSpring": true,
       "springPrice": 12250,
       "springDate": "13/11/2026",
-      "baseStartDate": "06/10/2026"
+      "baseStartDate": "06/10/2026",
+      "foreignBuyVal": 0,
+      "foreignSellVal": 109295000,
+      "foreignNetValTy": -0.11,
+      "foreignNetQty": -8900
     },
     "HT1": {
       "symbol": "HT1",
@@ -2411,7 +2603,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "28/07/2026"
+      "baseStartDate": "28/07/2026",
+      "foreignBuyVal": 0,
+      "foreignSellVal": 0,
+      "foreignNetValTy": 0,
+      "foreignNetQty": 0
     },
     "NVL": {
       "symbol": "NVL",
@@ -2457,7 +2653,11 @@
       "baseHasSpring": true,
       "springPrice": 9600,
       "springDate": "30/09/2026",
-      "baseStartDate": "30/09/2026"
+      "baseStartDate": "30/09/2026",
+      "foreignBuyVal": 4491635000,
+      "foreignSellVal": 36139818000,
+      "foreignNetValTy": -31.65,
+      "foreignNetQty": -3069260
     },
     "DIG": {
       "symbol": "DIG",
@@ -2503,7 +2703,11 @@
       "baseHasSpring": true,
       "springPrice": 9020,
       "springDate": "05/10/2026",
-      "baseStartDate": "28/07/2026"
+      "baseStartDate": "28/07/2026",
+      "foreignBuyVal": 591467900,
+      "foreignSellVal": 3110885000,
+      "foreignNetValTy": -2.52,
+      "foreignNetQty": -244757
     },
     "PDR": {
       "symbol": "PDR",
@@ -2549,7 +2753,11 @@
       "baseHasSpring": true,
       "springPrice": 11050,
       "springDate": "03/11/2026",
-      "baseStartDate": "28/07/2026"
+      "baseStartDate": "28/07/2026",
+      "foreignBuyVal": 0,
+      "foreignSellVal": 4298380000,
+      "foreignNetValTy": -4.3,
+      "foreignNetQty": -369700
     },
     "DXG": {
       "symbol": "DXG",
@@ -2595,7 +2803,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "08/10/2026"
+      "baseStartDate": "08/10/2026",
+      "foreignBuyVal": 9994565000,
+      "foreignSellVal": 3036950450,
+      "foreignNetValTy": 6.96,
+      "foreignNetQty": 629261
     },
     "KDH": {
       "symbol": "KDH",
@@ -2641,7 +2853,11 @@
       "baseHasSpring": true,
       "springPrice": 13000,
       "springDate": "03/11/2026",
-      "baseStartDate": "09/10/2026"
+      "baseStartDate": "09/10/2026",
+      "foreignBuyVal": 51953100000,
+      "foreignSellVal": 7795735000,
+      "foreignNetValTy": 44.16,
+      "foreignNetQty": 2831200
     },
     "NLG": {
       "symbol": "NLG",
@@ -2687,7 +2903,11 @@
       "baseHasSpring": true,
       "springPrice": 20900,
       "springDate": "03/11/2026",
-      "baseStartDate": "06/08/2026"
+      "baseStartDate": "06/08/2026",
+      "foreignBuyVal": 11487315000,
+      "foreignSellVal": 17117947950,
+      "foreignNetValTy": -5.63,
+      "foreignNetQty": -228054
     },
     "TCH": {
       "symbol": "TCH",
@@ -2733,7 +2953,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": null
+      "baseStartDate": null,
+      "foreignBuyVal": 12888165000,
+      "foreignSellVal": 2440440000,
+      "foreignNetValTy": 10.45,
+      "foreignNetQty": 774000
     },
     "HDG": {
       "symbol": "HDG",
@@ -2779,7 +3003,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "14/10/2026"
+      "baseStartDate": "14/10/2026",
+      "foreignBuyVal": 3282855000,
+      "foreignSellVal": 2392558800,
+      "foreignNetValTy": 0.89,
+      "foreignNetQty": 55702
     },
     "CEO": {
       "symbol": "CEO",
@@ -2825,7 +3053,11 @@
       "baseHasSpring": true,
       "springPrice": 9600,
       "springDate": "09/10/2026",
-      "baseStartDate": "09/10/2026"
+      "baseStartDate": "09/10/2026",
+      "foreignBuyVal": 2907700000,
+      "foreignSellVal": 1042650000,
+      "foreignNetValTy": 1.87,
+      "foreignNetQty": 156000
     },
     "DXS": {
       "symbol": "DXS",
@@ -2871,7 +3103,11 @@
       "baseHasSpring": true,
       "springPrice": 4700,
       "springDate": "03/11/2026",
-      "baseStartDate": "06/10/2026"
+      "baseStartDate": "06/10/2026",
+      "foreignBuyVal": 41382000,
+      "foreignSellVal": 13033690000,
+      "foreignNetValTy": -12.99,
+      "foreignNetQty": -2710600
     },
     "KBC": {
       "symbol": "KBC",
@@ -2917,7 +3153,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "15/10/2026"
+      "baseStartDate": "15/10/2026",
+      "foreignBuyVal": 34580000,
+      "foreignSellVal": 2801445000,
+      "foreignNetValTy": -2.77,
+      "foreignNetQty": -103400
     },
     "IDC": {
       "symbol": "IDC",
@@ -2963,7 +3203,11 @@
       "baseHasSpring": true,
       "springPrice": 30000,
       "springDate": "11/09/2026",
-      "baseStartDate": "23/07/2026"
+      "baseStartDate": "23/07/2026",
+      "foreignBuyVal": 441000000,
+      "foreignSellVal": 1338600000,
+      "foreignNetValTy": -0.9,
+      "foreignNetQty": -25200
     },
     "VGC": {
       "symbol": "VGC",
@@ -3009,7 +3253,11 @@
       "baseHasSpring": true,
       "springPrice": 39350,
       "springDate": "09/11/2026",
-      "baseStartDate": "22/09/2026"
+      "baseStartDate": "22/09/2026",
+      "foreignBuyVal": 1134775000,
+      "foreignSellVal": 108710000,
+      "foreignNetValTy": 1.03,
+      "foreignNetQty": 25500
     },
     "SZC": {
       "symbol": "SZC",
@@ -3055,7 +3303,11 @@
       "baseHasSpring": true,
       "springPrice": 16550,
       "springDate": "05/10/2026",
-      "baseStartDate": "06/08/2026"
+      "baseStartDate": "06/08/2026",
+      "foreignBuyVal": 1288145000,
+      "foreignSellVal": 594725000,
+      "foreignNetValTy": 0.69,
+      "foreignNetQty": 32600
     },
     "PHR": {
       "symbol": "PHR",
@@ -3101,7 +3353,11 @@
       "baseHasSpring": true,
       "springPrice": 28850,
       "springDate": "02/11/2026",
-      "baseStartDate": "28/07/2026"
+      "baseStartDate": "28/07/2026",
+      "foreignBuyVal": 0,
+      "foreignSellVal": 67385000,
+      "foreignNetValTy": -0.07,
+      "foreignNetQty": -2300
     },
     "DPR": {
       "symbol": "DPR",
@@ -3147,7 +3403,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "01/06/2026"
+      "baseStartDate": "01/06/2026",
+      "foreignBuyVal": 28800000,
+      "foreignSellVal": 3326867000,
+      "foreignNetValTy": -3.3,
+      "foreignNetQty": -91940
     },
     "FRT": {
       "symbol": "FRT",
@@ -3193,7 +3453,11 @@
       "baseHasSpring": true,
       "springPrice": 128000,
       "springDate": "16/09/2026",
-      "baseStartDate": "06/08/2026"
+      "baseStartDate": "06/08/2026",
+      "foreignBuyVal": 5946937400,
+      "foreignSellVal": 2636832000,
+      "foreignNetValTy": 3.31,
+      "foreignNetQty": 22563
     },
     "DGW": {
       "symbol": "DGW",
@@ -3239,7 +3503,11 @@
       "baseHasSpring": true,
       "springPrice": 38150,
       "springDate": "02/11/2026",
-      "baseStartDate": "17/08/2026"
+      "baseStartDate": "17/08/2026",
+      "foreignBuyVal": 8482155000,
+      "foreignSellVal": 2770008900,
+      "foreignNetValTy": 5.71,
+      "foreignNetQty": 143798
     },
     "PET": {
       "symbol": "PET",
@@ -3285,7 +3553,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "30/09/2026"
+      "baseStartDate": "30/09/2026",
+      "foreignBuyVal": 0,
+      "foreignSellVal": 99900000,
+      "foreignNetValTy": -0.1,
+      "foreignNetQty": -2000
     },
     "PNJ": {
       "symbol": "PNJ",
@@ -3331,7 +3603,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": null
+      "baseStartDate": null,
+      "foreignBuyVal": 5029457900,
+      "foreignSellVal": 8943260000,
+      "foreignNetValTy": -3.91,
+      "foreignNetQty": -265517
     },
     "CTR": {
       "symbol": "CTR",
@@ -3377,7 +3653,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": null
+      "baseStartDate": null,
+      "foreignBuyVal": 174706000,
+      "foreignSellVal": 56200000,
+      "foreignNetValTy": 0.12,
+      "foreignNetQty": 1920
     },
     "ELC": {
       "symbol": "ELC",
@@ -3423,7 +3703,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": null
+      "baseStartDate": null,
+      "foreignBuyVal": 1038590000,
+      "foreignSellVal": 504815000,
+      "foreignNetValTy": 0.53,
+      "foreignNetQty": 52100
     },
     "DGC": {
       "symbol": "DGC",
@@ -3469,7 +3753,11 @@
       "baseHasSpring": true,
       "springPrice": 32100,
       "springDate": "26/10/2026",
-      "baseStartDate": "08/10/2026"
+      "baseStartDate": "08/10/2026",
+      "foreignBuyVal": 101915000,
+      "foreignSellVal": 35970000,
+      "foreignNetValTy": 0.07,
+      "foreignNetQty": 2000
     },
     "DCM": {
       "symbol": "DCM",
@@ -3515,7 +3803,11 @@
       "baseHasSpring": true,
       "springPrice": 30000,
       "springDate": "11/11/2026",
-      "baseStartDate": "31/07/2026"
+      "baseStartDate": "31/07/2026",
+      "foreignBuyVal": 9525755000,
+      "foreignSellVal": 2292520000,
+      "foreignNetValTy": 7.23,
+      "foreignNetQty": 235800
     },
     "DPM": {
       "symbol": "DPM",
@@ -3561,7 +3853,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": null
+      "baseStartDate": null,
+      "foreignBuyVal": 2428125000,
+      "foreignSellVal": 704850000,
+      "foreignNetValTy": 1.72,
+      "foreignNetQty": 87900
     },
     "BFC": {
       "symbol": "BFC",
@@ -3607,7 +3903,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "08/10/2026"
+      "baseStartDate": "08/10/2026",
+      "foreignBuyVal": 0,
+      "foreignSellVal": 584300000,
+      "foreignNetValTy": -0.58,
+      "foreignNetQty": -10400
     },
     "CSV": {
       "symbol": "CSV",
@@ -3653,7 +3953,11 @@
       "baseHasSpring": true,
       "springPrice": 21700,
       "springDate": "02/11/2026",
-      "baseStartDate": "14/10/2026"
+      "baseStartDate": "14/10/2026",
+      "foreignBuyVal": 102120000,
+      "foreignSellVal": 487090000,
+      "foreignNetValTy": -0.38,
+      "foreignNetQty": -17100
     },
     "DBC": {
       "symbol": "DBC",
@@ -3699,7 +4003,11 @@
       "baseHasSpring": true,
       "springPrice": 15000,
       "springDate": "01/10/2026",
-      "baseStartDate": "27/07/2026"
+      "baseStartDate": "27/07/2026",
+      "foreignBuyVal": 1042770000,
+      "foreignSellVal": 694620000,
+      "foreignNetValTy": 0.35,
+      "foreignNetQty": 21800
     },
     "BAF": {
       "symbol": "BAF",
@@ -3745,7 +4053,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "26/11/2025"
+      "baseStartDate": "26/11/2025",
+      "foreignBuyVal": 3960385000,
+      "foreignSellVal": 571965000,
+      "foreignNetValTy": 3.39,
+      "foreignNetQty": 110900
     },
     "PVD": {
       "symbol": "PVD",
@@ -3791,7 +4103,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": null
+      "baseStartDate": null,
+      "foreignBuyVal": 913640000,
+      "foreignSellVal": 439510000,
+      "foreignNetValTy": 0.47,
+      "foreignNetQty": 28600
     },
     "PVS": {
       "symbol": "PVS",
@@ -3837,7 +4153,11 @@
       "baseHasSpring": true,
       "springPrice": 27750,
       "springDate": "27/07/2026",
-      "baseStartDate": "23/07/2026"
+      "baseStartDate": "23/07/2026",
+      "foreignBuyVal": 787160000,
+      "foreignSellVal": 7348204900,
+      "foreignNetValTy": -6.56,
+      "foreignNetQty": -229427
     },
     "PVT": {
       "symbol": "PVT",
@@ -3883,7 +4203,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": null
+      "baseStartDate": null,
+      "foreignBuyVal": 4176715000,
+      "foreignSellVal": 10071612000,
+      "foreignNetValTy": -5.89,
+      "foreignNetQty": -279320
     },
     "BSR": {
       "symbol": "BSR",
@@ -3929,7 +4253,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": null
+      "baseStartDate": null,
+      "foreignBuyVal": 1338785000,
+      "foreignSellVal": 6869841000,
+      "foreignNetValTy": -5.53,
+      "foreignNetQty": -216472
     },
     "GMD": {
       "symbol": "GMD",
@@ -3975,7 +4303,11 @@
       "baseHasSpring": true,
       "springPrice": 45810,
       "springDate": "03/04/2026",
-      "baseStartDate": "10/03/2026"
+      "baseStartDate": "10/03/2026",
+      "foreignBuyVal": 10476376000,
+      "foreignSellVal": 66837615000,
+      "foreignNetValTy": -56.36,
+      "foreignNetQty": -1041254
     },
     "HAH": {
       "symbol": "HAH",
@@ -4021,7 +4353,11 @@
       "baseHasSpring": true,
       "springPrice": 43900,
       "springDate": "28/07/2026",
-      "baseStartDate": "20/07/2026"
+      "baseStartDate": "20/07/2026",
+      "foreignBuyVal": 2218735000,
+      "foreignSellVal": 1119140250,
+      "foreignNetValTy": 1.1,
+      "foreignNetQty": 22949
     },
     "VOS": {
       "symbol": "VOS",
@@ -4067,7 +4403,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": null
+      "baseStartDate": null,
+      "foreignBuyVal": 549080000,
+      "foreignSellVal": 112025500,
+      "foreignNetValTy": 0.44,
+      "foreignNetQty": 41335
     },
     "REE": {
       "symbol": "REE",
@@ -4113,7 +4453,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "22/07/2026"
+      "baseStartDate": "22/07/2026",
+      "foreignBuyVal": 13472700,
+      "foreignSellVal": 209580000,
+      "foreignNetValTy": -0.2,
+      "foreignNetQty": -3926
     },
     "GEG": {
       "symbol": "GEG",
@@ -4159,7 +4503,11 @@
       "baseHasSpring": true,
       "springPrice": 11450,
       "springDate": "03/11/2026",
-      "baseStartDate": "22/07/2026"
+      "baseStartDate": "22/07/2026",
+      "foreignBuyVal": 27770000,
+      "foreignSellVal": 13990000,
+      "foreignNetValTy": 0.01,
+      "foreignNetQty": 1200
     },
     "PC1": {
       "symbol": "PC1",
@@ -4205,7 +4553,11 @@
       "baseHasSpring": true,
       "springPrice": 15870,
       "springDate": "14/10/2026",
-      "baseStartDate": "01/06/2026"
+      "baseStartDate": "01/06/2026",
+      "foreignBuyVal": 285570000,
+      "foreignSellVal": 804330000,
+      "foreignNetValTy": -0.52,
+      "foreignNetQty": -31100
     },
     "VCG": {
       "symbol": "VCG",
@@ -4251,7 +4603,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "02/10/2026"
+      "baseStartDate": "02/10/2026",
+      "foreignBuyVal": 1019525000,
+      "foreignSellVal": 12794685150,
+      "foreignNetValTy": -11.78,
+      "foreignNetQty": -766467
     },
     "HHV": {
       "symbol": "HHV",
@@ -4297,7 +4653,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "09/10/2026"
+      "baseStartDate": "09/10/2026",
+      "foreignBuyVal": 1001596000,
+      "foreignSellVal": 3193128000,
+      "foreignNetValTy": -2.19,
+      "foreignNetQty": -226700
     },
     "LCG": {
       "symbol": "LCG",
@@ -4343,7 +4703,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "09/10/2026"
+      "baseStartDate": "09/10/2026",
+      "foreignBuyVal": 26600000,
+      "foreignSellVal": 876263750,
+      "foreignNetValTy": -0.85,
+      "foreignNetQty": -126201
     },
     "FCN": {
       "symbol": "FCN",
@@ -4389,7 +4753,11 @@
       "baseHasSpring": true,
       "springPrice": 10150,
       "springDate": "07/10/2026",
-      "baseStartDate": "28/07/2026"
+      "baseStartDate": "28/07/2026",
+      "foreignBuyVal": 64695000,
+      "foreignSellVal": 676515000,
+      "foreignNetValTy": -0.61,
+      "foreignNetQty": -54900
     },
     "CII": {
       "symbol": "CII",
@@ -4435,7 +4803,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "09/10/2026"
+      "baseStartDate": "09/10/2026",
+      "foreignBuyVal": 75365000,
+      "foreignSellVal": 4098915000,
+      "foreignNetValTy": -4.02,
+      "foreignNetQty": -286500
     },
     "VHC": {
       "symbol": "VHC",
@@ -4481,7 +4853,11 @@
       "baseHasSpring": true,
       "springPrice": 47500,
       "springDate": "02/11/2026",
-      "baseStartDate": "29/09/2026"
+      "baseStartDate": "29/09/2026",
+      "foreignBuyVal": 168300000,
+      "foreignSellVal": 3994955000,
+      "foreignNetValTy": -3.83,
+      "foreignNetQty": -75200
     },
     "ANV": {
       "symbol": "ANV",
@@ -4527,7 +4903,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": null
+      "baseStartDate": null,
+      "foreignBuyVal": 75850000,
+      "foreignSellVal": 1009940650,
+      "foreignNetValTy": -0.93,
+      "foreignNetQty": -55173
     },
     "TNG": {
       "symbol": "TNG",
@@ -4573,7 +4953,11 @@
       "baseHasSpring": true,
       "springPrice": 15550,
       "springDate": "14/09/2026",
-      "baseStartDate": "28/07/2026"
+      "baseStartDate": "28/07/2026",
+      "foreignBuyVal": 1857040000,
+      "foreignSellVal": 2015070000,
+      "foreignNetValTy": -0.16,
+      "foreignNetQty": -9200
     },
     "MSH": {
       "symbol": "MSH",
@@ -4619,7 +5003,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "12/03/2026"
+      "baseStartDate": "12/03/2026",
+      "foreignBuyVal": 145695000,
+      "foreignSellVal": 78490000,
+      "foreignNetValTy": 0.07,
+      "foreignNetQty": 2000
     },
     "GIL": {
       "symbol": "GIL",
@@ -4665,7 +5053,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": null
+      "baseStartDate": null,
+      "foreignBuyVal": 54289000,
+      "foreignSellVal": 79781000,
+      "foreignNetValTy": -0.03,
+      "foreignNetQty": -2600
     },
     "PTB": {
       "symbol": "PTB",
@@ -4711,7 +5103,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "29/09/2026"
+      "baseStartDate": "29/09/2026",
+      "foreignBuyVal": 322335000,
+      "foreignSellVal": 148125000,
+      "foreignNetValTy": 0.17,
+      "foreignNetQty": 6000
     },
     "HAX": {
       "symbol": "HAX",
@@ -4757,7 +5153,11 @@
       "baseHasSpring": false,
       "springPrice": null,
       "springDate": null,
-      "baseStartDate": "28/07/2026"
+      "baseStartDate": "28/07/2026",
+      "foreignBuyVal": 0,
+      "foreignSellVal": 63009000,
+      "foreignNetValTy": -0.06,
+      "foreignNetQty": -7700
     }
   }
 }

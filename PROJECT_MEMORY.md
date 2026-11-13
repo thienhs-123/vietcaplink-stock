@@ -250,3 +250,23 @@
        4) **KDH (CTCP Đầu tư và Kinh doanh Nhà Khang Điền)**: Bất động sản (20%). Khối ngoại mua ròng **+44.16 Tỷ**, LNST **+22%**, DTT **+18.5%**, P/E 12.5x, bứt phá mạnh trên MA10 (+6.0%) và MA50 (+8.8%).
        5) **DBC (CTCP Tập đoàn DABACO Việt Nam)**: Nông nghiệp & Thực phẩm (20%). Khối ngoại mua ròng **+0.35 Tỷ**, LNST tăng trưởng vượt bậc **+280%**, DTT **+18.5%**, ROE 14.8%, EPS 2,150 đ, P/E 7.5x.
      * Cơ cấu ngành cân bằng 5 trụ cột: Tiêu dùng (20%) - Ngân hàng (20%) - Thép (20%) - BĐS (20%) - Nông nghiệp (20%).
+
+11. **Tính năng Cập nhật Danh mục Thủ công & Tự động (13/11/2026)**:
+   - **Giao diện người dùng**:
+     * Thêm 2 nút bấm thao tác nhanh ngay trên thanh công cụ của "Danh sách Cổ phiếu Nắm giữ trong Danh mục":
+       1) Nút **"Cập nhật thủ công"** (Icon `edit-3` màu xanh): Mở Modal chỉnh sửa danh mục thủ công.
+       2) Nút **"Cập nhật tự động"** (Icon `sparkles` gradient tím/xanh): Mở Modal quét và áp dụng tự động bằng AI & định lượng.
+   - **Modal Cập nhật Thủ công**:
+     * Cho phép chuyển đổi linh hoạt giữa 3 danh mục (Tấn công / Cân bằng / Phòng thủ).
+     * Bảng nhập liệu động: Mã chứng khoán (kèm autocomplete gợi ý từ 100 mã CP có sẵn), tự động nhận diện tên doanh nghiệp và ngành nghề, nhập tỷ trọng (%), nhập giá mua TB (VNĐ).
+     * Kiểm soát tổng tỷ trọng thời gian thực: Hiển thị tổng tỷ trọng và cảnh báo nếu khác 100%.
+     * Nút thêm dòng mới và xóa dòng linh hoạt.
+     * Lưu tự động tính toán lại phân bổ ngành (`sectors`), cập nhật lãi/lỗ và lưu vào `localStorage` (`custom_portfolios`) để giữ nguyên trạng thái khi F5 tải lại trang.
+   - **Modal Cập nhật Tự động**:
+     * Tích hợp bộ tiêu chí theo yêu cầu:
+       1) **Giá nằm trên MA10 và MA50** (`aboveMA10_50: true`).
+       2) **Khối ngoại mua ròng / đột biến** (Tùy chọn ngưỡng >0 tỷ, >5 tỷ, >20 tỷ).
+       3) **Kết quả kinh doanh tốt** (LNST và Doanh thu tăng trưởng dương, ROE cao).
+     * Tùy chọn số mã tuyển chọn: Top 1 mã (All-in 100%), Top 3 mã, Top 5 mã (Cân bằng chuẩn 20%/mã), Top 10 mã.
+     * Bảng xem trước kết quả (Live Preview) hiển thị chi tiết điểm số, tỷ trọng dự kiến và thông số từng mã trước khi áp dụng.
+     * Nút "Áp dụng vào Danh mục" ghi đè cấu trúc danh mục, tự động tạo phân bổ ngành và lưu trữ bền vững.
