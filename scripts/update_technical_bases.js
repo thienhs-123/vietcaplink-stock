@@ -89,6 +89,14 @@ function classifyBaseType(base, price, high52w, low52w, diffMA50) {
 
   // 4. NỀN TẠO ĐÁY (Bottom Reversal Base)
   // Nằm ở vùng giá thấp hoặc điểm bắt đầu nền nằm sát đáy 52 tuần
+  if (base.isDoubleBottom) {
+    return {
+      method: 'bottom',
+      methodName: 'Nền Tạo Đáy',
+      methodDesc: `Cổ phiếu hình thành mô hình Hai Đáy (Double Bottom) vững chắc với Đáy 1 ngày ${base.baseStartDate} và Đáy 2 ngày ${base.baseMinDate}, vận động siết chặt trong chiếc hộp ${formatPriceK(base.baseMin)} - ${formatPriceK(base.baseMax)} (${base.baseTightness}%) kéo dài ${base.baseMonths} tháng (${base.baseSessions} phiên), kiểm định đáy thành công và giữ vững cấu trúc tích lũy.`
+    };
+  }
+
   let springDesc = '';
   if (base.hasSpring) {
     springDesc = base.springDate === base.baseStartDate
@@ -140,13 +148,15 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
   // Method 1: Trough-anchored Base (Starting at reversal trough T0, Spring <= 5-7.5%)
   for (let t0 = Math.max(0, len - 240); t0 <= len - 18; t0++) {
     const t0Close = closesVND[t0];
-    // t0 must be the lowest close in a cluster around t0 (t0-2 to t0+2)
-    let isTrough = true;
+    const t0Low = lowsVND[t0];
+    // t0 must be a local trough either by close or by intraday low
+    let isTroughClose = true, isTroughLow = true;
     for (let r = Math.max(0, t0 - 2); r <= Math.min(len - 1, t0 + 2); r++) {
-      if (closesVND[r] < t0Close) { isTrough = false; break; }
+      if (closesVND[r] < t0Close) isTroughClose = false;
+      if (lowsVND[r] < t0Low) isTroughLow = false;
     }
 
-    if (!isTrough) continue;
+    if (!isTroughClose && !isTroughLow) continue;
 
     const baseSlice = closesVND.slice(t0);
     const lowSlice = lowsVND.slice(t0);
@@ -156,6 +166,7 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
 
     let minClose = Infinity, minIdx = -1;
     let maxClose = -Infinity, maxIdx = -1;
+    let minLow = Infinity, minLowIdx = -1;
 
     for (let i = 0; i < baseSlice.length; i++) {
       if (baseSlice[i] < minClose) {
@@ -166,42 +177,56 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
         maxClose = baseSlice[i];
         maxIdx = i;
       }
+      if (lowSlice[i] < minLow) {
+        minLow = lowSlice[i];
+        minLowIdx = i;
+      }
     }
+
+    // Double bottom detection:
+    // A subsequent test low (minLowIdx > 15) that holds t0Low level (minLow >= t0Low * 0.985) confirms a Double Bottom!
+    const isDoubleBottom = (minLowIdx > 15 && minLow >= t0Low * 0.985);
 
     // Breakdown check:
     const dipLimit = months >= 8.0 ? 7.5 : (months >= 6.0 ? 6.5 : 5.0);
     let invalidBreakdown = false;
     const dipPct = ((t0Close - minClose) / t0Close) * 100;
-    if (minIdx > 0 && dipPct > dipLimit) invalidBreakdown = true;
 
-    // Check if any subsequent intraday low dropped significantly below t0Close
-    for (let j = 1; j < lowSlice.length; j++) {
-      if (((t0Close - lowSlice[j]) / t0Close) * 100 > (dipLimit + 1.0)) {
-        invalidBreakdown = true;
-        break;
-      }
-    }
+    if (!isDoubleBottom) {
+      if (minIdx > 0 && dipPct > dipLimit) invalidBreakdown = true;
 
-    // Check count of consecutive bars closing below t0Close
-    let consecutiveBelow = 0, maxConsecutiveBelow = 0;
-    for (let k = 0; k < baseSlice.length; k++) {
-      if (baseSlice[k] < t0Close) {
-        consecutiveBelow++;
-        if (consecutiveBelow > maxConsecutiveBelow) maxConsecutiveBelow = consecutiveBelow;
-      } else {
-        consecutiveBelow = 0;
+      // Check if any subsequent intraday low dropped significantly below t0Close
+      for (let j = 1; j < lowSlice.length; j++) {
+        if (((t0Close - lowSlice[j]) / t0Close) * 100 > (dipLimit + 1.0)) {
+          invalidBreakdown = true;
+          break;
+        }
       }
-    }
-    const allowedConsecutiveBelow = months >= 8.0 ? 8 : 5;
-    if (maxConsecutiveBelow > allowedConsecutiveBelow) invalidBreakdown = true;
 
-    // Spring Validation: If minClose < t0Close, price must have formed a reaction rally
-    // (maxBeforeMin >= t0Close * 1.03) before dipping; otherwise it was just a falling leg
-    if (minIdx > 0 && dipPct > 0.05) {
-      const maxBeforeMin = Math.max(...baseSlice.slice(0, minIdx));
-      if (maxBeforeMin < t0Close * 1.03) {
-        invalidBreakdown = true;
+      // Check count of consecutive bars closing below t0Close
+      let consecutiveBelow = 0, maxConsecutiveBelow = 0;
+      for (let k = 0; k < baseSlice.length; k++) {
+        if (baseSlice[k] < t0Close) {
+          consecutiveBelow++;
+          if (consecutiveBelow > maxConsecutiveBelow) maxConsecutiveBelow = consecutiveBelow;
+        } else {
+          consecutiveBelow = 0;
+        }
       }
+      const allowedConsecutiveBelow = months >= 8.0 ? 8 : 5;
+      if (maxConsecutiveBelow > allowedConsecutiveBelow) invalidBreakdown = true;
+
+      // Spring Validation: If minClose < t0Close, price must have formed a reaction rally
+      // (maxBeforeMin >= t0Close * 1.03) before dipping; otherwise it was just a falling leg
+      if (minIdx > 0 && dipPct > 0.05) {
+        const maxBeforeMin = Math.max(...baseSlice.slice(0, minIdx));
+        if (maxBeforeMin < t0Close * 1.03) {
+          invalidBreakdown = true;
+        }
+      }
+    } else {
+      // In a double bottom pattern, price must still stay within the base limit
+      if (dipPct > 6.5) invalidBreakdown = true;
     }
 
     if (invalidBreakdown) continue;
@@ -228,7 +253,7 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
     }
 
     const baseMin = (hasSpring && springPrice && !isIntradaySpringAtT0) ? t0Close : minClose;
-    const baseMinDate = formatDateVN(timestamps[t0]);
+    const baseMinDate = formatDateVN(timeSlice[minIdx]);
     const baseMax = maxClose;
     const baseMaxDate = formatDateVN(timeSlice[maxIdx]);
     const baseStartDate = formatDateVN(timestamps[t0]);
@@ -252,7 +277,8 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
         springPrice,
         springDate,
         isIntradaySpringAtT0,
-        score: sessions * 3.0 + (30 - tightness) * 1.5
+        isDoubleBottom,
+        score: sessions * 3.0 + (30 - tightness) * 1.5 + (isDoubleBottom ? 50 : 0)
       });
     }
   }

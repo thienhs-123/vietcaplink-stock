@@ -184,8 +184,7 @@
      * **Quy tắc 2 (Trend Breakdown & Reset Clock)**: Nếu trong quá trình vận động có nhịp rơi gãy đáy $> 5\%$ hoặc đóng cửa dưới đáy cũ $> 3$ phiên, nền cũ bị hủy bỏ hoàn toàn và đồng hồ tính nền RESET về 0 tại đáy mới.
      * **Quy tắc 3 (Spring Validation)**: Một cú nhúng thấp hơn đáy chỉ được xem là Spring nếu trước đó đã hình thành nhịp hồi phản ứng ($\ge 4\%$) tạo biên trên của hộp. Nếu chỉ rơi từ từ tạo đáy sau thấp hơn đáy trước, đó là sóng giảm, không phải Spring.
    - **Kết quả kiểm chứng thực tế**:
-     * **HHV**: Nền Tạo Đáy chuẩn xác từ **09/10/2026** (26 phiên ~ 1.2 tháng), biên độ 8.75 – 9.88 (12.9%), xếp vào nhóm "Dưới 3 tháng", loại bỏ khỏi bộ lọc "3 – 6 tháng".
-     * **FCN**: Nền Tạo Đáy chuẩn xác từ **07/10/2026** (28 phiên ~ 1.3 tháng), biên độ 10.15 – 11.40 (12.3%), xếp vào nhóm "Dưới 3 tháng".
+     * **HHV**: Nền Tạo Đáy chuẩn xác từ **09/10/2026** (26 phiên ~ 1.2 tháng), biên độ 8.75 – 9.88 (12.9%), xếp vào nhóm "Dưới 3 tháng", loại bỏ khỏi bộ lọc "3 – 6 tháng". (Do nhịp rơi tháng 10 gãy thủng sâu đáy tháng 8 tới -9.9%, phá vỡ cấu trúc tích lũy trước đó).
      * **SSI, CTG, MWG, TCB, VNM, HSG, DIG**: Nền 3 – 6 tháng chuẩn mực (68 – 97 phiên) giữ vững đáy từ tháng 7/8/2026.
 
 7. **Cơ chế Độ Siết Nền Động theo Thời Gian Tích Lũy (Dynamic Base Tightness) (13/11/2026)**:
@@ -199,3 +198,18 @@
      * Biên độ: Đáy 19.10 – Đỉnh 22.93 (độ siết $20.1\% \le 25.0\%$).
      * Có nhịp rũ bỏ quét đáy (Spring) ngày 07/04/2026 về 18.74 với lực cầu hấp thụ mạnh, hiện đang vận động ở nửa trên chiếc hộp quanh MA50 để chuẩn bị vượt đỉnh 52 tuần.
      * Phân loại chuẩn xác vào nhóm bộ lọc **"Từ 6 – 12 tháng"**.
+
+8. **Chuẩn hóa Cơ chế Nhận diện Mô hình Hai Đáy (Double Bottom Base) - Phân biệt Triệt để FCN và HHV (13/11/2026)**:
+   - **Thừa nhận lỗi trước đó**: Khi xử lý trường hợp HHV (bị gãy đáy -9.9%), thuật toán đã áp dụng bộ lọc cơ học quá thô bạo (`consecutiveBelow > 3`), dẫn tới việc ngộ nhận FCN bị gãy nền trong khi thực tế FCN giữ vững đáy tạo mô hình Hai Đáy kinh điển. Điều này tạo ra mâu thuẫn lớn giữa phân tích kỹ thuật (nhận định FCN tích lũy 3.6 tháng) và thuật toán thực tế (bị cắt ngắn về 1.3 tháng).
+   - **Cơ chế phân biệt Price Action**:
+     * **HHV**: Đáy 1 ngày 08/08 là 9.50. Đến tháng 10 rơi thủng sâu về 8.56 (-9.9% so với Đáy 1). Đây là **Gãy xu hướng (Breakdown)**, bắt buộc phải Reset đồng hồ về ngày 09/10/2026 (26 phiên, 1.2 tháng).
+     * **FCN**: Đáy 1 ngày 28/07/2026 có Low 9.96 (nến rút chân pinbar). Nhịp test Đáy 2 ngày 06-07/10/2026 có Low 9.94. Chênh lệch Low giữa Đáy 1 và Đáy 2 chỉ là **0.2%** ($\le 1.5\%$). Đây là **Mô hình Hai Đáy (Double Bottom)** chuẩn mực 100%, bảo toàn nguyên vẹn toàn bộ quá trình tích lũy 3.6 tháng!
+   - **Nâng cấp thuật toán trong `update_technical_bases.js`**:
+     * Bổ sung nhận diện Trough bằng cả `closesVND` và `lowsVND` (nến pinbar rút chân ngày 28/07).
+     * Phát hiện Double Bottom: `const isDoubleBottom = (minLowIdx > 15 && minLow >= t0Low * 0.985)`. Khi thỏa mãn, không bị áp dụng điều kiện `consecutiveBelow` cơ học, giữ nguyên cấu trúc nền từ Đáy 1.
+     * Gán nhãn và mô tả rõ ràng: `baseMethodName = 'Nền Tạo Đáy'`, mô tả: *"Cổ phiếu hình thành mô hình Hai Đáy (Double Bottom) vững chắc với Đáy 1 ngày 28/07/2026 và Đáy 2 ngày 07/10/2026, vận động siết chặt trong chiếc hộp 10.50 - 11.60 (10.5%) kéo dài 3.6 tháng (76 phiên)..."*.
+   - **Kết quả FCN sau chuẩn hóa**:
+     * Bắt đầu: **28/07/2026**.
+     * Thời gian đi nền: **76 phiên (3.6 tháng)** $\rightarrow$ Xếp chuẩn xác vào nhóm **"Từ 3 – 6 tháng"**.
+     * Độ siết: **10.5%** ($\le 20\%$).
+     * Vị thế: Nửa trên hộp tích lũy (`baseUpperHalf: true`). Đạt tiêu chuẩn kỹ thuật hàng đầu.
