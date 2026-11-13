@@ -45,6 +45,7 @@ stocksList.forEach(st => {
     st.baseMax = incoming.baseMax;
     st.baseMinDate = incoming.baseMinDate;
     st.baseMaxDate = incoming.baseMaxDate;
+    st.baseStartDate = incoming.baseStartDate || (incoming.baseMethod === 'continuation' ? incoming.baseMaxDate : incoming.baseMinDate);
     st.baseMethod = incoming.baseMethod;
     st.baseMethodName = incoming.baseMethodName;
     st.baseMethodDesc = incoming.baseMethodDesc;

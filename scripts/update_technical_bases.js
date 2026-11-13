@@ -180,6 +180,7 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
         baseMax: baseMax,
         baseMinDate: baseMinDate,
         baseMaxDate: baseMaxDate,
+        baseStartDate: baseMinDate,
         baseSessions: sessions,
         baseMonths: months,
         baseTightness: tightness,
@@ -242,6 +243,7 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
         baseMax: baseMax,
         baseMinDate: baseMinDate,
         baseMaxDate: baseMaxDate,
+        baseStartDate: baseMaxDate,
         baseSessions: sessions,
         baseMonths: months,
         baseTightness: tightness,
@@ -279,6 +281,7 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
       baseMax: maxClose,
       baseMinDate: formatDateVN(timeSlice[minIdx]),
       baseMaxDate: formatDateVN(timeSlice[maxIdx]),
+      baseStartDate: null,
       baseSessions: 0,
       baseMonths: 0,
       baseTightness: tightness,
@@ -305,6 +308,7 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
     baseMax: baseResult.baseMax,
     baseMinDate: baseResult.baseMinDate,
     baseMaxDate: baseResult.baseMaxDate,
+    baseStartDate: baseResult.baseStartDate,
     baseMethod: baseResult.method,
     baseMethodName: baseResult.methodName,
     baseMethodDesc: baseResult.methodDesc,
@@ -379,6 +383,7 @@ async function run() {
       s.baseMax = tech.baseMax;
       s.baseMinDate = tech.baseMinDate;
       s.baseMaxDate = tech.baseMaxDate;
+      s.baseStartDate = tech.baseStartDate;
       s.baseMethod = tech.baseMethod;
       s.baseMethodName = tech.baseMethodName;
       s.baseMethodDesc = tech.baseMethodDesc;

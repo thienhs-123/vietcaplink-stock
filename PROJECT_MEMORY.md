@@ -160,3 +160,10 @@
 3. **Chuẩn hóa các mã tiêu biểu**:
    - **GMD**: Nền bắt đầu ngày **23/07/2026** (78 phiên, 3.7 tháng, nhóm 3 – 6 tháng), Đáy hộp `48.00`, Đỉnh hộp `57.50`, Độ siết `19.8%` ($\le 20\%$). Cú Spring rũ bỏ râu nến ngày 23/07/2026 nhúng về `44.67` với thanh khoản đạt 3.4M cổ phiếu (gấp **2.43 lần** MA20 Volume 1.4M cp).
    - **TPB**: Nền bắt đầu ngày **27/07/2026** (76 phiên, 3.6 tháng, nhóm 3 – 6 tháng), Đáy hộp `11.67`, Đỉnh hộp `13.10`, Độ siết `12.3%`. Cú Spring ngày 09/10/2026 nhúng về `11.45` rồi hồi phục ngay trong 2 phiên tiếp theo.
+
+4. **Cập nhật giao diện Modal thông số nền (13/11/2026)**:
+   - Thêm thông tin ngày bắt đầu sau số phiên đi nền: `Số phiên đi nền: XX phiên (tính từ ngày dd/mm/yyyy)`.
+     * Với Nền Tạo Đáy: ngày bắt đầu tính từ ngày tạo đáy hộp $T_0$ (`baseMinDate`).
+     * Với Nền Phẳng Tiếp Diễn: ngày bắt đầu tính từ ngày bứt phá đỉnh hộp $T_0$ (`baseMaxDate`).
+   - Bỏ đường viền kẻ mờ (`border-t`) ngăn cách phía trên dòng `Spring`.
+   - Căn chỉnh khoảng cách dọc giữa 4 dòng đều tăm tắp bằng `gap-y-2.5`.
