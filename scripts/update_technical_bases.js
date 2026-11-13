@@ -43,6 +43,49 @@ function formatPriceK(valVND) {
   return (valVND / 1000).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
+function classifyBaseType(base, price, high52w, low52w, diffMA50) {
+  const diffToHigh52w = ((high52w - price) / high52w) * 100;
+  const diffToLow52w = ((price - low52w) / low52w) * 100;
+
+  // 1. NỀN PHẲNG TIẾP DIỄN (Continuation Flat Base)
+  // Phải ở kênh trên (cách đỉnh 52 tuần <= 15%) VÀ giữ được MA50 (diffMA50 >= -2.5%)
+  if (diffToHigh52w <= 15.0 && diffMA50 >= -2.5) {
+    return {
+      method: 'continuation',
+      methodName: 'Nền Phẳng Tiếp Diễn',
+      methodDesc: `Cổ phiếu đang vận động tích lũy ở kênh trên sát vùng đỉnh 52 tuần (${formatPriceK(high52w)}, cách đỉnh ${diffToHigh52w.toFixed(1)}%) và giữ vững trên MA50 (+${diffMA50}%), hình thành chiếc hộp tiếp diễn ${formatPriceK(base.baseMin)} - ${formatPriceK(base.baseMax)} (${base.baseTightness}%) từ ngày ${base.baseStartDate} để hấp thụ lượng cung chốt lời tiếp tục xu hướng tăng.`
+    };
+  }
+
+  // 2. NỀN TÁI TÍCH LŨY (Re-accumulation Base)
+  // Đã bứt phá thoát đáy (> 20% từ đáy 52 tuần) nhưng chưa tới đỉnh (> 15% từ đỉnh), đi ngang kênh giữa
+  if (diffToLow52w >= 20.0 && diffToHigh52w > 15.0 && diffMA50 >= -4.0) {
+    let springDesc = '';
+    if (base.hasSpring) {
+      springDesc = `, xuất hiện nhịp rũ bỏ quét đáy (Spring) ngày ${base.springDate} về ${formatPriceK(base.springPrice)} với lực cầu hấp thụ mạnh`;
+    }
+    return {
+      method: 'reaccumulation',
+      methodName: 'Nền Tái Tích Lũy',
+      methodDesc: `Cổ phiếu đã bứt phá thoát đáy thành công (+${diffToLow52w.toFixed(1)}% từ đáy 52T) và đang hình thành một chiếc hộp tái tích lũy kênh giữa ${formatPriceK(base.baseMin)} - ${formatPriceK(base.baseMax)} (${base.baseTightness}%) từ ngày ${base.baseStartDate}${springDesc} để hấp thụ lượng cung lơ lửng trước khi tiến về đỉnh cũ.`
+    };
+  }
+
+  // 3. NỀN TẠO ĐÁY (Bottom Reversal Base)
+  // Nằm ở vùng giá thấp hoặc điểm bắt đầu nền nằm sát đáy 52 tuần
+  let springDesc = '';
+  if (base.hasSpring) {
+    springDesc = base.springDate === base.baseStartDate
+      ? `, có cú rũ bỏ Spring quét râu về ${formatPriceK(base.springPrice)} (ngày ${base.springDate}) kèm volume hấp thụ đột biến rồi rút chân đóng cửa tại ${formatPriceK(base.baseMin)}`
+      : `, có nhịp rũ bỏ quét đáy (Spring) ngày ${base.springDate} về ${formatPriceK(base.springPrice)} rồi bật tăng mạnh trở lại kênh trên`;
+  }
+  return {
+    method: 'bottom',
+    methodName: 'Nền Tạo Đáy',
+    methodDesc: `Cổ phiếu tích lũy gom hàng đảo chiều sau nhịp giảm sâu từ vùng đáy ngày ${base.baseStartDate}${springDesc}, vận động siết chặt trong chiếc hộp ${formatPriceK(base.baseMin)} - ${formatPriceK(base.baseMax)} (${base.baseTightness}%), chưa breakout chuyển pha sang xu hướng mới.`
+  };
+}
+
 function analyzeStockTechnical(bars, currentPriceVND, symbol) {
   if (!bars || !bars.c || bars.c.length < 50) return null;
   const len = bars.c.length;
@@ -70,6 +113,8 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
   const diffMA50 = parseFloat((((price - ma50) / ma50) * 100).toFixed(1));
 
   const aboveMA10_50 = (diffMA10 > 0 && diffMA50 > 0);
+  const high52w = Math.max(...highsVND);
+  const low52w = Math.min(...lowsVND);
 
   // 2. Base Consolidation Detection
   const candidates = [];
@@ -259,6 +304,10 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
   if (candidates.length > 0) {
     candidates.sort((a, b) => b.score - a.score);
     baseResult = candidates[0];
+    const classification = classifyBaseType(baseResult, price, high52w, low52w, diffMA50);
+    baseResult.method = classification.method;
+    baseResult.methodName = classification.methodName;
+    baseResult.methodDesc = classification.methodDesc;
     baseResult.baseValid = true;
   } else {
     // No valid base <= 20%

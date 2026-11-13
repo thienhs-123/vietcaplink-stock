@@ -167,3 +167,10 @@
      * Với Nền Phẳng Tiếp Diễn: ngày bắt đầu tính từ ngày bứt phá đỉnh hộp $T_0$ (`baseMaxDate`).
    - Bỏ đường viền kẻ mờ (`border-t`) ngăn cách phía trên dòng `Spring`.
    - Căn chỉnh khoảng cách dọc giữa 4 dòng đều tăm tắp bằng `gap-y-2.5`.
+
+5. **Nâng cấp Động cơ Phân loại Nền 3 Trụ cột (13/11/2026)**:
+   - Khắc phục triệt để lỗi phân loại sai loại nền bằng cách đưa **Vị thế Chu kỳ 52 tuần & Quan hệ với MA50** vào làm điều kiện tiên quyết:
+     * **Nền Phẳng Tiếp Diễn (Continuation Flat Base)**: Cách đỉnh 52 tuần $\le 15\%$ và giữ vững trên hoặc sát MA50 (`diffMA50 >= -2.5%`). Loại bỏ hoàn toàn lỗi gán nhãn Nền Tiếp Diễn cho các mã đang gãy nền cắm đầu dưới MA50 (như BID, PLX).
+     * **Nền Tái Tích Lũy (Re-accumulation Base)**: Cổ phiếu đã thoát đáy thành công ($\ge 20\%$ từ đáy 52T) nhưng chưa tiệm cận đỉnh cũ ($> 15\%$ từ đỉnh), đang tích lũy kênh giữa quanh MA50 (như MWG, VJC).
+     * **Nền Tạo Đáy (Bottom Reversal Base)**: Tích lũy gom hàng đảo chiều sau nhịp giảm sâu từ vùng đáy (như TPB, FCN, BID, PLX, SSI, CTG).
+   - Modal hiển thị giải thích đầy đủ cả 3 phương pháp nhận diện khi bấm nút [Chi tiết].
