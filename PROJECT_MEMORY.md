@@ -187,3 +187,15 @@
      * **HHV**: Nền Tạo Đáy chuẩn xác từ **09/10/2026** (26 phiên ~ 1.2 tháng), biên độ 8.75 – 9.88 (12.9%), xếp vào nhóm "Dưới 3 tháng", loại bỏ khỏi bộ lọc "3 – 6 tháng".
      * **FCN**: Nền Tạo Đáy chuẩn xác từ **07/10/2026** (28 phiên ~ 1.3 tháng), biên độ 10.15 – 11.40 (12.3%), xếp vào nhóm "Dưới 3 tháng".
      * **SSI, CTG, MWG, TCB, VNM, HSG, DIG**: Nền 3 – 6 tháng chuẩn mực (68 – 97 phiên) giữ vững đáy từ tháng 7/8/2026.
+
+7. **Cơ chế Độ Siết Nền Động theo Thời Gian Tích Lũy (Dynamic Base Tightness) (13/11/2026)**:
+   - **Quy tắc**: Theo chỉ đạo chiến lược của người dùng, đối với các nền tích lũy trung-dài hạn $\ge 8$ tháng, biên độ dao động $22\% – 25\%$ vẫn là trạng thái gom hàng rất tích cực theo quy luật Nhân - Quả Wyckoff (Cause and Effect). Quy tắc này áp dụng đồng bộ cho toàn bộ thị trường.
+   - **Biểu chuẩn độ siết động**:
+     * Dưới 6 tháng: $\le 20.0\%$ (yêu cầu độ nén cao).
+     * 6 – 8 tháng: $\le 22.5\%$.
+     * Trên 8 tháng: $\le 25.0\%$.
+   - **Áp dụng thành công cho TCB**:
+     * Nhận diện chuẩn xác **Nền Tái Tích Lũy Lớn (Major Re-accumulation)** kéo dài **8.3 tháng (174 phiên)** bắt đầu từ ngày 09/03 - 10/03/2026.
+     * Biên độ: Đáy 19.10 – Đỉnh 22.93 (độ siết $20.1\% \le 25.0\%$).
+     * Có nhịp rũ bỏ quét đáy (Spring) ngày 07/04/2026 về 18.74 với lực cầu hấp thụ mạnh, hiện đang vận động ở nửa trên chiếc hộp quanh MA50 để chuẩn bị vượt đỉnh 52 tuần.
+     * Phân loại chuẩn xác vào nhóm bộ lọc **"Từ 6 – 12 tháng"**.

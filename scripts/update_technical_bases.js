@@ -43,11 +43,27 @@ function formatPriceK(valVND) {
   return (valVND / 1000).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
+function getMaxTightnessAllowed(sessions) {
+  const months = sessions / 21;
+  if (months >= 8.0) return 25.0; // >= 8 tháng: cho phép biên độ đến 25% (nền lớn siêu tích cực theo Wyckoff Cause & Effect)
+  if (months >= 6.0) return 23.0; // 6 - 8 tháng: cho phép đến 23%
+  return 20.0;                    // dưới 6 tháng: tối đa 20%
+}
+
 function classifyBaseType(base, price, high52w, low52w, diffMA50) {
   const diffToHigh52w = ((high52w - price) / high52w) * 100;
   const diffToLow52w = ((price - low52w) / low52w) * 100;
 
-  // 1. NỀN PHẲNG TIẾP DIỄN (Continuation Flat Base)
+  // 1. NỀN TÁI TÍCH LŨY LỚN (Major Re-accumulation Base: >= 6 tháng và đã hồi phục đáng kể từ đáy)
+  if (base.baseMonths >= 6.0 && diffToLow52w >= 15.0 && diffMA50 >= -3.0) {
+    return {
+      method: 'reaccumulation',
+      methodName: 'Nền Tái Tích Lũy',
+      methodDesc: `Cổ phiếu đã bứt phá thoát đáy thành công (+${diffToLow52w.toFixed(1)}% từ đáy 52T) và đang hình thành một chiếc hộp tái tích lũy lớn kênh trên ${formatPriceK(base.baseMin)} - ${formatPriceK(base.baseMax)} (${base.baseTightness}%) kéo dài ${base.baseMonths} tháng từ ngày ${base.baseStartDate}, hiện đang siết chặt ở nửa trên chiếc hộp quanh MA50 để chuẩn bị vượt đỉnh 52 tuần.`
+    };
+  }
+
+  // 2. NỀN PHẲNG TIẾP DIỄN (Continuation Flat Base)
   // Phải ở kênh trên (cách đỉnh 52 tuần <= 15%) VÀ giữ được MA50 (diffMA50 >= -2.5%)
   if (diffToHigh52w <= 15.0 && diffMA50 >= -2.5) {
     return {
@@ -57,7 +73,7 @@ function classifyBaseType(base, price, high52w, low52w, diffMA50) {
     };
   }
 
-  // 2. NỀN TÁI TÍCH LŨY (Re-accumulation Base)
+  // 3. NỀN TÁI TÍCH LŨY KÊNH GIỮA (Re-accumulation Base)
   // Đã bứt phá thoát đáy (> 20% từ đáy 52 tuần) nhưng chưa tới đỉnh (> 15% từ đỉnh), đi ngang kênh giữa
   if (diffToLow52w >= 20.0 && diffToHigh52w > 15.0 && diffMA50 >= -4.0) {
     let springDesc = '';
@@ -71,7 +87,7 @@ function classifyBaseType(base, price, high52w, low52w, diffMA50) {
     };
   }
 
-  // 3. NỀN TẠO ĐÁY (Bottom Reversal Base)
+  // 4. NỀN TẠO ĐÁY (Bottom Reversal Base)
   // Nằm ở vùng giá thấp hoặc điểm bắt đầu nền nằm sát đáy 52 tuần
   let springDesc = '';
   if (base.hasSpring) {
@@ -82,7 +98,7 @@ function classifyBaseType(base, price, high52w, low52w, diffMA50) {
   return {
     method: 'bottom',
     methodName: 'Nền Tạo Đáy',
-    methodDesc: `Cổ phiếu tích lũy gom hàng đảo chiều sau nhịp giảm sâu từ vùng đáy ngày ${base.baseStartDate}${springDesc}, vận động siết chặt trong chiếc hộp ${formatPriceK(base.baseMin)} - ${formatPriceK(base.baseMax)} (${base.baseTightness}%), chưa breakout chuyển pha sang xu hướng mới.`
+    methodDesc: `Cổ phiếu tích lũy gom hàng đảo chiều sau nhịp giảm sâu từ vùng đáy ngày ${base.baseMinDate}${springDesc}, vận động siết chặt trong chiếc hộp ${formatPriceK(base.baseMin)} - ${formatPriceK(base.baseMax)} (${base.baseTightness}%), chưa breakout chuyển pha sang xu hướng mới.`
   };
 }
 
@@ -121,8 +137,8 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
   // 2. Base Consolidation Detection
   const candidates = [];
 
-  // Method 1: Trough-anchored Base (Starting at reversal trough T0, Spring <= 5%)
-  for (let t0 = Math.max(0, len - 180); t0 <= len - 18; t0++) {
+  // Method 1: Trough-anchored Base (Starting at reversal trough T0, Spring <= 5-7.5%)
+  for (let t0 = Math.max(0, len - 240); t0 <= len - 18; t0++) {
     const t0Close = closesVND[t0];
     // t0 must be the lowest close in a cluster around t0 (t0-2 to t0+2)
     let isTrough = true;
@@ -136,6 +152,7 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
     const lowSlice = lowsVND.slice(t0);
     const timeSlice = timestamps.slice(t0);
     const sessions = baseSlice.length;
+    const months = parseFloat((sessions / 21).toFixed(1));
 
     let minClose = Infinity, minIdx = -1;
     let maxClose = -Infinity, maxIdx = -1;
@@ -152,31 +169,37 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
     }
 
     // Breakdown check:
+    const dipLimit = months >= 8.0 ? 7.5 : (months >= 6.0 ? 6.5 : 5.0);
     let invalidBreakdown = false;
     const dipPct = ((t0Close - minClose) / t0Close) * 100;
-    if (minIdx > 0 && dipPct > 5.0) invalidBreakdown = true;
+    if (minIdx > 0 && dipPct > dipLimit) invalidBreakdown = true;
 
-    // Check if any subsequent intraday low dropped > 6% below t0Close
+    // Check if any subsequent intraday low dropped significantly below t0Close
     for (let j = 1; j < lowSlice.length; j++) {
-      if (((t0Close - lowSlice[j]) / t0Close) * 100 > 6.0) {
+      if (((t0Close - lowSlice[j]) / t0Close) * 100 > (dipLimit + 1.0)) {
         invalidBreakdown = true;
         break;
       }
     }
 
-    // Check count of bars closing below t0Close:
-    // A legitimate Spring/Shakeout can only stay below t0Close for at most 3 sessions
-    let belowCount = 0;
+    // Check count of consecutive bars closing below t0Close
+    let consecutiveBelow = 0, maxConsecutiveBelow = 0;
     for (let k = 0; k < baseSlice.length; k++) {
-      if (baseSlice[k] < t0Close) belowCount++;
+      if (baseSlice[k] < t0Close) {
+        consecutiveBelow++;
+        if (consecutiveBelow > maxConsecutiveBelow) maxConsecutiveBelow = consecutiveBelow;
+      } else {
+        consecutiveBelow = 0;
+      }
     }
-    if (belowCount > 3) invalidBreakdown = true;
+    const allowedConsecutiveBelow = months >= 8.0 ? 8 : 5;
+    if (maxConsecutiveBelow > allowedConsecutiveBelow) invalidBreakdown = true;
 
     // Spring Validation: If minClose < t0Close, price must have formed a reaction rally
-    // (maxBeforeMin >= t0Close * 1.04) before dipping; otherwise it was just a falling leg
+    // (maxBeforeMin >= t0Close * 1.03) before dipping; otherwise it was just a falling leg
     if (minIdx > 0 && dipPct > 0.05) {
       const maxBeforeMin = Math.max(...baseSlice.slice(0, minIdx));
-      if (maxBeforeMin < t0Close * 1.04) {
+      if (maxBeforeMin < t0Close * 1.03) {
         invalidBreakdown = true;
       }
     }
@@ -210,11 +233,10 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
     const baseMaxDate = formatDateVN(timeSlice[maxIdx]);
     const baseStartDate = formatDateVN(timestamps[t0]);
 
+    const maxAllowedTightness = getMaxTightnessAllowed(sessions);
     const tightness = parseFloat((((baseMax - baseMin) / baseMin) * 100).toFixed(1));
 
-    if (tightness <= 20.0 && price >= baseMin * 0.98) {
-      const months = parseFloat((sessions / 21).toFixed(1));
-
+    if (tightness <= maxAllowedTightness && price >= baseMin * 0.98) {
       candidates.push({
         method: 'bottom',
         methodName: 'Nền Tạo Đáy',
@@ -230,7 +252,7 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
         springPrice,
         springDate,
         isIntradaySpringAtT0,
-        score: sessions * 3.0 + (25 - tightness) * 1.5
+        score: sessions * 3.0 + (30 - tightness) * 1.5
       });
     }
   }
@@ -238,7 +260,7 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
   // Method 2: Continuation Flat Base (High Tight Box starting at peak T0)
   // STRICT RULE: Only applicable if stock is in the upper cycle (diffToHigh52w <= 20.0% AND diffMA50 >= -3.0%)
   if (diffToHigh52w <= 20.0 && diffMA50 >= -3.0) {
-    for (let t0 = Math.max(0, len - 180); t0 <= len - 18; t0++) {
+    for (let t0 = Math.max(0, len - 240); t0 <= len - 18; t0++) {
       const t0Close = closesVND[t0];
       // t0 must be the highest close in a cluster around t0 (t0-2 to t0+2)
       let isPeak = true;
@@ -251,6 +273,7 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
       const baseSlice = closesVND.slice(t0);
       const timeSlice = timestamps.slice(t0);
       const sessions = baseSlice.length;
+      const months = parseFloat((sessions / 21).toFixed(1));
 
       let minClose = Infinity, minIdx = -1;
       let maxClose = -Infinity, maxIdx = -1;
@@ -268,9 +291,9 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
 
       if (maxIdx > Math.round(sessions * 0.20)) continue;
 
-      // Price cannot drop more than 16% from the peak in a tight continuation base
+      // Price cannot drop more than 16-20% from the peak in a tight continuation base
       const dropFromPeak = ((t0Close - minClose) / t0Close) * 100;
-      if (dropFromPeak > 16.0) continue;
+      if (dropFromPeak > (months >= 8.0 ? 20.0 : 16.0)) continue;
 
       const baseMax = maxClose;
       const baseMaxDate = formatDateVN(timeSlice[maxIdx]);
@@ -278,11 +301,10 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
       const baseMinDate = formatDateVN(timeSlice[minIdx]);
       const baseStartDate = formatDateVN(timestamps[t0]);
 
+      const maxAllowedTightness = getMaxTightnessAllowed(sessions);
       const tightness = parseFloat((((baseMax - baseMin) / baseMin) * 100).toFixed(1));
 
-      if (tightness <= 20.0 && price >= minClose) {
-        const months = parseFloat((sessions / 21).toFixed(1));
-
+      if (tightness <= maxAllowedTightness && price >= minClose) {
         candidates.push({
           method: 'continuation',
           methodName: 'Nền Phẳng Tiếp Diễn',
@@ -297,7 +319,7 @@ function analyzeStockTechnical(bars, currentPriceVND, symbol) {
           hasSpring: false,
           springPrice: null,
           springDate: null,
-          score: sessions * 3.0 + (25 - tightness) * 1.5
+          score: sessions * 3.0 + (30 - tightness) * 1.5
         });
       }
     }
