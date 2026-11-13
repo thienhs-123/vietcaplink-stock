@@ -232,3 +232,21 @@
      * **Nền Dưới 3 tháng**: Giảm từ 40 xuống **30 cổ phiếu** (chỉ còn các mã mới tạo đáy ngắn hạn gần đây như HHV, VHM, VIC, VRE, VND, FTS, VIX, AGR, MSB, NVL, DXG, KDH...).
      * **Chưa có nền / Biến động lỏng**: Giảm còn **18 cổ phiếu** (đang rơi tự do dò đáy 52T hoặc biến động $> 25-30\%$).
      * **Mô hình Hai Đáy kiểm định**: Nhận diện thành công **25 cổ phiếu**.
+
+10. **Chỉnh sửa Danh mục Tiêu biểu Model Portfolios (13/11/2026)**:
+   - **1. Danh mục Tấn công (Offensive)**:
+     * Chiến lược: Tập trung tối đa 100% vào **POW** (Tổng Công ty Điện lực Dầu khí Việt Nam).
+     * Tỷ trọng: **100% POW** (Ngành Điện lực & Năng lượng).
+     * Mức tập trung hiển thị: "100% POW (All-in)".
+   - **2. Danh mục Cân bằng (Balanced)**:
+     * Bộ 3 điều kiện tuyển chọn:
+       1) **Giá nằm trên MA10 và MA50** (`aboveMA10_50: true`, xu hướng tăng ngắn và trung hạn xác lập).
+       2) **Kết quả kinh doanh tốt** (Tăng trưởng LNST, Doanh thu, EPS, ROE cao).
+       3) **Khối ngoại mua ròng** (Dòng vốn ngoại gom ròng tích cực trên sàn HOSE).
+     * **Top 5 cổ phiếu xuất sắc nhất được lựa chọn (Mỗi mã 20% tỷ trọng)**:
+       1) **MSN (CTCP Tập đoàn Masan)**: Tiêu dùng & Bán lẻ (20%). Khối ngoại mua ròng **+56.08 Tỷ** (Top 1 sàn), LNST **+145%**, DTT **+12.8%**, ROE 11.5%, trên MA10 (+0.7%) và MA50 (+1.4%).
+       2) **TCB (Ngân hàng Techcombank)**: Ngân hàng & Tài chính (20%). Khối ngoại mua ròng **+53.00 Tỷ**, LNST **+34.2%**, DTT **+22.8%**, ROE 16.8%, EPS 3,250 đ, P/E 6.7x, Nền Tái Tích Lũy 8.3 tháng.
+       3) **HPG (Tập đoàn Hòa Phát)**: Thép & Vật liệu (20%). Khối ngoại mua ròng **+24.56 Tỷ**, LNST **+77%**, DTT **+17%**, ROE 11.8%, EPS 1,970 đ, P/E 10.9x.
+       4) **KDH (CTCP Đầu tư và Kinh doanh Nhà Khang Điền)**: Bất động sản (20%). Khối ngoại mua ròng **+44.16 Tỷ**, LNST **+22%**, DTT **+18.5%**, P/E 12.5x, bứt phá mạnh trên MA10 (+6.0%) và MA50 (+8.8%).
+       5) **DBC (CTCP Tập đoàn DABACO Việt Nam)**: Nông nghiệp & Thực phẩm (20%). Khối ngoại mua ròng **+0.35 Tỷ**, LNST tăng trưởng vượt bậc **+280%**, DTT **+18.5%**, ROE 14.8%, EPS 2,150 đ, P/E 7.5x.
+     * Cơ cấu ngành cân bằng 5 trụ cột: Tiêu dùng (20%) - Ngân hàng (20%) - Thép (20%) - BĐS (20%) - Nông nghiệp (20%).

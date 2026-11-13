@@ -646,7 +646,7 @@
                   <span class="text-sm font-normal text-light-subtext dark:text-studio-muted">Mã cổ phiếu</span>
                 </div>
                 <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1 flex items-center justify-between">
-                  <span>Mức tập trung: <strong class="text-light-text dark:text-studio-text">Tối đa 25%/mã</strong></span>
+                  <span id="portKpiConcentrationText">Mức tập trung: <strong class="text-light-text dark:text-studio-text">Tối đa 25%/mã</strong></span>
                   <span class="text-emerald-500 font-semibold font-mono">An toàn</span>
                 </div>
               </div>
@@ -3792,51 +3792,43 @@
           benchmark: "+12.4%",
           alpha: "+19.4% Alpha",
           targetReturn: "25.0% - 35%",
-          stockPct: 90,
-          cashPct: 10,
+          stockPct: 100,
+          cashPct: 0,
           sectors: [
-            { name: "Công nghệ thông tin", pct: 30, color: "#0071e3" },
-            { name: "Thép & Vật liệu", pct: 25, color: "#10b981" },
-            { name: "Ngân hàng & Tài chính", pct: 20, color: "#f59e0b" },
-            { name: "Bán lẻ tiêu dùng", pct: 15, color: "#8b5cf6" },
-            { name: "Hóa chất cơ bản", pct: 10, color: "#06b6d4" }
+            { name: "Điện lực & Năng lượng", pct: 100, color: "#f59e0b" }
           ],
           navDates: ['02/01', '15/01', '01/02', '15/02', '01/03', '15/03', '01/04', '15/04', '02/05', '15/05', '03/06', '17/06', '01/07', '15/07', '01/08', '15/08', '03/09', '16/09', '01/10', '15/10'],
           navPortfolio: [100.0, 102.8, 105.6, 108.5, 112.0, 116.5, 114.2, 118.8, 122.5, 125.4, 123.6, 127.8, 129.5, 128.0, 129.8, 131.2, 130.6, 131.9, 131.2, 131.8],
           navBenchmark: [100.0, 101.2, 102.4, 103.8, 105.1, 107.0, 105.5, 107.2, 108.6, 110.2, 109.1, 111.0, 111.8, 110.5, 111.2, 111.9, 112.1, 112.8, 112.0, 112.4],
           holdings: [
-            { symbol: "FPT", name: "Tập đoàn FPT", sector: "Công nghệ TT", weight: 25, buyPrice: 48000, currentPrice: 53900, profitPct: 12.29 },
-            { symbol: "HPG", name: "Tập đoàn Hòa Phát", sector: "Thép", weight: 20, buyPrice: 19500, currentPrice: 21700, profitPct: 11.28 },
-            { symbol: "TCB", name: "Techcombank", sector: "Ngân hàng", weight: 20, buyPrice: 20000, currentPrice: 21850, profitPct: 9.25 },
-            { symbol: "MWG", name: "Thế Giới Di Động", sector: "Bán lẻ", weight: 15, buyPrice: 68000, currentPrice: 74500, profitPct: 9.56 },
-            { symbol: "DGC", name: "Hóa chất Đức Giang", sector: "Hóa chất", weight: 10, buyPrice: 30000, currentPrice: 33450, profitPct: 11.50 },
-            { symbol: "FRT", name: "Bán lẻ FPT", sector: "Bán lẻ", weight: 10, buyPrice: 132000, currentPrice: 144000, profitPct: 9.09 }
+            { symbol: "POW", name: "Tổng Công ty Điện lực Dầu khí VN", sector: "Điện lực & Năng lượng", weight: 100, buyPrice: 11900, currentPrice: 12550, profitPct: 5.46 }
           ]
         },
         can_bang: {
           name: "Cân bằng",
           badge: "Balanced",
-          ytdReturn: "+24.5%",
+          ytdReturn: "+26.8%",
           benchmark: "+12.4%",
-          alpha: "+12.1% Alpha",
+          alpha: "+14.4% Alpha",
           targetReturn: "18.0% - 24%",
-          stockPct: 75,
-          cashPct: 25,
+          stockPct: 100,
+          cashPct: 0,
           sectors: [
-            { name: "Ngân hàng & Tài chính", pct: 30, color: "#0071e3" },
-            { name: "Công nghệ thông tin", pct: 25, color: "#8b5cf6" },
-            { name: "Thực phẩm & Bán lẻ", pct: 25, color: "#10b981" },
-            { name: "Năng lượng & Tiện ích", pct: 20, color: "#f59e0b" }
+            { name: "Tiêu dùng & Bán lẻ", pct: 20, color: "#8b5cf6" },
+            { name: "Ngân hàng & Tài chính", pct: 20, color: "#0071e3" },
+            { name: "Thép & Vật liệu", pct: 20, color: "#10b981" },
+            { name: "Bất động sản", pct: 20, color: "#f59e0b" },
+            { name: "Nông nghiệp & Thực phẩm", pct: 20, color: "#06b6d4" }
           ],
           navDates: ['02/01', '15/01', '01/02', '15/02', '01/03', '15/03', '01/04', '15/04', '02/05', '15/05', '03/06', '17/06', '01/07', '15/07', '01/08', '15/08', '03/09', '16/09', '01/10', '15/10'],
-          navPortfolio: [100.0, 101.8, 103.5, 105.4, 108.0, 111.2, 110.0, 113.1, 116.0, 118.5, 117.2, 120.4, 121.8, 121.0, 122.5, 123.8, 123.2, 124.6, 124.0, 124.5],
+          navPortfolio: [100.0, 101.8, 103.5, 105.4, 108.0, 111.2, 110.0, 113.1, 116.0, 118.5, 117.2, 120.4, 121.8, 121.0, 122.5, 123.8, 123.2, 124.6, 125.2, 126.8],
           navBenchmark: [100.0, 101.2, 102.4, 103.8, 105.1, 107.0, 105.5, 107.2, 108.6, 110.2, 109.1, 111.0, 111.8, 110.5, 111.2, 111.9, 112.1, 112.8, 112.0, 112.4],
           holdings: [
-            { symbol: "FPT", name: "Tập đoàn FPT", sector: "Công nghệ TT", weight: 25, buyPrice: 48000, currentPrice: 53900, profitPct: 12.29 },
-            { symbol: "MBB", name: "Ngân hàng Quân đội", sector: "Ngân hàng", weight: 20, buyPrice: 18000, currentPrice: 19250, profitPct: 6.94 },
-            { symbol: "REE", name: "Cơ Điện Lạnh REE", sector: "Năng lượng", weight: 20, buyPrice: 42000, currentPrice: 45600, profitPct: 8.57 },
-            { symbol: "MWG", name: "Thế Giới Di Động", sector: "Bán lẻ", weight: 18, buyPrice: 68000, currentPrice: 74500, profitPct: 9.56 },
-            { symbol: "VCB", name: "Vietcombank", sector: "Ngân hàng", weight: 17, buyPrice: 52000, currentPrice: 54800, profitPct: 5.38 }
+            { symbol: "MSN", name: "CTCP Tập đoàn Masan", sector: "Tiêu dùng & Bán lẻ", weight: 20, buyPrice: 66500, currentPrice: 71900, profitPct: 8.12 },
+            { symbol: "TCB", name: "Ngân hàng Techcombank", sector: "Ngân hàng & Tài chính", weight: 20, buyPrice: 20200, currentPrice: 21900, profitPct: 8.42 },
+            { symbol: "HPG", name: "Tập đoàn Hòa Phát", sector: "Thép & Vật liệu", weight: 20, buyPrice: 19800, currentPrice: 21400, profitPct: 8.08 },
+            { symbol: "KDH", name: "Nhà Khang Điền", sector: "Bất động sản", weight: 20, buyPrice: 14200, currentPrice: 15600, profitPct: 9.86 },
+            { symbol: "DBC", name: "Tập đoàn DABACO", sector: "Nông nghiệp & Thực phẩm", weight: 20, buyPrice: 14800, currentPrice: 16200, profitPct: 9.46 }
           ]
         },
         phong_thu: {
@@ -8972,6 +8964,17 @@
 
       const holdingsCountEl = document.getElementById("portKpiHoldingsCount");
       if (holdingsCountEl) holdingsCountEl.innerText = port.holdings.length;
+
+      const concTextEl = document.getElementById("portKpiConcentrationText");
+      if (concTextEl) {
+        if (portKey === 'tan_cong') {
+          concTextEl.innerHTML = `Mức tập trung: <strong class="text-light-text dark:text-studio-text">100% POW (All-in)</strong>`;
+        } else if (portKey === 'can_bang') {
+          concTextEl.innerHTML = `Mức tập trung: <strong class="text-light-text dark:text-studio-text">Phân bổ đều 20%/mã</strong>`;
+        } else {
+          concTextEl.innerHTML = `Mức tập trung: <strong class="text-light-text dark:text-studio-text">Tối đa 30%/mã</strong>`;
+        }
+      }
 
       const holdingsBadge = document.getElementById("portfolioHoldingsBadge");
       if (holdingsBadge) holdingsBadge.innerText = `${port.holdings.length} mã cổ phiếu`;
