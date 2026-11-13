@@ -213,3 +213,22 @@
      * Thời gian đi nền: **76 phiên (3.6 tháng)** $\rightarrow$ Xếp chuẩn xác vào nhóm **"Từ 3 – 6 tháng"**.
      * Độ siết: **10.5%** ($\le 20\%$).
      * Vị thế: Nửa trên hộp tích lũy (`baseUpperHalf: true`). Đạt tiêu chuẩn kỹ thuật hàng đầu.
+
+9. **Đại Tu Toàn Diện Động Cơ Xác Định Nền: Tầm Nhìn Dài Hạn & Phi Máy Móc (13/11/2026)**:
+   - **Tư duy cốt lõi**:
+     1. **Tầm nhìn dài hạn (Wyckoff Cause & Effect)**: Hệ thống ưu tiên nhận diện và bảo toàn Cấu trúc Tích lũy Lớn (Major Base 3 – 12 tháng) thay vì bị "cận thị" chỉ nhìn cái nền cóc 2 – 3 tuần.
+     2. **Loại bỏ hoàn toàn tư duy máy móc**:
+        * Không cắt cụt nền chỉ vì vài phiên râu nến nhúng xuống hay vài phiên lình xình dưới đáy hộp vài lai nếu tổng thể hỗ trợ đáy vẫn được tôn trọng.
+        * Nhận diện đa hình thái Price Action: **Mô hình Hai Đáy (Double Bottom)**, **Cấu trúc Nâng Đáy (Ascending Base / Higher Lows)**, **Hộp Wyckoff có Spring rũ bỏ**, **Nền Phẳng Tiếp Diễn Kênh Trên**, và **Nền Tái Tích Lũy Lớn $\ge 6$ tháng**.
+        * Phân biệt rõ **Gãy nền thật sự (True Breakdown)** như HHV (rơi thủng đáy cũ -9.9%) bắt buộc phải reset về đáy mới; với **Kiểm định đáy / Rũ bỏ (Retest / Shakeout)** như FCN, VCI, IDC (giữ vững đáy) bảo toàn nguyên vẹn nền mẹ.
+     3. **Biểu chuẩn độ siết động (Dynamic Tightness)**:
+        * Dưới 3 tháng: $\le 20.0\%$.
+        * 3 – 6 tháng: $\le 22.0\%$ (phù hợp biên dao động VN-Index thời gian qua).
+        * 6 – 8 tháng: $\le 23.5\%$.
+        * Trên 8 tháng: $\le 25.0\%$.
+   - **Kết quả phân bổ toàn thị trường (100 cổ phiếu)**:
+     * **Nền 3 – 6 tháng**: Tăng từ 19 lên **32 cổ phiếu** (nhận diện chuẩn xác các mã tích lũy đáy lớn từ tháng 7/2026 như VCI, IDC, DIG, NLG, PDR, FCN, SSI, CTG, MWG, DBC, HAX, DGW...).
+     * **Nền 6 – 12 tháng**: **20 cổ phiếu** (các cấu trúc tái tích lũy siêu tích cực như TCB, VJC, VPB, GMD, MSH, OCB, NAB, STB, HCM, MSN, POW, VNM, HPG, HDB, MBB, VIB, ORS, BAF, SAB, ACB).
+     * **Nền Dưới 3 tháng**: Giảm từ 40 xuống **30 cổ phiếu** (chỉ còn các mã mới tạo đáy ngắn hạn gần đây như HHV, VHM, VIC, VRE, VND, FTS, VIX, AGR, MSB, NVL, DXG, KDH...).
+     * **Chưa có nền / Biến động lỏng**: Giảm còn **18 cổ phiếu** (đang rơi tự do dò đáy 52T hoặc biến động $> 25-30\%$).
+     * **Mô hình Hai Đáy kiểm định**: Nhận diện thành công **25 cổ phiếu**.
