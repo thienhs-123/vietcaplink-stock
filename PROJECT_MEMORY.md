@@ -174,3 +174,16 @@
      * **Nền Tái Tích Lũy (Re-accumulation Base)**: Cổ phiếu đã thoát đáy thành công ($\ge 20\%$ từ đáy 52T) nhưng chưa tiệm cận đỉnh cũ ($> 15\%$ từ đỉnh), đang tích lũy kênh giữa quanh MA50 (như MWG, VJC).
      * **Nền Tạo Đáy (Bottom Reversal Base)**: Tích lũy gom hàng đảo chiều sau nhịp giảm sâu từ vùng đáy (như TPB, FCN, BID, PLX, SSI, CTG).
    - Modal hiển thị giải thích đầy đủ cả 3 phương pháp nhận diện khi bấm nút [Chi tiết].
+
+6. **Khắc phục Triệt để Thuật toán Xác định Điểm Bắt đầu Nền & Thời gian Đi nền (13/11/2026)**:
+   - **Bản chất lỗi trước đó (Trường hợp điển hình HHV & FCN)**:
+     * Thuật toán cũ quét cửa sổ máy móc theo cực trị Max-Min ($\le 20\%$). Với HHV, nó bắt đỉnh ngày 12/08/2026 (10.30) và đáy ngày 09/10/2026 (8.75) với biên độ 17.7% và gộp nguyên con sóng giảm -15% suốt 1 tháng vào nền, gán nhầm thành "Nền 3 – 6 tháng (71 phiên)" tính từ đỉnh 12/08/2026.
+     * Tương tự, FCN bị gán nhầm từ đỉnh 26/08/2026 (11.60) gộp nhịp rơi về 07/10/2026 (10.15) thành 64 phiên (3 tháng).
+   - **Bộ 3 Quy tắc Mới chuẩn hóa**:
+     * **Quy tắc 1 (Neo Đáy Đảo Chiều cho Nền Tạo Đáy)**: Mọi nền tạo đáy bắt buộc phải neo gốc tính từ ngày xác lập đáy đảo chiều thấp nhất gần nhất ($T_{đáy}$ = `baseMinDate`).
+     * **Quy tắc 2 (Trend Breakdown & Reset Clock)**: Nếu trong quá trình vận động có nhịp rơi gãy đáy $> 5\%$ hoặc đóng cửa dưới đáy cũ $> 3$ phiên, nền cũ bị hủy bỏ hoàn toàn và đồng hồ tính nền RESET về 0 tại đáy mới.
+     * **Quy tắc 3 (Spring Validation)**: Một cú nhúng thấp hơn đáy chỉ được xem là Spring nếu trước đó đã hình thành nhịp hồi phản ứng ($\ge 4\%$) tạo biên trên của hộp. Nếu chỉ rơi từ từ tạo đáy sau thấp hơn đáy trước, đó là sóng giảm, không phải Spring.
+   - **Kết quả kiểm chứng thực tế**:
+     * **HHV**: Nền Tạo Đáy chuẩn xác từ **09/10/2026** (26 phiên ~ 1.2 tháng), biên độ 8.75 – 9.88 (12.9%), xếp vào nhóm "Dưới 3 tháng", loại bỏ khỏi bộ lọc "3 – 6 tháng".
+     * **FCN**: Nền Tạo Đáy chuẩn xác từ **07/10/2026** (28 phiên ~ 1.3 tháng), biên độ 10.15 – 11.40 (12.3%), xếp vào nhóm "Dưới 3 tháng".
+     * **SSI, CTG, MWG, TCB, VNM, HSG, DIG**: Nền 3 – 6 tháng chuẩn mực (68 – 97 phiên) giữ vững đáy từ tháng 7/8/2026.
