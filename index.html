@@ -740,12 +740,12 @@
               </div>
             </div>
 
-            <div class="overflow-x-auto">
-              <table class="w-full text-left text-xs">
+            <div class="overflow-x-auto rounded-xl border border-light-border dark:border-studio-border">
+              <table class="w-full text-left text-xs table-fixed">
                 <thead class="bg-light-elevated dark:bg-studio-elevated text-light-subtext dark:text-studio-muted font-medium uppercase tracking-wider border-b border-light-border dark:border-studio-border">
                   <tr>
-                    <th class="resizable-th py-3 px-3 w-32" data-col="symbol" data-table="portfolio">
-                      <div class="inline-flex items-center space-x-1">
+                    <th class="resizable-th py-3 px-3.5 w-[14%] min-w-[110px]" data-col="symbol" data-table="portfolio">
+                      <div class="inline-flex items-center space-x-1.5 whitespace-nowrap">
                         <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('portfolio', 'symbol')" title="Bấm để sắp xếp">Mã CP</span>
                         <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('portfolio', 'symbol')" id="sort-portfolio-symbol" title="Bấm để sắp xếp">⇅</span>
                         <button type="button" class="excel-filter-btn p-0.5 rounded hover:bg-black/10 dark:hover:bg-white/10 text-light-subtext dark:text-studio-muted" onclick="openExcelFilter(event, 'portfolio', 'symbol', 'Mã CP')" title="Lọc cột Mã CP">
@@ -754,8 +754,8 @@
                       </div>
                       <div class="col-resizer" onmousedown="initColumnResize(event)"></div>
                     </th>
-                    <th class="resizable-th py-3 px-3" data-col="name" data-table="portfolio">
-                      <div class="inline-flex items-center space-x-1">
+                    <th class="resizable-th py-3 px-3.5 w-[36%] min-w-[240px]" data-col="name" data-table="portfolio">
+                      <div class="inline-flex items-center space-x-1.5 whitespace-nowrap">
                         <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('portfolio', 'name')" title="Bấm để sắp xếp">Doanh nghiệp</span>
                         <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('portfolio', 'name')" id="sort-portfolio-name" title="Bấm để sắp xếp">⇅</span>
                         <button type="button" class="excel-filter-btn p-0.5 rounded hover:bg-black/10 dark:hover:bg-white/10 text-light-subtext dark:text-studio-muted" onclick="openExcelFilter(event, 'portfolio', 'name', 'Doanh nghiệp')" title="Lọc cột Doanh nghiệp">
@@ -764,8 +764,8 @@
                       </div>
                       <div class="col-resizer" onmousedown="initColumnResize(event)"></div>
                     </th>
-                    <th class="resizable-th py-3 px-3 w-48" data-col="sector" data-table="portfolio">
-                      <div class="inline-flex items-center space-x-1">
+                    <th class="resizable-th py-3 px-3.5 w-[24%] min-w-[170px]" data-col="sector" data-table="portfolio">
+                      <div class="inline-flex items-center space-x-1.5 whitespace-nowrap">
                         <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('portfolio', 'sector')" title="Bấm để sắp xếp">Ngành nghề</span>
                         <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('portfolio', 'sector')" id="sort-portfolio-sector" title="Bấm để sắp xếp">⇅</span>
                         <button type="button" class="excel-filter-btn p-0.5 rounded hover:bg-black/10 dark:hover:bg-white/10 text-light-subtext dark:text-studio-muted" onclick="openExcelFilter(event, 'portfolio', 'sector', 'Ngành nghề')" title="Lọc cột Ngành">
@@ -774,8 +774,8 @@
                       </div>
                       <div class="col-resizer" onmousedown="initColumnResize(event)"></div>
                     </th>
-                    <th class="resizable-th py-3 px-3 w-32 text-right" data-col="weight" data-table="portfolio">
-                      <div class="inline-flex items-center justify-end space-x-1 w-full">
+                    <th class="resizable-th py-3 px-3.5 w-[13%] min-w-[125px] text-right" data-col="weight" data-table="portfolio">
+                      <div class="inline-flex items-center justify-end space-x-1.5 w-full whitespace-nowrap">
                         <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('portfolio', 'weight')" title="Bấm để sắp xếp">% Phân bổ</span>
                         <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('portfolio', 'weight')" id="sort-portfolio-weight" title="Bấm để sắp xếp">⇅</span>
                         <button type="button" class="excel-filter-btn p-0.5 rounded hover:bg-black/10 dark:hover:bg-white/10 text-light-subtext dark:text-studio-muted" onclick="openExcelFilter(event, 'portfolio', 'weight', '% Phân bổ')" title="Lọc cột % Phân bổ">
@@ -784,8 +784,8 @@
                       </div>
                       <div class="col-resizer" onmousedown="initColumnResize(event)"></div>
                     </th>
-                    <th class="resizable-th py-3 px-3 w-36 text-right" data-col="buyPrice" data-table="portfolio">
-                      <div class="inline-flex items-center justify-end space-x-1 w-full">
+                    <th class="resizable-th py-3 px-3.5 w-[13%] min-w-[125px] text-right" data-col="buyPrice" data-table="portfolio">
+                      <div class="inline-flex items-center justify-end space-x-1.5 w-full whitespace-nowrap">
                         <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('portfolio', 'buyPrice')" title="Bấm để sắp xếp">Giá vốn</span>
                         <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('portfolio', 'buyPrice')" id="sort-portfolio-buyPrice" title="Bấm để sắp xếp">⇅</span>
                         <button type="button" class="excel-filter-btn p-0.5 rounded hover:bg-black/10 dark:hover:bg-white/10 text-light-subtext dark:text-studio-muted" onclick="openExcelFilter(event, 'portfolio', 'buyPrice', 'Giá vốn (đ)')" title="Lọc cột Giá vốn">
@@ -12610,23 +12610,23 @@
         tableBody.innerHTML = list.map(h => {
           return `
             <tr class="hover:bg-black/[0.02] dark:hover:bg-white/[0.03] transition-colors">
-              <td class="py-3 px-3">
+              <td class="py-3 px-3.5">
                 <span onclick="openCompanyModalBySymbol('${h.symbol}')" class="font-bold font-mono text-sm text-blue-600 dark:text-studio-blueLight hover:underline cursor-pointer" title="Bấm để xem chi tiết doanh nghiệp">
                   ${h.symbol}
                 </span>
               </td>
-              <td class="py-3 px-3 font-medium text-light-text dark:text-studio-text">
+              <td class="py-3 px-3.5 font-medium text-light-text dark:text-studio-text truncate">
                 ${h.name}
               </td>
-              <td class="py-3 px-3 text-light-subtext dark:text-studio-subtext text-xs">
+              <td class="py-3 px-3.5 text-light-subtext dark:text-studio-subtext text-xs truncate">
                 ${h.sector}
               </td>
-              <td class="py-3 px-3 text-right font-mono font-bold text-light-text dark:text-studio-text">
-                <span class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-studio-blueLight border border-blue-500/20 font-semibold" title="Tự động phân bổ đồng đều theo ${port.holdings.length} mã (${h.weight}%)">
+              <td class="py-3 px-3.5 text-right font-mono font-bold text-light-text dark:text-studio-text whitespace-nowrap">
+                <span class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-lg bg-blue-500/10 text-blue-600 dark:text-studio-blueLight border border-blue-500/20 font-semibold" title="Tự động phân bổ đồng đều theo ${port.holdings.length} mã (${h.weight}%)">
                   ${h.weight}%
                 </span>
               </td>
-              <td class="py-3 px-3 text-right font-mono text-light-text dark:text-studio-text">
+              <td class="py-3 px-3.5 text-right font-mono text-light-text dark:text-studio-text whitespace-nowrap">
                 ${(h.buyPrice || 0).toLocaleString('en-US')} đ
               </td>
             </tr>

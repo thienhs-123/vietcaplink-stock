@@ -393,3 +393,17 @@
       * **Modal Cập Nhật Thủ Công (`portfolioManualModal`)**:
         + Thay thế ô input gõ tỷ trọng bằng huy hiệu hiển thị tự động (`${r.weight}%`), luôn đảm bảo tổng tỷ trọng đạt chuẩn 100%.
         + Người dùng chỉ cần thêm/bớt mã và nhập giá vốn (Giá mua TB), hệ thống tự động cân bằng tỷ trọng cho toàn bộ danh mục ngay lập tức.
+
+22. **Thiết Kế Lại Bảng Danh Mục & Căn Chỉnh Chiều Ngang Cân Đối (17/11/2026)**:
+    - **Vấn đề phát hiện**:
+      * Do thiếu quy định tỷ lệ chiều ngang cố định và thiếu `table-fixed`, cột "Doanh nghiệp" bị dãn quá rộng chiếm hơn 60% màn hình, tạo khoảng trống lớn bất thường giữa Doanh nghiệp và Ngành nghề.
+      * Cột "% Phân bổ" bị bóp hẹp khiến tiêu đề bị ngắt dòng phản cảm (`% PHÂN` trên dòng 1, `BỔ ⇅ ⎚` trên dòng 2).
+    - **Giải pháp thiết kế & căn chỉnh**:
+      * Áp dụng `table-fixed` cho bảng kết hợp viền bo tròn hiện đại `rounded-xl border border-light-border dark:border-studio-border`.
+      * Phân bổ tỷ lệ chiều ngang vàng (100%) cho 5 cột:
+        + `Mã CP`: `w-[14%] min-w-[110px]`
+        + `Doanh nghiệp`: `w-[36%] min-w-[240px]` (vừa vặn tên công ty, triệt tiêu hoàn toàn khoảng trống thừa)
+        + `Ngành nghề`: `w-[24%] min-w-[170px]`
+        + `% Phân bổ`: `w-[13%] min-w-[125px] text-right` (kèm `whitespace-nowrap`, không còn bị rớt dòng chữ "BỔ")
+        + `Giá vốn`: `w-[13%] min-w-[125px] text-right` (kèm `whitespace-nowrap`)
+      * Đồng bộ padding `px-3.5 py-3`, căn chỉnh lề phải ngay ngắn cho các cột số học (`% Phân bổ`, `Giá vốn`) và căn lề trái trực quan cho các cột văn bản (`Mã CP`, `Doanh nghiệp`, `Ngành nghề`).
