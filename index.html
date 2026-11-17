@@ -3519,10 +3519,10 @@
             <div>
               <label class="block text-[11px] text-light-subtext dark:text-studio-muted mb-1">Số mã tuyển chọn:</label>
               <select id="autoModalCountSelect" onchange="runAutoPreview()" class="w-full px-2.5 py-1.5 rounded-lg bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border font-semibold text-blue-600 dark:text-studio-blueLight focus:outline-none">
-                <option value="5" selected>Top 5 mã (Cân bằng chuẩn 20%)</option>
-                <option value="1">Top 1 mã (Tập trung 100%)</option>
-                <option value="3">Top 3 mã (~33%/mã)</option>
-                <option value="10">Top 10 mã (Đa dạng 10%)</option>
+                <option value="5" selected>Top 5 mã (Khuyến nghị)</option>
+                <option value="1">Top 1 mã (Tập trung)</option>
+                <option value="3">Top 3 mã</option>
+                <option value="10">Top 10 mã (Đa dạng)</option>
               </select>
             </div>
           </div>
@@ -3601,7 +3601,6 @@
                 <th class="py-2.5 px-3 text-right">MA10 / MA50</th>
                 <th class="py-2.5 px-3 text-right" id="autoPreviewForeignHeader">Khối ngoại (5P)</th>
                 <th class="py-2.5 px-3 text-right">LNST / DTT</th>
-                <th class="py-2.5 px-3 text-right">Tỷ trọng dự kiến</th>
               </tr>
             </thead>
             <tbody id="autoPreviewTableBody" class="divide-y divide-light-border dark:divide-studio-border">
@@ -12998,7 +12997,7 @@
       if (filtered.length === 0) {
         tbody.innerHTML = `
           <tr>
-            <td colspan="8" class="py-6 text-center text-light-subtext dark:text-studio-muted">
+            <td colspan="7" class="py-6 text-center text-light-subtext dark:text-studio-muted">
               Không tìm thấy cổ phiếu nào thỏa mãn đầy đủ các tiêu chí lọc đã chọn. Hãy thử nới lỏng mức khối ngoại hoặc tiêu chí kinh doanh!
             </td>
           </tr>
@@ -13010,12 +13009,8 @@
         return;
       }
 
-      // Calculate weight per stock for top N
-      const equalWeight = targetCount === 1 ? 100 : Math.floor(100 / targetCount);
-
       tbody.innerHTML = filtered.map((s, idx) => {
         const isSelected = idx < targetCount;
-        const weightText = isSelected ? `${idx === 0 ? (100 - equalWeight * (targetCount - 1)) : equalWeight}%` : '0%';
         const rowBg = isSelected ? 'bg-blue-500/5 dark:bg-blue-500/10' : '';
         const fVal = getForeignVal(s);
         const fSessions = getForeignSessions(s);
@@ -13050,9 +13045,6 @@
             <td class="py-2.5 px-3 text-right font-mono">
               <span class="text-emerald-500 font-semibold">+${s.profitGrowth}%</span>
               <span class="text-light-subtext dark:text-studio-muted text-[10px]"> / +${s.revGrowth}%</span>
-            </td>
-            <td class="py-2.5 px-3 text-right font-mono font-bold">
-              ${isSelected ? `<span class="px-2 py-0.5 rounded bg-blue-500/15 text-blue-600 dark:text-studio-blueLight border border-blue-500/25">${weightText}</span>` : '<span class="text-gray-400 font-normal">Dự phòng</span>'}
             </td>
           </tr>
         `;

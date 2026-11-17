@@ -367,3 +367,12 @@
       * Cột giá trị hiển thị 2 dòng: dòng trên là tổng giá trị mua ròng lũy kế (Tỷ VNĐ), dòng dưới hiển thị số phiên mua ròng (ví dụ: `4/5P gom ròng`, `7/10P gom ròng`, `15/20P gom ròng`).
     - **Hiệu quả thực tế**:
       * Khi chọn khung 5 phiên với ngưỡng "Đột biến > 20 tỷ", bộ lọc ngay lập tức tìm ra các cổ phiếu dẫn dắt dòng tiền ngoại thỏa mãn toàn bộ tiêu chí MA Uptrend và KQKD: `MSN` (+151.78 tỷ, 4/5P), `VIC` (+210.45 tỷ), `VJC` (+95.30 tỷ), `KDH` (+168.57 tỷ, 4/5P), `FRT` (+48.20 tỷ),... giải quyết triệt để vấn đề danh sách trống (0 mã) khi chỉ lọc trên 1 phiên đơn lẻ.
+
+20. **Loại Bỏ Cột "TỶ TRỌNG DỰ KIẾN" Khỏi Modal Cập Nhật Danh Mục Tự Động (17/11/2026)**:
+    - **Yêu cầu**: Đồng bộ với quyết định tinh gọn giao diện danh mục nắm giữ (bỏ tỷ trọng, giá vốn, lãi lỗ), người dùng yêu cầu loại bỏ cột "TỶ TRỌNG DỰ KIẾN" khỏi bảng Live Preview trong modal.
+    - **Thực hiện**:
+      * Đã xóa bỏ cột `<th class="py-2.5 px-3 text-right">Tỷ trọng dự kiến</th>` khỏi `<thead>` của bảng xem trước.
+      * Đã xóa bỏ ô hiển thị badge tỷ trọng (`20%` / `Dự phòng`) khỏi `<tbody>` trong hàm `runAutoPreview()`.
+      * Cập nhật `colspan` trạng thái rỗng từ 8 về 7 cột.
+      * Tinh chỉnh các nhãn trong dropdown `#autoModalCountSelect` loại bỏ các con số % rườm rà: `Top 5 mã (Khuyến nghị)`, `Top 1 mã (Tập trung)`, `Top 3 mã`, `Top 10 mã (Đa dạng)`.
+      * Bảng xem trước hiện hiển thị gọn gàng, tập trung đúng vào các tín hiệu kỹ thuật và cơ bản: `Chọn`, `Mã CP`, `Doanh nghiệp & Ngành`, `Giá (đ)`, `MA10 / MA50`, `Khối ngoại (xP)` và `LNST / DTT`.
