@@ -336,3 +336,15 @@
       * **Frontend Client-Side (`index.html`)**: Hàm `fetchClientLiveMarketData()` được bổ sung trích xuất trực tiếp `fBValue` và `fSValue` từ VPS Live Feed, giúp ứng dụng tự động cập nhật số liệu khối ngoại thời gian thực ngay cả khi chạy thuần trên GitHub Pages (HTTPS).
       * **Đồng bộ cơ sở dữ liệu nền**: Đã đồng bộ toàn bộ 100 mã cổ phiếu trong `vnstock_snapshot.json` và `StockApp.stocks` trong `index.html` về đúng số liệu khớp lệnh phiên hôm nay. Mã VIX đã được cập nhật chuẩn xác về **+3.10 Tỷ VNĐ**.
       * **Chuẩn hóa hiển thị MA10/MA50**: Cố định 2 chữ số thập phân (`toFixed(2)`) kèm dấu `+` / `-` chuẩn xác trong bảng xem trước tự động (khắc phục lỗi hiện lệch `+5.7%` thành `+5.70%`).
+
+18. **Đồng Bộ Chuẩn Xác MA10 & MA50 Cho Toàn Bộ 100 Mã Theo FireAnt / Sàn HOSE (17/11/2026)**:
+    - **Làm rõ bản chất con số**:
+      * Cột `MA10 / MA50` trong bảng modal trước đó hiển thị **Độ lệch %** ($\frac{\text{Giá} - \text{MA}}{\text{MA}} \times 100\%$) chứ không phải giá trị tuyệt đối của đường MA, gây hiểu nhầm khi đối chiếu với FireAnt.
+    - **Đối chiếu thực tế mã DBC (CTCP Tập đoàn DABACO Việt Nam)**:
+      * Dữ liệu 10 phiên đóng cửa gần nhất (đến 16/11): Đóng cửa lần lượt 15.20, 15.75, 15.60, 15.60, 16.20, 16.20, 16.20, 16.00, 16.05, 16.40 $\rightarrow$ **Đường MA10 chuẩn FireAnt = 15.92** (15,920 đ).
+      * Dữ liệu 50 phiên đóng cửa gần nhất: **Đường MA50 chuẩn FireAnt = 15.80** (15,801 đ).
+      * Thị giá hôm nay (17/11): Khớp lệnh 16,850 đ (+2.74%) $\rightarrow$ Độ lệch thực tế so với MA10 là **+5.84%**, so với MA50 là **+6.64%**. Cổ phiếu bứt phá mạnh mẽ trên cả 2 đường MA.
+    - **Nâng cấp giao diện hiển thị 2 dòng trực quan**:
+      * Dòng trên (chữ to, màu xanh): Hiển thị rõ ràng **Độ lệch %** (`+5.84% / +6.64%`).
+      * Dòng dưới (chữ nhỏ, màu phụ): Hiển thị trực tiếp **Giá trị đường MA10 / MA50** (`MA10: 15.92 • MA50: 15.80`) giúp người dùng đối chiếu chuẩn xác 1:1 với biểu đồ nến ngày trên FireAnt.
+    - **Đồng bộ tự động 100 mã CP**: Toàn bộ 100/100 mã CP trong `vnstock_snapshot.json` và `index.html` đã được tính toán lại đường MA10 và MA50 từ chuỗi nến lịch sử thực tế.
