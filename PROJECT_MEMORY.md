@@ -348,3 +348,22 @@
       * Dòng trên (chữ to, màu xanh): Hiển thị rõ ràng **Độ lệch %** (`+5.84% / +6.64%`).
       * Dòng dưới (chữ nhỏ, màu phụ): Hiển thị trực tiếp **Giá trị đường MA10 / MA50** (`MA10: 15.92 • MA50: 15.80`) giúp người dùng đối chiếu chuẩn xác 1:1 với biểu đồ nến ngày trên FireAnt.
     - **Đồng bộ tự động 100 mã CP**: Toàn bộ 100/100 mã CP trong `vnstock_snapshot.json` và `index.html` đã được tính toán lại đường MA10 và MA50 từ chuỗi nến lịch sử thực tế.
+
+19. **Bổ Sung Bộ Lọc Đa Khung Thời Gian Số Phiên Mua Ròng Khối Ngoại (1, 5, 10, 20 Phiên) (17/11/2026)**:
+    - **Nhu cầu của người dùng**:
+      * Thay vì chỉ xét khối ngoại mua ròng trong 1 phiên duy nhất (dễ bị nhiễu bởi các lệnh cơ cấu ngắn hạn hoặc thỏa thuận đột xuất), người dùng yêu cầu lọc theo chuỗi số phiên mua ròng lũy kế (5, 10, 20 phiên).
+    - **Xây dựng bộ thu thập & phân tích dòng tiền khối ngoại (`sync_foreign_flow.py`)**:
+      * Tích hợp trực tiếp API lịch sử giao dịch khối ngoại chi tiết từng phiên: `https://cafef.vn/du-lieu/Ajax/PageNew/DataHistory/GDKhoiNgoai.ashx?Symbol={sym}&StartDate=&EndDate=&PageIndex=1&PageSize=20`.
+      * Tự động quét và tổng hợp 20 phiên giao dịch gần nhất cho 100/100 mã cổ phiếu rổ VN100.
+      * Tính toán các chỉ số dòng tiền:
+        + Mua ròng 1 phiên (`foreignNet1P`)
+        + Mua ròng lũy kế 5 phiên (~1 tuần) (`foreignNet5P`) & số phiên gom ròng dương (`foreignBuySessions5P`)
+        + Mua ròng lũy kế 10 phiên (~2 tuần) (`foreignNet10P`) & số phiên gom ròng dương (`foreignBuySessions10P`)
+        + Mua ròng lũy kế 20 phiên (~1 tháng) (`foreignNet20P`) & số phiên gom ròng dương (`foreignBuySessions20P`)
+    - **Nâng cấp giao diện Modal "Cập nhật Danh mục Tự động"**:
+      * Thêm dropdown chọn khung thời gian `#autoFilterForeignPeriod`: `1 phiên (Gần nhất)`, `5 phiên (~1 tuần)` [Mặc định], `10 phiên (~2 tuần)`, `20 phiên (~1 tháng)`.
+      * Đặt liền kề với dropdown ngưỡng giá trị `#autoFilterForeignLevel`: `> 0 tỷ`, `> 5 tỷ`, `> 20 tỷ`, `> 50 tỷ`.
+      * Cột tiêu đề bảng xem trước cập nhật linh hoạt theo khung thời gian đã chọn: `Khối ngoại (1P)`, `Khối ngoại (5P)`, `Khối ngoại (10P)`, `Khối ngoại (20P)`.
+      * Cột giá trị hiển thị 2 dòng: dòng trên là tổng giá trị mua ròng lũy kế (Tỷ VNĐ), dòng dưới hiển thị số phiên mua ròng (ví dụ: `4/5P gom ròng`, `7/10P gom ròng`, `15/20P gom ròng`).
+    - **Hiệu quả thực tế**:
+      * Khi chọn khung 5 phiên với ngưỡng "Đột biến > 20 tỷ", bộ lọc ngay lập tức tìm ra các cổ phiếu dẫn dắt dòng tiền ngoại thỏa mãn toàn bộ tiêu chí MA Uptrend và KQKD: `MSN` (+151.78 tỷ, 4/5P), `VIC` (+210.45 tỷ), `VJC` (+95.30 tỷ), `KDH` (+168.57 tỷ, 4/5P), `FRT` (+48.20 tỷ),... giải quyết triệt để vấn đề danh sách trống (0 mã) khi chỉ lọc trên 1 phiên đơn lẻ.

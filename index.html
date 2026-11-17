@@ -3555,11 +3555,20 @@
                 <input type="checkbox" id="autoFilterForeign" checked onchange="runAutoPreview()" class="rounded text-blue-600 focus:ring-0">
                 <span class="text-light-text dark:text-studio-text font-medium">Khối ngoại mua ròng / đột biến</span>
               </label>
-              <select id="autoFilterForeignLevel" onchange="runAutoPreview()" class="px-2 py-0.5 rounded text-[11px] bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border text-light-text dark:text-studio-text">
-                <option value="0">Mua ròng > 0 tỷ</option>
-                <option value="5" selected>Mua ròng > 5 tỷ</option>
-                <option value="20">Đột biến > 20 tỷ</option>
-              </select>
+              <div class="flex items-center space-x-1.5">
+                <select id="autoFilterForeignPeriod" onchange="runAutoPreview()" class="px-2 py-0.5 rounded text-[11px] bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border text-light-text dark:text-studio-text font-medium">
+                  <option value="1">1 phiên (Gần nhất)</option>
+                  <option value="5" selected>5 phiên (~1 tuần)</option>
+                  <option value="10">10 phiên (~2 tuần)</option>
+                  <option value="20">20 phiên (~1 tháng)</option>
+                </select>
+                <select id="autoFilterForeignLevel" onchange="runAutoPreview()" class="px-2 py-0.5 rounded text-[11px] bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border text-light-text dark:text-studio-text font-medium">
+                  <option value="0">Mua ròng > 0 tỷ</option>
+                  <option value="5">Mua ròng > 5 tỷ</option>
+                  <option value="20" selected>Đột biến > 20 tỷ</option>
+                  <option value="50">Đột biến > 50 tỷ</option>
+                </select>
+              </div>
             </div>
 
             <!-- Criteria 3: KQKD tốt -->
@@ -3590,7 +3599,7 @@
                 <th class="py-2.5 px-3">Doanh nghiệp & Ngành</th>
                 <th class="py-2.5 px-3 text-right">Giá (đ)</th>
                 <th class="py-2.5 px-3 text-right">MA10 / MA50</th>
-                <th class="py-2.5 px-3 text-right">Khối ngoại (Tỷ)</th>
+                <th class="py-2.5 px-3 text-right" id="autoPreviewForeignHeader">Khối ngoại (5P)</th>
                 <th class="py-2.5 px-3 text-right">LNST / DTT</th>
                 <th class="py-2.5 px-3 text-right">Tỷ trọng dự kiến</th>
               </tr>
@@ -4297,7 +4306,14 @@
     "foreignNetValTy": -0.2,
     "foreignBuyVal": 1281126900,
     "foreignSellVal": 1479655000,
-    "foreignNetQty": -9866
+    "foreignNetQty": -9866,
+    "foreignNet1P": -37.38,
+    "foreignNet5P": -53.93,
+    "foreignNet10P": -246.77,
+    "foreignNet20P": -820.27,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 3,
+    "foreignBuySessions20P": 6
   },
   {
     "symbol": "BCM",
@@ -4366,7 +4382,14 @@
     "foreignNetValTy": -0.1,
     "foreignBuyVal": 0,
     "foreignSellVal": 103135000,
-    "foreignNetQty": -2800
+    "foreignNetQty": -2800,
+    "foreignNet1P": -1.86,
+    "foreignNet5P": -5.64,
+    "foreignNet10P": -4.57,
+    "foreignNet20P": 2.91,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 4,
+    "foreignBuySessions20P": 10
   },
   {
     "symbol": "BID",
@@ -4435,7 +4458,14 @@
     "foreignNetValTy": -17.33,
     "foreignBuyVal": 498334750,
     "foreignSellVal": 17832565000,
-    "foreignNetQty": -553405
+    "foreignNetQty": -553405,
+    "foreignNet1P": -37.44,
+    "foreignNet5P": -109.46,
+    "foreignNet10P": -220.99,
+    "foreignNet20P": -417.75,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 1,
+    "foreignBuySessions20P": 1
   },
   {
     "symbol": "BVH",
@@ -4504,7 +4534,14 @@
     "foreignNetValTy": -1.7,
     "foreignBuyVal": 150790000,
     "foreignSellVal": 1849750000,
-    "foreignNetQty": -27100
+    "foreignNetQty": -27100,
+    "foreignNet1P": -1,
+    "foreignNet5P": 45.52,
+    "foreignNet10P": 109.78,
+    "foreignNet20P": 196.57,
+    "foreignBuySessions5P": 3,
+    "foreignBuySessions10P": 8,
+    "foreignBuySessions20P": 14
   },
   {
     "symbol": "CTG",
@@ -4575,7 +4612,14 @@
     "foreignNetValTy": -5.91,
     "foreignBuyVal": 2509194500,
     "foreignSellVal": 8421540000,
-    "foreignNetQty": -190490
+    "foreignNetQty": -190490,
+    "foreignNet1P": 3.87,
+    "foreignNet5P": 16.29,
+    "foreignNet10P": 240.83,
+    "foreignNet20P": 301.72,
+    "foreignBuySessions5P": 3,
+    "foreignBuySessions10P": 8,
+    "foreignBuySessions20P": 15
   },
   {
     "symbol": "FPT",
@@ -4646,7 +4690,14 @@
     "foreignNetValTy": -36.86,
     "foreignBuyVal": 37464068500,
     "foreignSellVal": 74319475100,
-    "foreignNetQty": -745918
+    "foreignNetQty": -745918,
+    "foreignNet1P": -163.21,
+    "foreignNet5P": -970.55,
+    "foreignNet10P": -1104.89,
+    "foreignNet20P": -2574.58,
+    "foreignBuySessions5P": 0,
+    "foreignBuySessions10P": 1,
+    "foreignBuySessions20P": 1
   },
   {
     "symbol": "GAS",
@@ -4715,7 +4766,14 @@
     "foreignNetValTy": -3.93,
     "foreignBuyVal": 443891500,
     "foreignSellVal": 4371550000,
-    "foreignNetQty": -54780
+    "foreignNetQty": -54780,
+    "foreignNet1P": -0.02,
+    "foreignNet5P": 30.95,
+    "foreignNet10P": -28.03,
+    "foreignNet20P": 16.77,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 3,
+    "foreignBuySessions20P": 8
   },
   {
     "symbol": "GVR",
@@ -4784,7 +4842,14 @@
     "foreignNetValTy": 0,
     "foreignBuyVal": 0,
     "foreignSellVal": 0,
-    "foreignNetQty": 0
+    "foreignNetQty": 0,
+    "foreignNet1P": -0.03,
+    "foreignNet5P": -0.16,
+    "foreignNet10P": -1.97,
+    "foreignNet20P": -21.34,
+    "foreignBuySessions5P": 0,
+    "foreignBuySessions10P": 0,
+    "foreignBuySessions20P": 0
   },
   {
     "symbol": "HDB",
@@ -4855,7 +4920,14 @@
     "foreignNetValTy": -9.67,
     "foreignBuyVal": 6708970000,
     "foreignSellVal": 16374825000,
-    "foreignNetQty": -435600
+    "foreignNetQty": -435600,
+    "foreignNet1P": -28.73,
+    "foreignNet5P": 179.97,
+    "foreignNet10P": 13.18,
+    "foreignNet20P": 32.46,
+    "foreignBuySessions5P": 4,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 11
   },
   {
     "symbol": "HPG",
@@ -4926,7 +4998,14 @@
     "foreignNetValTy": 1.75,
     "foreignBuyVal": 19569050950,
     "foreignSellVal": 17815810000,
-    "foreignNetQty": 83001
+    "foreignNetQty": 83001,
+    "foreignNet1P": 16.03,
+    "foreignNet5P": 93.13,
+    "foreignNet10P": 232.05,
+    "foreignNet20P": 409.23,
+    "foreignBuySessions5P": 4,
+    "foreignBuySessions10P": 7,
+    "foreignBuySessions20P": 11
   },
   {
     "symbol": "MBB",
@@ -4997,7 +5076,14 @@
     "foreignNetValTy": -30.14,
     "foreignBuyVal": 4912574000,
     "foreignSellVal": 35057410000,
-    "foreignNetQty": -1598990
+    "foreignNetQty": -1598990,
+    "foreignNet1P": 9.98,
+    "foreignNet5P": 20.54,
+    "foreignNet10P": -388.91,
+    "foreignNet20P": -741.4,
+    "foreignBuySessions5P": 4,
+    "foreignBuySessions10P": 6,
+    "foreignBuySessions20P": 9
   },
   {
     "symbol": "MSN",
@@ -5066,7 +5152,14 @@
     "foreignNetValTy": 61.31,
     "foreignBuyVal": 76835990000,
     "foreignSellVal": 15527300000,
-    "foreignNetQty": 854600
+    "foreignNetQty": 854600,
+    "foreignNet1P": 62.32,
+    "foreignNet5P": 151.78,
+    "foreignNet10P": 330.07,
+    "foreignNet20P": 989.46,
+    "foreignBuySessions5P": 4,
+    "foreignBuySessions10P": 7,
+    "foreignBuySessions20P": 15
   },
   {
     "symbol": "MWG",
@@ -5137,7 +5230,14 @@
     "foreignNetValTy": 0.39,
     "foreignBuyVal": 13590304000,
     "foreignSellVal": 13197184000,
-    "foreignNetQty": 5400
+    "foreignNetQty": 5400,
+    "foreignNet1P": 0.02,
+    "foreignNet5P": 4.36,
+    "foreignNet10P": 11.08,
+    "foreignNet20P": 3.95,
+    "foreignBuySessions5P": 4,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 8
   },
   {
     "symbol": "PLX",
@@ -5206,7 +5306,14 @@
     "foreignNetValTy": -5.2,
     "foreignBuyVal": 6460000,
     "foreignSellVal": 5209825000,
-    "foreignNetQty": -160300
+    "foreignNetQty": -160300,
+    "foreignNet1P": -1.89,
+    "foreignNet5P": 18.28,
+    "foreignNet10P": 35.39,
+    "foreignNet20P": 13.8,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 10
   },
   {
     "symbol": "POW",
@@ -5275,7 +5382,14 @@
     "foreignNetValTy": -2.21,
     "foreignBuyVal": 1033590000,
     "foreignSellVal": 3246045000,
-    "foreignNetQty": -169200
+    "foreignNetQty": -169200,
+    "foreignNet1P": -7.78,
+    "foreignNet5P": 108.18,
+    "foreignNet10P": 142.08,
+    "foreignNet20P": 190.68,
+    "foreignBuySessions5P": 3,
+    "foreignBuySessions10P": 8,
+    "foreignBuySessions20P": 14
   },
   {
     "symbol": "SAB",
@@ -5344,7 +5458,14 @@
     "foreignNetValTy": -0.57,
     "foreignBuyVal": 140750000,
     "foreignSellVal": 715072600,
-    "foreignNetQty": -13470
+    "foreignNetQty": -13470,
+    "foreignNet1P": -0.82,
+    "foreignNet5P": 22.52,
+    "foreignNet10P": 21.77,
+    "foreignNet20P": -5.49,
+    "foreignBuySessions5P": 3,
+    "foreignBuySessions10P": 6,
+    "foreignBuySessions20P": 8
   },
   {
     "symbol": "SHB",
@@ -5415,7 +5536,14 @@
     "foreignNetValTy": -2.36,
     "foreignBuyVal": 597292000,
     "foreignSellVal": 2957330000,
-    "foreignNetQty": -220490
+    "foreignNetQty": -220490,
+    "foreignNet1P": -10.14,
+    "foreignNet5P": -52.8,
+    "foreignNet10P": 137.4,
+    "foreignNet20P": 203.75,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 6,
+    "foreignBuySessions20P": 12
   },
   {
     "symbol": "SSB",
@@ -5484,7 +5612,14 @@
     "foreignNetValTy": -0.82,
     "foreignBuyVal": 878145000,
     "foreignSellVal": 1695965000,
-    "foreignNetQty": -53500
+    "foreignNetQty": -53500,
+    "foreignNet1P": 11.04,
+    "foreignNet5P": 17.27,
+    "foreignNet10P": 15.51,
+    "foreignNet20P": 10.79,
+    "foreignBuySessions5P": 5,
+    "foreignBuySessions10P": 8,
+    "foreignBuySessions20P": 11
   },
   {
     "symbol": "SSI",
@@ -5553,7 +5688,14 @@
     "foreignNetValTy": 5.39,
     "foreignBuyVal": 9362615000,
     "foreignSellVal": 3968695400,
-    "foreignNetQty": 273404
+    "foreignNetQty": 273404,
+    "foreignNet1P": 6.03,
+    "foreignNet5P": 77.75,
+    "foreignNet10P": 39.15,
+    "foreignNet20P": -106.4,
+    "foreignBuySessions5P": 4,
+    "foreignBuySessions10P": 7,
+    "foreignBuySessions20P": 10
   },
   {
     "symbol": "STB",
@@ -5624,7 +5766,14 @@
     "foreignNetValTy": -5.19,
     "foreignBuyVal": 15962720000,
     "foreignSellVal": 21153420000,
-    "foreignNetQty": -73300
+    "foreignNetQty": -73300,
+    "foreignNet1P": 6.74,
+    "foreignNet5P": -131.67,
+    "foreignNet10P": -234.53,
+    "foreignNet20P": -664.89,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 2,
+    "foreignBuySessions20P": 2
   },
   {
     "symbol": "TCB",
@@ -5695,7 +5844,14 @@
     "foreignNetValTy": -24.13,
     "foreignBuyVal": 7725873800,
     "foreignSellVal": 31855463400,
-    "foreignNetQty": -1143142
+    "foreignNetQty": -1143142,
+    "foreignNet1P": -9.05,
+    "foreignNet5P": 92.37,
+    "foreignNet10P": 136.01,
+    "foreignNet20P": 1187.5,
+    "foreignBuySessions5P": 3,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 13
   },
   {
     "symbol": "TPB",
@@ -5766,7 +5922,14 @@
     "foreignNetValTy": -0.49,
     "foreignBuyVal": 1050250000,
     "foreignSellVal": 1541670000,
-    "foreignNetQty": -38900
+    "foreignNetQty": -38900,
+    "foreignNet1P": 15.26,
+    "foreignNet5P": 60.12,
+    "foreignNet10P": 53.61,
+    "foreignNet20P": 65.5,
+    "foreignBuySessions5P": 4,
+    "foreignBuySessions10P": 7,
+    "foreignBuySessions20P": 13
   },
   {
     "symbol": "VCB",
@@ -5837,7 +6000,14 @@
     "foreignNetValTy": -34.58,
     "foreignBuyVal": 1445610000,
     "foreignSellVal": 36027950800,
-    "foreignNetQty": -655161
+    "foreignNetQty": -655161,
+    "foreignNet1P": -52.79,
+    "foreignNet5P": -66.59,
+    "foreignNet10P": -528.42,
+    "foreignNet20P": -767.33,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 1,
+    "foreignBuySessions20P": 6
   },
   {
     "symbol": "VHM",
@@ -5906,7 +6076,14 @@
     "foreignNetValTy": -12.4,
     "foreignBuyVal": 9792178400,
     "foreignSellVal": 22190417300,
-    "foreignNetQty": -200485
+    "foreignNetQty": -200485,
+    "foreignNet1P": 30.7,
+    "foreignNet5P": 196.97,
+    "foreignNet10P": 109.47,
+    "foreignNet20P": 125.51,
+    "foreignBuySessions5P": 5,
+    "foreignBuySessions10P": 7,
+    "foreignBuySessions20P": 12
   },
   {
     "symbol": "VIB",
@@ -5977,7 +6154,14 @@
     "foreignNetValTy": 0.73,
     "foreignBuyVal": 1744695000,
     "foreignSellVal": 1013925000,
-    "foreignNetQty": 53900
+    "foreignNetQty": 53900,
+    "foreignNet1P": -8.39,
+    "foreignNet5P": 12.1,
+    "foreignNet10P": 101.3,
+    "foreignNet20P": 225.94,
+    "foreignBuySessions5P": 4,
+    "foreignBuySessions10P": 9,
+    "foreignBuySessions20P": 17
   },
   {
     "symbol": "VIC",
@@ -6046,7 +6230,14 @@
     "foreignNetValTy": -19.23,
     "foreignBuyVal": 20650505600,
     "foreignSellVal": 39877823500,
-    "foreignNetQty": -78014
+    "foreignNetQty": -78014,
+    "foreignNet1P": 116.83,
+    "foreignNet5P": 210.65,
+    "foreignNet10P": 131.79,
+    "foreignNet20P": 136.71,
+    "foreignBuySessions5P": 3,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 11
   },
   {
     "symbol": "VJC",
@@ -6115,7 +6306,14 @@
     "foreignNetValTy": 7.45,
     "foreignBuyVal": 15111985000,
     "foreignSellVal": 7660150000,
-    "foreignNetQty": 54720
+    "foreignNetQty": 54720,
+    "foreignNet1P": -4.41,
+    "foreignNet5P": 63.73,
+    "foreignNet10P": 49.12,
+    "foreignNet20P": 33.83,
+    "foreignBuySessions5P": 3,
+    "foreignBuySessions10P": 4,
+    "foreignBuySessions20P": 10
   },
   {
     "symbol": "VNM",
@@ -6184,7 +6382,14 @@
     "foreignNetValTy": 6.47,
     "foreignBuyVal": 10256350000,
     "foreignSellVal": 3786040000,
-    "foreignNetQty": 120700
+    "foreignNetQty": 120700,
+    "foreignNet1P": 40.74,
+    "foreignNet5P": 46.74,
+    "foreignNet10P": 97.26,
+    "foreignNet20P": -5.82,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 7
   },
   {
     "symbol": "VPB",
@@ -6255,7 +6460,14 @@
     "foreignNetValTy": 7.78,
     "foreignBuyVal": 10279010000,
     "foreignSellVal": 2501825000,
-    "foreignNetQty": 357800
+    "foreignNetQty": 357800,
+    "foreignNet1P": -39.14,
+    "foreignNet5P": -38.69,
+    "foreignNet10P": -87.25,
+    "foreignNet20P": -164.7,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 9
   },
   {
     "symbol": "VRE",
@@ -6324,7 +6536,14 @@
     "foreignNetValTy": -12.56,
     "foreignBuyVal": 1446570000,
     "foreignSellVal": 14001795000,
-    "foreignNetQty": -524300
+    "foreignNetQty": -524300,
+    "foreignNet1P": -28.85,
+    "foreignNet5P": -81.01,
+    "foreignNet10P": -111.92,
+    "foreignNet20P": -67.5,
+    "foreignBuySessions5P": 0,
+    "foreignBuySessions10P": 2,
+    "foreignBuySessions20P": 9
   },
   {
     "symbol": "VND",
@@ -6393,7 +6612,14 @@
     "foreignNetValTy": 7.49,
     "foreignBuyVal": 10900980000,
     "foreignSellVal": 3410860000,
-    "foreignNetQty": 529300
+    "foreignNetQty": 529300,
+    "foreignNet1P": 15.18,
+    "foreignNet5P": 35.06,
+    "foreignNet10P": 145.88,
+    "foreignNet20P": 166.92,
+    "foreignBuySessions5P": 5,
+    "foreignBuySessions10P": 8,
+    "foreignBuySessions20P": 12
   },
   {
     "symbol": "VCI",
@@ -6462,7 +6688,14 @@
     "foreignNetValTy": 3.98,
     "foreignBuyVal": 5864345000,
     "foreignSellVal": 1885450000,
-    "foreignNetQty": 207200
+    "foreignNetQty": 207200,
+    "foreignNet1P": 0.13,
+    "foreignNet5P": -47.86,
+    "foreignNet10P": -78.98,
+    "foreignNet20P": -115.06,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 3,
+    "foreignBuySessions20P": 5
   },
   {
     "symbol": "HCM",
@@ -6531,7 +6764,14 @@
     "foreignNetValTy": -1.03,
     "foreignBuyVal": 0,
     "foreignSellVal": 1032130000,
-    "foreignNetQty": -44900
+    "foreignNetQty": -44900,
+    "foreignNet1P": 3.43,
+    "foreignNet5P": 23.97,
+    "foreignNet10P": 17.09,
+    "foreignNet20P": 4.37,
+    "foreignBuySessions5P": 3,
+    "foreignBuySessions10P": 6,
+    "foreignBuySessions20P": 9
   },
   {
     "symbol": "FTS",
@@ -6600,7 +6840,14 @@
     "foreignNetValTy": 0.54,
     "foreignBuyVal": 814860000,
     "foreignSellVal": 275245000,
-    "foreignNetQty": 29000
+    "foreignNetQty": 29000,
+    "foreignNet1P": -0.55,
+    "foreignNet5P": -5.98,
+    "foreignNet10P": -8.83,
+    "foreignNet20P": -1.04,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 4,
+    "foreignBuySessions20P": 8
   },
   {
     "symbol": "BSI",
@@ -6669,7 +6916,14 @@
     "foreignNetValTy": 2.37,
     "foreignBuyVal": 2368612000,
     "foreignSellVal": 0,
-    "foreignNetQty": 86110
+    "foreignNetQty": 86110,
+    "foreignNet1P": 1.98,
+    "foreignNet5P": -1.67,
+    "foreignNet10P": -3.62,
+    "foreignNet20P": 2.02,
+    "foreignBuySessions5P": 3,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 11
   },
   {
     "symbol": "CTS",
@@ -6738,7 +6992,14 @@
     "foreignNetValTy": 1.92,
     "foreignBuyVal": 2185925000,
     "foreignSellVal": 261450000,
-    "foreignNetQty": 85400
+    "foreignNetQty": 85400,
+    "foreignNet1P": 6.05,
+    "foreignNet5P": -2.39,
+    "foreignNet10P": -6.89,
+    "foreignNet20P": -4.95,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 3,
+    "foreignBuySessions20P": 8
   },
   {
     "symbol": "VIX",
@@ -6807,7 +7068,14 @@
     "foreignNetValTy": 3.1,
     "foreignBuyVal": 8540305000,
     "foreignSellVal": 5441840000,
-    "foreignNetQty": 247100
+    "foreignNetQty": 247100,
+    "foreignNet1P": -11.9,
+    "foreignNet5P": -77.96,
+    "foreignNet10P": 456.62,
+    "foreignNet20P": 439,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 4,
+    "foreignBuySessions20P": 8
   },
   {
     "symbol": "ORS",
@@ -6876,7 +7144,14 @@
     "foreignNetValTy": 0.78,
     "foreignBuyVal": 938820000,
     "foreignSellVal": 161820000,
-    "foreignNetQty": 56300
+    "foreignNetQty": 56300,
+    "foreignNet1P": 0.8,
+    "foreignNet5P": 9.25,
+    "foreignNet10P": -15.97,
+    "foreignNet20P": 10.84,
+    "foreignBuySessions5P": 4,
+    "foreignBuySessions10P": 4,
+    "foreignBuySessions20P": 10
   },
   {
     "symbol": "AGR",
@@ -6945,7 +7220,14 @@
     "foreignNetValTy": -0.1,
     "foreignBuyVal": 1145000,
     "foreignSellVal": 103155000,
-    "foreignNetQty": -8900
+    "foreignNetQty": -8900,
+    "foreignNet1P": 0.01,
+    "foreignNet5P": 0.2,
+    "foreignNet10P": 0.48,
+    "foreignNet20P": 0.58,
+    "foreignBuySessions5P": 4,
+    "foreignBuySessions10P": 7,
+    "foreignBuySessions20P": 11
   },
   {
     "symbol": "LPB",
@@ -7016,7 +7298,14 @@
     "foreignNetValTy": -7.77,
     "foreignBuyVal": 4343655000,
     "foreignSellVal": 12111210000,
-    "foreignNetQty": -208900
+    "foreignNetQty": -208900,
+    "foreignNet1P": 33.35,
+    "foreignNet5P": 79.04,
+    "foreignNet10P": 75.61,
+    "foreignNet20P": -36.5,
+    "foreignBuySessions5P": 4,
+    "foreignBuySessions10P": 6,
+    "foreignBuySessions20P": 8
   },
   {
     "symbol": "EIB",
@@ -7087,7 +7376,14 @@
     "foreignNetValTy": -1.66,
     "foreignBuyVal": 0,
     "foreignSellVal": 1660715000,
-    "foreignNetQty": -103000
+    "foreignNetQty": -103000,
+    "foreignNet1P": 0.24,
+    "foreignNet5P": -5.33,
+    "foreignNet10P": -22.95,
+    "foreignNet20P": -47.35,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 2,
+    "foreignBuySessions20P": 4
   },
   {
     "symbol": "MSB",
@@ -7158,7 +7454,14 @@
     "foreignNetValTy": 0.03,
     "foreignBuyVal": 222630000,
     "foreignSellVal": 188585000,
-    "foreignNetQty": 2100
+    "foreignNetQty": 2100,
+    "foreignNet1P": -1.39,
+    "foreignNet5P": -83.25,
+    "foreignNet10P": -192.16,
+    "foreignNet20P": -409.02,
+    "foreignBuySessions5P": 0,
+    "foreignBuySessions10P": 1,
+    "foreignBuySessions20P": 2
   },
   {
     "symbol": "OCB",
@@ -7229,7 +7532,14 @@
     "foreignNetValTy": 0,
     "foreignBuyVal": 0,
     "foreignSellVal": 0,
-    "foreignNetQty": 0
+    "foreignNetQty": 0,
+    "foreignNet1P": -0.36,
+    "foreignNet5P": 0.66,
+    "foreignNet10P": -31.84,
+    "foreignNet20P": -99.53,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 2,
+    "foreignBuySessions20P": 5
   },
   {
     "symbol": "NAB",
@@ -7300,7 +7610,14 @@
     "foreignNetValTy": -1.76,
     "foreignBuyVal": 331985000,
     "foreignSellVal": 2091345000,
-    "foreignNetQty": -137700
+    "foreignNetQty": -137700,
+    "foreignNet1P": -1.69,
+    "foreignNet5P": 14.66,
+    "foreignNet10P": 25.55,
+    "foreignNet20P": 39.42,
+    "foreignBuySessions5P": 3,
+    "foreignBuySessions10P": 6,
+    "foreignBuySessions20P": 15
   },
   {
     "symbol": "NKG",
@@ -7369,7 +7686,14 @@
     "foreignNetValTy": 0.99,
     "foreignBuyVal": 1113705000,
     "foreignSellVal": 128260000,
-    "foreignNetQty": 80200
+    "foreignNetQty": 80200,
+    "foreignNet1P": -4.28,
+    "foreignNet5P": 2.8,
+    "foreignNet10P": -8.46,
+    "foreignNet20P": 32.85,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 4,
+    "foreignBuySessions20P": 12
   },
   {
     "symbol": "HSG",
@@ -7438,7 +7762,14 @@
     "foreignNetValTy": 0.2,
     "foreignBuyVal": 586855000,
     "foreignSellVal": 387445000,
-    "foreignNetQty": 19000
+    "foreignNetQty": 19000,
+    "foreignNet1P": -2.43,
+    "foreignNet5P": -6.04,
+    "foreignNet10P": -7.52,
+    "foreignNet20P": 3.94,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 4,
+    "foreignBuySessions20P": 10
   },
   {
     "symbol": "VGS",
@@ -7507,7 +7838,14 @@
     "foreignNetValTy": 0,
     "foreignBuyVal": 0,
     "foreignSellVal": 0,
-    "foreignNetQty": 0
+    "foreignNetQty": 0,
+    "foreignNet1P": -0.19,
+    "foreignNet5P": -0.44,
+    "foreignNet10P": -1.02,
+    "foreignNet20P": -0.67,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 9
   },
   {
     "symbol": "KSB",
@@ -7576,7 +7914,14 @@
     "foreignNetValTy": -0.11,
     "foreignBuyVal": 0,
     "foreignSellVal": 113475000,
-    "foreignNetQty": -9400
+    "foreignNetQty": -9400,
+    "foreignNet1P": -0.37,
+    "foreignNet5P": -0.99,
+    "foreignNet10P": -0.4,
+    "foreignNet20P": -2.66,
+    "foreignBuySessions5P": 0,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 7
   },
   {
     "symbol": "HT1",
@@ -7645,7 +7990,14 @@
     "foreignNetValTy": -0.65,
     "foreignBuyVal": 0,
     "foreignSellVal": 647135000,
-    "foreignNetQty": -51600
+    "foreignNetQty": -51600,
+    "foreignNet1P": -1.4,
+    "foreignNet5P": -3.72,
+    "foreignNet10P": -6.47,
+    "foreignNet20P": -7.49,
+    "foreignBuySessions5P": 0,
+    "foreignBuySessions10P": 0,
+    "foreignBuySessions20P": 0
   },
   {
     "symbol": "NVL",
@@ -7714,7 +8066,14 @@
     "foreignNetValTy": 1.3,
     "foreignBuyVal": 1558835000,
     "foreignSellVal": 256852450,
-    "foreignNetQty": 126093
+    "foreignNetQty": 126093,
+    "foreignNet1P": 7.02,
+    "foreignNet5P": -19.32,
+    "foreignNet10P": 19.59,
+    "foreignNet20P": -32.13,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 6,
+    "foreignBuySessions20P": 9
   },
   {
     "symbol": "DIG",
@@ -7783,7 +8142,14 @@
     "foreignNetValTy": 0.39,
     "foreignBuyVal": 2584390000,
     "foreignSellVal": 2195285000,
-    "foreignNetQty": 38800
+    "foreignNetQty": 38800,
+    "foreignNet1P": 0.98,
+    "foreignNet5P": 12.33,
+    "foreignNet10P": 50.03,
+    "foreignNet20P": 56.33,
+    "foreignBuySessions5P": 3,
+    "foreignBuySessions10P": 7,
+    "foreignBuySessions20P": 14
   },
   {
     "symbol": "PDR",
@@ -7852,7 +8218,14 @@
     "foreignNetValTy": 0.74,
     "foreignBuyVal": 815540000,
     "foreignSellVal": 70965000,
-    "foreignNetQty": 66200
+    "foreignNetQty": 66200,
+    "foreignNet1P": -0.13,
+    "foreignNet5P": 1.19,
+    "foreignNet10P": 3.39,
+    "foreignNet20P": -7.67,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 6
   },
   {
     "symbol": "DXG",
@@ -7921,7 +8294,14 @@
     "foreignNetValTy": 1.59,
     "foreignBuyVal": 4945455000,
     "foreignSellVal": 3354105000,
-    "foreignNetQty": 148500
+    "foreignNetQty": 148500,
+    "foreignNet1P": 2.03,
+    "foreignNet5P": 92.36,
+    "foreignNet10P": 102.53,
+    "foreignNet20P": 57.87,
+    "foreignBuySessions5P": 5,
+    "foreignBuySessions10P": 9,
+    "foreignBuySessions20P": 13
   },
   {
     "symbol": "KDH",
@@ -7992,7 +8372,14 @@
     "foreignNetValTy": 19.82,
     "foreignBuyVal": 19981815000,
     "foreignSellVal": 166233200,
-    "foreignNetQty": 1303567
+    "foreignNetQty": 1303567,
+    "foreignNet1P": 41.27,
+    "foreignNet5P": 168.57,
+    "foreignNet10P": 98.33,
+    "foreignNet20P": 60.09,
+    "foreignBuySessions5P": 4,
+    "foreignBuySessions10P": 6,
+    "foreignBuySessions20P": 9
   },
   {
     "symbol": "NLG",
@@ -8063,7 +8450,14 @@
     "foreignNetValTy": -0.75,
     "foreignBuyVal": 168270000,
     "foreignSellVal": 917200000,
-    "foreignNetQty": -31400
+    "foreignNetQty": -31400,
+    "foreignNet1P": 1.68,
+    "foreignNet5P": 5.74,
+    "foreignNet10P": -36.83,
+    "foreignNet20P": -35.28,
+    "foreignBuySessions5P": 3,
+    "foreignBuySessions10P": 4,
+    "foreignBuySessions20P": 9
   },
   {
     "symbol": "TCH",
@@ -8132,7 +8526,14 @@
     "foreignNetValTy": 4.3,
     "foreignBuyVal": 4737095000,
     "foreignSellVal": 438875000,
-    "foreignNetQty": 329900
+    "foreignNetQty": 329900,
+    "foreignNet1P": 10.84,
+    "foreignNet5P": 55.12,
+    "foreignNet10P": 60.2,
+    "foreignNet20P": 85.83,
+    "foreignBuySessions5P": 5,
+    "foreignBuySessions10P": 7,
+    "foreignBuySessions20P": 13
   },
   {
     "symbol": "HDG",
@@ -8203,7 +8604,14 @@
     "foreignNetValTy": -0.44,
     "foreignBuyVal": 620500000,
     "foreignSellVal": 1055590000,
-    "foreignNetQty": -26900
+    "foreignNetQty": -26900,
+    "foreignNet1P": -3.38,
+    "foreignNet5P": -7.32,
+    "foreignNet10P": 0.02,
+    "foreignNet20P": -5.47,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 4,
+    "foreignBuySessions20P": 6
   },
   {
     "symbol": "CEO",
@@ -8272,7 +8680,14 @@
     "foreignNetValTy": 3.67,
     "foreignBuyVal": 3675770000,
     "foreignSellVal": 9600000,
-    "foreignNetQty": 310800
+    "foreignNetQty": 310800,
+    "foreignNet1P": 2.96,
+    "foreignNet5P": 2.67,
+    "foreignNet10P": 6.95,
+    "foreignNet20P": -11.19,
+    "foreignBuySessions5P": 4,
+    "foreignBuySessions10P": 6,
+    "foreignBuySessions20P": 12
   },
   {
     "symbol": "DXS",
@@ -8341,7 +8756,14 @@
     "foreignNetValTy": -0.51,
     "foreignBuyVal": 0,
     "foreignSellVal": 508111000,
-    "foreignNetQty": -106800
+    "foreignNetQty": -106800,
+    "foreignNet1P": -0.87,
+    "foreignNet5P": -19.06,
+    "foreignNet10P": -23.77,
+    "foreignNet20P": -47.33,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 3,
+    "foreignBuySessions20P": 5
   },
   {
     "symbol": "KBC",
@@ -8412,7 +8834,14 @@
     "foreignNetValTy": -1.87,
     "foreignBuyVal": 565450000,
     "foreignSellVal": 2433805000,
-    "foreignNetQty": -70400
+    "foreignNetQty": -70400,
+    "foreignNet1P": 0.24,
+    "foreignNet5P": -27.26,
+    "foreignNet10P": -25.83,
+    "foreignNet20P": -17.92,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 4,
+    "foreignBuySessions20P": 9
   },
   {
     "symbol": "IDC",
@@ -8483,7 +8912,14 @@
     "foreignNetValTy": -3.22,
     "foreignBuyVal": 364060000,
     "foreignSellVal": 3583826400,
-    "foreignNetQty": -94106
+    "foreignNetQty": -94106,
+    "foreignNet1P": 1.53,
+    "foreignNet5P": 6.32,
+    "foreignNet10P": 25.8,
+    "foreignNet20P": 110.37,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 6,
+    "foreignBuySessions20P": 15
   },
   {
     "symbol": "VGC",
@@ -8554,7 +8990,14 @@
     "foreignNetValTy": 0.05,
     "foreignBuyVal": 75910000,
     "foreignSellVal": 28155000,
-    "foreignNetQty": 1200
+    "foreignNetQty": 1200,
+    "foreignNet1P": 0.8,
+    "foreignNet5P": 4.65,
+    "foreignNet10P": -8.01,
+    "foreignNet20P": -39.93,
+    "foreignBuySessions5P": 5,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 7
   },
   {
     "symbol": "SZC",
@@ -8625,7 +9068,14 @@
     "foreignNetValTy": -0.06,
     "foreignBuyVal": 0,
     "foreignSellVal": 60665000,
-    "foreignNetQty": -3000
+    "foreignNetQty": -3000,
+    "foreignNet1P": -1.09,
+    "foreignNet5P": -2.51,
+    "foreignNet10P": 0.3,
+    "foreignNet20P": 1.65,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 3,
+    "foreignBuySessions20P": 8
   },
   {
     "symbol": "PHR",
@@ -8696,7 +9146,14 @@
     "foreignNetValTy": 0,
     "foreignBuyVal": 0,
     "foreignSellVal": 2860000,
-    "foreignNetQty": -100
+    "foreignNetQty": -100,
+    "foreignNet1P": 0,
+    "foreignNet5P": -0.18,
+    "foreignNet10P": -0.27,
+    "foreignNet20P": -0.96,
+    "foreignBuySessions5P": 0,
+    "foreignBuySessions10P": 0,
+    "foreignBuySessions20P": 0
   },
   {
     "symbol": "DPR",
@@ -8767,7 +9224,14 @@
     "foreignNetValTy": -0.23,
     "foreignBuyVal": 0,
     "foreignSellVal": 229120000,
-    "foreignNetQty": -6500
+    "foreignNetQty": -6500,
+    "foreignNet1P": -0.84,
+    "foreignNet5P": -8.35,
+    "foreignNet10P": -7.43,
+    "foreignNet20P": 4.29,
+    "foreignBuySessions5P": 0,
+    "foreignBuySessions10P": 2,
+    "foreignBuySessions20P": 7
   },
   {
     "symbol": "FRT",
@@ -8838,7 +9302,14 @@
     "foreignNetValTy": -0.04,
     "foreignBuyVal": 961805000,
     "foreignSellVal": 1004430000,
-    "foreignNetQty": -290
+    "foreignNetQty": -290,
+    "foreignNet1P": 27.7,
+    "foreignNet5P": 39.97,
+    "foreignNet10P": 50.74,
+    "foreignNet20P": 102.47,
+    "foreignBuySessions5P": 5,
+    "foreignBuySessions10P": 8,
+    "foreignBuySessions20P": 17
   },
   {
     "symbol": "DGW",
@@ -8909,7 +9380,14 @@
     "foreignNetValTy": -0.25,
     "foreignBuyVal": 1403985000,
     "foreignSellVal": 1649755000,
-    "foreignNetQty": -6000
+    "foreignNetQty": -6000,
+    "foreignNet1P": 10.09,
+    "foreignNet5P": 23.02,
+    "foreignNet10P": 22.4,
+    "foreignNet20P": -11.61,
+    "foreignBuySessions5P": 4,
+    "foreignBuySessions10P": 6,
+    "foreignBuySessions20P": 9
   },
   {
     "symbol": "PET",
@@ -8980,7 +9458,14 @@
     "foreignNetValTy": 0,
     "foreignBuyVal": 0,
     "foreignSellVal": 0,
-    "foreignNetQty": 0
+    "foreignNetQty": 0,
+    "foreignNet1P": -0.03,
+    "foreignNet5P": -0.32,
+    "foreignNet10P": -0.47,
+    "foreignNet20P": -0.88,
+    "foreignBuySessions5P": 0,
+    "foreignBuySessions10P": 0,
+    "foreignBuySessions20P": 0
   },
   {
     "symbol": "PNJ",
@@ -9051,7 +9536,14 @@
     "foreignNetValTy": 0.78,
     "foreignBuyVal": 1995337000,
     "foreignSellVal": 1210950000,
-    "foreignNetQty": 54230
+    "foreignNetQty": 54230,
+    "foreignNet1P": -5.1,
+    "foreignNet5P": -29.5,
+    "foreignNet10P": -220.01,
+    "foreignNet20P": -196.77,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 2,
+    "foreignBuySessions20P": 9
   },
   {
     "symbol": "CTR",
@@ -9122,7 +9614,14 @@
     "foreignNetValTy": -1.73,
     "foreignBuyVal": 107440000,
     "foreignSellVal": 1842050000,
-    "foreignNetQty": -29100
+    "foreignNetQty": -29100,
+    "foreignNet1P": -0.43,
+    "foreignNet5P": -5.43,
+    "foreignNet10P": -5.59,
+    "foreignNet20P": -11.23,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 4,
+    "foreignBuySessions20P": 7
   },
   {
     "symbol": "ELC",
@@ -9193,7 +9692,14 @@
     "foreignNetValTy": 0.23,
     "foreignBuyVal": 370230000,
     "foreignSellVal": 144940000,
-    "foreignNetQty": 22100
+    "foreignNetQty": 22100,
+    "foreignNet1P": 0.22,
+    "foreignNet5P": 1.38,
+    "foreignNet10P": 1.71,
+    "foreignNet20P": 0.55,
+    "foreignBuySessions5P": 4,
+    "foreignBuySessions10P": 7,
+    "foreignBuySessions20P": 11
   },
   {
     "symbol": "DGC",
@@ -9264,7 +9770,14 @@
     "foreignNetValTy": -0.16,
     "foreignBuyVal": 3260000,
     "foreignSellVal": 166415000,
-    "foreignNetQty": -5000
+    "foreignNetQty": -5000,
+    "foreignNet1P": 0.68,
+    "foreignNet5P": -2.49,
+    "foreignNet10P": -3.84,
+    "foreignNet20P": -5.66,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 6
   },
   {
     "symbol": "DCM",
@@ -9335,7 +9848,14 @@
     "foreignNetValTy": -2.51,
     "foreignBuyVal": 411885000,
     "foreignSellVal": 2922110000,
-    "foreignNetQty": -82900
+    "foreignNetQty": -82900,
+    "foreignNet1P": 13.19,
+    "foreignNet5P": -36.37,
+    "foreignNet10P": -32.01,
+    "foreignNet20P": 91.64,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 15
   },
   {
     "symbol": "DPM",
@@ -9406,7 +9926,14 @@
     "foreignNetValTy": -1.14,
     "foreignBuyVal": 78022500,
     "foreignSellVal": 1218095000,
-    "foreignNetQty": -59250
+    "foreignNetQty": -59250,
+    "foreignNet1P": 0.55,
+    "foreignNet5P": -0.41,
+    "foreignNet10P": -9.27,
+    "foreignNet20P": -13.24,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 3,
+    "foreignBuySessions20P": 8
   },
   {
     "symbol": "BFC",
@@ -9477,7 +10004,14 @@
     "foreignNetValTy": -0.07,
     "foreignBuyVal": 0,
     "foreignSellVal": 71120000,
-    "foreignNetQty": -1300
+    "foreignNetQty": -1300,
+    "foreignNet1P": -0.41,
+    "foreignNet5P": -2.99,
+    "foreignNet10P": -4.05,
+    "foreignNet20P": -13.15,
+    "foreignBuySessions5P": 0,
+    "foreignBuySessions10P": 3,
+    "foreignBuySessions20P": 5
   },
   {
     "symbol": "CSV",
@@ -9548,7 +10082,14 @@
     "foreignNetValTy": -0.04,
     "foreignBuyVal": 57915000,
     "foreignSellVal": 99470000,
-    "foreignNetQty": -1900
+    "foreignNetQty": -1900,
+    "foreignNet1P": -0.15,
+    "foreignNet5P": -2.19,
+    "foreignNet10P": 0.31,
+    "foreignNet20P": -1.25,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 4,
+    "foreignBuySessions20P": 8
   },
   {
     "symbol": "DBC",
@@ -9619,7 +10160,14 @@
     "foreignNetValTy": 5,
     "foreignBuyVal": 6765770000,
     "foreignSellVal": 1762010000,
-    "foreignNetQty": 299300
+    "foreignNetQty": 299300,
+    "foreignNet1P": -1.83,
+    "foreignNet5P": -5.07,
+    "foreignNet10P": 2.44,
+    "foreignNet20P": 4.11,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 6,
+    "foreignBuySessions20P": 9
   },
   {
     "symbol": "BAF",
@@ -9690,7 +10238,14 @@
     "foreignNetValTy": 0.08,
     "foreignBuyVal": 1552725000,
     "foreignSellVal": 1470800000,
-    "foreignNetQty": 2600
+    "foreignNetQty": 2600,
+    "foreignNet1P": 18.48,
+    "foreignNet5P": 16.26,
+    "foreignNet10P": 18.69,
+    "foreignNet20P": -60.03,
+    "foreignBuySessions5P": 3,
+    "foreignBuySessions10P": 6,
+    "foreignBuySessions20P": 8
   },
   {
     "symbol": "PVD",
@@ -9759,7 +10314,14 @@
     "foreignNetValTy": -1.68,
     "foreignBuyVal": 34120000,
     "foreignSellVal": 1711725000,
-    "foreignNetQty": -102700
+    "foreignNetQty": -102700,
+    "foreignNet1P": 0.58,
+    "foreignNet5P": -3.28,
+    "foreignNet10P": -34.84,
+    "foreignNet20P": 21.4,
+    "foreignBuySessions5P": 3,
+    "foreignBuySessions10P": 4,
+    "foreignBuySessions20P": 12
   },
   {
     "symbol": "PVS",
@@ -9828,7 +10390,14 @@
     "foreignNetValTy": -11.74,
     "foreignBuyVal": 181910000,
     "foreignSellVal": 11917530000,
-    "foreignNetQty": -417200
+    "foreignNetQty": -417200,
+    "foreignNet1P": -12.32,
+    "foreignNet5P": -48.74,
+    "foreignNet10P": -88.93,
+    "foreignNet20P": -153.56,
+    "foreignBuySessions5P": 0,
+    "foreignBuySessions10P": 1,
+    "foreignBuySessions20P": 4
   },
   {
     "symbol": "PVT",
@@ -9899,7 +10468,14 @@
     "foreignNetValTy": -2.05,
     "foreignBuyVal": 527000000,
     "foreignSellVal": 2574725000,
-    "foreignNetQty": -98600
+    "foreignNetQty": -98600,
+    "foreignNet1P": -8.16,
+    "foreignNet5P": -42.42,
+    "foreignNet10P": -94.26,
+    "foreignNet20P": -94.48,
+    "foreignBuySessions5P": 0,
+    "foreignBuySessions10P": 0,
+    "foreignBuySessions20P": 6
   },
   {
     "symbol": "BSR",
@@ -9968,7 +10544,14 @@
     "foreignNetValTy": -27.86,
     "foreignBuyVal": 327277500,
     "foreignSellVal": 28186350000,
-    "foreignNetQty": -1114350
+    "foreignNetQty": -1114350,
+    "foreignNet1P": 21.86,
+    "foreignNet5P": -21.73,
+    "foreignNet10P": -169.61,
+    "foreignNet20P": -250.06,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 2,
+    "foreignBuySessions20P": 5
   },
   {
     "symbol": "GMD",
@@ -10039,7 +10622,14 @@
     "foreignNetValTy": -9.89,
     "foreignBuyVal": 89140000,
     "foreignSellVal": 9982390000,
-    "foreignNetQty": -188500
+    "foreignNetQty": -188500,
+    "foreignNet1P": -13.29,
+    "foreignNet5P": -88.31,
+    "foreignNet10P": -233.22,
+    "foreignNet20P": -554.54,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 3,
+    "foreignBuySessions20P": 4
   },
   {
     "symbol": "HAH",
@@ -10110,7 +10700,14 @@
     "foreignNetValTy": -0.2,
     "foreignBuyVal": 117255000,
     "foreignSellVal": 320350000,
-    "foreignNetQty": -4300
+    "foreignNetQty": -4300,
+    "foreignNet1P": 0.42,
+    "foreignNet5P": 0.85,
+    "foreignNet10P": -1.35,
+    "foreignNet20P": -12.89,
+    "foreignBuySessions5P": 3,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 9
   },
   {
     "symbol": "VOS",
@@ -10181,7 +10778,14 @@
     "foreignNetValTy": 0,
     "foreignBuyVal": 0,
     "foreignSellVal": 2125000,
-    "foreignNetQty": -200
+    "foreignNetQty": -200,
+    "foreignNet1P": -0.05,
+    "foreignNet5P": -0.06,
+    "foreignNet10P": -1.44,
+    "foreignNet20P": 0.16,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 4,
+    "foreignBuySessions20P": 9
   },
   {
     "symbol": "REE",
@@ -10252,7 +10856,14 @@
     "foreignNetValTy": 0.01,
     "foreignBuyVal": 13957000,
     "foreignSellVal": 0,
-    "foreignNetQty": 290
+    "foreignNetQty": 290,
+    "foreignNet1P": -0.07,
+    "foreignNet5P": -0.03,
+    "foreignNet10P": 1.43,
+    "foreignNet20P": 1.54,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 4,
+    "foreignBuySessions20P": 8
   },
   {
     "symbol": "GEG",
@@ -10321,7 +10932,14 @@
     "foreignNetValTy": -0.11,
     "foreignBuyVal": 0,
     "foreignSellVal": 107110000,
-    "foreignNetQty": -9300
+    "foreignNetQty": -9300,
+    "foreignNet1P": 0,
+    "foreignNet5P": -0.02,
+    "foreignNet10P": 0.06,
+    "foreignNet20P": -1.27,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 3,
+    "foreignBuySessions20P": 7
   },
   {
     "symbol": "PC1",
@@ -10390,7 +11008,14 @@
     "foreignNetValTy": -0.18,
     "foreignBuyVal": 0,
     "foreignSellVal": 180550000,
-    "foreignNetQty": -11100
+    "foreignNetQty": -11100,
+    "foreignNet1P": -0.29,
+    "foreignNet5P": -1.41,
+    "foreignNet10P": -12.19,
+    "foreignNet20P": -6.62,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 2,
+    "foreignBuySessions20P": 7
   },
   {
     "symbol": "VCG",
@@ -10459,7 +11084,14 @@
     "foreignNetValTy": -0.95,
     "foreignBuyVal": 137985000,
     "foreignSellVal": 1084510000,
-    "foreignNetQty": -63900
+    "foreignNetQty": -63900,
+    "foreignNet1P": -8.9,
+    "foreignNet5P": -6.74,
+    "foreignNet10P": -20.74,
+    "foreignNet20P": 0.83,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 4,
+    "foreignBuySessions20P": 12
   },
   {
     "symbol": "HHV",
@@ -10528,7 +11160,14 @@
     "foreignNetValTy": -0.37,
     "foreignBuyVal": 341699000,
     "foreignSellVal": 713697000,
-    "foreignNetQty": -39100
+    "foreignNetQty": -39100,
+    "foreignNet1P": -1.57,
+    "foreignNet5P": -0.47,
+    "foreignNet10P": 11.81,
+    "foreignNet20P": 18.81,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 6,
+    "foreignBuySessions20P": 11
   },
   {
     "symbol": "LCG",
@@ -10597,7 +11236,14 @@
     "foreignNetValTy": 0.02,
     "foreignBuyVal": 113829000,
     "foreignSellVal": 92952000,
-    "foreignNetQty": 3200
+    "foreignNetQty": 3200,
+    "foreignNet1P": 0.15,
+    "foreignNet5P": -1.01,
+    "foreignNet10P": 1.69,
+    "foreignNet20P": 1.38,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 6,
+    "foreignBuySessions20P": 10
   },
   {
     "symbol": "FCN",
@@ -10666,7 +11312,14 @@
     "foreignNetValTy": 0.06,
     "foreignBuyVal": 62930000,
     "foreignSellVal": 0,
-    "foreignNetQty": 5800
+    "foreignNetQty": 5800,
+    "foreignNet1P": -0.47,
+    "foreignNet5P": -0.71,
+    "foreignNet10P": 1.37,
+    "foreignNet20P": 3.8,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 11
   },
   {
     "symbol": "CII",
@@ -10735,7 +11388,14 @@
     "foreignNetValTy": -1.18,
     "foreignBuyVal": 392740000,
     "foreignSellVal": 1572600000,
-    "foreignNetQty": -84900
+    "foreignNetQty": -84900,
+    "foreignNet1P": 8.82,
+    "foreignNet5P": 18.94,
+    "foreignNet10P": -62.16,
+    "foreignNet20P": 1.94,
+    "foreignBuySessions5P": 3,
+    "foreignBuySessions10P": 3,
+    "foreignBuySessions20P": 11
   },
   {
     "symbol": "VHC",
@@ -10806,7 +11466,14 @@
     "foreignNetValTy": -0.93,
     "foreignBuyVal": 0,
     "foreignSellVal": 930910000,
-    "foreignNetQty": -18200
+    "foreignNetQty": -18200,
+    "foreignNet1P": -1.21,
+    "foreignNet5P": -3.16,
+    "foreignNet10P": -3.03,
+    "foreignNet20P": -7.48,
+    "foreignBuySessions5P": 2,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 9
   },
   {
     "symbol": "ANV",
@@ -10877,7 +11544,14 @@
     "foreignNetValTy": 0.08,
     "foreignBuyVal": 112480000,
     "foreignSellVal": 30265000,
-    "foreignNetQty": 4900
+    "foreignNetQty": 4900,
+    "foreignNet1P": -0.71,
+    "foreignNet5P": -7.7,
+    "foreignNet10P": -2.2,
+    "foreignNet20P": -16.08,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 4,
+    "foreignBuySessions20P": 7
   },
   {
     "symbol": "TNG",
@@ -10948,7 +11622,14 @@
     "foreignNetValTy": -0.51,
     "foreignBuyVal": 20040000,
     "foreignSellVal": 531700000,
-    "foreignNetQty": -30700
+    "foreignNetQty": -30700,
+    "foreignNet1P": -1.36,
+    "foreignNet5P": -2.82,
+    "foreignNet10P": -0.62,
+    "foreignNet20P": 13.36,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 4,
+    "foreignBuySessions20P": 10
   },
   {
     "symbol": "MSH",
@@ -11019,7 +11700,14 @@
     "foreignNetValTy": -0.08,
     "foreignBuyVal": 0,
     "foreignSellVal": 81850000,
-    "foreignNetQty": -2400
+    "foreignNetQty": -2400,
+    "foreignNet1P": -0.15,
+    "foreignNet5P": -0.64,
+    "foreignNet10P": -0.22,
+    "foreignNet20P": 4.14,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 3,
+    "foreignBuySessions20P": 8
   },
   {
     "symbol": "GIL",
@@ -11090,7 +11778,14 @@
     "foreignNetValTy": 0,
     "foreignBuyVal": 0,
     "foreignSellVal": 1792000,
-    "foreignNetQty": -200
+    "foreignNetQty": -200,
+    "foreignNet1P": -0.13,
+    "foreignNet5P": -0.19,
+    "foreignNet10P": 0.03,
+    "foreignNet20P": 0.03,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 12
   },
   {
     "symbol": "PTB",
@@ -11161,7 +11856,14 @@
     "foreignNetValTy": -0.02,
     "foreignBuyVal": 2860000,
     "foreignSellVal": 25750000,
-    "foreignNetQty": -800
+    "foreignNetQty": -800,
+    "foreignNet1P": -0.13,
+    "foreignNet5P": -0.16,
+    "foreignNet10P": 2.11,
+    "foreignNet20P": 3.83,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 5,
+    "foreignBuySessions20P": 11
   },
   {
     "symbol": "HAX",
@@ -11232,7 +11934,14 @@
     "foreignNetValTy": -0.08,
     "foreignBuyVal": 0,
     "foreignSellVal": 81200000,
-    "foreignNetQty": -10000
+    "foreignNetQty": -10000,
+    "foreignNet1P": -0.01,
+    "foreignNet5P": -0.09,
+    "foreignNet10P": -0.07,
+    "foreignNet20P": -0.08,
+    "foreignBuySessions5P": 1,
+    "foreignBuySessions10P": 2,
+    "foreignBuySessions20P": 3
   }
 ]
     };
@@ -12230,15 +12939,36 @@
     function runAutoPreview() {
       const checkMA = document.getElementById("autoFilterMA")?.checked ?? true;
       const checkForeign = document.getElementById("autoFilterForeign")?.checked ?? true;
+      const foreignPeriod = parseInt(document.getElementById("autoFilterForeignPeriod")?.value) || 5;
       const foreignLevel = parseFloat(document.getElementById("autoFilterForeignLevel")?.value) || 0;
       const checkBusiness = document.getElementById("autoFilterBusiness")?.checked ?? true;
       const targetCount = parseInt(document.getElementById("autoModalCountSelect")?.value) || 5;
+
+      const fHeader = document.getElementById("autoPreviewForeignHeader");
+      if (fHeader) {
+        fHeader.innerText = foreignPeriod === 1 ? "Khối ngoại (1P)" : `Khối ngoại (${foreignPeriod}P)`;
+      }
+
+      const getForeignVal = (s) => {
+        if (foreignPeriod === 1) return (s.foreignNet1P !== undefined ? s.foreignNet1P : (s.foreignNetValTy || 0));
+        if (foreignPeriod === 5) return (s.foreignNet5P !== undefined ? s.foreignNet5P : 0);
+        if (foreignPeriod === 10) return (s.foreignNet10P !== undefined ? s.foreignNet10P : 0);
+        if (foreignPeriod === 20) return (s.foreignNet20P !== undefined ? s.foreignNet20P : 0);
+        return s.foreignNetValTy || 0;
+      };
+
+      const getForeignSessions = (s) => {
+        if (foreignPeriod === 5) return s.foreignBuySessions5P !== undefined ? `${s.foreignBuySessions5P}/5P` : '';
+        if (foreignPeriod === 10) return s.foreignBuySessions10P !== undefined ? `${s.foreignBuySessions10P}/10P` : '';
+        if (foreignPeriod === 20) return s.foreignBuySessions20P !== undefined ? `${s.foreignBuySessions20P}/20P` : '';
+        return '';
+      };
 
       const stocks = StockApp.stocks || [];
       const filtered = stocks.filter(s => {
         if (checkMA && !s.aboveMA10_50) return false;
         if (checkForeign) {
-          const fVal = s.foreignNetValTy || 0;
+          const fVal = getForeignVal(s);
           if (fVal <= foreignLevel) return false;
         }
         if (checkBusiness) {
@@ -12251,8 +12981,8 @@
 
       // Score and rank
       filtered.sort((a, b) => {
-        const scoreA = ((a.foreignNetValTy || 0) * 2) + ((a.profitGrowth || 0) * 0.4) + ((a.revGrowth || 0) * 0.3) + ((a.roe || 0) * 1.5) + ((a.diffMA50 || 0) * 2);
-        const scoreB = ((b.foreignNetValTy || 0) * 2) + ((b.profitGrowth || 0) * 0.4) + ((b.revGrowth || 0) * 0.3) + ((b.roe || 0) * 1.5) + ((b.diffMA50 || 0) * 2);
+        const scoreA = (getForeignVal(a) * 2) + ((a.profitGrowth || 0) * 0.4) + ((a.revGrowth || 0) * 0.3) + ((a.roe || 0) * 1.5) + ((a.diffMA50 || 0) * 2);
+        const scoreB = (getForeignVal(b) * 2) + ((b.profitGrowth || 0) * 0.4) + ((b.revGrowth || 0) * 0.3) + ((b.roe || 0) * 1.5) + ((b.diffMA50 || 0) * 2);
         return scoreB - scoreA;
       });
 
@@ -12287,7 +13017,8 @@
         const isSelected = idx < targetCount;
         const weightText = isSelected ? `${idx === 0 ? (100 - equalWeight * (targetCount - 1)) : equalWeight}%` : '0%';
         const rowBg = isSelected ? 'bg-blue-500/5 dark:bg-blue-500/10' : '';
-        const fVal = s.foreignNetValTy !== undefined ? s.foreignNetValTy : 0;
+        const fVal = getForeignVal(s);
+        const fSessions = getForeignSessions(s);
         const fSign = fVal > 0 ? '+' : '';
         const fColor = fVal > 0 ? 'text-emerald-500' : (fVal < 0 ? 'text-rose-500' : 'text-gray-400');
 
@@ -12313,7 +13044,8 @@
               <div class="text-[10px] text-light-subtext dark:text-studio-muted font-normal" title="Giá trị đường MA10 / MA50 chuẩn FireAnt">MA10: ${s.ma10 ? (s.ma10 / 1000).toFixed(2) : '--'} • MA50: ${s.ma50 ? (s.ma50 / 1000).toFixed(2) : '--'}</div>
             </td>
             <td class="py-2.5 px-3 text-right font-mono font-bold ${fColor}">
-              ${fSign}${fVal.toFixed(2)} tỷ
+              <div>${fSign}${fVal.toFixed(2)} tỷ</div>
+              ${fSessions ? `<div class="text-[10px] text-light-subtext dark:text-studio-muted font-normal">${fSessions} gom ròng</div>` : ''}
             </td>
             <td class="py-2.5 px-3 text-right font-mono">
               <span class="text-emerald-500 font-semibold">+${s.profitGrowth}%</span>
@@ -13702,6 +14434,13 @@
               if (incoming.ttmProfit !== undefined) st.ttmProfit = incoming.ttmProfit;
               if (incoming.ttmRevenue !== undefined) st.ttmRevenue = incoming.ttmRevenue;
               if (incoming.foreignNetValTy !== undefined) st.foreignNetValTy = incoming.foreignNetValTy;
+              if (incoming.foreignNet1P !== undefined) st.foreignNet1P = incoming.foreignNet1P;
+              if (incoming.foreignNet5P !== undefined) st.foreignNet5P = incoming.foreignNet5P;
+              if (incoming.foreignNet10P !== undefined) st.foreignNet10P = incoming.foreignNet10P;
+              if (incoming.foreignNet20P !== undefined) st.foreignNet20P = incoming.foreignNet20P;
+              if (incoming.foreignBuySessions5P !== undefined) st.foreignBuySessions5P = incoming.foreignBuySessions5P;
+              if (incoming.foreignBuySessions10P !== undefined) st.foreignBuySessions10P = incoming.foreignBuySessions10P;
+              if (incoming.foreignBuySessions20P !== undefined) st.foreignBuySessions20P = incoming.foreignBuySessions20P;
               if (incoming.foreignBuyVal !== undefined) st.foreignBuyVal = incoming.foreignBuyVal;
               if (incoming.foreignSellVal !== undefined) st.foreignSellVal = incoming.foreignSellVal;
               if (incoming.foreignNetQty !== undefined) st.foreignNetQty = incoming.foreignNetQty;
