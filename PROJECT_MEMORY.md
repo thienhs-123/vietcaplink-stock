@@ -376,3 +376,20 @@
       * Cập nhật `colspan` trạng thái rỗng từ 8 về 7 cột.
       * Tinh chỉnh các nhãn trong dropdown `#autoModalCountSelect` loại bỏ các con số % rườm rà: `Top 5 mã (Khuyến nghị)`, `Top 1 mã (Tập trung)`, `Top 3 mã`, `Top 10 mã (Đa dạng)`.
       * Bảng xem trước hiện hiển thị gọn gàng, tập trung đúng vào các tín hiệu kỹ thuật và cơ bản: `Chọn`, `Mã CP`, `Doanh nghiệp & Ngành`, `Giá (đ)`, `MA10 / MA50`, `Khối ngoại (xP)` và `LNST / DTT`.
+
+21. **Mở Lại Cột Giá Vốn & Tự Động Phân Bổ % Đồng Đều Theo Số Lượng Cổ Phiếu (17/11/2026)**:
+    - **Yêu cầu của người dùng**:
+      * Mở lại phần "Giá vốn" trong bảng Danh mục Nắm giữ.
+      * Đối với "% phân bổ" (Tỷ trọng), tự động phân bổ đồng đều theo số lượng cổ phiếu của danh mục (thay vì người dùng phải tính toán hoặc gõ tay tỷ trọng từng mã).
+    - **Triển khai kỹ thuật**:
+      * **Bảng Danh mục Nắm giữ (`renderPortfolioTable`)**:
+        + Thêm lại cột `% PHÂN BỔ` (kèm tính năng sắp xếp ⇅ và bộ lọc Excel Filter).
+        + Thêm lại cột `GIÁ VỐN` (Giá mua TB kèm tính năng sắp xếp ⇅ và bộ lọc Excel Filter).
+        + Dropdown sắp xếp bổ sung: `% Phân bổ (Lớn nhất)` và `Giá vốn (Cao nhất)`.
+        + Điều chỉnh `colspan` trạng thái rỗng từ 3 lên 5 cột.
+      * **Cơ chế Tự Động Phân Bổ Đồng Đều (`auto equal weight`)**:
+        + Mọi danh mục khi được tải, hiển thị (`renderPortfolioModule`), lưu thủ công (`savePortfolioManual`) hoặc áp dụng tự động (`applyAutoPortfolio`) đều tự động tính toán tỷ trọng bằng nhau cho $N$ cổ phiếu: $\text{weight} = \frac{100\%}{N}$ (ví dụ: 1 mã $\rightarrow$ 100%, 2 mã $\rightarrow$ 50%/mã, 3 mã $\rightarrow$ 33.3%/mã, 4 mã $\rightarrow$ 25%/mã, 5 mã $\rightarrow$ 20%/mã, 10 mã $\rightarrow$ 10%/mã).
+        + Cơ cấu ngành (`port.sectors`) tự động cập nhật chính xác theo tỷ trọng chia đều của các cổ phiếu trong ngành đó.
+      * **Modal Cập Nhật Thủ Công (`portfolioManualModal`)**:
+        + Thay thế ô input gõ tỷ trọng bằng huy hiệu hiển thị tự động (`${r.weight}%`), luôn đảm bảo tổng tỷ trọng đạt chuẩn 100%.
+        + Người dùng chỉ cần thêm/bớt mã và nhập giá vốn (Giá mua TB), hệ thống tự động cân bằng tỷ trọng cho toàn bộ danh mục ngay lập tức.
