@@ -288,3 +288,14 @@
       * Khi xóa hết cổ phiếu (danh sách về 0 dòng), Modal hiển thị Empty State hướng dẫn thân thiện: "Danh mục hiện đang trống (0 cổ phiếu). Bấm nút '+ Thêm cổ phiếu vào danh mục' để thêm mã mới, hoặc bấm 'Lưu danh mục' để giữ 100% Tiền mặt."
       * Cho phép lưu danh mục rỗng (100% Tiền mặt / Cash), tự động cập nhật phân bổ ngành thành `Tiền mặt (100% Cash)`, tỷ lệ cổ phiếu `stockPct = 0`, tiền mặt `cashPct = 100`.
       * Bảng danh mục ngoài trang chủ hiển thị trạng thái thân thiện: "Danh mục hiện đang nắm giữ 100% Tiền mặt (0 cổ phiếu)..." thay vì báo lỗi.
+
+14. **Tích Hợp Dữ Liệu BCTC Thật 4 Quý Mới Nhất Cho 100 Mã CP (17/11/2026)**:
+    - **Nguồn cấp dữ liệu BCTC chính thức**:
+      * Tích hợp module `sync_real_financials.py` kết nối trực tiếp đến API dữ liệu BCTC (`apiweb.cafef.vn/api/v1/BCTC/GetReportSummary`) chuẩn hóa theo VAS.
+      * Tự động trích xuất chính xác 4 quý gần nhất (`Q4-2025`, `Q1-2026`, `Q2-2026`, `Q3-2026`): Doanh thu thuần (Tỷ VND), Lợi nhuận sau thuế (Tỷ VND), Doanh thu TTM và Lợi nhuận TTM cho 100/100 mã cổ phiếu rổ VN100.
+      * Phân loại bóc tách chuẩn xác theo từng loại hình doanh nghiệp: Doanh nghiệp sản xuất/thương mại (HPG, FPT, MSN, POW), Ngân hàng (TCB, ACB, CTG), Công ty chứng khoán (SSI, VND, VCI), và Bảo hiểm (BVH).
+    - **Tích hợp Backend & Frontend**:
+      * `realtime_server.py`: Tự động gọi đồng bộ BCTC thật và lưu trữ bền vững vào `vnstock_snapshot.json` và `financials_real_quarterly.json`.
+      * `index.html`: Pre-populate toàn bộ 100 mã cổ phiếu với `quarterLabels`, `quarterlyRevenue`, `quarterlyProfit`.
+      * **Popup Chi tiết Doanh nghiệp (Company Detail Modal)**: Biểu đồ Doanh thu & Lợi nhuận 4 quý chuyển từ dữ liệu ước lượng sang **Dữ liệu BCTC thật 100%**, có nhãn quý chính xác và tooltip định dạng đơn vị Tỷ VND.
+      * **Bộ lọc Cập nhật Tự động**: Tiêu chí "Kết quả kinh doanh tốt" được bảo đảm bởi số liệu BCTC thật 100%.
