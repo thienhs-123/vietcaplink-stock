@@ -12309,7 +12309,7 @@
               ${Number(s.price).toLocaleString('en-US')} đ
             </td>
             <td class="py-2.5 px-3 text-right font-mono text-emerald-500 font-semibold">
-              +${s.diffMA10}% / +${s.diffMA50}%
+              ${(s.diffMA10 >= 0 ? '+' : '') + Number(s.diffMA10 || 0).toFixed(2)}% / ${(s.diffMA50 >= 0 ? '+' : '') + Number(s.diffMA50 || 0).toFixed(2)}%
             </td>
             <td class="py-2.5 px-3 text-right font-mono font-bold ${fColor}">
               ${fSign}${fVal.toFixed(2)} tỷ
