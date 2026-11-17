@@ -281,3 +281,10 @@
      * Nút **Cập nhật thủ công** (mở modal chỉnh sửa mã, tỷ trọng, giá mua).
      * Nút **Cập nhật tự động** (mở modal lọc định lượng AI theo MA10/MA50, Khối ngoại, KQKD).
      * Bộ chọn **Sắp xếp** (Tỷ trọng lớn nhất, Lãi nhiều nhất, Tên A-Z).
+
+13. **Nâng cấp Xóa Cổ phiếu Trong Modal Cập nhật Thủ công (17/11/2026)**:
+    - **Loại bỏ ràng buộc chặn xóa khi danh mục còn 1 cổ phiếu**:
+      * Người dùng có thể xóa cổ phiếu cuối cùng bất cứ lúc nào (bấm nút thùng rác khi còn 1 mã sẽ xóa thành công về 0 mã).
+      * Khi xóa hết cổ phiếu (danh sách về 0 dòng), Modal hiển thị Empty State hướng dẫn thân thiện: "Danh mục hiện đang trống (0 cổ phiếu). Bấm nút '+ Thêm cổ phiếu vào danh mục' để thêm mã mới, hoặc bấm 'Lưu danh mục' để giữ 100% Tiền mặt."
+      * Cho phép lưu danh mục rỗng (100% Tiền mặt / Cash), tự động cập nhật phân bổ ngành thành `Tiền mặt (100% Cash)`, tỷ lệ cổ phiếu `stockPct = 0`, tiền mặt `cashPct = 100`.
+      * Bảng danh mục ngoài trang chủ hiển thị trạng thái thân thiện: "Danh mục hiện đang nắm giữ 100% Tiền mặt (0 cổ phiếu)..." thay vì báo lỗi.

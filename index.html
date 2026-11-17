@@ -9193,14 +9193,16 @@
       if (alphaEl) alphaEl.innerText = port.alpha;
 
       const holdingsCountEl = document.getElementById("portKpiHoldingsCount");
-      if (holdingsCountEl) holdingsCountEl.innerText = port.holdings.length;
+      if (holdingsCountEl) holdingsCountEl.innerText = port.holdings ? port.holdings.length : 0;
 
       const concTextEl = document.getElementById("portKpiConcentrationText");
       if (concTextEl) {
-        if (portKey === 'tan_cong') {
-          concTextEl.innerHTML = `Mức tập trung: <strong class="text-light-text dark:text-studio-text">100% POW (All-in)</strong>`;
+        if (!port.holdings || port.holdings.length === 0) {
+          concTextEl.innerHTML = `Mức tập trung: <strong class="text-light-text dark:text-studio-text">100% Tiền mặt</strong>`;
+        } else if (portKey === 'tan_cong') {
+          concTextEl.innerHTML = `Mức tập trung: <strong class="text-light-text dark:text-studio-text">${port.holdings.length === 1 ? '100% ' + port.holdings[0].symbol + ' (All-in)' : 'Tập trung ' + port.holdings.length + ' mã'}</strong>`;
         } else if (portKey === 'can_bang') {
-          concTextEl.innerHTML = `Mức tập trung: <strong class="text-light-text dark:text-studio-text">Phân bổ đều 20%/mã</strong>`;
+          concTextEl.innerHTML = `Mức tập trung: <strong class="text-light-text dark:text-studio-text">${port.holdings.length} mã (${(100/port.holdings.length).toFixed(0)}%/mã)</strong>`;
         } else {
           concTextEl.innerHTML = `Mức tập trung: <strong class="text-light-text dark:text-studio-text">Tối đa 30%/mã</strong>`;
         }
@@ -9272,10 +9274,13 @@
         }
 
         if (list.length === 0) {
+          const emptyMsg = (!port.holdings || port.holdings.length === 0)
+            ? 'Danh mục hiện đang nắm giữ 100% Tiền mặt (0 cổ phiếu). Bấm "Cập nhật thủ công" hoặc "Cập nhật tự động" để thêm cổ phiếu.'
+            : 'Không tìm thấy cổ phiếu nắm giữ nào thỏa mãn bộ lọc đã chọn.';
           tableBody.innerHTML = `
             <tr>
-              <td colspan="7" class="py-6 text-center text-light-subtext dark:text-studio-muted">
-                Không tìm thấy cổ phiếu nắm giữ nào thỏa mãn bộ lọc đã chọn.
+              <td colspan="7" class="py-8 text-center text-light-subtext dark:text-studio-muted">
+                ${emptyMsg}
               </td>
             </tr>
           `;
@@ -9443,6 +9448,25 @@
       const tbody = document.getElementById("manualModalTableBody");
       if (!tbody) return;
 
+      if (currentManualRows.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" class="py-8 text-center text-light-subtext dark:text-studio-muted">
+              <div class="flex flex-col items-center justify-center space-y-2">
+                <i data-lucide="inbox" class="w-8 h-8 opacity-40"></i>
+                <p class="text-xs font-medium">Danh mục hiện đang trống (0 cổ phiếu).</p>
+                <p class="text-[11px] text-light-subtext/70 dark:text-studio-muted/70">
+                  Bấm nút "<strong>+ Thêm cổ phiếu vào danh mục</strong>" để thêm mã mới, hoặc bấm "<strong>Lưu danh mục</strong>" để giữ 100% Tiền mặt.
+                </p>
+              </div>
+            </td>
+          </tr>
+        `;
+        calculateManualTotalWeight();
+        if (window.lucide) lucide.createIcons();
+        return;
+      }
+
       tbody.innerHTML = currentManualRows.map((r, idx) => {
         return `
           <tr class="hover:bg-black/[0.02] dark:hover:bg-white/[0.02]">
@@ -9496,10 +9520,6 @@
     }
 
     function removeManualRow(idx) {
-      if (currentManualRows.length <= 1) {
-        showMacToast({ title: "Không thể xóa", message: "Danh mục phải có ít nhất 1 mã cổ phiếu!", type: "warning" });
-        return;
-      }
       currentManualRows.splice(idx, 1);
       renderManualModalRows();
     }
@@ -9536,12 +9556,25 @@
       const warningEl = document.getElementById("manualWeightWarning");
       if (displayEl) {
         displayEl.innerText = `${total}%`;
-        if (Math.abs(total - 100) < 0.01) {
+        if (currentManualRows.length === 0) {
+          displayEl.className = "font-bold text-light-subtext dark:text-studio-muted font-mono";
+          if (warningEl) {
+            warningEl.className = "text-[11px] text-blue-500 flex items-center space-x-1";
+            warningEl.innerHTML = `<i data-lucide="info" class="w-3.5 h-3.5 inline"></i><span>Danh mục trống sẽ được lưu là 100% Tiền mặt</span>`;
+            warningEl.classList.remove("hidden");
+            if (window.lucide) lucide.createIcons();
+          }
+        } else if (Math.abs(total - 100) < 0.01) {
           displayEl.className = "font-bold text-emerald-500 font-mono";
           if (warningEl) warningEl.classList.add("hidden");
         } else {
           displayEl.className = "font-bold text-amber-500 font-mono";
-          if (warningEl) warningEl.classList.remove("hidden");
+          if (warningEl) {
+            warningEl.className = "text-[11px] text-amber-500 flex items-center space-x-1";
+            warningEl.innerHTML = `<i data-lucide="alert-triangle" class="w-3.5 h-3.5 inline"></i><span>Tổng tỷ trọng nên đạt 100%</span>`;
+            warningEl.classList.remove("hidden");
+            if (window.lucide) lucide.createIcons();
+          }
         }
       }
     }
@@ -9554,7 +9587,26 @@
       // Filter valid rows
       const validRows = currentManualRows.filter(r => r.symbol && r.symbol.trim().length > 0);
       if (validRows.length === 0) {
-        showMacToast({ title: "Lỗi", message: "Vui lòng nhập ít nhất 1 mã cổ phiếu!", type: "error" });
+        // Cho phép lưu danh mục rỗng (100% Tiền mặt)
+        port.holdings = [];
+        port.sectors = [{ name: 'Tiền mặt (100% Cash)', pct: 100, color: '#9ca3af' }];
+        port.stockPct = 0;
+        port.cashPct = 100;
+
+        try {
+          localStorage.setItem('custom_portfolios', JSON.stringify(StockApp.portfolios));
+        } catch(e) {}
+
+        StockApp.selectedPortfolioKey = portKey;
+        renderPortfolioModule();
+        closePortfolioManualModal();
+
+        showMacToast({
+          title: "Cập nhật thành công!",
+          message: `Đã lưu danh mục ${port.name} ở trạng thái 100% Tiền mặt (0 cổ phiếu)!`,
+          type: "success",
+          duration: 3000
+        });
         return;
       }
 
