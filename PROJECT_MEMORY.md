@@ -407,3 +407,27 @@
         + `% Phân bổ`: `w-[13%] min-w-[125px] text-right` (kèm `whitespace-nowrap`, không còn bị rớt dòng chữ "BỔ")
         + `Giá vốn`: `w-[13%] min-w-[125px] text-right` (kèm `whitespace-nowrap`)
       * Đồng bộ padding `px-3.5 py-3`, căn chỉnh lề phải ngay ngắn cho các cột số học (`% Phân bổ`, `Giá vốn`) và căn lề trái trực quan cho các cột văn bản (`Mã CP`, `Doanh nghiệp`, `Ngành nghề`).
+
+23. **Tự Động Tính Toán Chính Xác Hiệu Suất Danh Mục (Portfolio Return), Alpha vs VN-Index & Thanh Tiến Trình (17/11/2026)**:
+    - **Vấn đề phát hiện**:
+      * Card KPI "HIỆU SUẤT YTD DANH MỤC" trước đây hiển thị chuỗi tĩnh hardcoded (`+31.8%`, `+19.4% Alpha`, thanh tiến trình cố định `82%`). Khi người dùng thay đổi danh mục (thêm/bớt mã, cập nhật giá vốn hoặc dùng tính năng tự động), số liệu hiệu suất không thay đổi theo thực tế.
+    - **Triển khai kỹ thuật tự động hóa chính xác 100%**:
+      * **Công thức tỷ suất sinh lời danh mục (Weighted Portfolio Return)**:
+        $$\text{PortReturn} = \sum_{i=1}^N \left( \frac{\text{weight}_i}{100} \times \frac{P_{\text{cur}, i} - P_{\text{buy}, i}}{P_{\text{buy}, i}} \times 100\% \right) \times \frac{\text{stockRatio}}{100}$$
+        + $P_{\text{cur}, i}$: Thị giá khớp lệnh mới nhất của cổ phiếu trên sàn HOSE (lấy tự động từ `StockApp.stocks` hoặc đồng bộ từ nguồn Vnstock API).
+        + $P_{\text{buy}, i}$: Giá vốn mua vào của cổ phiếu.
+        + $\text{weight}_i$: Tỷ trọng phân bổ đồng đều ($100\% / N$).
+        + Khi danh mục 100% Tiền mặt (0 cổ phiếu): $\text{PortReturn} = 0.0\%$.
+      * **Chỉ số Alpha so với VN-Index Benchmark**:
+        $$\text{Alpha} = \text{PortReturn} - \text{BenchmarkYTD}$$
+        + VN-Index YTD chuẩn hóa ở mức $+12.4\%$.
+        + Nếu lãi vượt trội: hiển thị màu xanh `text-emerald-500` (ví dụ `+6.4%` với Alpha `-6.0% Alpha`).
+        + Nếu lỗ: tự động hiển thị số âm kèm màu đỏ `text-rose-500` (ví dụ `-13.7%` với Alpha `-26.1% Alpha`).
+      * **Thanh tiến trình trực quan (`#portKpiProgressBar`) & Icon xu hướng (`#portKpiReturnIconWrap`)**:
+        + Chiều rộng thanh tiến trình co giãn động theo tỷ suất sinh lời: `Math.max(5, Math.min(100, Math.round((absReturn / 35) * 100)))`.
+        + Tự động đổi màu: Xanh lục (`bg-emerald-500`) khi danh mục có lãi, Đỏ hoa hồng (`bg-rose-500`) khi danh mục bị lỗ.
+        + Icon góc phải card tự động đảo chiều: `trending-up` (xanh) khi lãi, `trending-down` (đỏ) khi lỗ.
+      * **Đồng bộ toàn diện biểu đồ NAV Danh mục & Chú giải**:
+        + Đường NAV danh mục (`port.navPortfolio`) tự động co giãn đường cong theo hàm tiến trình mượt mà, điểm kết thúc đồ thị khớp chuẩn xác 100% với $100 + \text{PortReturn}$.
+        + Chú giải góc trên đồ thị `#portfolioChartLegendVal` đồng bộ tức thời: `Danh mục (+X.X%)` hoặc `Danh mục (-X.X%)`.
+        + Ô giá vốn trong bảng danh mục bổ sung thuộc tính `title` tooltip hiển thị đầy đủ Giá vốn, Thị giá hiện tại và % Lãi lỗ chi tiết của từng mã khi di chuột.
