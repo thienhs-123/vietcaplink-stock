@@ -730,9 +730,9 @@
                 <div class="flex items-center space-x-1 pl-1">
                   <span class="text-light-subtext dark:text-studio-muted">Sắp xếp:</span>
                   <select id="portfolioSortSelect" onchange="sortPortfolioHoldings(this.value)" class="px-2.5 py-1.5 rounded-xl bg-light-elevated dark:bg-studio-elevated border border-light-border dark:border-studio-border text-xs font-medium focus:outline-none text-light-text dark:text-studio-text">
-                    <option value="weight">Tỷ trọng lớn nhất</option>
-                    <option value="profit">Lãi nhiều nhất</option>
                     <option value="symbol">Mã cổ phiếu (A - Z)</option>
+                    <option value="name">Doanh nghiệp (A - Z)</option>
+                    <option value="sector">Ngành nghề</option>
                   </select>
                 </div>
               </div>
@@ -742,7 +742,7 @@
               <table class="w-full text-left text-xs">
                 <thead class="bg-light-elevated dark:bg-studio-elevated text-light-subtext dark:text-studio-muted font-medium uppercase tracking-wider border-b border-light-border dark:border-studio-border">
                   <tr>
-                    <th class="resizable-th py-3 px-3" data-col="symbol" data-table="portfolio">
+                    <th class="resizable-th py-3 px-3 w-36" data-col="symbol" data-table="portfolio">
                       <div class="inline-flex items-center space-x-1">
                         <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('portfolio', 'symbol')" title="Bấm để sắp xếp">Mã CP</span>
                         <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('portfolio', 'symbol')" id="sort-portfolio-symbol" title="Bấm để sắp xếp">⇅</span>
@@ -762,51 +762,11 @@
                       </div>
                       <div class="col-resizer" onmousedown="initColumnResize(event)"></div>
                     </th>
-                    <th class="resizable-th py-3 px-3" data-col="sector" data-table="portfolio">
+                    <th class="resizable-th py-3 px-3 w-64" data-col="sector" data-table="portfolio">
                       <div class="inline-flex items-center space-x-1">
                         <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('portfolio', 'sector')" title="Bấm để sắp xếp">Ngành nghề</span>
                         <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('portfolio', 'sector')" id="sort-portfolio-sector" title="Bấm để sắp xếp">⇅</span>
                         <button type="button" class="excel-filter-btn p-0.5 rounded hover:bg-black/10 dark:hover:bg-white/10 text-light-subtext dark:text-studio-muted" onclick="openExcelFilter(event, 'portfolio', 'sector', 'Ngành nghề')" title="Lọc cột Ngành">
-                          <i data-lucide="filter" class="w-3 h-3"></i>
-                        </button>
-                      </div>
-                      <div class="col-resizer" onmousedown="initColumnResize(event)"></div>
-                    </th>
-                    <th class="resizable-th py-3 px-3 text-right" data-col="weight" data-table="portfolio">
-                      <div class="inline-flex items-center justify-end space-x-1 w-full">
-                        <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('portfolio', 'weight')" title="Bấm để sắp xếp">Tỷ trọng</span>
-                        <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('portfolio', 'weight')" id="sort-portfolio-weight" title="Bấm để sắp xếp">⇅</span>
-                        <button type="button" class="excel-filter-btn p-0.5 rounded hover:bg-black/10 dark:hover:bg-white/10 text-light-subtext dark:text-studio-muted" onclick="openExcelFilter(event, 'portfolio', 'weight', 'Tỷ trọng (%)')" title="Lọc cột Tỷ trọng">
-                          <i data-lucide="filter" class="w-3 h-3"></i>
-                        </button>
-                      </div>
-                      <div class="col-resizer" onmousedown="initColumnResize(event)"></div>
-                    </th>
-                    <th class="resizable-th py-3 px-3 text-right" data-col="buyPrice" data-table="portfolio">
-                      <div class="inline-flex items-center justify-end space-x-1 w-full">
-                        <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('portfolio', 'buyPrice')" title="Bấm để sắp xếp">Giá mua TB</span>
-                        <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('portfolio', 'buyPrice')" id="sort-portfolio-buyPrice" title="Bấm để sắp xếp">⇅</span>
-                        <button type="button" class="excel-filter-btn p-0.5 rounded hover:bg-black/10 dark:hover:bg-white/10 text-light-subtext dark:text-studio-muted" onclick="openExcelFilter(event, 'portfolio', 'buyPrice', 'Giá mua TB')" title="Lọc cột Giá mua">
-                          <i data-lucide="filter" class="w-3 h-3"></i>
-                        </button>
-                      </div>
-                      <div class="col-resizer" onmousedown="initColumnResize(event)"></div>
-                    </th>
-                    <th class="resizable-th py-3 px-3 text-right" data-col="currentPrice" data-table="portfolio">
-                      <div class="inline-flex items-center justify-end space-x-1 w-full">
-                        <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('portfolio', 'currentPrice')" title="Bấm để sắp xếp">Giá phiên hôm trước</span>
-                        <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('portfolio', 'currentPrice')" id="sort-portfolio-currentPrice" title="Bấm để sắp xếp">⇅</span>
-                        <button type="button" class="excel-filter-btn p-0.5 rounded hover:bg-black/10 dark:hover:bg-white/10 text-light-subtext dark:text-studio-muted" onclick="openExcelFilter(event, 'portfolio', 'currentPrice', 'Giá phiên hôm trước')" title="Lọc cột Giá">
-                          <i data-lucide="filter" class="w-3 h-3"></i>
-                        </button>
-                      </div>
-                      <div class="col-resizer" onmousedown="initColumnResize(event)"></div>
-                    </th>
-                    <th class="resizable-th py-3 px-3 text-right" data-col="profitPct" data-table="portfolio">
-                      <div class="inline-flex items-center justify-end space-x-1 w-full">
-                        <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('portfolio', 'profitPct')" title="Bấm để sắp xếp">Lãi / Lỗ</span>
-                        <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('portfolio', 'profitPct')" id="sort-portfolio-profitPct" title="Bấm để sắp xếp">⇅</span>
-                        <button type="button" class="excel-filter-btn p-0.5 rounded hover:bg-black/10 dark:hover:bg-white/10 text-light-subtext dark:text-studio-muted" onclick="openExcelFilter(event, 'portfolio', 'profitPct', 'Lãi / Lỗ (%)')" title="Lọc cột Lãi / Lỗ">
                           <i data-lucide="filter" class="w-3 h-3"></i>
                         </button>
                       </div>
@@ -11882,7 +11842,7 @@
             : 'Không tìm thấy cổ phiếu nắm giữ nào thỏa mãn bộ lọc đã chọn.';
           tableBody.innerHTML = `
             <tr>
-              <td colspan="7" class="py-8 text-center text-light-subtext dark:text-studio-muted">
+              <td colspan="3" class="py-8 text-center text-light-subtext dark:text-studio-muted">
                 ${emptyMsg}
               </td>
             </tr>
@@ -11892,16 +11852,6 @@
         }
 
         tableBody.innerHTML = list.map(h => {
-          const isPriceError = h.currentPrice === "Lỗi" || h.currentPrice === null || h.currentPrice === undefined || isNaN(h.currentPrice);
-          const profitColor = isPriceError ? "text-rose-500" : (h.profitPct >= 0 ? "text-emerald-500" : "text-rose-500");
-          const profitSign = (!isPriceError && h.profitPct >= 0) ? "+" : "";
-          const priceHtml = isPriceError 
-            ? `<span class="text-rose-500 font-bold">Lỗi</span>` 
-            : `<div>${Number(h.currentPrice).toLocaleString('en-US')} đ</div>${h.sessionDate ? `<div class="text-[10px] font-normal text-emerald-600 dark:text-emerald-400 font-mono">Phiên ${h.sessionDate}</div>` : ''}`;
-          const profitHtml = isPriceError 
-            ? `<span class="text-rose-500 font-bold">Lỗi</span>` 
-            : `${profitSign}${Number(h.profitPct).toFixed(2)}%`;
-
           return `
             <tr class="hover:bg-black/[0.02] dark:hover:bg-white/[0.03] transition-colors">
               <td class="py-3 px-3">
@@ -11912,22 +11862,8 @@
               <td class="py-3 px-3 font-medium text-light-text dark:text-studio-text">
                 ${h.name}
               </td>
-              <td class="py-3 px-3 text-light-subtext dark:text-studio-subtext text-[11px]">
+              <td class="py-3 px-3 text-light-subtext dark:text-studio-subtext text-xs">
                 ${h.sector}
-              </td>
-              <td class="py-3 px-3 text-right font-mono font-bold text-light-text dark:text-studio-text">
-                <span class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-studio-blueLight border border-blue-500/20 font-semibold">
-                  ${h.weight}%
-                </span>
-              </td>
-              <td class="py-3 px-3 text-right font-mono text-light-subtext dark:text-studio-subtext">
-                ${h.buyPrice.toLocaleString('en-US')} đ
-              </td>
-              <td id="port-price-${h.symbol}" class="py-3 px-3 text-right font-mono font-bold text-light-text dark:text-studio-text">
-                ${priceHtml}
-              </td>
-              <td id="port-profit-${h.symbol}" class="py-3 px-3 text-right font-mono font-bold ${profitColor}">
-                ${profitHtml}
               </td>
             </tr>
           `;

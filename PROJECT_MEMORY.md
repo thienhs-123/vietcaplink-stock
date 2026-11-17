@@ -311,3 +311,18 @@
       * Cập nhật `applyRealStockData()` để tự động đồng bộ liên tục dữ liệu mua ròng khối ngoại từ backend.
       * Khi lọc với ngưỡng "Đột biến > 20 tỷ", hệ thống lập tức quét ra Top 5 mã xuất sắc nhất (`VIX`, `MSN`, `TCB`, `KDH`, `HPG`).
       * Bấm "Áp dụng vào Danh mục" nạp thành công 100% vào danh mục được chọn, tự động tính tỷ trọng và lưu bền vững vào `localStorage`.
+
+16. **Tinh Gọn Bảng Danh Mục Nắm Giữ - Loại Bỏ 4 Cột Giao Dịch Cá Nhân (17/11/2026)**:
+    - Theo yêu cầu của người dùng, loại bỏ hoàn toàn 4 cột thông tin quản lý giao dịch cá nhân khỏi bảng "Danh sách Cổ phiếu Nắm giữ trong Danh mục":
+      * Bỏ cột `TỶ TRỌNG ⇅ ⎚`
+      * Bỏ cột `GIÁ MUA TB ⇅ ⎚`
+      * Bỏ cột `GIÁ PHIÊN HÔM TRƯỚC ⇅ ⎚`
+      * Bỏ cột `LÃI / LỖ ⇅ ⎚`
+    - Bảng Danh mục nắm giữ hiện chỉ tập trung hiển thị 3 cột thông tin cốt lõi, tinh gọn và rõ ràng:
+      * `Mã CP`
+      * `Doanh nghiệp`
+      * `Ngành nghề`
+    - Cập nhật tương ứng:
+      * `colspan` của trạng thái rỗng/không tìm thấy được điều chỉnh từ 7 về 3.
+      * Bộ chọn sắp xếp `#portfolioSortSelect` được tinh chỉnh chỉ còn các tiêu chí phù hợp với 3 cột hiển thị: `Mã cổ phiếu (A - Z)`, `Doanh nghiệp (A - Z)`, `Ngành nghề`.
+      * Toàn bộ 3 chiến lược danh mục (Tấn công, Cân bằng, Phòng thủ) được áp dụng giao diện mới đồng nhất.
