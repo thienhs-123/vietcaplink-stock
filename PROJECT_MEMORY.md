@@ -299,3 +299,15 @@
       * `index.html`: Pre-populate toàn bộ 100 mã cổ phiếu với `quarterLabels`, `quarterlyRevenue`, `quarterlyProfit`.
       * **Popup Chi tiết Doanh nghiệp (Company Detail Modal)**: Biểu đồ Doanh thu & Lợi nhuận 4 quý chuyển từ dữ liệu ước lượng sang **Dữ liệu BCTC thật 100%**, có nhãn quý chính xác và tooltip định dạng đơn vị Tỷ VND.
       * **Bộ lọc Cập nhật Tự động**: Tiêu chí "Kết quả kinh doanh tốt" được bảo đảm bởi số liệu BCTC thật 100%.
+
+15. **Sửa Lỗi Đồng Bộ Khối Ngoại & Nút Áp Dụng Trong Modal Cập Nhật Tự Động (17/11/2026)**:
+    - **Nguyên nhân cốt lõi**:
+      * Trường dữ liệu `foreignNetValTy` (Giá trị khối ngoại mua ròng theo tỷ VNĐ) trước đó chỉ có trong `vnstock_snapshot.json` mà chưa được nạp vào `DEFAULT_STOCKS` trong `index.html`.
+      * Hàm `applyRealStockData()` khi nhận gói tin thời gian thực cũng chưa sao chép trường `foreignNetValTy`.
+      * Khi người dùng mở Modal Cập nhật Tự động và bật lọc "Khối ngoại mua ròng / đột biến", giá trị bị `undefined` (tính là 0) dẫn đến bị loại trừ toàn bộ 100 mã (báo "0 mã thỏa mãn").
+      * Khi danh sách quét trống (0 mã), nút "Áp dụng vào Danh mục" không thể tạo danh mục.
+    - **Khắc phục triệt để**:
+      * Đã nhúng đầy đủ `foreignNetValTy`, `foreignBuyVal`, `foreignSellVal`, `foreignNetQty` vào toàn bộ 100 mã cổ phiếu `DEFAULT_STOCKS` trong `index.html`.
+      * Cập nhật `applyRealStockData()` để tự động đồng bộ liên tục dữ liệu mua ròng khối ngoại từ backend.
+      * Khi lọc với ngưỡng "Đột biến > 20 tỷ", hệ thống lập tức quét ra Top 5 mã xuất sắc nhất (`VIX`, `MSN`, `TCB`, `KDH`, `HPG`).
+      * Bấm "Áp dụng vào Danh mục" nạp thành công 100% vào danh mục được chọn, tự động tính tỷ trọng và lưu bền vững vào `localStorage`.
