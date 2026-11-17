@@ -326,3 +326,12 @@
       * `colspan` của trạng thái rỗng/không tìm thấy được điều chỉnh từ 7 về 3.
       * Bộ chọn sắp xếp `#portfolioSortSelect` được tinh chỉnh chỉ còn các tiêu chí phù hợp với 3 cột hiển thị: `Mã cổ phiếu (A - Z)`, `Doanh nghiệp (A - Z)`, `Ngành nghề`.
       * Toàn bộ 3 chiến lược danh mục (Tấn công, Cân bằng, Phòng thủ) được áp dụng giao diện mới đồng nhất.
+
+17. **Chuẩn Hóa Dữ Liệu Khối Ngoại Thời Gian Thực (17/11/2026)**:
+    - **Phát hiện & Hiệu chỉnh mã VIX**:
+      * Đối chiếu thực tế: VIX hiển thị con số lịch sử cũ (+308.05 tỷ) do phiên thỏa thuận trước đó lưu vào snapshot cũ.
+      * Trong phiên giao dịch hôm nay (17/11/2026), dữ liệu khớp lệnh trực tiếp từ sàn HOSE: Khối ngoại mua 8.54 tỷ (667,800 CP), bán 5.44 tỷ (420,700 CP) $\rightarrow$ Mua ròng thực tế là **+3.10 Tỷ VNĐ**.
+    - **Nâng cấp Hệ Thống Đồng Bộ Đa Tầng**:
+      * **Backend (`realtime_server.py`)**: Tích hợp cơ chế lấy dữ liệu trực tiếp từ SSI Live iBoard Feed (không giới hạn tải, không cần key, cập nhật từng phút) cho cả 100 mã CP. Tự động bóc tách chuẩn xác `buyForeignValue`, `sellForeignValue`, `foreignNetValTy` và `foreignNetQty`, đồng thời tính toán lại MA10, MA50, Vốn hóa và P/E thời gian thực.
+      * **Frontend Client-Side (`index.html`)**: Hàm `fetchClientLiveMarketData()` được bổ sung trích xuất trực tiếp `fBValue` và `fSValue` từ VPS Live Feed, giúp ứng dụng tự động cập nhật số liệu khối ngoại thời gian thực ngay cả khi chạy thuần trên GitHub Pages (HTTPS).
+      * **Đồng bộ cơ sở dữ liệu nền**: Đã đồng bộ toàn bộ 100 mã cổ phiếu trong `vnstock_snapshot.json` và `StockApp.stocks` trong `index.html` về đúng số liệu khớp lệnh phiên hôm nay. Mã VIX đã được cập nhật chuẩn xác về **+3.10 Tỷ VNĐ**.

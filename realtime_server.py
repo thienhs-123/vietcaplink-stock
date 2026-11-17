@@ -739,18 +739,93 @@ def fetch_world_indices_and_commodities():
 
 def fetch_prices_from_vnstock():
     """
-    Truy vấn bảng giá thời gian thực của toàn bộ rổ VN100 qua thư viện Vnstock (v5.x).
-    Chia nhỏ thành 2 đợt (batches) 50 mã để đảm bảo an toàn tuyệt đối và không chạm trần tải.
+    Truy vấn bảng giá thời gian thực và dòng tiền khối ngoại của rổ VN100.
+    Ưu tiên số 1: SSI Live iBoard Datafeed (cực nhanh, không giới hạn tải, đầy đủ giá trị mua/bán ròng khối ngoại).
+    Dự phòng số 2: Vnstock API / Snapshot.
     """
     global CURRENT_STOCKS, LAST_SYNC_SOURCE, LAST_SYNC_TIMESTAMP
     updated_count = 0
+    now_str = datetime.datetime.now().strftime("%H:%M:%S")
 
+    # 1. Ưu tiên số 1: SSI Live iBoard Datafeed
+    try:
+        import urllib.request
+        for ex in ['hose', 'hnx']:
+            req = urllib.request.Request(f"https://iboard-query.ssi.com.vn/stock/exchange/{ex}", headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req, timeout=5) as resp:
+                items = json.loads(resp.read().decode('utf-8')).get('data', [])
+                for it in items:
+                    sym = it.get('stockSymbol')
+                    if sym in CURRENT_STOCKS:
+                        p = it.get('matchedPrice') or it.get('refPrice') or 0
+                        if p > 0:
+                            with DATA_LOCK:
+                                st = CURRENT_STOCKS[sym]
+                                st["price"] = p
+                                st["change"] = it.get('priceChangePercent', 0.0)
+                                st["volume"] = it.get('nmTotalTradedQty') or it.get('stockVol') or 0
+                                st["status"] = "success"
+                                st["source"] = "SSI Live iBoard"
+
+                                # Dữ liệu Khối ngoại mua/bán ròng chuẩn xác thời gian thực
+                                b_val = it.get('buyForeignValue') or 0
+                                s_val = it.get('sellForeignValue') or 0
+                                st["foreignBuyVal"] = b_val
+                                st["foreignSellVal"] = s_val
+                                st["foreignNetValTy"] = round((b_val - s_val) / 1e9, 2)
+                                b_qty = it.get('buyForeignQtty') or 0
+                                s_qty = it.get('sellForeignQtty') or 0
+                                st["foreignNetQty"] = b_qty - s_qty
+
+                                # Dữ liệu nến trong phiên
+                                if it.get('openPrice'): st["open"] = int(float(it['openPrice']))
+                                if it.get('highest'): st["high"] = int(float(it['highest']))
+                                if it.get('lowest'): st["low"] = int(float(it['lowest']))
+                                if it.get('ceiling'): st["ceiling"] = int(float(it['ceiling']))
+                                if it.get('floor'): st["floor"] = int(float(it['floor']))
+                                if it.get('refPrice'): st["ref"] = int(float(it['refPrice']))
+
+                                if st.get("eps", 0) > 0:
+                                    st["pe"] = round(p / st["eps"], 1)
+                                shares = st.get("shares") or STOCK_METRICS.get(sym, {}).get("shares", 0)
+                                if shares > 0:
+                                    st["marketCapTỷ"] = round((shares * p) / 1e9, 0)
+
+                                if st.get("ma10", 0) > 0:
+                                    st["diffMA10"] = round(((p - st["ma10"]) / st["ma10"]) * 100, 1)
+                                if st.get("ma50", 0) > 0:
+                                    st["diffMA50"] = round(((p - st["ma50"]) / st["ma50"]) * 100, 1)
+                                st["aboveMA10_50"] = (st.get("diffMA10", 0) > 0 and st.get("diffMA50", 0) > 0)
+
+                                if st.get("baseMin") and st.get("baseMax"):
+                                    b_min = st["baseMin"]
+                                    b_max = st["baseMax"]
+                                    b_mid = round(b_min + 0.5 * (b_max - b_min))
+                                    st["baseMid"] = b_mid
+                                    st["baseUpperHalf"] = p >= b_mid
+                                    dur_ok = (st.get("baseSessions", 0) >= 60) or (st.get("baseMonths", 0) >= 3.0)
+                                    tight_ok = st.get("baseTightness", 15.0) <= 20.0
+                                    not_broken = p >= b_min
+                                    st["baseValid"] = dur_ok and tight_ok and not_broken and st["baseUpperHalf"]
+
+                            updated_count += 1
+        if updated_count > 0:
+            LAST_SYNC_SOURCE = "SSI Live iBoard (Thời gian thực 1 phút/lần)"
+            LAST_SYNC_TIMESTAMP = now_str
+            save_snapshot()
+            update_ram_cache()
+            return updated_count
+    except Exception as e:
+        print(f"⚠️ SSI Live Datafeed: {e}", flush=True)
+
+    # 2. Dự phòng qua thư viện Vnstock
     vnstock = try_import_vnstock()
     if not vnstock:
         with DATA_LOCK:
-            LAST_SYNC_SOURCE = "Dữ liệu thị trường Vnstock Snapshot"
+            LAST_SYNC_SOURCE = f"Vnstock Snapshot ({now_str})"
+            LAST_SYNC_TIMESTAMP = now_str
         update_ram_cache()
-        return 0
+        return updated_count
 
     if VNSTOCK_API_KEY and hasattr(vnstock, 'login'):
         try:
