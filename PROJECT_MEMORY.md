@@ -270,3 +270,14 @@
      * Tùy chọn số mã tuyển chọn: Top 1 mã (All-in 100%), Top 3 mã, Top 5 mã (Cân bằng chuẩn 20%/mã), Top 10 mã.
      * Bảng xem trước kết quả (Live Preview) hiển thị chi tiết điểm số, tỷ trọng dự kiến và thông số từng mã trước khi áp dụng.
      * Nút "Áp dụng vào Danh mục" ghi đè cấu trúc danh mục, tự động tạo phân bổ ngành và lưu trữ bền vững.
+
+12. **Tinh chỉnh Tối Giản Thanh Công Cụ Danh Mục Nắm Giữ (17/11/2026)**:
+   - Theo yêu cầu của người dùng, loại bỏ các chi tiết thừa gây rối mắt trên thanh tiêu đề và thanh công cụ của "Danh sách Cổ phiếu Nắm giữ trong Danh mục":
+     * Bỏ badge số lượng mã cạnh tiêu đề: `[X mã cổ phiếu]`.
+     * Bỏ badge trạng thái nguồn giá: `[Giá chuẩn xác 100% • Nguồn: Vnstock API • 1 phút/lần]`.
+     * Bỏ nút: `[Làm mới giá]`.
+   - Giữ lại thanh công cụ tinh gọn, trực quan, tập trung vào các hành động cốt lõi:
+     * Tiêu đề: **Danh sách Cổ phiếu Nắm giữ trong Danh mục** kèm mô tả.
+     * Nút **Cập nhật thủ công** (mở modal chỉnh sửa mã, tỷ trọng, giá mua).
+     * Nút **Cập nhật tự động** (mở modal lọc định lượng AI theo MA10/MA50, Khối ngoại, KQKD).
+     * Bộ chọn **Sắp xếp** (Tỷ trọng lớn nhất, Lãi nhiều nhất, Tên A-Z).

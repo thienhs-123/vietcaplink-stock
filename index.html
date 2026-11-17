@@ -711,20 +711,12 @@
           <div class="p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border shadow-sm space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-light-border dark:border-studio-border">
               <div>
-                <div class="flex items-center space-x-2">
-                  <h3 class="text-base font-bold text-light-text dark:text-studio-text">Danh sách Cổ phiếu Nắm giữ trong Danh mục</h3>
-                  <span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-studio-blueLight border border-blue-500/20 font-mono" id="portfolioHoldingsBadge">6 mã cổ phiếu</span>
-                </div>
+                <h3 class="text-base font-bold text-light-text dark:text-studio-text">Danh sách Cổ phiếu Nắm giữ trong Danh mục</h3>
                 <p class="text-xs text-light-subtext dark:text-studio-subtext mt-0.5">
                   Giá cổ phiếu được đồng bộ tự động online từ dữ liệu đóng cửa phiên giao dịch hôm trước (HOSE).
                 </p>
               </div>
               <div class="flex flex-wrap items-center gap-2.5 text-xs">
-                <!-- Status Badge -->
-                <div id="portfolioOnlineStatusBadge" class="flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25">
-                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                  <span id="portfolioOnlineStatusText">Giá phiên hôm trước: Đang nạp online...</span>
-                </div>
                 <!-- Nút Cập nhật thủ công -->
                 <button onclick="openPortfolioManualModal()" id="btnPortfolioManualEdit" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-light-elevated dark:bg-studio-elevated border border-light-border dark:border-studio-border hover:border-blue-500 hover:text-blue-500 text-light-text dark:text-studio-text flex items-center space-x-1.5 transition-all shadow-sm active:scale-95" title="Thêm/sửa mã chứng khoán, tỷ trọng và giá mua thủ công">
                   <i data-lucide="edit-3" class="w-3.5 h-3.5 text-blue-500"></i>
@@ -734,11 +726,6 @@
                 <button onclick="openPortfolioAutoModal()" id="btnPortfolioAutoEdit" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white flex items-center space-x-1.5 transition-all shadow-sm active:scale-95" title="Lọc và cập nhật tự động theo MA10/MA50, Khối ngoại mua ròng và KQKD">
                   <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-300"></i>
                   <span>Cập nhật tự động</span>
-                </button>
-                <!-- Manual Refresh Button -->
-                <button onclick="window.PortfolioOnlinePriceService.fetchAndApplyPreviousPrices()" id="btnRefreshPrevPrices" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-light-elevated dark:bg-studio-elevated border border-light-border dark:border-studio-border hover:border-blue-500 hover:text-blue-500 text-light-text dark:text-studio-text flex items-center space-x-1.5 transition-all shadow-sm active:scale-95" title="Lấy lại giá phiên hôm trước từ API online">
-                  <i data-lucide="refresh-cw" class="w-3.5 h-3.5" id="portfolioRefreshIcon"></i>
-                  <span>Làm mới giá</span>
                 </button>
                 <div class="flex items-center space-x-1 pl-1">
                   <span class="text-light-subtext dark:text-studio-muted">Sắp xếp:</span>
