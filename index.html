@@ -13148,7 +13148,7 @@
 
       document.getElementById("portfolioAutoModal")?.classList.remove("hidden");
       selectedAutoSymbols.clear();
-      runAutoPreview(true);
+      runAutoPreview();
       if (window.lucide) lucide.createIcons();
     }
 
@@ -13184,7 +13184,7 @@
 
     function updateAutoPreviewSelectionUI(reRender = false) {
       if (reRender) {
-        runAutoPreview(false);
+        runAutoPreview();
         return;
       }
 
@@ -13263,7 +13263,7 @@
       }
     }
 
-    function runAutoPreview(isInitial = false) {
+    function runAutoPreview() {
       const checkMA = document.getElementById("autoFilterMA")?.checked ?? true;
       const checkForeign = document.getElementById("autoFilterForeign")?.checked ?? true;
       const foreignPeriod = parseInt(document.getElementById("autoFilterForeignPeriod")?.value) || 5;
@@ -13314,21 +13314,13 @@
 
       currentAutoPreviewList = filtered;
 
-      // Quản lý trạng thái tick chọn: lần mở đầu tiên chọn top 5; khi đổi bộ lọc giữ lại các mã đã tick nếu vẫn còn trong danh sách
-      if (isInitial || selectedAutoSymbols.size === 0) {
-        selectedAutoSymbols.clear();
-        filtered.slice(0, 5).forEach(s => selectedAutoSymbols.add(s.symbol));
-      } else {
-        const currentSymbolSet = new Set(filtered.map(s => s.symbol));
-        const newSet = new Set();
-        selectedAutoSymbols.forEach(sym => {
-          if (currentSymbolSet.has(sym)) newSet.add(sym);
-        });
-        if (newSet.size === 0 && filtered.length > 0) {
-          filtered.slice(0, 5).forEach(s => newSet.add(s.symbol));
-        }
-        selectedAutoSymbols = newSet;
-      }
+      // Không tự động tick chọn: chỉ duy trì các mã người dùng đã chủ động tick chọn nếu vẫn còn thỏa mãn bộ lọc
+      const currentSymbolSet = new Set(filtered.map(s => s.symbol));
+      const newSet = new Set();
+      selectedAutoSymbols.forEach(sym => {
+        if (currentSymbolSet.has(sym)) newSet.add(sym);
+      });
+      selectedAutoSymbols = newSet;
 
       // Render preview table
       const countBadge = document.getElementById("autoPreviewCountBadge");
@@ -13440,7 +13432,7 @@
       await new Promise(resolve => setTimeout(resolve, 300));
 
       // Chạy lại bộ lọc và giữ nguyên các mã đã tick nếu vẫn hợp lệ
-      runAutoPreview(false);
+      runAutoPreview();
 
       // Khôi phục giao diện
       if (tbody) {

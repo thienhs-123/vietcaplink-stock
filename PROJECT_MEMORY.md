@@ -512,7 +512,7 @@
         + Cột 1 của bảng chuyển từ số thứ tự tĩnh (1..5) thành Checkbox tương tác riêng biệt (`#auto-cb-${s.symbol}`) cho từng cổ phiếu.
         + Thêm checkbox "Chọn tất cả" (`#autoPreviewSelectAll`) ở tiêu đề bảng với hỗ trợ trạng thái `checked`, `unchecked` và `indeterminate`.
         + Quản lý tập hợp mã được chọn bằng `selectedAutoSymbols = new Set()`.
-        + Khi mở modal: Mặc định tự động tick chọn sẵn Top 5 mã khuyến nghị hàng đầu.
+        + **Bỏ tính năng tự động tick chọn cổ phiếu**: Khi mở modal hoặc khi quét lại, toàn bộ danh sách để trạng thái **chưa chọn** (0 mã được tick, checkbox trống). Người dùng hoàn toàn chủ động tick chọn từng cổ phiếu mà mình muốn thêm vào danh mục.
         + Hỗ trợ bấm trực tiếp vào checkbox hoặc bấm bất kỳ vị trí nào trên hàng (`toggleAutoStockRow`) để tick/bỏ tick cực kỳ tiện lợi. Hàng được tick nhận class highlight nền xanh (`bg-blue-500/10 dark:bg-blue-500/15`).
         + Badge đếm hiển thị thời gian thực: `Đã chọn X / Y mã`.
         + Text tóm tắt và nút bấm chân trang tự động cập nhật linh hoạt: `Áp dụng X mã vào Danh mục (Tỷ trọng Y%/mã)`.
