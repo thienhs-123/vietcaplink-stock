@@ -3523,30 +3523,22 @@
 
       <!-- Controls & Criteria Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <!-- Panel 1: Thiết lập Danh mục & Số lượng -->
-        <div class="p-3.5 rounded-xl bg-light-elevated/60 dark:bg-studio-elevated/60 border border-light-border dark:border-studio-border space-y-3 text-xs">
-          <div class="font-bold text-light-text dark:text-studio-text flex items-center space-x-1.5">
-            <i data-lucide="sliders" class="w-3.5 h-3.5 text-blue-500"></i>
-            <span>Thiết lập Mục tiêu Danh mục</span>
+        <!-- Panel 1: Thiết lập Danh mục Mục tiêu -->
+        <div class="p-3.5 rounded-xl bg-light-elevated/60 dark:bg-studio-elevated/60 border border-light-border dark:border-studio-border space-y-2 text-xs flex flex-col justify-between">
+          <div class="font-bold text-light-text dark:text-studio-text flex items-center justify-between">
+            <div class="flex items-center space-x-1.5">
+              <i data-lucide="sliders" class="w-3.5 h-3.5 text-blue-500"></i>
+              <span>Thiết lập Mục tiêu Danh mục</span>
+            </div>
+            <span class="text-[11px] text-light-subtext dark:text-studio-muted font-normal">Tự động phân bổ đều theo mã được tick</span>
           </div>
-          <div class="grid grid-cols-2 gap-2.5">
-            <div>
-              <label class="block text-[11px] text-light-subtext dark:text-studio-muted mb-1">Áp dụng cho:</label>
-              <select id="autoModalPortSelect" class="w-full px-2.5 py-1.5 rounded-lg bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border font-semibold text-light-text dark:text-studio-text focus:outline-none">
-                <option value="can_bang">⚖️ Danh mục Cân bằng</option>
-                <option value="tan_cong">⚡ Danh mục Tấn công</option>
-                <option value="phong_thu">🛡️ Danh mục Phòng thủ</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-[11px] text-light-subtext dark:text-studio-muted mb-1">Số mã tuyển chọn:</label>
-              <select id="autoModalCountSelect" onchange="runAutoPreview()" class="w-full px-2.5 py-1.5 rounded-lg bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border font-semibold text-blue-600 dark:text-studio-blueLight focus:outline-none">
-                <option value="5" selected>Top 5 mã (Khuyến nghị)</option>
-                <option value="1">Top 1 mã (Tập trung)</option>
-                <option value="3">Top 3 mã</option>
-                <option value="10">Top 10 mã (Đa dạng)</option>
-              </select>
-            </div>
+          <div>
+            <label class="block text-[11px] text-light-subtext dark:text-studio-muted mb-1">Áp dụng cho danh mục:</label>
+            <select id="autoModalPortSelect" onchange="updateAutoModalSummaryText()" class="w-full px-3 py-1.5 rounded-lg bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border font-semibold text-light-text dark:text-studio-text focus:outline-none text-xs">
+              <option value="can_bang">⚖️ Danh mục Cân bằng</option>
+              <option value="tan_cong">⚡ Danh mục Tấn công</option>
+              <option value="phong_thu">🛡️ Danh mục Phòng thủ</option>
+            </select>
           </div>
         </div>
 
@@ -3557,7 +3549,7 @@
               <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-500"></i>
               <span>Bộ Tiêu Chí Tuyển Chọn</span>
             </div>
-            <button onclick="rescanAutoPortfolio()" id="btnAutoRescan" type="button" class="text-[11px] text-blue-500 hover:text-blue-600 dark:hover:text-blue-400 hover:underline flex items-center space-x-1.5 cursor-pointer active:scale-95 transition-all px-2 py-0.5 rounded-md hover:bg-blue-500/10" title="Quét và rà soát lại toàn bộ 100 mã cổ phiếu theo tiêu chí hiện tại">
+            <button onclick="rescanAutoPortfolio()" id="btnAutoRescan" type="button" class="text-[11px] text-blue-500 hover:text-blue-600 dark:hover:text-blue-400 hover:underline flex items-center space-x-1.5 cursor-pointer active:scale-95 transition-all px-2 py-0.5 rounded-md hover:bg-blue-500/10" title="Quét lại theo tiêu chí hiện tại">
               <i data-lucide="refresh-cw" id="iconAutoRescan" class="w-3.5 h-3.5"></i>
               <span id="textAutoRescan" class="font-semibold">Quét lại</span>
             </button>
@@ -3609,20 +3601,22 @@
             <span>Danh sách Cổ phiếu Thỏa mãn Tiêu chí</span>
             <span class="text-[11px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-600 dark:text-studio-blueLight font-mono font-bold" id="autoPreviewCountBadge">0 mã</span>
           </div>
-          <span class="text-[11px] text-light-subtext dark:text-studio-muted">Sắp xếp theo Sức mạnh Dòng tiền ngoại & Hiệu quả kinh doanh</span>
+          <span class="text-[11px] text-light-subtext dark:text-studio-muted">Sắp xếp theo Sức mạnh Dòng tiền ngoại & Hiệu quả kinh doanh • Tick để chọn mã</span>
         </div>
 
         <div class="overflow-x-auto border border-light-border dark:border-studio-border rounded-xl max-h-[380px] overflow-y-auto shadow-sm">
-          <table class="w-full text-left text-xs table-fixed min-w-[780px]">
+          <table class="w-full text-left text-xs table-fixed min-w-[800px]">
             <thead class="bg-light-elevated dark:bg-studio-elevated text-light-subtext dark:text-studio-muted font-semibold uppercase tracking-wider sticky top-0 border-b border-light-border dark:border-studio-border z-10 text-[11px]">
               <tr>
-                <th class="py-2.5 px-3 w-[6%] min-w-[48px] text-center whitespace-nowrap">Chọn</th>
-                <th class="py-2.5 px-3 w-[10%] min-w-[75px] text-left whitespace-nowrap">Mã CP</th>
-                <th class="py-2.5 px-3 w-[28%] min-w-[200px] text-left whitespace-nowrap">Doanh nghiệp & Ngành</th>
-                <th class="py-2.5 px-3 w-[12%] min-w-[95px] text-right whitespace-nowrap">Giá (đ)</th>
-                <th class="py-2.5 px-3 w-[18%] min-w-[145px] text-right whitespace-nowrap">MA10 / MA50</th>
+                <th class="py-2.5 px-2 w-[5%] min-w-[44px] text-center whitespace-nowrap">
+                  <input type="checkbox" id="autoPreviewSelectAll" onchange="toggleAutoPreviewSelectAll(this.checked)" class="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-0 cursor-pointer align-middle" title="Chọn / Bỏ chọn tất cả">
+                </th>
+                <th class="py-2.5 px-3 w-[9%] min-w-[65px] text-left whitespace-nowrap">Mã CP</th>
+                <th class="py-2.5 px-3 w-[26%] min-w-[185px] text-left whitespace-nowrap">Doanh nghiệp &amp; Ngành</th>
+                <th class="py-2.5 px-3 w-[11%] min-w-[85px] text-right whitespace-nowrap">Giá (đ)</th>
+                <th class="py-2.5 px-3 w-[16%] min-w-[130px] text-right whitespace-nowrap">MA10 / MA50</th>
                 <th class="py-2.5 px-3 w-[14%] min-w-[115px] text-right whitespace-nowrap" id="autoPreviewForeignHeader">Khối ngoại (5P)</th>
-                <th class="py-2.5 px-3 w-[12%] min-w-[102px] text-right whitespace-nowrap" title="Tăng trưởng Lợi nhuận sau thuế (LNST) &amp; Doanh thu thuần (DTT) của Quý gần nhất so với cùng kỳ năm trước (YoY)">LNST / DTT</th>
+                <th class="py-2.5 pl-2 pr-4 w-[19%] min-w-[155px] text-right whitespace-nowrap" title="Tăng trưởng Lợi nhuận sau thuế (LNST) &amp; Doanh thu thuần (DTT) của Quý gần nhất so với cùng kỳ năm trước (YoY)">LNST / DTT</th>
               </tr>
             </thead>
             <tbody id="autoPreviewTableBody" class="divide-y divide-light-border dark:divide-studio-border">
@@ -3641,9 +3635,9 @@
           <button onclick="closePortfolioAutoModal()" type="button" class="px-4 py-2 rounded-xl text-xs font-medium text-light-subtext dark:text-studio-muted hover:bg-black/5 dark:hover:bg-white/5 transition-all">
             Hủy bỏ
           </button>
-          <button onclick="applyAutoPortfolio()" type="button" class="px-5 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-sm flex items-center space-x-1.5 transition-all">
+          <button onclick="applyAutoPortfolio()" id="btnApplyAutoPortfolio" type="button" class="px-5 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-sm flex items-center space-x-1.5 transition-all cursor-pointer active:scale-95">
             <i data-lucide="check" class="w-4 h-4"></i>
-            <span>Áp dụng vào Danh mục</span>
+            <span id="btnApplyAutoPortfolioText">Áp dụng vào Danh mục</span>
           </button>
         </div>
       </div>
@@ -13145,6 +13139,7 @@
 
     // 2. MODAL CẬP NHẬT TỰ ĐỘNG
     let currentAutoPreviewList = [];
+    let selectedAutoSymbols = new Set();
 
     function openPortfolioAutoModal() {
       const currentKey = StockApp.selectedPortfolioKey || 'can_bang';
@@ -13152,7 +13147,8 @@
       if (selectEl) selectEl.value = currentKey;
 
       document.getElementById("portfolioAutoModal")?.classList.remove("hidden");
-      runAutoPreview();
+      selectedAutoSymbols.clear();
+      runAutoPreview(true);
       if (window.lucide) lucide.createIcons();
     }
 
@@ -13160,13 +13156,119 @@
       document.getElementById("portfolioAutoModal")?.classList.add("hidden");
     }
 
-    function runAutoPreview() {
+    function toggleAutoStockRow(sym) {
+      const cb = document.getElementById(`auto-cb-${sym}`);
+      if (cb) {
+        cb.checked = !cb.checked;
+        toggleAutoStockSelection(sym, cb.checked);
+      }
+    }
+
+    function toggleAutoStockSelection(sym, isChecked) {
+      if (isChecked) {
+        selectedAutoSymbols.add(sym);
+      } else {
+        selectedAutoSymbols.delete(sym);
+      }
+      updateAutoPreviewSelectionUI(false);
+    }
+
+    function toggleAutoPreviewSelectAll(isChecked) {
+      if (isChecked) {
+        currentAutoPreviewList.forEach(s => selectedAutoSymbols.add(s.symbol));
+      } else {
+        selectedAutoSymbols.clear();
+      }
+      updateAutoPreviewSelectionUI(false);
+    }
+
+    function updateAutoPreviewSelectionUI(reRender = false) {
+      if (reRender) {
+        runAutoPreview(false);
+        return;
+      }
+
+      currentAutoPreviewList.forEach(s => {
+        const row = document.getElementById(`auto-row-${s.symbol}`);
+        const cb = document.getElementById(`auto-cb-${s.symbol}`);
+        const isSel = selectedAutoSymbols.has(s.symbol);
+        if (cb) cb.checked = isSel;
+        if (row) {
+          if (isSel) {
+            row.className = "bg-blue-500/10 dark:bg-blue-500/15 hover:bg-blue-500/15 dark:hover:bg-blue-500/20 cursor-pointer transition-colors border-b border-light-border/60 dark:border-studio-border/60";
+          } else {
+            row.className = "hover:bg-black/[0.03] dark:hover:bg-white/[0.03] opacity-75 cursor-pointer transition-colors border-b border-light-border/60 dark:border-studio-border/60";
+          }
+        }
+      });
+
+      // Update header select-all checkbox
+      const selectAllCb = document.getElementById("autoPreviewSelectAll");
+      if (selectAllCb) {
+        const totalCount = currentAutoPreviewList.length;
+        const selectedCount = selectedAutoSymbols.size;
+        if (totalCount === 0 || selectedCount === 0) {
+          selectAllCb.checked = false;
+          selectAllCb.indeterminate = false;
+        } else if (selectedCount === totalCount) {
+          selectAllCb.checked = true;
+          selectAllCb.indeterminate = false;
+        } else {
+          selectAllCb.checked = false;
+          selectAllCb.indeterminate = true;
+        }
+      }
+
+      // Update count badge
+      const countBadge = document.getElementById("autoPreviewCountBadge");
+      if (countBadge) {
+        countBadge.innerText = `Đã chọn ${selectedAutoSymbols.size} / ${currentAutoPreviewList.length} mã`;
+      }
+
+      // Update modal summary text and apply button
+      updateAutoModalSummaryText();
+    }
+
+    function updateAutoModalSummaryText() {
+      const portKey = document.getElementById("autoModalPortSelect")?.value || StockApp.selectedPortfolioKey || 'can_bang';
+      const portName = portKey === 'tan_cong' ? 'Tấn công' : (portKey === 'phong_thu' ? 'Phòng thủ' : 'Cân bằng');
+      const summaryEl = document.getElementById("autoModalSummaryText");
+      const btnApply = document.getElementById("btnApplyAutoPortfolio");
+      const btnText = document.getElementById("btnApplyAutoPortfolioText");
+
+      const n = selectedAutoSymbols.size;
+      if (n === 0) {
+        if (summaryEl) {
+          summaryEl.innerHTML = `<span class="text-amber-500 font-medium">Chưa có mã nào được chọn — Hãy tick chọn các cổ phiếu trong bảng để đưa vào danh mục</span>`;
+        }
+        if (btnApply) {
+          btnApply.disabled = true;
+          btnApply.classList.add("opacity-50", "cursor-not-allowed");
+        }
+        if (btnText) {
+          btnText.innerText = "Chưa chọn cổ phiếu";
+        }
+      } else {
+        const eqWeight = (100 % n === 0) ? (100 / n) : parseFloat((100 / n).toFixed(1));
+        if (summaryEl) {
+          summaryEl.innerHTML = `Đã tick chọn <strong class="text-blue-500 font-bold">${n} mã</strong>. Tự động phân bổ đều <strong class="text-emerald-500 font-mono font-bold">${eqWeight}%</strong>/mã vào Danh mục <strong>${portName}</strong> (giá vốn = thị giá).`;
+        }
+        if (btnApply) {
+          btnApply.disabled = false;
+          btnApply.classList.remove("opacity-50", "cursor-not-allowed");
+        }
+        if (btnText) {
+          btnText.innerText = `Áp dụng ${n} mã vào Danh mục`;
+        }
+      }
+    }
+
+    function runAutoPreview(isInitial = false) {
       const checkMA = document.getElementById("autoFilterMA")?.checked ?? true;
       const checkForeign = document.getElementById("autoFilterForeign")?.checked ?? true;
       const foreignPeriod = parseInt(document.getElementById("autoFilterForeignPeriod")?.value) || 5;
       const foreignLevel = parseFloat(document.getElementById("autoFilterForeignLevel")?.value) || 0;
       const checkBusiness = document.getElementById("autoFilterBusiness")?.checked ?? true;
-      const targetCount = parseInt(document.getElementById("autoModalCountSelect")?.value) || 5;
 
       const fHeader = document.getElementById("autoPreviewForeignHeader");
       if (fHeader) {
@@ -13212,9 +13314,25 @@
 
       currentAutoPreviewList = filtered;
 
+      // Quản lý trạng thái tick chọn: lần mở đầu tiên chọn top 5; khi đổi bộ lọc giữ lại các mã đã tick nếu vẫn còn trong danh sách
+      if (isInitial || selectedAutoSymbols.size === 0) {
+        selectedAutoSymbols.clear();
+        filtered.slice(0, 5).forEach(s => selectedAutoSymbols.add(s.symbol));
+      } else {
+        const currentSymbolSet = new Set(filtered.map(s => s.symbol));
+        const newSet = new Set();
+        selectedAutoSymbols.forEach(sym => {
+          if (currentSymbolSet.has(sym)) newSet.add(sym);
+        });
+        if (newSet.size === 0 && filtered.length > 0) {
+          filtered.slice(0, 5).forEach(s => newSet.add(s.symbol));
+        }
+        selectedAutoSymbols = newSet;
+      }
+
       // Render preview table
       const countBadge = document.getElementById("autoPreviewCountBadge");
-      if (countBadge) countBadge.innerText = `${filtered.length} mã thỏa mãn`;
+      if (countBadge) countBadge.innerText = `Đã chọn ${selectedAutoSymbols.size} / ${filtered.length} mã`;
 
       const tbody = document.getElementById("autoPreviewTableBody");
       if (!tbody) return;
@@ -13231,12 +13349,15 @@
         if (summaryText) {
           summaryText.innerHTML = `<span class="text-amber-500 font-medium">Chưa có mã thỏa mãn — Hãy thử chọn mức Khối ngoại &gt; 0 tỷ hoặc bỏ bớt tiêu chí</span>`;
         }
+        updateAutoModalSummaryText();
         return;
       }
 
-      tbody.innerHTML = filtered.map((s, idx) => {
-        const isSelected = idx < targetCount;
-        const rowBg = isSelected ? 'bg-blue-500/5 dark:bg-blue-500/10' : '';
+      tbody.innerHTML = filtered.map((s) => {
+        const isSelected = selectedAutoSymbols.has(s.symbol);
+        const rowBg = isSelected 
+          ? 'bg-blue-500/10 dark:bg-blue-500/15 hover:bg-blue-500/15 dark:hover:bg-blue-500/20' 
+          : 'hover:bg-black/[0.03] dark:hover:bg-white/[0.03] opacity-75';
         const fVal = getForeignVal(s);
         const fSessions = getForeignSessions(s);
         const fSign = fVal > 0 ? '+' : '';
@@ -13255,16 +13376,14 @@
         const ma50Formatted = s.ma50 ? (s.ma50 >= 1000 ? (s.ma50 / 1000).toFixed(2) : s.ma50) : '--';
 
         return `
-          <tr class="${rowBg} hover:bg-black/[0.03] dark:hover:bg-white/[0.03] transition-colors">
-            <td class="py-2.5 px-2 text-center whitespace-nowrap">
-              <span class="w-5 h-5 rounded-full inline-flex items-center justify-center text-[10px] font-bold font-mono ${isSelected ? 'bg-blue-600 text-white shadow-sm ring-2 ring-blue-500/30' : 'bg-gray-200 dark:bg-gray-700 text-gray-500'}">
-                ${idx + 1}
-              </span>
+          <tr id="auto-row-${s.symbol}" onclick="toggleAutoStockRow('${s.symbol}')" class="${rowBg} cursor-pointer transition-colors border-b border-light-border/60 dark:border-studio-border/60">
+            <td class="py-2.5 px-2 text-center whitespace-nowrap" onclick="event.stopPropagation()">
+              <input type="checkbox" id="auto-cb-${s.symbol}" ${isSelected ? 'checked' : ''} onchange="toggleAutoStockSelection('${s.symbol}', this.checked)" class="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-blue-600 focus:ring-0 cursor-pointer align-middle transition-transform active:scale-95" title="Chọn / bỏ chọn mã ${s.symbol}">
             </td>
-            <td class="py-2.5 px-3 font-mono font-bold text-blue-600 dark:text-studio-blueLight whitespace-nowrap text-xs">
+            <td class="py-2.5 px-3 font-mono font-bold text-blue-600 dark:text-studio-blueLight whitespace-nowrap text-xs text-left">
               ${s.symbol}
             </td>
-            <td class="py-2.5 px-3 font-medium text-light-text dark:text-studio-text overflow-hidden">
+            <td class="py-2.5 px-3 font-medium text-light-text dark:text-studio-text overflow-hidden text-left">
               <div class="truncate font-semibold text-light-text dark:text-studio-text text-xs" title="${s.name}">${s.name}</div>
               <div class="text-[11px] text-light-subtext dark:text-studio-muted truncate">${s.industry}</div>
             </td>
@@ -13279,44 +13398,34 @@
               <div class="whitespace-nowrap text-xs">${fSign}${fVal.toFixed(2)} tỷ</div>
               ${fSessions ? `<div class="text-[10px] text-light-subtext dark:text-studio-muted font-normal whitespace-nowrap">${fSessions} gom ròng</div>` : ''}
             </td>
-            <td class="py-2.5 px-3 text-right font-mono whitespace-nowrap" title="${finDetailTooltip}">
-              <div class="whitespace-nowrap text-xs">
+            <td class="py-2.5 pl-2 pr-4 text-right font-mono whitespace-nowrap" title="${finDetailTooltip}">
+              <div class="whitespace-nowrap text-xs leading-tight">
                 <span class="${pgColor} font-semibold">${pgSign}${s.profitGrowth}%</span>
                 <span class="text-light-subtext dark:text-studio-muted text-[10px] font-normal"> / ${rgSign}${s.revGrowth}%</span>
               </div>
-              <div class="text-[10px] text-light-subtext dark:text-studio-muted font-normal whitespace-nowrap">${qLabel} (YoY)</div>
+              <div class="text-[10px] text-light-subtext dark:text-studio-muted font-normal whitespace-nowrap mt-0.5">${qLabel} (YoY)</div>
             </td>
           </tr>
         `;
       }).join('');
 
-      const summaryText = document.getElementById("autoModalSummaryText");
-      if (summaryText) {
-        if (filtered.length < targetCount) {
-          summaryText.innerHTML = `Sẽ tự động chọn <strong class="text-blue-500 font-bold">Top ${filtered.length} mã xuất sắc nhất</strong> đưa vào danh mục. <span class="text-amber-500 text-[11px] block mt-0.5 font-normal">(Hiện có ${filtered.length} mã thỏa mãn cả 3 tiêu chí khắt khe. Bạn có thể chọn mức Khối ngoại &gt; 5 tỷ hoặc đổi số phiên gom để tìm thêm)</span>`;
-        } else {
-          summaryText.innerHTML = `Sẽ tự động chọn <strong class="text-blue-500 font-bold">Top ${targetCount} mã xuất sắc nhất</strong> đưa vào danh mục.`;
-        }
-      }
-
+      updateAutoPreviewSelectionUI(false);
       if (window.lucide) lucide.createIcons();
     }
 
     async function rescanAutoPortfolio() {
       const btn = document.getElementById("btnAutoRescan");
-      const icon = document.getElementById("iconAutoRescan");
       const text = document.getElementById("textAutoRescan");
       const countBadge = document.getElementById("autoPreviewCountBadge");
       const tbody = document.getElementById("autoPreviewTableBody");
 
       if (btn) btn.disabled = true;
-      if (icon) icon.classList.add("animate-spin");
+      // Biểu tượng tĩnh 100%: Tuyệt đối KHÔNG thêm animate-spin vào iconAutoRescan
       if (text) text.innerText = "Đang quét...";
       if (countBadge) {
-        countBadge.innerHTML = `<span class="inline-flex items-center space-x-1 text-blue-500 animate-pulse"><i data-lucide="loader-2" class="w-3 h-3 animate-spin"></i><span>Đang quét 100 mã...</span></span>`;
+        countBadge.innerHTML = `<span class="text-blue-500 font-medium">Đang quét 100 mã...</span>`;
       }
       if (tbody) tbody.classList.add("opacity-40", "transition-opacity", "duration-200");
-      if (window.lucide) lucide.createIcons();
 
       try {
         // Đồng bộ dữ liệu thị trường mới nhất từ Realtime Service
@@ -13327,11 +13436,11 @@
         console.warn("[rescanAutoPortfolio]", err);
       }
 
-      // Đợi ngắn 350ms để tạo phản hồi thị giác mượt mà
-      await new Promise(resolve => setTimeout(resolve, 350));
+      // Đợi ngắn 300ms tạo phản hồi thị giác
+      await new Promise(resolve => setTimeout(resolve, 300));
 
-      // Chạy lại bộ lọc và vẽ lại bảng
-      runAutoPreview();
+      // Chạy lại bộ lọc và giữ nguyên các mã đã tick nếu vẫn hợp lệ
+      runAutoPreview(false);
 
       // Khôi phục giao diện
       if (tbody) {
@@ -13341,7 +13450,6 @@
       }
 
       if (btn) btn.disabled = false;
-      if (icon) icon.classList.remove("animate-spin");
       if (text) text.innerText = "Quét lại";
       if (window.lucide) lucide.createIcons();
 
@@ -13359,23 +13467,22 @@
       const port = StockApp.portfolios ? StockApp.portfolios[portKey] : null;
       if (!port) return;
 
-      const targetCount = parseInt(document.getElementById("autoModalCountSelect")?.value) || 5;
-      const topSelected = currentAutoPreviewList.slice(0, targetCount);
+      const selectedStocks = currentAutoPreviewList.filter(s => selectedAutoSymbols.has(s.symbol));
 
-      if (topSelected.length === 0) {
+      if (selectedStocks.length === 0) {
         showMacToast({ 
-          title: "Chưa có mã thỏa mãn", 
-          message: "Danh sách quét hiện đang trống (0 mã). Vui lòng chọn hoặc nới lỏng mức lọc Khối ngoại (ví dụ: Mua ròng > 0 tỷ) để có cổ phiếu áp dụng!", 
+          title: "Chưa chọn cổ phiếu", 
+          message: "Vui lòng tick chọn ít nhất 1 mã cổ phiếu trong bảng xem trước để áp dụng vào danh mục!", 
           type: "warning",
-          duration: 4000 
+          duration: 3500 
         });
         return;
       }
 
-      const n = topSelected.length;
+      const n = selectedStocks.length;
       const equalWeight = n > 0 ? ((100 % n === 0) ? (100 / n) : parseFloat((100 / n).toFixed(1))) : 100;
 
-      port.holdings = topSelected.map((s, idx) => {
+      port.holdings = selectedStocks.map((s) => {
         const curPrice = (typeof s.price === 'number' && s.price > 0) ? s.price : (s.ref || 10000);
         // Giá vốn bằng đúng thị giá khi lọc danh mục tự động
         const buyPrice = curPrice;
@@ -13394,7 +13501,7 @@
 
       // Recalculate sectors
       const sectorMap = {};
-      const palette = ['#0071e3', '#8b5cf6', '#10b981', '#f59e0b', '#06b6d4', '#ec4899', '#f97316'];
+      const palette = ['#0071e3', '#8b5cf6', '#10b981', '#f59e0b', '#06b6d4', '#ec4899', '#f97316', '#14b8a6'];
       port.holdings.forEach(h => {
         const sec = h.sector || 'Khác';
         sectorMap[sec] = (sectorMap[sec] || 0) + (h.weight || 0);
@@ -13420,7 +13527,7 @@
 
       showMacToast({
         title: "Cập nhật tự động thành công!",
-        message: `Đã tuyển chọn và nạp Top ${topSelected.length} mã vào Danh mục ${port.name} với giá vốn bằng đúng thị giá hiện tại!`,
+        message: `Đã nạp ${selectedStocks.length} mã đã tick vào Danh mục ${port.name} (Tỷ trọng đều ${equalWeight}%/mã, giá vốn = thị giá)!`,
         type: "success",
         duration: 3500
       });

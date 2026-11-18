@@ -500,3 +500,38 @@
         + **Thông báo Toast**: Phát thông báo Mac Toast xác nhận rõ ràng: `Đã hoàn tất rà soát 100 mã cổ phiếu. Tìm thấy X mã thỏa mãn bộ tiêu chí!`.
         + **Gợi ý thông minh**: Khi số mã đạt tiêu chuẩn ít hơn mục tiêu (ví dụ tìm thấy 4 mã với tiêu chí đột biến > 20 tỷ trong khi chọn Top 5), hiển thị ghi chú gợi ý nới lỏng mức khối ngoại xuống > 5 tỷ hoặc tăng số phiên gom ròng.
         + **Cải thiện nút bấm**: Bổ sung `id="btnAutoRescan"`, `px-2 py-0.5 rounded-md hover:bg-blue-500/10 cursor-pointer active:scale-95` mở rộng vùng bấm trên cả desktop và mobile.
+
+28. **Tick Chọn Cổ Phiếu Trực Tiếp, Biểu Tượng Quét Lại Tĩnh & Tối Ưu Căn Chỉnh Bảng Xem Trước (18/11/2026)**:
+    - **Yêu cầu của người dùng**:
+      * Bỏ dropdown "Số mã tuyển chọn", người dùng sẽ tick chọn vào trực tiếp từng cổ phiếu trong bảng.
+      * Biểu tượng nút "Quét lại" là biểu tượng tĩnh (không xoay).
+      * Căn chỉnh lại bảng xem trước vừa vặn, thoáng đẹp, không bị co ép hoặc che khuất dữ liệu.
+    - **Triển khai kỹ thuật hoàn chỉnh**:
+      * **Loại bỏ dropdown chọn số mã & Cho phép tick chọn trực tiếp**:
+        + Xóa bỏ select `#autoModalCountSelect` trong Modal.
+        + Cột 1 của bảng chuyển từ số thứ tự tĩnh (1..5) thành Checkbox tương tác riêng biệt (`#auto-cb-${s.symbol}`) cho từng cổ phiếu.
+        + Thêm checkbox "Chọn tất cả" (`#autoPreviewSelectAll`) ở tiêu đề bảng với hỗ trợ trạng thái `checked`, `unchecked` và `indeterminate`.
+        + Quản lý tập hợp mã được chọn bằng `selectedAutoSymbols = new Set()`.
+        + Khi mở modal: Mặc định tự động tick chọn sẵn Top 5 mã khuyến nghị hàng đầu.
+        + Hỗ trợ bấm trực tiếp vào checkbox hoặc bấm bất kỳ vị trí nào trên hàng (`toggleAutoStockRow`) để tick/bỏ tick cực kỳ tiện lợi. Hàng được tick nhận class highlight nền xanh (`bg-blue-500/10 dark:bg-blue-500/15`).
+        + Badge đếm hiển thị thời gian thực: `Đã chọn X / Y mã`.
+        + Text tóm tắt và nút bấm chân trang tự động cập nhật linh hoạt: `Áp dụng X mã vào Danh mục (Tỷ trọng Y%/mã)`.
+      * **Biểu tượng Quét lại Tĩnh 100%**:
+        + Loại bỏ triệt để mọi class `animate-spin` trên icon `#iconAutoRescan`.
+        + Giữ nguyên biểu tượng tĩnh theo đúng yêu cầu, chỉ đổi text nút thành "Đang quét..." và hiển thị badge tiến trình, sau đó phát thông báo Toast thành công.
+      * **Căn chỉnh lại bảng xem trước hoàn hảo**:
+        + Tăng `min-w-[800px]` cho bảng `table-fixed`.
+        + Phân bổ lại tỷ lệ độ rộng 7 cột chuẩn 100%:
+          - `CHỌN`: `w-[5%] min-w-[44px] text-center`
+          - `MÃ CP`: `w-[9%] min-w-[65px] text-left`
+          - `DOANH NGHIỆP & NGÀNH`: `w-[26%] min-w-[185px] text-left`
+          - `GIÁ (Đ)`: `w-[11%] min-w-[85px] text-right`
+          - `MA10 / MA50`: `w-[16%] min-w-[130px] text-right`
+          - `KHỐI NGOẠI (xP)`: `w-[14%] min-w-[115px] text-right`
+          - `LNST / DTT`: `w-[19%] min-w-[155px] text-right pl-2 pr-4`
+        + Cột `LNST / DTT` mở rộng lên 19% min 155px kèm khoảng đệm phải `pr-4`, triệt tiêu hoàn toàn lỗi cắt cụt ký tự `%` ở các số liệu tăng trưởng 3-4 chữ số (như `+1233% / +466%` hay `+652.3% / +284.8%`).
+      * **Áp dụng vào Danh mục**:
+        + Chỉ nạp đúng các cổ phiếu mà người dùng đã tick chọn vào danh mục mục tiêu.
+        + Tự động tính toán phân bổ đều tỷ trọng `(100 / n)%` cho mỗi mã.
+        + Gán giá vốn bằng đúng thị giá hiện tại khi lọc tự động.
+        + Đồng bộ vào `localStorage`, cập nhật lại giao diện danh mục và đồ thị NAV.
