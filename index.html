@@ -14906,8 +14906,14 @@
         const cardVnChange = document.getElementById("cardVnindexChange");
         if (cardVn && cardVnChange) {
           cardVn.innerText = StockApp.macro.vnindex.toLocaleString("en-US");
+          cardVn.className = "text-3xl font-bold font-mono " + colorClass;
           cardVnChange.innerText = sign + StockApp.macro.vnindexChange + " (" + sign + StockApp.macro.vnindexPct + "%)";
-          cardVnChange.className = "text-2xl font-bold font-mono " + colorClass;
+          cardVnChange.className = "text-xs px-2 py-0.5 rounded font-mono font-medium " + (isUp ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400" : "bg-rose-500/10 text-rose-600 dark:text-rose-400");
+        }
+
+        const cardLiq = document.getElementById("cardMarketLiquidityVal");
+        if (cardLiq && StockApp.macro.vnindexGtgd) {
+          cardLiq.innerText = StockApp.macro.vnindexGtgd;
         }
 
         // Module 4 Market Overview Cards
