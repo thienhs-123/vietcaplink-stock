@@ -486,3 +486,17 @@
         + Tiêu đề cột `<th>`: bổ sung thuộc tính `title="Tăng trưởng Lợi nhuận sau thuế (LNST) & Doanh thu thuần (DTT) của Quý gần nhất so với cùng kỳ năm trước (YoY)"`.
       * **Chuẩn hóa bộ lọc Tuyển chọn Tự động**:
         + Khi bật `[x] Kết quả kinh doanh tốt (LNST tăng trưởng & ROE cao)`, các mã thực tế có tăng trưởng quý gần nhất âm (như DXG, KDH) sẽ bị loại bỏ chính xác, chỉ chọn các mã có kết quả kinh doanh quý gần nhất thực sự xuất sắc (VIC +652%, MSN +144%, FRT +110%, POW +119%, HPG +106%).
+
+27. **Khắc Phục Nút "Quét Lại" & Nâng Cấp Trải Nghiệm Rescan Tự Động (18/11/2026)**:
+    - **Vấn đề người dùng phản hồi**: "nút quét lại không hoạt động".
+    - **Nguyên nhân cốt lõi**:
+      * Nút `Quét lại` trước đây chỉ gọi hàm đồng bộ `runAutoPreview()` thuần túy trong RAM (0.1ms) mà không có bất kỳ phản hồi thị giác nào: không xoay icon, không đổi trạng thái "Đang quét...", không làm mờ bảng, không có thông báo Toast. Do bảng xem trước đã được vẽ từ khi mở modal, việc bấm nút không làm đổi một pixel nào trên màn hình khiến người dùng nghĩ nút bị đơ/hỏng.
+      * Nút chưa kích hoạt luồng đồng bộ cập nhật thị giá và dòng tiền khối ngoại trực tiếp từ `StockRealtimeService`.
+    - **Triển khai kỹ thuật hoàn chỉnh**:
+      * Xây dựng hàm bất đồng bộ chuyên trách `rescanAutoPortfolio()`:
+        + **Hiệu ứng thị giác tương tác**: Thêm `animate-spin` vào icon `refresh-cw`, đổi nhãn tạm thời thành `Đang quét...`, vô hiệu hóa tạm thời để tránh spam click.
+        + **Trạng thái bảng động**: Badge hiển thị `Đang quét 100 mã...`, bảng xem trước tự động giảm độ mờ (`opacity-40`) và hoàn trả với hiệu ứng flash highlight `bg-blue-500/5` khi quét xong.
+        + **Đồng bộ thị trường thực**: Gọi `StockRealtimeService.sync(false)` lấy dữ liệu khớp lệnh & khối ngoại mới nhất.
+        + **Thông báo Toast**: Phát thông báo Mac Toast xác nhận rõ ràng: `Đã hoàn tất rà soát 100 mã cổ phiếu. Tìm thấy X mã thỏa mãn bộ tiêu chí!`.
+        + **Gợi ý thông minh**: Khi số mã đạt tiêu chuẩn ít hơn mục tiêu (ví dụ tìm thấy 4 mã với tiêu chí đột biến > 20 tỷ trong khi chọn Top 5), hiển thị ghi chú gợi ý nới lỏng mức khối ngoại xuống > 5 tỷ hoặc tăng số phiên gom ròng.
+        + **Cải thiện nút bấm**: Bổ sung `id="btnAutoRescan"`, `px-2 py-0.5 rounded-md hover:bg-blue-500/10 cursor-pointer active:scale-95` mở rộng vùng bấm trên cả desktop và mobile.

@@ -3557,9 +3557,9 @@
               <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-500"></i>
               <span>Bộ Tiêu Chí Tuyển Chọn</span>
             </div>
-            <button onclick="runAutoPreview()" type="button" class="text-[11px] text-blue-500 hover:underline flex items-center space-x-1">
-              <i data-lucide="refresh-cw" class="w-3 h-3"></i>
-              <span>Quét lại</span>
+            <button onclick="rescanAutoPortfolio()" id="btnAutoRescan" type="button" class="text-[11px] text-blue-500 hover:text-blue-600 dark:hover:text-blue-400 hover:underline flex items-center space-x-1.5 cursor-pointer active:scale-95 transition-all px-2 py-0.5 rounded-md hover:bg-blue-500/10" title="Quét và rà soát lại toàn bộ 100 mã cổ phiếu theo tiêu chí hiện tại">
+              <i data-lucide="refresh-cw" id="iconAutoRescan" class="w-3.5 h-3.5"></i>
+              <span id="textAutoRescan" class="font-semibold">Quét lại</span>
             </button>
           </div>
           
@@ -13292,10 +13292,66 @@
 
       const summaryText = document.getElementById("autoModalSummaryText");
       if (summaryText) {
-        summaryText.innerHTML = `Sẽ tự động chọn <strong class="text-blue-500 font-bold">Top ${Math.min(targetCount, filtered.length)} mã xuất sắc nhất</strong> đưa vào danh mục.`;
+        if (filtered.length < targetCount) {
+          summaryText.innerHTML = `Sẽ tự động chọn <strong class="text-blue-500 font-bold">Top ${filtered.length} mã xuất sắc nhất</strong> đưa vào danh mục. <span class="text-amber-500 text-[11px] block mt-0.5 font-normal">(Hiện có ${filtered.length} mã thỏa mãn cả 3 tiêu chí khắt khe. Bạn có thể chọn mức Khối ngoại &gt; 5 tỷ hoặc đổi số phiên gom để tìm thêm)</span>`;
+        } else {
+          summaryText.innerHTML = `Sẽ tự động chọn <strong class="text-blue-500 font-bold">Top ${targetCount} mã xuất sắc nhất</strong> đưa vào danh mục.`;
+        }
       }
 
       if (window.lucide) lucide.createIcons();
+    }
+
+    async function rescanAutoPortfolio() {
+      const btn = document.getElementById("btnAutoRescan");
+      const icon = document.getElementById("iconAutoRescan");
+      const text = document.getElementById("textAutoRescan");
+      const countBadge = document.getElementById("autoPreviewCountBadge");
+      const tbody = document.getElementById("autoPreviewTableBody");
+
+      if (btn) btn.disabled = true;
+      if (icon) icon.classList.add("animate-spin");
+      if (text) text.innerText = "Đang quét...";
+      if (countBadge) {
+        countBadge.innerHTML = `<span class="inline-flex items-center space-x-1 text-blue-500 animate-pulse"><i data-lucide="loader-2" class="w-3 h-3 animate-spin"></i><span>Đang quét 100 mã...</span></span>`;
+      }
+      if (tbody) tbody.classList.add("opacity-40", "transition-opacity", "duration-200");
+      if (window.lucide) lucide.createIcons();
+
+      try {
+        // Đồng bộ dữ liệu thị trường mới nhất từ Realtime Service
+        if (window.StockRealtimeService && typeof window.StockRealtimeService.sync === 'function') {
+          await window.StockRealtimeService.sync(false);
+        }
+      } catch (err) {
+        console.warn("[rescanAutoPortfolio]", err);
+      }
+
+      // Đợi ngắn 350ms để tạo phản hồi thị giác mượt mà
+      await new Promise(resolve => setTimeout(resolve, 350));
+
+      // Chạy lại bộ lọc và vẽ lại bảng
+      runAutoPreview();
+
+      // Khôi phục giao diện
+      if (tbody) {
+        tbody.classList.remove("opacity-40");
+        tbody.classList.add("bg-blue-500/5", "transition-colors", "duration-500");
+        setTimeout(() => tbody.classList.remove("bg-blue-500/5"), 500);
+      }
+
+      if (btn) btn.disabled = false;
+      if (icon) icon.classList.remove("animate-spin");
+      if (text) text.innerText = "Quét lại";
+      if (window.lucide) lucide.createIcons();
+
+      const matchCount = currentAutoPreviewList ? currentAutoPreviewList.length : 0;
+      showMacToast({
+        title: "Quét lại thành công!",
+        message: `Đã hoàn tất rà soát 100 mã cổ phiếu. Tìm thấy ${matchCount} mã thỏa mãn bộ tiêu chí tuyển chọn!`,
+        type: "success",
+        duration: 2500
+      });
     }
 
     function applyAutoPortfolio() {
