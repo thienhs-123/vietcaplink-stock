@@ -19,14 +19,14 @@
     "hnxPct": -0.88,
     "vnindexGtgd": "15.500 tỷ",
     "vnindexVol": "720,5 tr cp",
-    "usdVnd": 25780,
-    "usdVndBuy": 25370,
-    "eurVnd": 29261,
-    "goldWorld": 4138.4,
+    "usdVnd": 25880,
+    "usdVndBuy": 25470,
+    "eurVnd": 28964,
+    "goldWorld": 3767.9,
     "goldSjc": 89.5,
-    "oilBrent": 97.67,
-    "oilWti": 90.61,
-    "dxy": 102.14,
+    "oilBrent": 91.96,
+    "oilWti": 84.27,
+    "dxy": 103.74,
     "world_indices": [
       {
         "label": "DOW JONES (MỸ)",
@@ -74,45 +74,45 @@
     "commodities": [
       {
         "label": "USD/VND (VCB BÁN)",
-        "val": "25,780",
+        "val": "25,880",
         "change": "+15đ",
         "isUp": true
       },
       {
         "label": "USD/VND (VCB MUA)",
-        "val": "25,370",
+        "val": "25,470",
         "change": "+10đ",
         "isUp": true
       },
       {
         "label": "EUR/VND",
-        "val": "29,261",
+        "val": "28,964",
         "change": "+0.35%",
         "isUp": true
       },
       {
         "label": "DXY (DOLLAR INDEX)",
-        "val": "102.14",
-        "change": "-0.15%",
-        "isUp": false
+        "val": "103.74",
+        "change": "+0.24%",
+        "isUp": true
       },
       {
         "label": "DẦU BRENT",
-        "val": "$97.67",
-        "change": "-0.66%",
+        "val": "$91.96",
+        "change": "-1.27%",
         "isUp": false
       },
       {
         "label": "DẦU WTI",
-        "val": "$90.61",
-        "change": "-0.24%",
+        "val": "$84.27",
+        "change": "-2.02%",
         "isUp": false
       },
       {
         "label": "VÀNG THẾ GIỚI",
-        "val": "$4,138.4",
-        "change": "+1.56%",
-        "isUp": true
+        "val": "$3,767.9",
+        "change": "-2.49%",
+        "isUp": false
       },
       {
         "label": "VÀNG SJC",
@@ -126,7 +126,11 @@
         "change": "+0.45%",
         "isUp": true
       }
-    ]
+    ],
+    "oilBrentChange": "-1.27%",
+    "oilBrentIsUp": false,
+    "oilWtiChange": "-2.02%",
+    "oilWtiIsUp": false
   },
   "breadth": {
     "total": {

@@ -23,7 +23,7 @@
 4. **Hàng hóa & Năng lượng toàn cầu**:
    - Vàng thế giới Spot Gold: `$4,138.4` (Yahoo Finance & gold-api.com).
    - Vàng SJC Việt Nam: `89.50 Tr/lượng`.
-   - Dầu thô Brent: `$97.67` | Dầu WTI: `$90.61`.
+   - Dầu thô Brent: `$91.96` | Dầu WTI: `$84.27` (Đồng bộ chính xác từ Yahoo Finance BZ=F / CL=F).
    - Dollar Index (DXY): `102.14`.
 
 ---
@@ -535,3 +535,15 @@
         + Tự động tính toán phân bổ đều tỷ trọng `(100 / n)%` cho mỗi mã.
         + Gán giá vốn bằng đúng thị giá hiện tại khi lọc tự động.
         + Đồng bộ vào `localStorage`, cập nhật lại giao diện danh mục và đồ thị NAV.
+
+29. **Hiệu Chỉnh Giá Dầu Thế Giới (Brent & WTI) Khớp Tuyệt Đối Với Thực Tế (18/11/2026)**:
+    - **Vấn đề phát hiện**: Giá dầu trên Dashboard hiển thị mức cũ `$97.67` (Brent) và `$90.61` (WTI), bị lệch cao hơn thực tế thị trường hơn 5 - 6 USD/thùng do snapshot tĩnh và template HTML lưu giữ con số cũ khi chưa đồng bộ.
+    - **Kiểm tra dữ liệu thực tế từ Yahoo Finance**:
+      * Dầu thô Brent (`BZ=F`): `$91.80 - $91.96` (giảm -1.27% ~ -1.43%).
+      * Dầu thô WTI (`CL=F`): `$84.07 - $84.27` (giảm -2.02% ~ -2.26%).
+    - **Triển khai kỹ thuật khắc phục triệt để**:
+      * Cập nhật đồng bộ dữ liệu chuẩn trong `vnstock_snapshot.json` qua script `sync_commodities.py` kết nối trực tiếp Yahoo Finance.
+      * Bổ sung ID cho các phần tử DOM trên thẻ Giá dầu trong `index.html`: `#cardOilVal` ($91.96), `#cardOilChange` (-1.27%), `#cardOilWtiVal` ($84.27), `#cardOilWtiChange` (-2.02%).
+      * Nâng cấp hàm `applyRealMacroData()` tự động cập nhật đồng thời cả Brent, WTI và nhãn % biến động.
+      * Cập nhật giá trị hiển thị trên thanh Ticker chạy tự động ở đầu trang và Modal Chỉnh sửa Vĩ mô thủ công.
+      * Cập nhật giá trị mặc định trong `realtime_server.py`.

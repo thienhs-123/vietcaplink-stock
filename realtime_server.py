@@ -254,11 +254,11 @@ MACRO_STATE = {
     "usdVnd": 25780,
     "usdVndBuy": 25370,
     "eurVnd": 29261,
-    "goldWorld": 4138.40,
+    "goldWorld": 3768.10,
     "goldSjc": 89.50,
-    "oilBrent": 97.67,
-    "oilWti": 90.61,
-    "dxy": 102.14,
+    "oilBrent": 91.81,
+    "oilWti": 84.07,
+    "dxy": 103.73,
     "world_indices": [
         {"label": "DOW JONES (MỸ)", "val": "51,285.73", "change": "-3.88%", "isUp": False},
         {"label": "S&P 500 (MỸ)", "val": "7,376.86", "change": "-4.05%", "isUp": False},
@@ -272,9 +272,9 @@ MACRO_STATE = {
         {"label": "USD/VND (VCB BÁN)", "val": "25,780", "change": "+15đ", "isUp": True},
         {"label": "USD/VND (VCB MUA)", "val": "25,370", "change": "+10đ", "isUp": True},
         {"label": "EUR/VND", "val": "29,261", "change": "+0.35%", "isUp": True},
-        {"label": "DXY (DOLLAR INDEX)", "val": "102.14", "change": "-0.15%", "isUp": False},
-        {"label": "DẦU BRENT", "val": "$97.67", "change": "-0.66%", "isUp": False},
-        {"label": "DẦU WTI", "val": "$90.61", "change": "-0.24%", "isUp": False},
+        {"label": "DXY (DOLLAR INDEX)", "val": "103.73", "change": "+0.23%", "isUp": True},
+        {"label": "DẦU BRENT", "val": "$91.81", "change": "-1.43%", "isUp": False},
+        {"label": "DẦU WTI", "val": "$84.07", "change": "-2.26%", "isUp": False},
         {"label": "VÀNG THẾ GIỚI", "val": "$4,138.4", "change": "+1.56%", "isUp": True},
         {"label": "VÀNG SJC", "val": "89.50 Tr", "change": "+0.50%", "isUp": True},
         {"label": "VÀNG NHẪN 9999", "val": "88.50 Tr", "change": "+0.45%", "isUp": True}
@@ -705,12 +705,12 @@ def fetch_world_indices_and_commodities():
         dxy_pct = comm_results.get('dxy', {}).get('change', '-0.15%')
         dxy_up = comm_results.get('dxy', {}).get('isUp', False)
 
-        brent_val = comm_results.get('oilBrent', {}).get('price', MACRO_STATE.get('oilBrent', 97.67))
-        brent_pct = comm_results.get('oilBrent', {}).get('change', '-0.66%')
+        brent_val = comm_results.get('oilBrent', {}).get('price', MACRO_STATE.get('oilBrent', 91.81))
+        brent_pct = comm_results.get('oilBrent', {}).get('change', '-1.43%')
         brent_up = comm_results.get('oilBrent', {}).get('isUp', False)
 
-        wti_val = comm_results.get('oilWti', {}).get('price', MACRO_STATE.get('oilWti', 90.61))
-        wti_pct = comm_results.get('oilWti', {}).get('change', '-0.24%')
+        wti_val = comm_results.get('oilWti', {}).get('price', MACRO_STATE.get('oilWti', 84.07))
+        wti_pct = comm_results.get('oilWti', {}).get('change', '-2.26%')
         wti_up = comm_results.get('oilWti', {}).get('isUp', False)
 
         gold_w_val = comm_results.get('goldWorld', {}).get('price', MACRO_STATE.get('goldWorld', 4138.40))

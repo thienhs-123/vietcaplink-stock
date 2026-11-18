@@ -1061,12 +1061,12 @@
 
                 <div>
                   <div class="flex items-baseline space-x-2.5">
-                    <span class="text-3xl font-bold font-mono text-light-text dark:text-studio-text" id="cardOilVal">$97.67</span>
-                    <span class="text-xs px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 font-mono font-medium">-0.66%</span>
+                    <span class="text-3xl font-bold font-mono text-light-text dark:text-studio-text" id="cardOilVal">$91.81</span>
+                    <span class="text-xs px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 font-mono font-medium" id="cardOilChange">-1.43%</span>
                   </div>
                   <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
-                    <span>WTI: <strong class="text-light-text dark:text-studio-text font-mono">$90.61</strong></span>
-                    <span>Biến động tuần: <strong class="text-emerald-500 font-mono">-1.8%</strong></span>
+                    <span>WTI: <strong class="text-light-text dark:text-studio-text font-mono" id="cardOilWtiVal">$84.07</strong></span>
+                    <span>Biến động: <strong class="text-rose-500 font-mono" id="cardOilWtiChange">-2.26%</strong></span>
                     <span>Tác động: <span class="text-emerald-500 font-medium">Hạ nhiệt CPI</span></span>
                   </div>
                 </div>
@@ -3784,8 +3784,8 @@
             { label: "USD/VND (VCB MUA)", val: "25,370", change: "+10đ", isUp: true },
             { label: "EUR/VND", val: "29,261", change: "+0.35%", isUp: true },
             { label: "DXY (DOLLAR INDEX)", val: "102.14", change: "-0.15%", isUp: false },
-            { label: "DẦU BRENT", val: "$97.67", change: "-0.66%", isUp: false },
-            { label: "DẦU WTI", val: "$90.61", change: "-0.24%", isUp: false },
+            { label: "DẦU BRENT", val: "$91.81", change: "-1.43%", isUp: false },
+            { label: "DẦU WTI", val: "$84.07", change: "-2.26%", isUp: false },
             { label: "VÀNG THẾ GIỚI", val: "$4,138.4", change: "+1.56%", isUp: true },
             { label: "VÀNG SJC", val: "89.50 Tr", change: "+0.50%", isUp: true },
             { label: "VÀNG NHẪN 9999", val: "88.50 Tr", change: "+0.45%", isUp: true }
@@ -4102,9 +4102,11 @@
         eurVnd: 29261,
         goldWorld: 4138.40,
         goldSjc: 89.50,
-        oilBrent: 97.67,
-        oilWti: 90.61,
-        dxy: 102.14,
+        oilBrent: 91.81,
+        oilWti: 84.07,
+        oilBrentChange: "-1.43%",
+        oilWtiChange: "-2.26%",
+        dxy: 103.73,
         sources: {
           gdp: "Tổng cục Thống kê (GSO) - Báo cáo Kinh tế Xã hội",
           pmi: "S&P Global Manufacturing PMI",
@@ -14734,6 +14736,20 @@
         if (cGold && macro.goldWorld) cGold.innerText = `$${Number(macro.goldWorld).toLocaleString('en-US', {minimumFractionDigits: 1, maximumFractionDigits: 1})}`;
         const cOil = document.getElementById("cardOilVal");
         if (cOil && macro.oilBrent) cOil.innerText = `$${Number(macro.oilBrent).toFixed(2)}`;
+        const cOilWti = document.getElementById("cardOilWtiVal");
+        if (cOilWti && macro.oilWti) cOilWti.innerText = `$${Number(macro.oilWti).toFixed(2)}`;
+        const cOilChg = document.getElementById("cardOilChange");
+        if (cOilChg && macro.oilBrentChange) {
+          cOilChg.innerText = macro.oilBrentChange;
+          const isUp = macro.oilBrentIsUp !== undefined ? macro.oilBrentIsUp : (parseFloat(macro.oilBrentChange) >= 0);
+          cOilChg.className = `text-xs px-2 py-0.5 rounded font-mono font-medium ${isUp ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'}`;
+        }
+        const cOilWtiChg = document.getElementById("cardOilWtiChange");
+        if (cOilWtiChg && macro.oilWtiChange) {
+          cOilWtiChg.innerText = macro.oilWtiChange;
+          const isUp = macro.oilWtiIsUp !== undefined ? macro.oilWtiIsUp : (parseFloat(macro.oilWtiChange) >= 0);
+          cOilWtiChg.className = `font-mono ${isUp ? 'text-emerald-500' : 'text-rose-500'}`;
+        }
 
         // Cập nhật các danh sách Ticker Module 0 (Thế giới) và Module 2 (Tỷ giá & Hàng hóa)
         if (window.TickerController && window.TickerController.modules) {
