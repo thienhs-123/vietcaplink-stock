@@ -441,3 +441,23 @@
       * Tỷ suất sinh lời danh mục tức thời đạt `+0.0%`, Alpha so với VN-Index Benchmark đạt `-12.4% Alpha`.
       * Khi thị trường vận động các phiên tiếp theo, % Lãi/lỗ và Hiệu suất YTD Danh mục sẽ tự động tính toán tăng/giảm chính xác so với mức giá vốn khởi điểm này.
       * Cập nhật nội dung thông báo Toast khi áp dụng thành công.
+
+25. **Căn Chỉnh Chiều Ngang & Thiết Kế Lại Bảng Xem Trước Lọc Tự Động (18/11/2026)**:
+    - **Vấn đề phát hiện trên giao diện modal**:
+      * Do thiếu `table-fixed` và tỷ lệ cột không cố định, chữ `đ` ở cột "Giá (đ)" bị rớt dòng xuống hàng dưới (`247,200 \n đ`).
+      * Giá trị `MA50` ở cột "MA10 / MA50" bị rớt dòng thành 3 hàng (`MA10: 239.61 • MA50: \n 233.85`).
+      * Tên doanh nghiệp dài ở cột "Doanh nghiệp & Ngành" bị ngắt dòng cụt lủn (`CTCP Đầu tư và Kinh doanh Nhà Khang \n Điền`).
+      * Cột "LNST / DTT" bị ngắt dòng tỷ lệ DTT (`+145% / \n +12.8%`).
+      * Tiêu đề "Khối ngoại (5P)" bị gãy dòng thành 2 hàng.
+    - **Triển khai kỹ thuật khắc phục triệt để**:
+      * Mở rộng kích thước Modal từ `max-w-4xl` (896px) lên `max-w-5xl` (1024px) tạo độ thoáng tối ưu cho 7 cột dữ liệu.
+      * Tăng chiều cao container bảng từ `max-h-60` (240px) lên `max-h-[380px]` giúp xem trọn vẹn 5-6 mã mà không bị cuộn gắt.
+      * Áp dụng `table-fixed min-w-[780px]` kết hợp phân bổ tỷ lệ chiều ngang chuẩn 100%:
+        + `Chọn`: `w-[6%] min-w-[48px] text-center`
+        + `Mã CP`: `w-[10%] min-w-[75px] text-left`
+        + `Doanh nghiệp & Ngành`: `w-[28%] min-w-[200px] text-left` (kèm `truncate` & `title` tooltip, triệt tiêu gãy dòng)
+        + `Giá (đ)`: `w-[12%] min-w-[95px] text-right whitespace-nowrap` (chấm dứt rớt dòng chữ "đ")
+        + `MA10 / MA50`: `w-[18%] min-w-[145px] text-right whitespace-nowrap` (vừa vặn 2 dòng chuẩn chỉ)
+        + `Khối ngoại (xP)`: `w-[14%] min-w-[115px] text-right whitespace-nowrap` (tiêu đề và nội dung trên 1 dòng)
+        + `LNST / DTT`: `w-[12%] min-w-[102px] text-right whitespace-nowrap` (dòng 1: % LNST/DTT, dòng 2: nhãn Tăng trưởng YoY)
+      * Bổ sung `whitespace-nowrap` cho toàn bộ các ô dữ liệu tài chính, đảm bảo giao diện luôn ngay ngắn, chuyên nghiệp trên mọi độ phân giải.
