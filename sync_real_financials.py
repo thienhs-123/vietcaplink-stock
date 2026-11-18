@@ -22,29 +22,20 @@ TRACKED_SYMBOLS = [
 ]
 
 def fetch_stock_bctc(sym):
-    url = f"https://apiweb.cafef.vn/api/v1/BCTC/GetReportSummary?symbol={sym}&pageIndex=1&pageSize=4&reportType=KQKD&TypeTime=QUY"
+    url = f"https://apiweb.cafef.vn/api/v1/BCTC/GetReportSummary?symbol={sym}&pageIndex=1&pageSize=8&reportType=KQKD&TypeTime=QUY"
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
     try:
-        with urllib.request.urlopen(req, timeout=8) as r:
+        with urllib.request.urlopen(req, timeout=10) as r:
             val = json.loads(r.read().decode('utf-8'))['value']
             if not val or not val.get('data') or not val['data'][0].get('data'):
                 return sym, None
-            
             quarters = val['data'][0]['data']
-            quarters_sorted = sorted(quarters, key=lambda x: (x.get('year', 0), x.get('quater', 0)))
-            
-            # Map code to template name
             template = val.get('templace', [{}])[0].get('data', [])
             temp_map = {t.get('code'): t.get('name', '') for t in template}
 
-            labels = []
-            revs = []
-            profits = []
-
-            for q in quarters_sorted:
-                time_lbl = q.get('time') or f"Q{q.get('quater')}-{q.get('year')}"
-                labels.append(time_lbl)
-                data_items = q.get('data', [])
+            q_map = {}
+            for d in quarters:
+                data_items = d.get('data', [])
 
                 # 1. Doanh thu thuần
                 rev_val = 0
@@ -56,7 +47,7 @@ def fetch_stock_bctc(sym):
                 if rev_val == 0:
                     for it in data_items:
                         n = temp_map.get(it.get('code'), '').lower()
-                        if ('doanh thu thuần' in n or 'thu nhập lãi thuần' in n) and it.get('value', 0) != 0:
+                        if ('doanh thu thuần' in n or 'thu nhập lãi thuần' in n or 'doanh thu hoạt động' in n or 'kinh doanh bảo hiểm' in n) and it.get('value', 0) != 0:
                             rev_val = it['value']
                             break
 
@@ -66,11 +57,9 @@ def fetch_stock_bctc(sym):
                     it = next((x for x in data_items if x.get('code') == c), None)
                     if it:
                         n = temp_map.get(c, '').lower()
-                        # Ensure it's not "lợi nhuận khác"
                         if 'khác' not in n and it.get('value', 0) != 0:
                             profit_val = it['value']
                             break
-
                 if profit_val == 0:
                     for it in data_items:
                         n = temp_map.get(it.get('code'), '').lower()
@@ -78,45 +67,81 @@ def fetch_stock_bctc(sym):
                             profit_val = it['value']
                             break
 
-                revs.append(round(rev_val / 1e9, 1))
-                profits.append(round(profit_val / 1e9, 1))
+                y = d.get('year', 0)
+                q = d.get('quater', 0)
+                q_map[(y, q)] = {
+                    'year': y,
+                    'quarter': q,
+                    'label': f"Q{q}/{y}",
+                    'rev': round(rev_val / 1e9, 1),
+                    'profit': round(profit_val / 1e9, 1)
+                }
+
+            sorted_qs = sorted(q_map.values(), key=lambda x: (x['year'], x['quarter']))
+            if not sorted_qs:
+                return sym, None
+
+            latest = sorted_qs[-1]
+            prev_year = latest['year'] - 1
+            same_q_last_year = next((item for item in sorted_qs if item['year'] == prev_year and item['quarter'] == latest['quarter']), None)
+
+            profit_growth = 0.0
+            rev_growth = 0.0
+            if same_q_last_year:
+                if same_q_last_year['profit'] != 0:
+                    profit_growth = round(((latest['profit'] - same_q_last_year['profit']) / abs(same_q_last_year['profit'])) * 100, 1)
+                if same_q_last_year['rev'] != 0:
+                    rev_growth = round(((latest['rev'] - same_q_last_year['rev']) / abs(same_q_last_year['rev'])) * 100, 1)
+
+            # Cap growth between -999% and 9999%
+            if profit_growth > 9999: profit_growth = 9999.0
+            if profit_growth < -999: profit_growth = -999.0
+            if rev_growth > 9999: rev_growth = 9999.0
+            if rev_growth < -999: rev_growth = -999.0
+
+            last_4 = sorted_qs[-4:] if len(sorted_qs) >= 4 else sorted_qs
 
             return sym, {
-                'quarterLabels': labels,
-                'quarterlyRevenue': revs,
-                'quarterlyProfit': profits,
-                'latestRev': revs[-1] if revs else 0,
-                'latestProfit': profits[-1] if profits else 0,
-                'ttmProfit': round(sum(profits), 1),
-                'ttmRevenue': round(sum(revs), 1)
+                'latestQuarter': latest['label'],
+                'latestRev': latest['rev'],
+                'latestProfit': latest['profit'],
+                'profitGrowth': profit_growth,
+                'revGrowth': rev_growth,
+                'prevRev': same_q_last_year['rev'] if same_q_last_year else 0.0,
+                'prevProfit': same_q_last_year['profit'] if same_q_last_year else 0.0,
+                'quarterLabels': [item['label'] for item in last_4],
+                'quarterlyRevenue': [item['rev'] for item in last_4],
+                'quarterlyProfit': [item['profit'] for item in last_4],
+                'ttmProfit': round(sum(item['profit'] for item in last_4), 1),
+                'ttmRevenue': round(sum(item['rev'] for item in last_4), 1)
             }
     except Exception as e:
         return sym, None
 
 def sync_all_financials():
-    print(f"🚀 Bắt đầu đồng bộ Báo cáo tài chính 4 quý từ nguồn chính thức cho {len(TRACKED_SYMBOLS)} mã...")
+    print(f"🚀 Bắt đầu đồng bộ Kết quả kinh doanh quý gần nhất & 8 quý BCTC cho {len(TRACKED_SYMBOLS)} mã...")
     t0 = time.time()
     results = {}
-    with ThreadPoolExecutor(max_workers=10) as ex:
+    with ThreadPoolExecutor(max_workers=15) as ex:
         for sym, data in ex.map(fetch_stock_bctc, TRACKED_SYMBOLS):
             if data:
                 results[sym] = data
 
-    print(f"✅ Đã nạp thành công BCTC 4 quý chuẩn xác cho {len(results)}/{len(TRACKED_SYMBOLS)} mã trong {round(time.time() - t0, 2)} giây!")
+    print(f"✅ Đã nạp thành công BCTC quý gần nhất chuẩn xác cho {len(results)}/{len(TRACKED_SYMBOLS)} mã trong {round(time.time() - t0, 2)} giây!")
 
     # Merge into vnstock_snapshot.json
     if os.path.exists(SNAPSHOT_FILE):
         try:
             with open(SNAPSHOT_FILE, "r", encoding="utf-8") as f:
                 snapshot = json.load(f)
-            
+
             stocks = snapshot.get("stocks", {})
             for sym, data in results.items():
                 if sym in stocks:
                     stocks[sym].update(data)
                 else:
                     stocks[sym] = data
-            
+
             snapshot["stocks"] = stocks
             snapshot["bctc_last_synced"] = time.strftime("%Y-%m-%d %H:%M:%S")
 

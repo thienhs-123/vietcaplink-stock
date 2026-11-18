@@ -1,10 +1,17 @@
 {
   "ACB": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 8195.4,
+    "latestProfit": 4698.8,
+    "profitGrowth": 9.8,
+    "revGrowth": 21.1,
+    "prevRev": 6769.7,
+    "prevProfit": 4280.6,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       7093.3,
@@ -18,17 +25,22 @@
       4292.5,
       4698.8
     ],
-    "latestRev": 8195.4,
-    "latestProfit": 4698.8,
     "ttmProfit": 16096.4,
     "ttmRevenue": 30062.6
   },
   "BCM": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 941.0,
+    "latestProfit": 579.3,
+    "profitGrowth": 37.1,
+    "revGrowth": 13.6,
+    "prevRev": 828.4,
+    "prevProfit": 422.4,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       1376.5,
@@ -42,17 +54,22 @@
       211.1,
       579.3
     ],
-    "latestRev": 941.0,
-    "latestProfit": 579.3,
     "ttmProfit": 2325.9,
     "ttmRevenue": 4313.4
   },
   "BID": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 17056.0,
+    "latestProfit": 8473.2,
+    "profitGrowth": 39.2,
+    "revGrowth": 12.4,
+    "prevRev": 15172.6,
+    "prevProfit": 6086.9,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       19246.8,
@@ -66,17 +83,22 @@
       8294.9,
       8473.2
     ],
-    "latestRev": 17056.0,
-    "latestProfit": 8473.2,
     "ttmProfit": 35189.5,
     "ttmRevenue": 69840.7
   },
   "BVH": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 9856.1,
+    "latestProfit": 824.3,
+    "profitGrowth": 6.9,
+    "revGrowth": 1.1,
+    "prevRev": 9749.6,
+    "prevProfit": 770.8,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       10549.6,
@@ -90,17 +112,22 @@
       1032.4,
       824.3
     ],
-    "latestRev": 9856.1,
-    "latestProfit": 824.3,
     "ttmProfit": 3514.4,
     "ttmRevenue": 40929.0
   },
   "CTG": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 21815.8,
+    "latestProfit": 10871.3,
+    "profitGrowth": 27.7,
+    "revGrowth": 27.0,
+    "prevRev": 17175.7,
+    "prevProfit": 8512.5,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       17959.7,
@@ -114,17 +141,22 @@
       11783.5,
       10871.3
     ],
-    "latestRev": 21815.8,
-    "latestProfit": 10871.3,
     "ttmProfit": 42708.4,
     "ttmRevenue": 79891.2
   },
   "FPT": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 13754.2,
+    "latestProfit": 2729.3,
+    "profitGrowth": -5.9,
+    "revGrowth": -20.1,
+    "prevRev": 17204.5,
+    "prevProfit": 2901.5,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       20225.5,
@@ -138,17 +170,22 @@
       2570.4,
       2729.3
     ],
-    "latestRev": 13754.2,
-    "latestProfit": 2729.3,
     "ttmProfit": 10764.6,
     "ttmRevenue": 60248.2
   },
   "GAS": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 39708.4,
+    "latestProfit": 4569.0,
+    "profitGrowth": 74.9,
+    "revGrowth": 11.3,
+    "prevRev": 35690.1,
+    "prevProfit": 2612.8,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       43683.1,
@@ -162,17 +199,22 @@
       6021.4,
       4569.0
     ],
-    "latestRev": 39708.4,
-    "latestProfit": 4569.0,
     "ttmProfit": 14971.9,
     "ttmRevenue": 164660.2
   },
   "GVR": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 9506.4,
+    "latestProfit": 3678.9,
+    "profitGrowth": 68.2,
+    "revGrowth": 2.3,
+    "prevRev": 9294.4,
+    "prevProfit": 2187.3,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       8505.7,
@@ -186,17 +228,22 @@
       2556.4,
       3678.9
     ],
-    "latestRev": 9506.4,
-    "latestProfit": 3678.9,
     "ttmProfit": 9884.7,
     "ttmRevenue": 33954.7
   },
   "HDB": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 9288.1,
+    "latestProfit": 4065.7,
+    "profitGrowth": 7.0,
+    "revGrowth": 19.6,
+    "prevRev": 7763.3,
+    "prevProfit": 3798.8,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       9755.6,
@@ -210,17 +257,22 @@
       5797.9,
       4065.7
     ],
-    "latestRev": 9288.1,
-    "latestProfit": 4065.7,
     "ttmProfit": 19985.9,
     "ttmRevenue": 37279.5
   },
   "HPG": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 62214.2,
+    "latestProfit": 8265.5,
+    "profitGrowth": 106.0,
+    "revGrowth": 70.9,
+    "prevRev": 36407.4,
+    "prevProfit": 4012.3,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       46176.5,
@@ -234,17 +286,22 @@
       6424.5,
       8265.5
     ],
-    "latestRev": 62214.2,
-    "latestProfit": 8265.5,
     "ttmProfit": 27634.2,
     "ttmRevenue": 216450.4
   },
   "MBB": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 17836.0,
+    "latestProfit": 8251.9,
+    "profitGrowth": 42.3,
+    "revGrowth": 37.3,
+    "prevRev": 12990.5,
+    "prevProfit": 5800.4,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       14555.3,
@@ -258,17 +315,22 @@
       8445.5,
       8251.9
     ],
-    "latestRev": 17836.0,
-    "latestProfit": 8251.9,
     "ttmProfit": 33303.1,
     "ttmRevenue": 64198.1
   },
   "MSN": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 36981.0,
+    "latestProfit": 4552.0,
+    "profitGrowth": 144.0,
+    "revGrowth": 74.7,
+    "prevRev": 21163.8,
+    "prevProfit": 1865.8,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       23245.8,
@@ -282,17 +344,22 @@
       3799.9,
       4552.0
     ],
-    "latestRev": 36981.0,
-    "latestProfit": 4552.0,
     "ttmProfit": 12620.8,
     "ttmRevenue": 112364.3
   },
   "MWG": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 52613.6,
+    "latestProfit": 3521.1,
+    "profitGrowth": 97.4,
+    "revGrowth": 32.0,
+    "prevRev": 39852.5,
+    "prevProfit": 1783.7,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       42850.4,
@@ -306,17 +373,22 @@
       3354.9,
       3521.1
     ],
-    "latestRev": 52613.6,
-    "latestProfit": 3521.1,
     "ttmProfit": 11720.1,
     "ttmRevenue": 190677.3
   },
   "PLX": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 138481.8,
+    "latestProfit": 1363.1,
+    "profitGrowth": 93.1,
+    "revGrowth": 65.6,
+    "prevRev": 83631.4,
+    "prevProfit": 706.0,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       81892.8,
@@ -330,17 +402,22 @@
       3044.7,
       1363.1
     ],
-    "latestRev": 138481.8,
-    "latestProfit": 1363.1,
     "ttmProfit": 4442.2,
     "ttmRevenue": 455290.6
   },
   "POW": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 16772.2,
+    "latestProfit": 2073.1,
+    "profitGrowth": 118.6,
+    "revGrowth": 113.5,
+    "prevRev": 7855.2,
+    "prevProfit": 948.4,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       8747.0,
@@ -354,17 +431,22 @@
       3707.7,
       2073.1
     ],
-    "latestRev": 16772.2,
-    "latestProfit": 2073.1,
     "ttmProfit": 7768.4,
     "ttmRevenue": 58154.2
   },
   "SAB": {
+    "latestQuarter": "Q2/2026",
+    "latestRev": 6888.0,
+    "latestProfit": 1243.3,
+    "profitGrowth": -0.6,
+    "revGrowth": 1.2,
+    "prevRev": 6804.3,
+    "prevProfit": 1250.7,
     "quarterLabels": [
-      "Q3-2025",
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026"
+      "Q3/2025",
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026"
     ],
     "quarterlyRevenue": [
       6436.6,
@@ -378,17 +460,22 @@
       1245.4,
       1243.3
     ],
-    "latestRev": 6888.0,
-    "latestProfit": 1243.3,
     "ttmProfit": 5011.5,
     "ttmRevenue": 26618.4
   },
   "SHB": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 6493.2,
+    "latestProfit": 4118.9,
+    "profitGrowth": 58.0,
+    "revGrowth": 22.0,
+    "prevRev": 5323.8,
+    "prevProfit": 2606.7,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       3830.8,
@@ -402,17 +489,22 @@
       3561.6,
       4118.9
     ],
-    "latestRev": 6493.2,
-    "latestProfit": 4118.9,
     "ttmProfit": 13666.4,
     "ttmRevenue": 22529.9
   },
   "SSB": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 2468.4,
+    "latestProfit": 1052.0,
+    "profitGrowth": 35.0,
+    "revGrowth": 5.6,
+    "prevRev": 2337.1,
+    "prevProfit": 779.5,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       2451.9,
@@ -426,17 +518,22 @@
       990.9,
       1052.0
     ],
-    "latestRev": 2468.4,
-    "latestProfit": 1052.0,
     "ttmProfit": 3257.8,
     "ttmRevenue": 9583.8
   },
   "SSI": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 3168.0,
+    "latestProfit": 1125.0,
+    "profitGrowth": -23.8,
+    "revGrowth": -24.2,
+    "prevRev": 4176.7,
+    "prevProfit": 1475.6,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       3601.8,
@@ -450,17 +547,22 @@
       1231.9,
       1125.0
     ],
-    "latestRev": 3168.0,
-    "latestProfit": 1125.0,
     "ttmProfit": 4454.2,
     "ttmRevenue": 13266.5
   },
   "STB": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 5227.9,
+    "latestProfit": 1346.7,
+    "profitGrowth": -53.6,
+    "revGrowth": -33.6,
+    "prevRev": 7874.4,
+    "prevProfit": 2901.3,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       5358.0,
@@ -474,17 +576,22 @@
       1346.7,
       1346.7
     ],
-    "latestRev": 5227.9,
-    "latestProfit": 1346.7,
     "ttmProfit": 1525.3,
     "ttmRevenue": 22875.1
   },
   "TCB": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 11700.0,
+    "latestProfit": 8337.3,
+    "profitGrowth": 26.1,
+    "revGrowth": 17.9,
+    "prevRev": 9924.6,
+    "prevProfit": 6613.5,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       10788.0,
@@ -498,17 +605,22 @@
       7726.6,
       8337.3
     ],
-    "latestRev": 11700.0,
-    "latestProfit": 8337.3,
     "ttmProfit": 29994.0,
     "ttmRevenue": 42773.1
   },
   "TPB": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 4424.0,
+    "latestProfit": 2351.2,
+    "profitGrowth": 54.6,
+    "revGrowth": 36.6,
+    "prevRev": 3237.6,
+    "prevProfit": 1520.6,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       3595.1,
@@ -522,17 +634,22 @@
       1891.0,
       2351.2
     ],
-    "latestRev": 4424.0,
-    "latestProfit": 2351.2,
     "ttmProfit": 8467.2,
     "ttmRevenue": 15112.9
   },
   "VCB": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 20386.0,
+    "latestProfit": 9041.1,
+    "profitGrowth": 0.2,
+    "revGrowth": 39.1,
+    "prevRev": 14657.2,
+    "prevProfit": 9025.6,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       16169.8,
@@ -546,17 +663,22 @@
       14551.0,
       9041.1
     ],
-    "latestRev": 20386.0,
-    "latestProfit": 9041.1,
     "ttmProfit": 41688.0,
     "ttmRevenue": 73348.7
   },
   "VHM": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 85364.0,
+    "latestProfit": 23021.0,
+    "profitGrowth": 419.0,
+    "revGrowth": 419.9,
+    "prevRev": 16420.0,
+    "prevProfit": 4435.6,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       103009.5,
@@ -570,17 +692,22 @@
       26466.6,
       23021.0
     ],
-    "latestRev": 85364.0,
-    "latestProfit": 23021.0,
     "ttmProfit": 101911.2,
     "ttmRevenue": 306209.3
   },
   "VIB": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 4780.8,
+    "latestProfit": 1924.9,
+    "profitGrowth": 3.3,
+    "revGrowth": 14.6,
+    "prevRev": 4172.7,
+    "prevProfit": 1863.6,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       4213.6,
@@ -594,17 +721,22 @@
       1905.4,
       1924.9
     ],
-    "latestRev": 4780.8,
-    "latestProfit": 1924.9,
     "ttmProfit": 7719.5,
     "ttmRevenue": 17401.0
   },
   "VIC": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 150579.0,
+    "latestProfit": 22759.8,
+    "profitGrowth": 652.3,
+    "revGrowth": 284.8,
+    "prevRev": 39135.1,
+    "prevProfit": 3025.3,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       163159.4,
@@ -618,17 +750,22 @@
       14764.0,
       22759.8
     ],
-    "latestRev": 150579.0,
-    "latestProfit": 22759.8,
     "ttmProfit": 46715.9,
     "ttmRevenue": 536026.4
   },
   "VJC": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 22849.4,
+    "latestProfit": 348.3,
+    "profitGrowth": 8.8,
+    "revGrowth": 35.0,
+    "prevRev": 16931.4,
+    "prevProfit": 320.2,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       29324.1,
@@ -642,17 +779,22 @@
       349.0,
       348.3
     ],
-    "latestRev": 22849.4,
-    "latestProfit": 348.3,
     "ttmProfit": 2229.9,
     "ttmRevenue": 103693.5
   },
   "VNM": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 18465.2,
+    "latestProfit": 2962.2,
+    "profitGrowth": 18.0,
+    "revGrowth": 8.9,
+    "prevRev": 16953.2,
+    "prevProfit": 2510.5,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       17033.6,
@@ -666,17 +808,22 @@
       3184.4,
       2962.2
     ],
-    "latestRev": 18465.2,
-    "latestProfit": 2962.2,
     "ttmProfit": 11432.0,
     "ttmRevenue": 70494.8
   },
   "VPB": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 18158.2,
+    "latestProfit": 8862.9,
+    "profitGrowth": 20.4,
+    "revGrowth": 20.6,
+    "prevRev": 15061.2,
+    "prevProfit": 7363.7,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       16767.2,
@@ -690,17 +837,22 @@
       8775.9,
       8862.9
     ],
-    "latestRev": 18158.2,
-    "latestProfit": 8862.9,
     "ttmProfit": 32086.7,
     "ttmRevenue": 69859.5
   },
   "VRE": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 2373.8,
+    "latestProfit": 1522.1,
+    "profitGrowth": 10.6,
+    "revGrowth": 5.5,
+    "prevRev": 2251.0,
+    "prevProfit": 1376.4,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       2312.3,
@@ -714,17 +866,22 @@
       1608.5,
       1522.1
     ],
-    "latestRev": 2373.8,
-    "latestProfit": 1522.1,
     "ttmProfit": 7395.7,
     "ttmRevenue": 9353.6
   },
   "VND": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 1714.8,
+    "latestProfit": 329.5,
+    "profitGrowth": -64.5,
+    "revGrowth": -22.6,
+    "prevRev": 2214.2,
+    "prevProfit": 929.0,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       1427.5,
@@ -738,17 +895,22 @@
       882.6,
       329.5
     ],
-    "latestRev": 1714.8,
-    "latestProfit": 329.5,
     "ttmProfit": 2099.4,
     "ttmRevenue": 6818.5
   },
   "VCI": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 1304.7,
+    "latestProfit": 367.4,
+    "profitGrowth": -12.6,
+    "revGrowth": -9.6,
+    "prevRev": 1443.3,
+    "prevProfit": 420.3,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       1526.3,
@@ -762,17 +924,22 @@
       250.6,
       367.4
     ],
-    "latestRev": 1304.7,
-    "latestProfit": 367.4,
     "ttmProfit": 1401.6,
     "ttmRevenue": 5413.3
   },
   "HCM": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 1243.6,
+    "latestProfit": 297.2,
+    "profitGrowth": -32.5,
+    "revGrowth": -25.3,
+    "prevRev": 1664.9,
+    "prevProfit": 440.5,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       1398.2,
@@ -786,17 +953,22 @@
       273.2,
       297.2
     ],
-    "latestRev": 1243.6,
-    "latestProfit": 297.2,
     "ttmProfit": 1180.1,
     "ttmRevenue": 5343.6
   },
   "FTS": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 271.8,
+    "latestProfit": 35.8,
+    "profitGrowth": -35.0,
+    "revGrowth": -4.4,
+    "prevRev": 284.4,
+    "prevProfit": 55.1,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       370.2,
@@ -810,17 +982,22 @@
       78.0,
       35.8
     ],
-    "latestRev": 271.8,
-    "latestProfit": 35.8,
     "ttmProfit": 401.8,
     "ttmRevenue": 1329.9
   },
   "BSI": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 818.7,
+    "latestProfit": 165.0,
+    "profitGrowth": -23.5,
+    "revGrowth": 19.0,
+    "prevRev": 687.9,
+    "prevProfit": 215.6,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       565.7,
@@ -834,17 +1011,22 @@
       123.2,
       165.0
     ],
-    "latestRev": 818.7,
-    "latestProfit": 165.0,
     "ttmProfit": 472.1,
     "ttmRevenue": 2698.3
   },
   "CTS": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 410.2,
+    "latestProfit": 5.0,
+    "profitGrowth": -98.2,
+    "revGrowth": -37.2,
+    "prevRev": 652.9,
+    "prevProfit": 270.5,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       399.9,
@@ -858,17 +1040,22 @@
       15.4,
       5.0
     ],
-    "latestRev": 410.2,
-    "latestProfit": 5.0,
     "ttmProfit": 111.4,
     "ttmRevenue": 1519.1
   },
   "VIX": {
+    "latestQuarter": "Q2/2026",
+    "latestRev": 1349.3,
+    "latestProfit": 75.9,
+    "profitGrowth": -94.2,
+    "revGrowth": -31.7,
+    "prevRev": 1976.2,
+    "prevProfit": 1301.6,
     "quarterLabels": [
-      "Q3-2025",
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026"
+      "Q3/2025",
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026"
     ],
     "quarterlyRevenue": [
       3221.8,
@@ -882,17 +1069,22 @@
       138.4,
       75.9
     ],
-    "latestRev": 1349.3,
-    "latestProfit": 75.9,
     "ttmProfit": 3950.4,
     "ttmRevenue": 8326.0
   },
   "ORS": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 489.1,
+    "latestProfit": 86.4,
+    "profitGrowth": -35.3,
+    "revGrowth": 37.5,
+    "prevRev": 355.8,
+    "prevProfit": 133.5,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       390.5,
@@ -906,17 +1098,22 @@
       129.4,
       86.4
     ],
-    "latestRev": 489.1,
-    "latestProfit": 86.4,
     "ttmProfit": 347.2,
     "ttmRevenue": 1515.8
   },
   "AGR": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 169.6,
+    "latestProfit": 29.2,
+    "profitGrowth": -57.4,
+    "revGrowth": 8.1,
+    "prevRev": 156.9,
+    "prevProfit": 68.6,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       123.4,
@@ -930,17 +1127,22 @@
       30.3,
       29.2
     ],
-    "latestRev": 169.6,
-    "latestProfit": 29.2,
     "ttmProfit": 132.0,
     "ttmRevenue": 577.4
   },
   "LPB": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 3922.7,
+    "latestProfit": 3561.5,
+    "profitGrowth": 28.9,
+    "revGrowth": -7.4,
+    "prevRev": 4235.0,
+    "prevProfit": 2762.0,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       4781.4,
@@ -954,17 +1156,22 @@
       2520.7,
       3561.5
     ],
-    "latestRev": 3922.7,
-    "latestProfit": 3561.5,
     "ttmProfit": 12092.0,
     "ttmRevenue": 16470.6
   },
   "EIB": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 1090.2,
+    "latestProfit": 144.0,
+    "profitGrowth": -67.6,
+    "revGrowth": -25.6,
+    "prevRev": 1465.0,
+    "prevProfit": 444.7,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       1690.9,
@@ -978,17 +1185,22 @@
       250.5,
       144.0
     ],
-    "latestRev": 1090.2,
-    "latestProfit": 144.0,
     "ttmProfit": 191.2,
     "ttmRevenue": 5556.7
   },
   "MSB": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 3422.0,
+    "latestProfit": 1649.2,
+    "profitGrowth": 29.4,
+    "revGrowth": 21.6,
+    "prevRev": 2815.3,
+    "prevProfit": 1274.2,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       3043.6,
@@ -1002,17 +1214,22 @@
       1250.6,
       1649.2
     ],
-    "latestRev": 3422.0,
-    "latestProfit": 1649.2,
     "ttmProfit": 6265.2,
     "ttmRevenue": 12664.3
   },
   "OCB": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 2767.9,
+    "latestProfit": 1313.9,
+    "profitGrowth": 7.0,
+    "revGrowth": 14.2,
+    "prevRev": 2424.2,
+    "prevProfit": 1227.9,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       2481.9,
@@ -1026,17 +1243,22 @@
       972.9,
       1313.9
     ],
-    "latestRev": 2767.9,
-    "latestProfit": 1313.9,
     "ttmProfit": 4557.5,
     "ttmRevenue": 10157.8
   },
   "NAB": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 1777.8,
+    "latestProfit": 1268.9,
+    "profitGrowth": 23.0,
+    "revGrowth": -13.5,
+    "prevRev": 2054.8,
+    "prevProfit": 1031.3,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       2327.6,
@@ -1050,17 +1272,22 @@
       1209.8,
       1268.9
     ],
-    "latestRev": 1777.8,
-    "latestProfit": 1268.9,
     "ttmProfit": 4929.7,
     "ttmRevenue": 8404.8
   },
   "NKG": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 5472.0,
+    "latestProfit": 127.7,
+    "profitGrowth": 158.0,
+    "revGrowth": 45.0,
+    "prevRev": 3773.1,
+    "prevProfit": 49.5,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       3136.5,
@@ -1074,17 +1301,22 @@
       102.7,
       127.7
     ],
-    "latestRev": 5472.0,
-    "latestProfit": 127.7,
     "ttmProfit": 242.6,
     "ttmRevenue": 16020.1
   },
   "HSG": {
+    "latestQuarter": "Q1/2026",
+    "latestRev": 8383.1,
+    "latestProfit": 62.4,
+    "profitGrowth": -62.3,
+    "revGrowth": -18.0,
+    "prevRev": 10221.7,
+    "prevProfit": 165.5,
     "quarterLabels": [
-      "Q2-2025",
-      "Q3-2025",
-      "Q4-2025",
-      "Q1-2026"
+      "Q2/2025",
+      "Q3/2025",
+      "Q4/2025",
+      "Q1/2026"
     ],
     "quarterlyRevenue": [
       8451.9,
@@ -1098,17 +1330,22 @@
       84.7,
       62.4
     ],
-    "latestRev": 8383.1,
-    "latestProfit": 62.4,
     "ttmProfit": 626.3,
     "ttmRevenue": 34700.8
   },
   "VGS": {
+    "latestQuarter": "Q2/2026",
+    "latestRev": 2365.4,
+    "latestProfit": 57.8,
+    "profitGrowth": 65.6,
+    "revGrowth": 11.6,
+    "prevRev": 2120.3,
+    "prevProfit": 34.9,
     "quarterLabels": [
-      "Q3-2025",
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026"
+      "Q3/2025",
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026"
     ],
     "quarterlyRevenue": [
       1767.2,
@@ -1122,17 +1359,22 @@
       45.3,
       57.8
     ],
-    "latestRev": 2365.4,
-    "latestProfit": 57.8,
     "ttmProfit": 244.4,
     "ttmRevenue": 7478.1
   },
   "KSB": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 259.2,
+    "latestProfit": 35.0,
+    "profitGrowth": -1.1,
+    "revGrowth": -0.3,
+    "prevRev": 259.9,
+    "prevProfit": 35.4,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       181.0,
@@ -1146,17 +1388,22 @@
       96.7,
       35.0
     ],
-    "latestRev": 259.2,
-    "latestProfit": 35.0,
     "ttmProfit": 203.5,
     "ttmRevenue": 914.7
   },
   "HT1": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 2268.8,
+    "latestProfit": 99.5,
+    "profitGrowth": 16.0,
+    "revGrowth": 21.6,
+    "prevRev": 1866.5,
+    "prevProfit": 85.8,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       1979.8,
@@ -1170,17 +1417,22 @@
       138.2,
       99.5
     ],
-    "latestRev": 2268.8,
-    "latestProfit": 99.5,
     "ttmProfit": 400.5,
     "ttmRevenue": 8369.6
   },
   "NVL": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 5120.1,
+    "latestProfit": 1102.3,
+    "profitGrowth": 195.6,
+    "revGrowth": 204.2,
+    "prevRev": 1683.1,
+    "prevProfit": -1153.2,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       1567.4,
@@ -1194,17 +1446,22 @@
       912.0,
       1102.3
     ],
-    "latestRev": 5120.1,
-    "latestProfit": 1102.3,
     "ttmProfit": 6512.1,
     "ttmRevenue": 11783.3
   },
   "DIG": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 761.4,
+    "latestProfit": 69.2,
+    "profitGrowth": -64.2,
+    "revGrowth": -43.1,
+    "prevRev": 1339.3,
+    "prevProfit": 193.2,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       2959.7,
@@ -1218,17 +1475,22 @@
       143.4,
       69.2
     ],
-    "latestRev": 761.4,
-    "latestProfit": 69.2,
     "ttmProfit": 626.7,
     "ttmRevenue": 4478.9
   },
   "PDR": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 23.9,
+    "latestProfit": 13.7,
+    "profitGrowth": -84.0,
+    "revGrowth": -95.3,
+    "prevRev": 506.5,
+    "prevProfit": 85.8,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       360.6,
@@ -1242,17 +1504,22 @@
       80.5,
       13.7
     ],
-    "latestRev": 23.9,
-    "latestProfit": 13.7,
     "ttmProfit": 545.0,
     "ttmRevenue": 542.3
   },
   "DXG": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 682.6,
+    "latestProfit": 3.2,
+    "profitGrowth": -98.0,
+    "revGrowth": -36.1,
+    "prevRev": 1068.3,
+    "prevProfit": 163.6,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       1437.1,
@@ -1266,17 +1533,22 @@
       34.9,
       3.2
     ],
-    "latestRev": 682.6,
-    "latestProfit": 3.2,
     "ttmProfit": 315.9,
     "ttmRevenue": 4259.9
   },
   "KDH": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 41.4,
+    "latestProfit": 168.8,
+    "profitGrowth": -67.9,
+    "revGrowth": -96.2,
+    "prevRev": 1098.2,
+    "prevProfit": 525.9,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       1816.3,
@@ -1290,17 +1562,22 @@
       770.1,
       168.8
     ],
-    "latestRev": 41.4,
-    "latestProfit": 168.8,
     "ttmProfit": 2058.9,
     "ttmRevenue": 2299.7
   },
   "NLG": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 327.7,
+    "latestProfit": 5.4,
+    "profitGrowth": -97.7,
+    "revGrowth": -82.5,
+    "prevRev": 1877.2,
+    "prevProfit": 234.0,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       1704.2,
@@ -1314,17 +1591,22 @@
       66.3,
       5.4
     ],
-    "latestRev": 327.7,
-    "latestProfit": 5.4,
     "ttmProfit": 686.1,
     "ttmRevenue": 3726.4
   },
   "TCH": {
+    "latestQuarter": "Q2/2026",
+    "latestRev": 1958.2,
+    "latestProfit": 750.5,
+    "profitGrowth": 1233.0,
+    "revGrowth": 466.0,
+    "prevRev": 346.0,
+    "prevProfit": 56.3,
     "quarterLabels": [
-      "Q3-2025",
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026"
+      "Q3/2025",
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026"
     ],
     "quarterlyRevenue": [
       317.0,
@@ -1338,17 +1620,22 @@
       163.8,
       750.5
     ],
-    "latestRev": 1958.2,
-    "latestProfit": 750.5,
     "ttmProfit": 1058.1,
     "ttmRevenue": 3120.2
   },
   "HDG": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 597.5,
+    "latestProfit": 228.0,
+    "profitGrowth": -32.3,
+    "revGrowth": -16.1,
+    "prevRev": 712.5,
+    "prevProfit": 336.7,
     "quarterLabels": [
-      "Q3-2025",
-      "Q4-2025",
-      "Q1-2026",
-      "Q3-2026"
+      "Q3/2025",
+      "Q4/2025",
+      "Q1/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       712.5,
@@ -1362,17 +1649,22 @@
       104.0,
       228.0
     ],
-    "latestRev": 597.5,
-    "latestProfit": 228.0,
     "ttmProfit": 1042.1,
     "ttmRevenue": 2878.8
   },
   "CEO": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 266.1,
+    "latestProfit": 40.4,
+    "profitGrowth": -22.6,
+    "revGrowth": 10.0,
+    "prevRev": 241.9,
+    "prevProfit": 52.2,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       349.1,
@@ -1386,17 +1678,22 @@
       53.5,
       40.4
     ],
-    "latestRev": 266.1,
-    "latestProfit": 40.4,
     "ttmProfit": 240.4,
     "ttmRevenue": 1340.8
   },
   "DXS": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 633.7,
+    "latestProfit": -27.7,
+    "profitGrowth": -128.1,
+    "revGrowth": -26.7,
+    "prevRev": 864.1,
+    "prevProfit": 98.6,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       1597.1,
@@ -1410,17 +1707,22 @@
       -45.4,
       -27.7
     ],
-    "latestRev": 633.7,
-    "latestProfit": -27.7,
     "ttmProfit": 257.7,
     "ttmRevenue": 4273.2
   },
   "KBC": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 3187.3,
+    "latestProfit": 937.2,
+    "profitGrowth": 200.5,
+    "revGrowth": 136.6,
+    "prevRev": 1347.3,
+    "prevProfit": 311.9,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       1648.5,
@@ -1434,17 +1736,22 @@
       34.5,
       937.2
     ],
-    "latestRev": 3187.3,
-    "latestProfit": 937.2,
     "ttmProfit": 1870.3,
     "ttmRevenue": 6760.4
   },
   "IDC": {
+    "latestQuarter": "Q2/2026",
+    "latestRev": 2270.5,
+    "latestProfit": 643.7,
+    "profitGrowth": 54.7,
+    "revGrowth": 28.8,
+    "prevRev": 1763.2,
+    "prevProfit": 416.0,
     "quarterLabels": [
-      "Q3-2025",
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026"
+      "Q3/2025",
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026"
     ],
     "quarterlyRevenue": [
       2871.3,
@@ -1458,17 +1765,22 @@
       337.9,
       643.7
     ],
-    "latestRev": 2270.5,
-    "latestProfit": 643.7,
     "ttmProfit": 2456.0,
     "ttmRevenue": 8787.4
   },
   "VGC": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 3794.7,
+    "latestProfit": 616.0,
+    "profitGrowth": 423.8,
+    "revGrowth": 16.6,
+    "prevRev": 3254.0,
+    "prevProfit": 117.6,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       3978.0,
@@ -1482,17 +1794,22 @@
       831.2,
       616.0
     ],
-    "latestRev": 3794.7,
-    "latestProfit": 616.0,
     "ttmProfit": 2407.2,
     "ttmRevenue": 15509.4
   },
   "SZC": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 112.1,
+    "latestProfit": 21.6,
+    "profitGrowth": 24.1,
+    "revGrowth": 114.8,
+    "prevRev": 52.2,
+    "prevProfit": 17.4,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       379.4,
@@ -1506,17 +1823,22 @@
       18.9,
       21.6
     ],
-    "latestRev": 112.1,
-    "latestProfit": 21.6,
     "ttmProfit": 160.6,
     "ttmRevenue": 725.7
   },
   "PHR": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 657.8,
+    "latestProfit": 433.1,
+    "profitGrowth": 63.7,
+    "revGrowth": 6.6,
+    "prevRev": 616.8,
+    "prevProfit": 264.5,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       498.7,
@@ -1530,17 +1852,22 @@
       370.2,
       433.1
     ],
-    "latestRev": 657.8,
-    "latestProfit": 433.1,
     "ttmProfit": 1158.6,
     "ttmRevenue": 2031.1
   },
   "DPR": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 559.4,
+    "latestProfit": 215.3,
+    "profitGrowth": 39.0,
+    "revGrowth": 16.0,
+    "prevRev": 482.2,
+    "prevProfit": 154.9,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       301.7,
@@ -1554,17 +1881,22 @@
       99.8,
       215.3
     ],
-    "latestRev": 559.4,
-    "latestProfit": 215.3,
     "ttmProfit": 508.0,
     "ttmRevenue": 1521.0
   },
   "FRT": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 17530.1,
+    "latestProfit": 559.1,
+    "profitGrowth": 110.3,
+    "revGrowth": 33.7,
+    "prevRev": 13109.9,
+    "prevProfit": 265.9,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       14912.8,
@@ -1578,17 +1910,22 @@
       450.5,
       559.1
     ],
-    "latestRev": 17530.1,
-    "latestProfit": 559.1,
     "ttmProfit": 1732.5,
     "ttmRevenue": 63185.8
   },
   "DGW": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 11022.2,
+    "latestProfit": 278.1,
+    "profitGrowth": 65.0,
+    "revGrowth": 49.1,
+    "prevRev": 7390.6,
+    "prevProfit": 168.5,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       7990.1,
@@ -1602,17 +1939,22 @@
       309.0,
       278.1
     ],
-    "latestRev": 11022.2,
-    "latestProfit": 278.1,
     "ttmProfit": 950.5,
     "ttmRevenue": 34785.8
   },
   "PET": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 7267.9,
+    "latestProfit": 109.1,
+    "profitGrowth": -24.9,
+    "revGrowth": 32.5,
+    "prevRev": 5483.8,
+    "prevProfit": 145.2,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       7594.8,
@@ -1626,17 +1968,22 @@
       101.2,
       109.1
     ],
-    "latestRev": 7267.9,
-    "latestProfit": 109.1,
     "ttmProfit": 414.8,
     "ttmRevenue": 27959.6
   },
   "PNJ": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 6994.7,
+    "latestProfit": -257.9,
+    "profitGrowth": -152.0,
+    "revGrowth": -14.0,
+    "prevRev": 8135.5,
+    "prevProfit": 495.7,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       9623.0,
@@ -1650,17 +1997,22 @@
       -283.0,
       -257.9
     ],
-    "latestRev": 6994.7,
-    "latestProfit": -257.9,
     "ttmProfit": 2145.4,
     "ttmRevenue": 42346.6
   },
   "CTR": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 4226.9,
+    "latestProfit": 183.4,
+    "profitGrowth": 8.6,
+    "revGrowth": 6.6,
+    "prevRev": 3965.2,
+    "prevProfit": 168.9,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       3999.5,
@@ -1674,17 +2026,22 @@
       171.9,
       183.4
     ],
-    "latestRev": 4226.9,
-    "latestProfit": 183.4,
     "ttmProfit": 669.2,
     "ttmRevenue": 16185.2
   },
   "ELC": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 665.6,
+    "latestProfit": 35.4,
+    "profitGrowth": -5.9,
+    "revGrowth": 55.7,
+    "prevRev": 427.6,
+    "prevProfit": 37.6,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       760.1,
@@ -1698,17 +2055,22 @@
       28.1,
       35.4
     ],
-    "latestRev": 665.6,
-    "latestProfit": 35.4,
     "ttmProfit": 138.6,
     "ttmRevenue": 1973.4
   },
   "DGC": {
+    "latestQuarter": "Q2/2026",
+    "latestRev": 2415.4,
+    "latestProfit": 440.8,
+    "profitGrowth": -50.5,
+    "revGrowth": -16.5,
+    "prevRev": 2894.4,
+    "prevProfit": 890.8,
     "quarterLabels": [
-      "Q3-2025",
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026"
+      "Q3/2025",
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026"
     ],
     "quarterlyRevenue": [
       2816.7,
@@ -1722,17 +2084,22 @@
       430.1,
       440.8
     ],
-    "latestRev": 2415.4,
-    "latestProfit": 440.8,
     "ttmProfit": 2332.4,
     "ttmRevenue": 10097.3
   },
   "DCM": {
+    "latestQuarter": "Q2/2026",
+    "latestRev": 6712.2,
+    "latestProfit": 1067.4,
+    "profitGrowth": 32.4,
+    "revGrowth": 11.2,
+    "prevRev": 6037.3,
+    "prevProfit": 806.4,
     "quarterLabels": [
-      "Q3-2025",
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026"
+      "Q3/2025",
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026"
     ],
     "quarterlyRevenue": [
       2988.2,
@@ -1746,17 +2113,22 @@
       788.6,
       1067.4
     ],
-    "latestRev": 6712.2,
-    "latestProfit": 1067.4,
     "ttmProfit": 2573.5,
     "ttmRevenue": 19514.8
   },
   "DPM": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 4128.0,
+    "latestProfit": 44.9,
+    "profitGrowth": -81.2,
+    "revGrowth": 10.7,
+    "prevRev": 3728.8,
+    "prevProfit": 238.8,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       3414.4,
@@ -1770,17 +2142,22 @@
       915.5,
       44.9
     ],
-    "latestRev": 4128.0,
-    "latestProfit": 44.9,
     "ttmProfit": 1603.9,
     "ttmRevenue": 20151.4
   },
   "BFC": {
+    "latestQuarter": "Q1/2026",
+    "latestRev": 3345.4,
+    "latestProfit": 142.2,
+    "profitGrowth": 28.0,
+    "revGrowth": 31.0,
+    "prevRev": 2554.3,
+    "prevProfit": 111.1,
     "quarterLabels": [
-      "Q2-2025",
-      "Q3-2025",
-      "Q4-2025",
-      "Q1-2026"
+      "Q2/2025",
+      "Q3/2025",
+      "Q4/2025",
+      "Q1/2026"
     ],
     "quarterlyRevenue": [
       3534.6,
@@ -1794,17 +2171,22 @@
       68.3,
       142.2
     ],
-    "latestRev": 3345.4,
-    "latestProfit": 142.2,
     "ttmProfit": 431.3,
     "ttmRevenue": 11405.7
   },
   "CSV": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 814.1,
+    "latestProfit": 96.3,
+    "profitGrowth": 60.2,
+    "revGrowth": 59.6,
+    "prevRev": 510.1,
+    "prevProfit": 60.1,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       644.0,
@@ -1818,17 +2200,22 @@
       134.1,
       96.3
     ],
-    "latestRev": 814.1,
-    "latestProfit": 96.3,
     "ttmProfit": 316.5,
     "ttmRevenue": 2773.7
   },
   "DBC": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 5138.0,
+    "latestProfit": 200.2,
+    "profitGrowth": -41.6,
+    "revGrowth": 6.1,
+    "prevRev": 4841.2,
+    "prevProfit": 343.0,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       3729.0,
@@ -1842,17 +2229,22 @@
       289.1,
       200.2
     ],
-    "latestRev": 5138.0,
-    "latestProfit": 200.2,
     "ttmProfit": 1011.9,
     "ttmRevenue": 17244.0
   },
   "BAF": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 2067.4,
+    "latestProfit": 21.2,
+    "profitGrowth": -5.8,
+    "revGrowth": 81.9,
+    "prevRev": 1136.3,
+    "prevProfit": 22.5,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       1399.2,
@@ -1866,17 +2258,22 @@
       104.7,
       21.2
     ],
-    "latestRev": 2067.4,
-    "latestProfit": 21.2,
     "ttmProfit": 67.2,
     "ttmRevenue": 7365.9
   },
   "PVD": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 3213.5,
+    "latestProfit": 81.7,
+    "profitGrowth": -70.5,
+    "revGrowth": 25.0,
+    "prevRev": 2570.6,
+    "prevProfit": 277.1,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       4312.9,
@@ -1890,17 +2287,22 @@
       177.9,
       81.7
     ],
-    "latestRev": 3213.5,
-    "latestProfit": 81.7,
     "ttmProfit": 934.3,
     "ttmRevenue": 13955.4
   },
   "PVS": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 10579.1,
+    "latestProfit": 340.9,
+    "profitGrowth": 2.1,
+    "revGrowth": 9.9,
+    "prevRev": 9629.5,
+    "prevProfit": 334.0,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       9553.7,
@@ -1914,17 +2316,22 @@
       562.6,
       340.9
     ],
-    "latestRev": 10579.1,
-    "latestProfit": 340.9,
     "ttmProfit": 2289.2,
     "ttmRevenue": 37420.7
   },
   "PVT": {
+    "latestQuarter": "Q2/2026",
+    "latestRev": 5713.8,
+    "latestProfit": 678.4,
+    "profitGrowth": 88.1,
+    "revGrowth": 31.3,
+    "prevRev": 4352.0,
+    "prevProfit": 360.7,
     "quarterLabels": [
-      "Q3-2025",
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026"
+      "Q3/2025",
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026"
     ],
     "quarterlyRevenue": [
       4419.4,
@@ -1938,17 +2345,22 @@
       387.4,
       678.4
     ],
-    "latestRev": 5713.8,
-    "latestProfit": 678.4,
     "ttmProfit": 1759.7,
     "ttmRevenue": 18790.6
   },
   "BSR": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 59580.6,
+    "latestProfit": 8969.0,
+    "profitGrowth": 887.1,
+    "revGrowth": 68.8,
+    "prevRev": 35290.2,
+    "prevProfit": 908.6,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       37621.4,
@@ -1962,17 +2374,22 @@
       7461.0,
       8969.0
     ],
-    "latestRev": 59580.6,
-    "latestProfit": 8969.0,
     "ttmProfit": 27730.0,
     "ttmRevenue": 201838.0
   },
   "GMD": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 2209.8,
+    "latestProfit": 586.3,
+    "profitGrowth": 35.6,
+    "revGrowth": 41.6,
+    "prevRev": 1560.5,
+    "prevProfit": 432.4,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       1614.4,
@@ -1986,17 +2403,22 @@
       1285.4,
       586.3
     ],
-    "latestRev": 2209.8,
-    "latestProfit": 586.3,
     "ttmProfit": 3181.9,
     "ttmRevenue": 7038.2
   },
   "HAH": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 1419.3,
+    "latestProfit": 366.0,
+    "profitGrowth": 3.7,
+    "revGrowth": 5.3,
+    "prevRev": 1347.7,
+    "prevProfit": 352.9,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       1299.6,
@@ -2010,41 +2432,51 @@
       466.7,
       366.0
     ],
-    "latestRev": 1419.3,
-    "latestProfit": 366.0,
     "ttmProfit": 1543.7,
     "ttmRevenue": 5517.5
   },
   "VOS": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 739.0,
+    "latestProfit": 76.9,
+    "profitGrowth": -41.6,
+    "revGrowth": -13.0,
+    "prevRev": 849.7,
+    "prevProfit": 131.7,
     "quarterLabels": [
-      "Q1-2026",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
-      0.0,
+      955.9,
       709.0,
       922.1,
       739.0
     ],
     "quarterlyProfit": [
-      0.0,
+      216.6,
       4.3,
       42.7,
       76.9
     ],
-    "latestRev": 739.0,
-    "latestProfit": 76.9,
-    "ttmProfit": 123.9,
-    "ttmRevenue": 2370.1
+    "ttmProfit": 340.5,
+    "ttmRevenue": 3326.0
   },
   "REE": {
+    "latestQuarter": "Q2/2026",
+    "latestRev": 2426.4,
+    "latestProfit": 782.0,
+    "profitGrowth": 5.8,
+    "revGrowth": -3.5,
+    "prevRev": 2513.5,
+    "prevProfit": 739.2,
     "quarterLabels": [
-      "Q3-2025",
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026"
+      "Q3/2025",
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026"
     ],
     "quarterlyRevenue": [
       2552.2,
@@ -2058,17 +2490,22 @@
       938.7,
       782.0
     ],
-    "latestRev": 2426.4,
-    "latestProfit": 782.0,
     "ttmProfit": 3314.2,
     "ttmRevenue": 10327.0
   },
   "GEG": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 721.7,
+    "latestProfit": 100.4,
+    "profitGrowth": 25.3,
+    "revGrowth": 7.5,
+    "prevRev": 671.3,
+    "prevProfit": 80.1,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       590.4,
@@ -2082,17 +2519,22 @@
       8.2,
       100.4
     ],
-    "latestRev": 721.7,
-    "latestProfit": 100.4,
     "ttmProfit": 468.4,
     "ttmRevenue": 2659.8
   },
   "PC1": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 2619.3,
+    "latestProfit": 416.4,
+    "profitGrowth": 5.6,
+    "revGrowth": -20.1,
+    "prevRev": 3278.1,
+    "prevProfit": 394.4,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       5011.8,
@@ -2106,17 +2548,22 @@
       235.3,
       416.4
     ],
-    "latestRev": 2619.3,
-    "latestProfit": 416.4,
     "ttmProfit": 1581.9,
     "ttmRevenue": 11837.1
   },
   "VCG": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 3296.0,
+    "latestProfit": 371.1,
+    "profitGrowth": -88.8,
+    "revGrowth": -25.6,
+    "prevRev": 4429.3,
+    "prevProfit": 3304.4,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       4651.7,
@@ -2130,17 +2577,22 @@
       228.1,
       371.1
     ],
-    "latestRev": 3296.0,
-    "latestProfit": 371.1,
     "ttmProfit": 1314.8,
     "ttmRevenue": 15215.2
   },
   "HHV": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 1114.4,
+    "latestProfit": 212.8,
+    "profitGrowth": 39.6,
+    "revGrowth": 22.0,
+    "prevRev": 913.5,
+    "prevProfit": 152.4,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       1205.9,
@@ -2154,17 +2606,22 @@
       171.8,
       212.8
     ],
-    "latestRev": 1114.4,
-    "latestProfit": 212.8,
     "ttmProfit": 803.6,
     "ttmRevenue": 4197.6
   },
   "LCG": {
+    "latestQuarter": "Q2/2026",
+    "latestRev": 822.1,
+    "latestProfit": 36.1,
+    "profitGrowth": 17.2,
+    "revGrowth": 12.3,
+    "prevRev": 731.9,
+    "prevProfit": 30.8,
     "quarterLabels": [
-      "Q3-2025",
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026"
+      "Q3/2025",
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026"
     ],
     "quarterlyRevenue": [
       565.7,
@@ -2178,17 +2635,22 @@
       15.4,
       36.1
     ],
-    "latestRev": 822.1,
-    "latestProfit": 36.1,
     "ttmProfit": 151.2,
     "ttmRevenue": 3005.3
   },
   "FCN": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 1858.1,
+    "latestProfit": 101.9,
+    "profitGrowth": 517.6,
+    "revGrowth": 62.6,
+    "prevRev": 1142.6,
+    "prevProfit": 16.5,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       2714.8,
@@ -2202,17 +2664,22 @@
       35.0,
       101.9
     ],
-    "latestRev": 1858.1,
-    "latestProfit": 101.9,
     "ttmProfit": 259.7,
     "ttmRevenue": 7785.7
   },
   "CII": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 913.7,
+    "latestProfit": 49.4,
+    "profitGrowth": -11.9,
+    "revGrowth": 27.9,
+    "prevRev": 714.5,
+    "prevProfit": 56.1,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       824.7,
@@ -2226,17 +2693,22 @@
       55.3,
       49.4
     ],
-    "latestRev": 913.7,
-    "latestProfit": 49.4,
     "ttmProfit": 281.3,
     "ttmRevenue": 3324.0
   },
   "VHC": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 3316.7,
+    "latestProfit": 229.3,
+    "profitGrowth": 0.0,
+    "revGrowth": 0.0,
+    "prevRev": 0.0,
+    "prevProfit": 0.0,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       2715.0,
@@ -2250,17 +2722,22 @@
       493.3,
       229.3
     ],
-    "latestRev": 3316.7,
-    "latestProfit": 229.3,
     "ttmProfit": 1253.6,
     "ttmRevenue": 12430.7
   },
   "ANV": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 2071.0,
+    "latestProfit": 206.7,
+    "profitGrowth": -27.0,
+    "revGrowth": 3.5,
+    "prevRev": 2000.1,
+    "prevProfit": 283.1,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       2118.9,
@@ -2274,17 +2751,22 @@
       134.9,
       206.7
     ],
-    "latestRev": 2071.0,
-    "latestProfit": 206.7,
     "ttmProfit": 788.6,
     "ttmRevenue": 7968.2
   },
   "TNG": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 3229.0,
+    "latestProfit": 151.5,
+    "profitGrowth": 29.5,
+    "revGrowth": 22.6,
+    "prevRev": 2632.8,
+    "prevProfit": 117.0,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       2027.4,
@@ -2298,17 +2780,22 @@
       146.9,
       151.5
     ],
-    "latestRev": 3229.0,
-    "latestProfit": 151.5,
     "ttmProfit": 470.3,
     "ttmRevenue": 10122.4
   },
   "MSH": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 1630.4,
+    "latestProfit": 196.3,
+    "profitGrowth": -2.2,
+    "revGrowth": -1.0,
+    "prevRev": 1646.7,
+    "prevProfit": 200.7,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       1388.4,
@@ -2322,17 +2809,22 @@
       203.4,
       196.3
     ],
-    "latestRev": 1630.4,
-    "latestProfit": 196.3,
     "ttmProfit": 684.0,
     "ttmRevenue": 5717.0
   },
   "GIL": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 329.4,
+    "latestProfit": 30.7,
+    "profitGrowth": 193.0,
+    "revGrowth": 66.3,
+    "prevRev": 198.1,
+    "prevProfit": -33.0,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       260.5,
@@ -2346,17 +2838,22 @@
       11.9,
       30.7
     ],
-    "latestRev": 329.4,
-    "latestProfit": 30.7,
     "ttmProfit": 192.1,
     "ttmRevenue": 1037.2
   },
   "PTB": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 2153.9,
+    "latestProfit": 131.9,
+    "profitGrowth": -5.9,
+    "revGrowth": 27.9,
+    "prevRev": 1683.9,
+    "prevProfit": 140.1,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       2088.4,
@@ -2370,17 +2867,22 @@
       132.9,
       131.9
     ],
-    "latestRev": 2153.9,
-    "latestProfit": 131.9,
     "ttmProfit": 551.6,
     "ttmRevenue": 8421.4
   },
   "HAX": {
+    "latestQuarter": "Q3/2026",
+    "latestRev": 1391.8,
+    "latestProfit": 3.6,
+    "profitGrowth": 114.0,
+    "revGrowth": 21.1,
+    "prevRev": 1149.5,
+    "prevProfit": -25.8,
     "quarterLabels": [
-      "Q4-2025",
-      "Q1-2026",
-      "Q2-2026",
-      "Q3-2026"
+      "Q4/2025",
+      "Q1/2026",
+      "Q2/2026",
+      "Q3/2026"
     ],
     "quarterlyRevenue": [
       1513.4,
@@ -2394,8 +2896,6 @@
       21.9,
       3.6
     ],
-    "latestRev": 1391.8,
-    "latestProfit": 3.6,
     "ttmProfit": 78.9,
     "ttmRevenue": 5561.5
   }

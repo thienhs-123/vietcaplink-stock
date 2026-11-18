@@ -175,8 +175,8 @@
       "ceiling": 21850,
       "floor": 19050,
       "marketCapTỷ": 118120.0,
-      "profitGrowth": 16.2,
-      "revGrowth": 14.5,
+      "profitGrowth": 9.8,
+      "revGrowth": 21.1,
       "eps": 3820,
       "pe": 5.3,
       "pb": 1.3,
@@ -209,10 +209,10 @@
       "foreignNetValTy": -0.2,
       "foreignNetQty": -9866,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         7093.3,
@@ -236,7 +236,10 @@
       "foreignNet20P": -820.27,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 3,
-      "foreignBuySessions20P": 6
+      "foreignBuySessions20P": 6,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 6769.7,
+      "prevProfit": 4280.6
     },
     "BCM": {
       "symbol": "BCM",
@@ -254,8 +257,8 @@
       "ceiling": 39350,
       "floor": 34250,
       "marketCapTỷ": 38295.0,
-      "profitGrowth": 14.2,
-      "revGrowth": 18,
+      "profitGrowth": 37.1,
+      "revGrowth": 13.6,
       "eps": 2150,
       "pe": 17.2,
       "pb": 3.5,
@@ -288,10 +291,10 @@
       "foreignNetValTy": -0.1,
       "foreignNetQty": -2800,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         1376.5,
@@ -315,7 +318,10 @@
       "foreignNet20P": 2.91,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 4,
-      "foreignBuySessions20P": 10
+      "foreignBuySessions20P": 10,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 828.4,
+      "prevProfit": 422.4
     },
     "BID": {
       "symbol": "BID",
@@ -333,8 +339,8 @@
       "ceiling": 33850,
       "floor": 29450,
       "marketCapTỷ": 178139.0,
-      "profitGrowth": 15.8,
-      "revGrowth": 14.2,
+      "profitGrowth": 39.2,
+      "revGrowth": 12.4,
       "eps": 4120,
       "pe": 7.6,
       "pb": 1.8,
@@ -367,10 +373,10 @@
       "foreignNetValTy": -17.33,
       "foreignNetQty": -553405,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         19246.8,
@@ -394,7 +400,10 @@
       "foreignNet20P": -417.75,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 1,
-      "foreignBuySessions20P": 1
+      "foreignBuySessions20P": 1,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 15172.6,
+      "prevProfit": 6086.9
     },
     "BVH": {
       "symbol": "BVH",
@@ -412,8 +421,8 @@
       "ceiling": 67900,
       "floor": 59100,
       "marketCapTỷ": 46469.0,
-      "profitGrowth": 8.5,
-      "revGrowth": 7.2,
+      "profitGrowth": 6.9,
+      "revGrowth": 1.1,
       "eps": 2540,
       "pe": 24.6,
       "pb": 1.4,
@@ -446,10 +455,10 @@
       "foreignNetValTy": -1.7,
       "foreignNetQty": -27100,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         10549.6,
@@ -473,7 +482,10 @@
       "foreignNet20P": 196.57,
       "foreignBuySessions5P": 3,
       "foreignBuySessions10P": 8,
-      "foreignBuySessions20P": 14
+      "foreignBuySessions20P": 14,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 9749.6,
+      "prevProfit": 770.8
     },
     "CTG": {
       "symbol": "CTG",
@@ -491,8 +503,8 @@
       "ceiling": 33350,
       "floor": 29050,
       "marketCapTỷ": 165668.0,
-      "profitGrowth": 18.5,
-      "revGrowth": 15.2,
+      "profitGrowth": 27.7,
+      "revGrowth": 27.0,
       "eps": 4620,
       "pe": 6.7,
       "pb": 1.2,
@@ -525,10 +537,10 @@
       "foreignNetValTy": -5.91,
       "foreignNetQty": -190490,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         17959.7,
@@ -552,7 +564,10 @@
       "foreignNet20P": 301.72,
       "foreignBuySessions5P": 3,
       "foreignBuySessions10P": 8,
-      "foreignBuySessions20P": 15
+      "foreignBuySessions20P": 15,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 17175.7,
+      "prevProfit": 8512.5
     },
     "FPT": {
       "symbol": "FPT",
@@ -570,8 +585,8 @@
       "ceiling": 52800,
       "floor": 45950,
       "marketCapTỷ": 72148.0,
-      "profitGrowth": 20.4,
-      "revGrowth": 19.3,
+      "profitGrowth": -5.9,
+      "revGrowth": -20.1,
       "eps": 5120,
       "pe": 9.6,
       "pb": 3.1,
@@ -604,10 +619,10 @@
       "foreignNetValTy": -36.86,
       "foreignNetQty": -745918,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         20225.5,
@@ -631,7 +646,10 @@
       "foreignNet20P": -2574.58,
       "foreignBuySessions5P": 0,
       "foreignBuySessions10P": 1,
-      "foreignBuySessions20P": 1
+      "foreignBuySessions20P": 1,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 17204.5,
+      "prevProfit": 2901.5
     },
     "GAS": {
       "symbol": "GAS",
@@ -649,8 +667,8 @@
       "ceiling": 77700,
       "floor": 67700,
       "marketCapTỷ": 163755.0,
-      "profitGrowth": 7.8,
-      "revGrowth": 9.5,
+      "profitGrowth": 74.9,
+      "revGrowth": 11.3,
       "eps": 4850,
       "pe": 14.7,
       "pb": 2.4,
@@ -683,10 +701,10 @@
       "foreignNetValTy": -3.93,
       "foreignNetQty": -54780,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         43683.1,
@@ -710,7 +728,10 @@
       "foreignNet20P": 16.77,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 3,
-      "foreignBuySessions20P": 8
+      "foreignBuySessions20P": 8,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 35690.1,
+      "prevProfit": 2612.8
     },
     "GVR": {
       "symbol": "GVR",
@@ -728,8 +749,8 @@
       "ceiling": 30800,
       "floor": 26800,
       "marketCapTỷ": 114000.0,
-      "profitGrowth": 19.2,
-      "revGrowth": 14.8,
+      "profitGrowth": 68.2,
+      "revGrowth": 2.3,
       "eps": 1150,
       "pe": 24.8,
       "pb": 2.2,
@@ -762,10 +783,10 @@
       "foreignNetValTy": 0.0,
       "foreignNetQty": 0,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         8505.7,
@@ -789,7 +810,10 @@
       "foreignNet20P": -21.34,
       "foreignBuySessions5P": 0,
       "foreignBuySessions10P": 0,
-      "foreignBuySessions20P": 0
+      "foreignBuySessions20P": 0,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 9294.4,
+      "prevProfit": 2187.3
     },
     "HDB": {
       "symbol": "HDB",
@@ -807,8 +831,8 @@
       "ceiling": 23850,
       "floor": 20750,
       "marketCapTỷ": 64840.0,
-      "profitGrowth": 29.5,
-      "revGrowth": 22.4,
+      "profitGrowth": 7.0,
+      "revGrowth": 19.6,
       "eps": 4180,
       "pe": 5.3,
       "pb": 1.4,
@@ -841,10 +865,10 @@
       "foreignNetValTy": -9.67,
       "foreignNetQty": -435600,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         9755.6,
@@ -868,7 +892,10 @@
       "foreignNet20P": 32.46,
       "foreignBuySessions5P": 4,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 11
+      "foreignBuySessions20P": 11,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 7763.3,
+      "prevProfit": 3798.8
     },
     "HPG": {
       "symbol": "HPG",
@@ -886,8 +913,8 @@
       "ceiling": 22500,
       "floor": 19600,
       "marketCapTỷ": 134641.0,
-      "profitGrowth": 77,
-      "revGrowth": 17,
+      "profitGrowth": 106.0,
+      "revGrowth": 70.9,
       "eps": 1970,
       "pe": 10.7,
       "pb": 1.5,
@@ -920,10 +947,10 @@
       "foreignNetValTy": 1.75,
       "foreignNetQty": 83001,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         46176.5,
@@ -947,7 +974,10 @@
       "foreignNet20P": 409.23,
       "foreignBuySessions5P": 4,
       "foreignBuySessions10P": 7,
-      "foreignBuySessions20P": 11
+      "foreignBuySessions20P": 11,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 36407.4,
+      "prevProfit": 4012.3
     },
     "MBB": {
       "symbol": "MBB",
@@ -965,8 +995,8 @@
       "ceiling": 20300,
       "floor": 17700,
       "marketCapTỷ": 99926.0,
-      "profitGrowth": 15.7,
-      "revGrowth": 18.4,
+      "profitGrowth": 42.3,
+      "revGrowth": 37.3,
       "eps": 3210,
       "pe": 5.9,
       "pb": 1.2,
@@ -999,10 +1029,10 @@
       "foreignNetValTy": -30.14,
       "foreignNetQty": -1598990,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         14555.3,
@@ -1026,7 +1056,10 @@
       "foreignNet20P": -741.4,
       "foreignBuySessions5P": 4,
       "foreignBuySessions10P": 6,
-      "foreignBuySessions20P": 9
+      "foreignBuySessions20P": 9,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 12990.5,
+      "prevProfit": 5800.4
     },
     "MSN": {
       "symbol": "MSN",
@@ -1044,8 +1077,8 @@
       "ceiling": 76500,
       "floor": 66500,
       "marketCapTỷ": 103164.0,
-      "profitGrowth": 145,
-      "revGrowth": 12.8,
+      "profitGrowth": 144.0,
+      "revGrowth": 74.7,
       "eps": 2180,
       "pe": 33.1,
       "pb": 3.2,
@@ -1078,10 +1111,10 @@
       "foreignNetValTy": 61.31,
       "foreignNetQty": 854600,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         23245.8,
@@ -1105,7 +1138,10 @@
       "foreignNet20P": 989.46,
       "foreignBuySessions5P": 4,
       "foreignBuySessions10P": 7,
-      "foreignBuySessions20P": 15
+      "foreignBuySessions20P": 15,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 21163.8,
+      "prevProfit": 1865.8
     },
     "MWG": {
       "symbol": "MWG",
@@ -1123,8 +1159,8 @@
       "ceiling": 77800,
       "floor": 67800,
       "marketCapTỷ": 106451.0,
-      "profitGrowth": 115,
-      "revGrowth": 14.8,
+      "profitGrowth": 97.4,
+      "revGrowth": 32.0,
       "eps": 2680,
       "pe": 27.2,
       "pb": 2.8,
@@ -1157,10 +1193,10 @@
       "foreignNetValTy": 0.39,
       "foreignNetQty": 5400,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         42850.4,
@@ -1184,7 +1220,10 @@
       "foreignNet20P": 3.95,
       "foreignBuySessions5P": 4,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 8
+      "foreignBuySessions20P": 8,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 39852.5,
+      "prevProfit": 1783.7
     },
     "PLX": {
       "symbol": "PLX",
@@ -1202,8 +1241,8 @@
       "ceiling": 35000,
       "floor": 30500,
       "marketCapTỷ": 40786.0,
-      "profitGrowth": 32.5,
-      "revGrowth": 12.2,
+      "profitGrowth": 93.1,
+      "revGrowth": 65.6,
       "eps": 2650,
       "pe": 12.1,
       "pb": 1.8,
@@ -1236,10 +1275,10 @@
       "foreignNetValTy": -5.2,
       "foreignNetQty": -160300,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         81892.8,
@@ -1263,7 +1302,10 @@
       "foreignNet20P": 13.8,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 10
+      "foreignBuySessions20P": 10,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 83631.4,
+      "prevProfit": 706.0
     },
     "POW": {
       "symbol": "POW",
@@ -1281,8 +1323,8 @@
       "ceiling": 13700,
       "floor": 12000,
       "marketCapTỷ": 30327.0,
-      "profitGrowth": 18,
-      "revGrowth": 10.5,
+      "profitGrowth": 118.6,
+      "revGrowth": 113.5,
       "eps": 650,
       "pe": 19.9,
       "pb": 0.9,
@@ -1315,10 +1357,10 @@
       "foreignNetValTy": -2.21,
       "foreignNetQty": -169200,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         8747.0,
@@ -1342,7 +1384,10 @@
       "foreignNet20P": 190.68,
       "foreignBuySessions5P": 3,
       "foreignBuySessions10P": 8,
-      "foreignBuySessions20P": 14
+      "foreignBuySessions20P": 14,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 7855.2,
+      "prevProfit": 948.4
     },
     "SAB": {
       "symbol": "SAB",
@@ -1360,8 +1405,8 @@
       "ceiling": 45550,
       "floor": 39650,
       "marketCapTỷ": 54829.0,
-      "profitGrowth": 6.5,
-      "revGrowth": 8.2,
+      "profitGrowth": -0.6,
+      "revGrowth": 1.2,
       "eps": 3450,
       "pe": 12.4,
       "pb": 2.8,
@@ -1394,10 +1439,10 @@
       "foreignNetValTy": -0.57,
       "foreignNetQty": -13470,
       "quarterLabels": [
-        "Q3-2025",
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026"
+        "Q3/2025",
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026"
       ],
       "quarterlyRevenue": [
         6436.6,
@@ -1421,7 +1466,10 @@
       "foreignNet20P": -5.49,
       "foreignBuySessions5P": 3,
       "foreignBuySessions10P": 6,
-      "foreignBuySessions20P": 8
+      "foreignBuySessions20P": 8,
+      "latestQuarter": "Q2/2026",
+      "prevRev": 6804.3,
+      "prevProfit": 1250.7
     },
     "SHB": {
       "symbol": "SHB",
@@ -1439,8 +1487,8 @@
       "ceiling": 11550,
       "floor": 10050,
       "marketCapTỷ": 39193.0,
-      "profitGrowth": 14.8,
-      "revGrowth": 16.2,
+      "profitGrowth": 58.0,
+      "revGrowth": 22.0,
       "eps": 2280,
       "pe": 4.7,
       "pb": 0.8,
@@ -1473,10 +1521,10 @@
       "foreignNetValTy": -2.36,
       "foreignNetQty": -220490,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         3830.8,
@@ -1500,7 +1548,10 @@
       "foreignNet20P": 203.75,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 6,
-      "foreignBuySessions20P": 12
+      "foreignBuySessions20P": 12,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 5323.8,
+      "prevProfit": 2606.7
     },
     "SSB": {
       "symbol": "SSB",
@@ -1518,8 +1569,8 @@
       "ceiling": 16450,
       "floor": 14350,
       "marketCapTỷ": 43092.0,
-      "profitGrowth": 18.2,
-      "revGrowth": 15,
+      "profitGrowth": 35.0,
+      "revGrowth": 5.6,
       "eps": 1750,
       "pe": 8.7,
       "pb": 1.2,
@@ -1552,10 +1603,10 @@
       "foreignNetValTy": -0.82,
       "foreignNetQty": -53500,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         2451.9,
@@ -1579,7 +1630,10 @@
       "foreignNet20P": 10.79,
       "foreignBuySessions5P": 5,
       "foreignBuySessions10P": 8,
-      "foreignBuySessions20P": 11
+      "foreignBuySessions20P": 11,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 2337.1,
+      "prevProfit": 779.5
     },
     "SSI": {
       "symbol": "SSI",
@@ -1597,8 +1651,8 @@
       "ceiling": 21200,
       "floor": 18500,
       "marketCapTỷ": 39093.0,
-      "profitGrowth": 31.2,
-      "revGrowth": 28.5,
+      "profitGrowth": -23.8,
+      "revGrowth": -24.2,
       "eps": 1740,
       "pe": 11.4,
       "pb": 1.5,
@@ -1631,10 +1685,10 @@
       "foreignNetValTy": 5.39,
       "foreignNetQty": 273404,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         3601.8,
@@ -1658,7 +1712,10 @@
       "foreignNet20P": -106.4,
       "foreignBuySessions5P": 4,
       "foreignBuySessions10P": 7,
-      "foreignBuySessions20P": 10
+      "foreignBuySessions20P": 10,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 4176.7,
+      "prevProfit": 1475.6
     },
     "STB": {
       "symbol": "STB",
@@ -1676,8 +1733,8 @@
       "ceiling": 76100,
       "floor": 66300,
       "marketCapTỷ": 136490.0,
-      "profitGrowth": 26.8,
-      "revGrowth": 19.4,
+      "profitGrowth": -53.6,
+      "revGrowth": -33.6,
       "eps": 4280,
       "pe": 16.9,
       "pb": 1.2,
@@ -1710,10 +1767,10 @@
       "foreignNetValTy": -5.19,
       "foreignNetQty": -73300,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         5358.0,
@@ -1737,7 +1794,10 @@
       "foreignNet20P": -664.89,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 2,
-      "foreignBuySessions20P": 2
+      "foreignBuySessions20P": 2,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 7874.4,
+      "prevProfit": 2901.3
     },
     "TCB": {
       "symbol": "TCB",
@@ -1755,8 +1815,8 @@
       "ceiling": 22750,
       "floor": 19850,
       "marketCapTỷ": 149003.0,
-      "profitGrowth": 34.2,
-      "revGrowth": 22.8,
+      "profitGrowth": 26.1,
+      "revGrowth": 17.9,
       "eps": 3250,
       "pe": 6.5,
       "pb": 1,
@@ -1789,10 +1849,10 @@
       "foreignNetValTy": -24.13,
       "foreignNetQty": -1143142,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         10788.0,
@@ -1816,7 +1876,10 @@
       "foreignNet20P": 1187.5,
       "foreignBuySessions5P": 3,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 13
+      "foreignBuySessions20P": 13,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 9924.6,
+      "prevProfit": 6613.5
     },
     "TPB": {
       "symbol": "TPB",
@@ -1834,8 +1897,8 @@
       "ceiling": 13500,
       "floor": 11800,
       "marketCapTỷ": 27741.0,
-      "profitGrowth": 21,
-      "revGrowth": 18.5,
+      "profitGrowth": 54.6,
+      "revGrowth": 36.6,
       "eps": 2650,
       "pe": 4.8,
       "pb": 1.1,
@@ -1868,10 +1931,10 @@
       "foreignNetValTy": -0.49,
       "foreignNetQty": -38900,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         3595.1,
@@ -1895,7 +1958,10 @@
       "foreignNet20P": 65.5,
       "foreignBuySessions5P": 4,
       "foreignBuySessions10P": 7,
-      "foreignBuySessions20P": 13
+      "foreignBuySessions20P": 13,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 3237.6,
+      "prevProfit": 1520.6
     },
     "VCB": {
       "symbol": "VCB",
@@ -1913,8 +1979,8 @@
       "ceiling": 56900,
       "floor": 49500,
       "marketCapTỷ": 294545.0,
-      "profitGrowth": 10.5,
-      "revGrowth": 11.8,
+      "profitGrowth": 0.2,
+      "revGrowth": 39.1,
       "eps": 5850,
       "pe": 9.0,
       "pb": 2.6,
@@ -1947,10 +2013,10 @@
       "foreignNetValTy": -34.58,
       "foreignNetQty": -655161,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         16169.8,
@@ -1974,7 +2040,10 @@
       "foreignNet20P": -767.33,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 1,
-      "foreignBuySessions20P": 6
+      "foreignBuySessions20P": 6,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 14657.2,
+      "prevProfit": 9025.6
     },
     "VHM": {
       "symbol": "VHM",
@@ -1992,8 +2061,8 @@
       "ceiling": 66800,
       "floor": 58200,
       "marketCapTỷ": 247556.0,
-      "profitGrowth": -5.8,
-      "revGrowth": 12.4,
+      "profitGrowth": 419.0,
+      "revGrowth": 419.9,
       "eps": 7450,
       "pe": 8.3,
       "pb": 0.9,
@@ -2026,10 +2095,10 @@
       "foreignNetValTy": -12.4,
       "foreignNetQty": -200485,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         103009.5,
@@ -2053,7 +2122,10 @@
       "foreignNet20P": 125.51,
       "foreignBuySessions5P": 5,
       "foreignBuySessions10P": 7,
-      "foreignBuySessions20P": 12
+      "foreignBuySessions20P": 12,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 16420.0,
+      "prevProfit": 4435.6
     },
     "VIB": {
       "symbol": "VIB",
@@ -2071,8 +2143,8 @@
       "ceiling": 14750,
       "floor": 12850,
       "marketCapTỷ": 41011.0,
-      "profitGrowth": 14.2,
-      "revGrowth": 16.5,
+      "profitGrowth": 3.3,
+      "revGrowth": 14.6,
       "eps": 3350,
       "pe": 4.1,
       "pb": 1.3,
@@ -2105,10 +2177,10 @@
       "foreignNetValTy": 0.73,
       "foreignNetQty": 53900,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         4213.6,
@@ -2132,7 +2204,10 @@
       "foreignNet20P": 225.94,
       "foreignBuySessions5P": 4,
       "foreignBuySessions10P": 9,
-      "foreignBuySessions20P": 17
+      "foreignBuySessions20P": 17,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 4172.7,
+      "prevProfit": 1863.6
     },
     "VIC": {
       "symbol": "VIC",
@@ -2150,8 +2225,8 @@
       "ceiling": 265300,
       "floor": 230700,
       "marketCapTỷ": 940621.0,
-      "profitGrowth": 14.5,
-      "revGrowth": 28,
+      "profitGrowth": 652.3,
+      "revGrowth": 284.8,
       "eps": 1280,
       "pe": 192.2,
       "pb": 1.1,
@@ -2184,10 +2259,10 @@
       "foreignNetValTy": -19.23,
       "foreignNetQty": -78014,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         163159.4,
@@ -2211,7 +2286,10 @@
       "foreignNet20P": 136.71,
       "foreignBuySessions5P": 3,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 11
+      "foreignBuySessions20P": 11,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 39135.1,
+      "prevProfit": 3025.3
     },
     "VJC": {
       "symbol": "VJC",
@@ -2229,8 +2307,8 @@
       "ceiling": 148100,
       "floor": 128900,
       "marketCapTỷ": 74147.0,
-      "profitGrowth": 85,
-      "revGrowth": 24.5,
+      "profitGrowth": 8.8,
+      "revGrowth": 35.0,
       "eps": 2850,
       "pe": 48.0,
       "pb": 3.4,
@@ -2263,10 +2341,10 @@
       "foreignNetValTy": 7.45,
       "foreignNetQty": 54720,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         29324.1,
@@ -2290,7 +2368,10 @@
       "foreignNet20P": 33.83,
       "foreignBuySessions5P": 3,
       "foreignBuySessions10P": 4,
-      "foreignBuySessions20P": 10
+      "foreignBuySessions20P": 10,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 16931.4,
+      "prevProfit": 320.2
     },
     "VNM": {
       "symbol": "VNM",
@@ -2308,8 +2389,8 @@
       "ceiling": 57300,
       "floor": 49850,
       "marketCapTỷ": 112022.0,
-      "profitGrowth": 8.5,
-      "revGrowth": 6.2,
+      "profitGrowth": 18.0,
+      "revGrowth": 8.9,
       "eps": 4180,
       "pe": 12.8,
       "pb": 3.8,
@@ -2342,10 +2423,10 @@
       "foreignNetValTy": 6.47,
       "foreignNetQty": 120700,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         17033.6,
@@ -2369,7 +2450,10 @@
       "foreignNet20P": -5.82,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 7
+      "foreignBuySessions20P": 7,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 16953.2,
+      "prevProfit": 2510.5
     },
     "VPB": {
       "symbol": "VPB",
@@ -2387,8 +2471,8 @@
       "ceiling": 23200,
       "floor": 20200,
       "marketCapTỷ": 172960.0,
-      "profitGrowth": 42.5,
-      "revGrowth": 21,
+      "profitGrowth": 20.4,
+      "revGrowth": 20.6,
       "eps": 2150,
       "pe": 10.1,
       "pb": 1,
@@ -2421,10 +2505,10 @@
       "foreignNetValTy": 7.78,
       "foreignNetQty": 357800,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         16767.2,
@@ -2448,7 +2532,10 @@
       "foreignNet20P": -164.7,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 9
+      "foreignBuySessions20P": 9,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 15061.2,
+      "prevProfit": 7363.7
     },
     "VRE": {
       "symbol": "VRE",
@@ -2466,8 +2553,8 @@
       "ceiling": 25900,
       "floor": 22600,
       "marketCapTỷ": 54422.0,
-      "profitGrowth": 4.2,
-      "revGrowth": 6.8,
+      "profitGrowth": 10.6,
+      "revGrowth": 5.5,
       "eps": 1850,
       "pe": 12.9,
       "pb": 1.1,
@@ -2500,10 +2587,10 @@
       "foreignNetValTy": -12.56,
       "foreignNetQty": -524300,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         2312.3,
@@ -2527,7 +2614,10 @@
       "foreignNet20P": -67.5,
       "foreignBuySessions5P": 0,
       "foreignBuySessions10P": 2,
-      "foreignBuySessions20P": 9
+      "foreignBuySessions20P": 9,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 2251.0,
+      "prevProfit": 1376.4
     },
     "VND": {
       "symbol": "VND",
@@ -2545,8 +2635,8 @@
       "ceiling": 15300,
       "floor": 13300,
       "marketCapTỷ": 21770.0,
-      "profitGrowth": 18.4,
-      "revGrowth": 14.2,
+      "profitGrowth": -64.5,
+      "revGrowth": -22.6,
       "eps": 1480,
       "pe": 9.7,
       "pb": 1.1,
@@ -2579,10 +2669,10 @@
       "foreignNetValTy": 7.49,
       "foreignNetQty": 529300,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         1427.5,
@@ -2606,7 +2696,10 @@
       "foreignNet20P": 166.92,
       "foreignBuySessions5P": 5,
       "foreignBuySessions10P": 8,
-      "foreignBuySessions20P": 12
+      "foreignBuySessions20P": 12,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 2214.2,
+      "prevProfit": 929.0
     },
     "VCI": {
       "symbol": "VCI",
@@ -2624,8 +2717,8 @@
       "ceiling": 20550,
       "floor": 17950,
       "marketCapTỷ": 13857.0,
-      "profitGrowth": 45.2,
-      "revGrowth": 32.5,
+      "profitGrowth": -12.6,
+      "revGrowth": -9.6,
       "eps": 1850,
       "pe": 10.4,
       "pb": 1.8,
@@ -2658,10 +2751,10 @@
       "foreignNetValTy": 3.98,
       "foreignNetQty": 207200,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         1526.3,
@@ -2685,7 +2778,10 @@
       "foreignNet20P": -115.06,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 3,
-      "foreignBuySessions20P": 5
+      "foreignBuySessions20P": 5,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 1443.3,
+      "prevProfit": 420.3
     },
     "HCM": {
       "symbol": "HCM",
@@ -2703,8 +2799,8 @@
       "ceiling": 24600,
       "floor": 21400,
       "marketCapTỷ": 16703.0,
-      "profitGrowth": 38.5,
-      "revGrowth": 27.2,
+      "profitGrowth": -32.5,
+      "revGrowth": -25.3,
       "eps": 1650,
       "pe": 13.9,
       "pb": 1.7,
@@ -2737,10 +2833,10 @@
       "foreignNetValTy": -1.03,
       "foreignNetQty": -44900,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         1398.2,
@@ -2764,7 +2860,10 @@
       "foreignNet20P": 4.37,
       "foreignBuySessions5P": 3,
       "foreignBuySessions10P": 6,
-      "foreignBuySessions20P": 9
+      "foreignBuySessions20P": 9,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 1664.9,
+      "prevProfit": 440.5
     },
     "FTS": {
       "symbol": "FTS",
@@ -2782,8 +2881,8 @@
       "ceiling": 20100,
       "floor": 17500,
       "marketCapTỷ": 5766.0,
-      "profitGrowth": 48,
-      "revGrowth": 34,
+      "profitGrowth": -35.0,
+      "revGrowth": -4.4,
       "eps": 2150,
       "pe": 8.8,
       "pb": 2.5,
@@ -2816,10 +2915,10 @@
       "foreignNetValTy": 0.54,
       "foreignNetQty": 29000,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         370.2,
@@ -2843,7 +2942,10 @@
       "foreignNet20P": -1.04,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 4,
-      "foreignBuySessions20P": 8
+      "foreignBuySessions20P": 8,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 284.4,
+      "prevProfit": 55.1
     },
     "BSI": {
       "symbol": "BSI",
@@ -2861,8 +2963,8 @@
       "ceiling": 29200,
       "floor": 25400,
       "marketCapTỷ": 5628.0,
-      "profitGrowth": 42.5,
-      "revGrowth": 31,
+      "profitGrowth": -23.5,
+      "revGrowth": 19.0,
       "eps": 2420,
       "pe": 11.3,
       "pb": 2.3,
@@ -2895,10 +2997,10 @@
       "foreignNetValTy": 2.37,
       "foreignNetQty": 86110,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         565.7,
@@ -2922,7 +3024,10 @@
       "foreignNet20P": 2.02,
       "foreignBuySessions5P": 3,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 11
+      "foreignBuySessions20P": 11,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 687.9,
+      "prevProfit": 215.6
     },
     "CTS": {
       "symbol": "CTS",
@@ -2940,8 +3045,8 @@
       "ceiling": 24050,
       "floor": 20950,
       "marketCapTỷ": 3466.0,
-      "profitGrowth": 35,
-      "revGrowth": 26.5,
+      "profitGrowth": -98.2,
+      "revGrowth": -37.2,
       "eps": 1950,
       "pe": 11.7,
       "pb": 1.9,
@@ -2974,10 +3079,10 @@
       "foreignNetValTy": 1.92,
       "foreignNetQty": 85400,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         399.9,
@@ -3001,7 +3106,10 @@
       "foreignNet20P": -4.95,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 3,
-      "foreignBuySessions20P": 8
+      "foreignBuySessions20P": 8,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 652.9,
+      "prevProfit": 270.5
     },
     "VIX": {
       "symbol": "VIX",
@@ -3019,8 +3127,8 @@
       "ceiling": 13650,
       "floor": 11950,
       "marketCapTỷ": 18742.0,
-      "profitGrowth": 24,
-      "revGrowth": 19.5,
+      "profitGrowth": -94.2,
+      "revGrowth": -31.7,
       "eps": 850,
       "pe": 15.1,
       "pb": 1,
@@ -3053,10 +3161,10 @@
       "foreignNetValTy": 3.1,
       "foreignNetQty": 247100,
       "quarterLabels": [
-        "Q3-2025",
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026"
+        "Q3/2025",
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026"
       ],
       "quarterlyRevenue": [
         3221.8,
@@ -3080,7 +3188,10 @@
       "foreignNet20P": 439.0,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 4,
-      "foreignBuySessions20P": 8
+      "foreignBuySessions20P": 8,
+      "latestQuarter": "Q2/2026",
+      "prevRev": 1976.2,
+      "prevProfit": 1301.6
     },
     "ORS": {
       "symbol": "ORS",
@@ -3098,8 +3209,8 @@
       "ceiling": 14950,
       "floor": 13050,
       "marketCapTỷ": 4185.0,
-      "profitGrowth": 28.5,
-      "revGrowth": 21.2,
+      "profitGrowth": -35.3,
+      "revGrowth": 37.5,
       "eps": 1120,
       "pe": 12.5,
       "pb": 1.1,
@@ -3132,10 +3243,10 @@
       "foreignNetValTy": 0.78,
       "foreignNetQty": 56300,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         390.5,
@@ -3159,7 +3270,10 @@
       "foreignNet20P": 10.84,
       "foreignBuySessions5P": 4,
       "foreignBuySessions10P": 4,
-      "foreignBuySessions20P": 10
+      "foreignBuySessions20P": 10,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 355.8,
+      "prevProfit": 133.5
     },
     "AGR": {
       "symbol": "AGR",
@@ -3177,8 +3291,8 @@
       "ceiling": 12150,
       "floor": 10650,
       "marketCapTỷ": 2466.0,
-      "profitGrowth": 22,
-      "revGrowth": 18,
+      "profitGrowth": -57.4,
+      "revGrowth": 8.1,
       "eps": 1250,
       "pe": 9.2,
       "pb": 1.3,
@@ -3211,10 +3325,10 @@
       "foreignNetValTy": -0.1,
       "foreignNetQty": -8900,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         123.4,
@@ -3238,7 +3352,10 @@
       "foreignNet20P": 0.58,
       "foreignBuySessions5P": 4,
       "foreignBuySessions10P": 7,
-      "foreignBuySessions20P": 11
+      "foreignBuySessions20P": 11,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 156.9,
+      "prevProfit": 68.6
     },
     "LPB": {
       "symbol": "LPB",
@@ -3256,8 +3373,8 @@
       "ceiling": 39750,
       "floor": 34550,
       "marketCapTỷ": 110978.0,
-      "profitGrowth": 85.4,
-      "revGrowth": 38.2,
+      "profitGrowth": 28.9,
+      "revGrowth": -7.4,
       "eps": 3850,
       "pe": 9.6,
       "pb": 2.3,
@@ -3290,10 +3407,10 @@
       "foreignNetValTy": -7.77,
       "foreignNetQty": -208900,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         4781.4,
@@ -3317,7 +3434,10 @@
       "foreignNet20P": -36.5,
       "foreignBuySessions5P": 4,
       "foreignBuySessions10P": 6,
-      "foreignBuySessions20P": 8
+      "foreignBuySessions20P": 8,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 4235.0,
+      "prevProfit": 2762.0
     },
     "EIB": {
       "symbol": "EIB",
@@ -3335,8 +3455,8 @@
       "ceiling": 17250,
       "floor": 15050,
       "marketCapTỷ": 28026.0,
-      "profitGrowth": 18,
-      "revGrowth": 14,
+      "profitGrowth": -67.6,
+      "revGrowth": -25.6,
       "eps": 1420,
       "pe": 11.3,
       "pb": 1.2,
@@ -3369,10 +3489,10 @@
       "foreignNetValTy": -1.66,
       "foreignNetQty": -103000,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         1690.9,
@@ -3396,7 +3516,10 @@
       "foreignNet20P": -47.35,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 2,
-      "foreignBuySessions20P": 4
+      "foreignBuySessions20P": 4,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 1465.0,
+      "prevProfit": 444.7
     },
     "MSB": {
       "symbol": "MSB",
@@ -3414,8 +3537,8 @@
       "ceiling": 17350,
       "floor": 15150,
       "marketCapTỷ": 42120.0,
-      "profitGrowth": 16.5,
-      "revGrowth": 15.2,
+      "profitGrowth": 29.4,
+      "revGrowth": 21.6,
       "eps": 2150,
       "pe": 7.5,
       "pb": 0.9,
@@ -3448,10 +3571,10 @@
       "foreignNetValTy": 0.03,
       "foreignNetQty": 2100,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         3043.6,
@@ -3475,7 +3598,10 @@
       "foreignNet20P": -409.02,
       "foreignBuySessions5P": 0,
       "foreignBuySessions10P": 1,
-      "foreignBuySessions20P": 2
+      "foreignBuySessions20P": 2,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 2815.3,
+      "prevProfit": 1274.2
     },
     "OCB": {
       "symbol": "OCB",
@@ -3493,8 +3619,8 @@
       "ceiling": 11250,
       "floor": 9820,
       "marketCapTỷ": 26138.0,
-      "profitGrowth": 15,
-      "revGrowth": 14.5,
+      "profitGrowth": 7.0,
+      "revGrowth": 14.2,
       "eps": 1850,
       "pe": 5.7,
       "pb": 0.9,
@@ -3527,10 +3653,10 @@
       "foreignNetValTy": 0.0,
       "foreignNetQty": 0,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         2481.9,
@@ -3554,7 +3680,10 @@
       "foreignNet20P": -99.53,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 2,
-      "foreignBuySessions20P": 5
+      "foreignBuySessions20P": 5,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 2424.2,
+      "prevProfit": 1227.9
     },
     "NAB": {
       "symbol": "NAB",
@@ -3572,8 +3701,8 @@
       "ceiling": 13850,
       "floor": 12050,
       "marketCapTỷ": 16575.0,
-      "profitGrowth": 32,
-      "revGrowth": 24.5,
+      "profitGrowth": 23.0,
+      "revGrowth": -13.5,
       "eps": 2450,
       "pe": 5.2,
       "pb": 1.2,
@@ -3606,10 +3735,10 @@
       "foreignNetValTy": -1.76,
       "foreignNetQty": -137700,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         2327.6,
@@ -3633,7 +3762,10 @@
       "foreignNet20P": 39.42,
       "foreignBuySessions5P": 3,
       "foreignBuySessions10P": 6,
-      "foreignBuySessions20P": 15
+      "foreignBuySessions20P": 15,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 2054.8,
+      "prevProfit": 1031.3
     },
     "NKG": {
       "symbol": "NKG",
@@ -3651,8 +3783,8 @@
       "ceiling": 13100,
       "floor": 11400,
       "marketCapTỷ": 3238.0,
-      "profitGrowth": 120,
-      "revGrowth": 16.5,
+      "profitGrowth": 158.0,
+      "revGrowth": 45.0,
       "eps": 1680,
       "pe": 7.3,
       "pb": 1,
@@ -3685,10 +3817,10 @@
       "foreignNetValTy": 0.99,
       "foreignNetQty": 80200,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         3136.5,
@@ -3712,7 +3844,10 @@
       "foreignNet20P": 32.85,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 4,
-      "foreignBuySessions20P": 12
+      "foreignBuySessions20P": 12,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 3773.1,
+      "prevProfit": 49.5
     },
     "HSG": {
       "symbol": "HSG",
@@ -3730,8 +3865,8 @@
       "ceiling": 11350,
       "floor": 9910,
       "marketCapTỷ": 6529.0,
-      "profitGrowth": 165,
-      "revGrowth": 18.2,
+      "profitGrowth": -62.3,
+      "revGrowth": -18.0,
       "eps": 1450,
       "pe": 7.3,
       "pb": 1.1,
@@ -3764,10 +3899,10 @@
       "foreignNetValTy": 0.2,
       "foreignNetQty": 19000,
       "quarterLabels": [
-        "Q2-2025",
-        "Q3-2025",
-        "Q4-2025",
-        "Q1-2026"
+        "Q2/2025",
+        "Q3/2025",
+        "Q4/2025",
+        "Q1/2026"
       ],
       "quarterlyRevenue": [
         8451.9,
@@ -3791,7 +3926,10 @@
       "foreignNet20P": 3.94,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 4,
-      "foreignBuySessions20P": 10
+      "foreignBuySessions20P": 10,
+      "latestQuarter": "Q1/2026",
+      "prevRev": 10221.7,
+      "prevProfit": 165.5
     },
     "VGS": {
       "symbol": "VGS",
@@ -3809,8 +3947,8 @@
       "ceiling": 21200,
       "floor": 17400,
       "marketCapTỷ": 1033.0,
-      "profitGrowth": 42,
-      "revGrowth": 21,
+      "profitGrowth": 65.6,
+      "revGrowth": 11.6,
       "eps": 2450,
       "pe": 7.9,
       "pb": 1.8,
@@ -3843,10 +3981,10 @@
       "foreignNetValTy": 0.0,
       "foreignNetQty": 0,
       "quarterLabels": [
-        "Q3-2025",
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026"
+        "Q3/2025",
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026"
       ],
       "quarterlyRevenue": [
         1767.2,
@@ -3870,7 +4008,10 @@
       "foreignNet20P": -0.67,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 9
+      "foreignBuySessions20P": 9,
+      "latestQuarter": "Q2/2026",
+      "prevRev": 2120.3,
+      "prevProfit": 34.9
     },
     "KSB": {
       "symbol": "KSB",
@@ -3888,8 +4029,8 @@
       "ceiling": 13000,
       "floor": 11300,
       "marketCapTỷ": 1391.0,
-      "profitGrowth": 18.5,
-      "revGrowth": 14,
+      "profitGrowth": -1.1,
+      "revGrowth": -0.3,
       "eps": 1150,
       "pe": 10.6,
       "pb": 1,
@@ -3922,10 +4063,10 @@
       "foreignNetValTy": -0.11,
       "foreignNetQty": -9400,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         181.0,
@@ -3949,7 +4090,10 @@
       "foreignNet20P": -2.66,
       "foreignBuySessions5P": 0,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 7
+      "foreignBuySessions20P": 7,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 259.9,
+      "prevProfit": 35.4
     },
     "HT1": {
       "symbol": "HT1",
@@ -3967,8 +4111,8 @@
       "ceiling": 13550,
       "floor": 11850,
       "marketCapTỷ": 4789.0,
-      "profitGrowth": 45,
-      "revGrowth": 11.2,
+      "profitGrowth": 16.0,
+      "revGrowth": 21.6,
       "eps": 520,
       "pe": 24.1,
       "pb": 0.9,
@@ -4001,10 +4145,10 @@
       "foreignNetValTy": -0.65,
       "foreignNetQty": -51600,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         1979.8,
@@ -4028,7 +4172,10 @@
       "foreignNet20P": -7.49,
       "foreignBuySessions5P": 0,
       "foreignBuySessions10P": 0,
-      "foreignBuySessions20P": 0
+      "foreignBuySessions20P": 0,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 1866.5,
+      "prevProfit": 85.8
     },
     "NVL": {
       "symbol": "NVL",
@@ -4046,8 +4193,8 @@
       "ceiling": 11050,
       "floor": 9630,
       "marketCapTỷ": 20086.0,
-      "profitGrowth": -48.5,
-      "revGrowth": -22,
+      "profitGrowth": 195.6,
+      "revGrowth": 204.2,
       "eps": 180,
       "pe": 57.2,
       "pb": 0.6,
@@ -4080,10 +4227,10 @@
       "foreignNetValTy": 1.3,
       "foreignNetQty": 126093,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         1567.4,
@@ -4107,7 +4254,10 @@
       "foreignNet20P": -32.13,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 6,
-      "foreignBuySessions20P": 9
+      "foreignBuySessions20P": 9,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 1683.1,
+      "prevProfit": -1153.2
     },
     "DIG": {
       "symbol": "DIG",
@@ -4125,8 +4275,8 @@
       "ceiling": 10800,
       "floor": 9400,
       "marketCapTỷ": 6160.0,
-      "profitGrowth": -18,
-      "revGrowth": -12.5,
+      "profitGrowth": -64.2,
+      "revGrowth": -43.1,
       "eps": 380,
       "pe": 26.6,
       "pb": 1,
@@ -4159,10 +4309,10 @@
       "foreignNetValTy": 0.39,
       "foreignNetQty": 38800,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         2959.7,
@@ -4186,7 +4336,10 @@
       "foreignNet20P": 56.33,
       "foreignBuySessions5P": 3,
       "foreignBuySessions10P": 7,
-      "foreignBuySessions20P": 14
+      "foreignBuySessions20P": 14,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 1339.3,
+      "prevProfit": 193.2
     },
     "PDR": {
       "symbol": "PDR",
@@ -4204,8 +4357,8 @@
       "ceiling": 12100,
       "floor": 10600,
       "marketCapTỷ": 9823.0,
-      "profitGrowth": 12,
-      "revGrowth": 15.5,
+      "profitGrowth": -84.0,
+      "revGrowth": -95.3,
       "eps": 590,
       "pe": 19.1,
       "pb": 1.1,
@@ -4238,10 +4391,10 @@
       "foreignNetValTy": 0.74,
       "foreignNetQty": 66200,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         360.6,
@@ -4265,7 +4418,10 @@
       "foreignNet20P": -7.67,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 6
+      "foreignBuySessions20P": 6,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 506.5,
+      "prevProfit": 85.8
     },
     "DXG": {
       "symbol": "DXG",
@@ -4283,8 +4439,8 @@
       "ceiling": 11700,
       "floor": 10200,
       "marketCapTỷ": 7961.0,
-      "profitGrowth": 8.5,
-      "revGrowth": 12,
+      "profitGrowth": -98.0,
+      "revGrowth": -36.1,
       "eps": 320,
       "pe": 34.5,
       "pb": 0.8,
@@ -4317,10 +4473,10 @@
       "foreignNetValTy": 1.59,
       "foreignNetQty": 148500,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         1437.1,
@@ -4344,7 +4500,10 @@
       "foreignNet20P": 57.87,
       "foreignBuySessions5P": 5,
       "foreignBuySessions10P": 9,
-      "foreignBuySessions20P": 13
+      "foreignBuySessions20P": 13,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 1068.3,
+      "prevProfit": 163.6
     },
     "KDH": {
       "symbol": "KDH",
@@ -4362,8 +4521,8 @@
       "ceiling": 16150,
       "floor": 14050,
       "marketCapTỷ": 13952.0,
-      "profitGrowth": 22,
-      "revGrowth": 18.5,
+      "profitGrowth": -67.9,
+      "revGrowth": -96.2,
       "eps": 1250,
       "pe": 12.3,
       "pb": 1.7,
@@ -4396,10 +4555,10 @@
       "foreignNetValTy": 19.82,
       "foreignNetQty": 1303567,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         1816.3,
@@ -4423,7 +4582,10 @@
       "foreignNet20P": 60.09,
       "foreignBuySessions5P": 4,
       "foreignBuySessions10P": 6,
-      "foreignBuySessions20P": 9
+      "foreignBuySessions20P": 9,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 1098.2,
+      "prevProfit": 525.9
     },
     "NLG": {
       "symbol": "NLG",
@@ -4441,8 +4603,8 @@
       "ceiling": 25900,
       "floor": 22600,
       "marketCapTỷ": 9177.0,
-      "profitGrowth": 28.5,
-      "revGrowth": 21,
+      "profitGrowth": -97.7,
+      "revGrowth": -82.5,
       "eps": 1850,
       "pe": 12.9,
       "pb": 1.4,
@@ -4475,10 +4637,10 @@
       "foreignNetValTy": -0.75,
       "foreignNetQty": -31400,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         1704.2,
@@ -4502,7 +4664,10 @@
       "foreignNet20P": -35.28,
       "foreignBuySessions5P": 3,
       "foreignBuySessions10P": 4,
-      "foreignBuySessions20P": 9
+      "foreignBuySessions20P": 9,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 1877.2,
+      "prevProfit": 234.0
     },
     "TCH": {
       "symbol": "TCH",
@@ -4520,8 +4685,8 @@
       "ceiling": 13950,
       "floor": 12150,
       "marketCapTỷ": 8753.0,
-      "profitGrowth": 45,
-      "revGrowth": 32,
+      "profitGrowth": 1233.0,
+      "revGrowth": 466.0,
       "eps": 1720,
       "pe": 7.6,
       "pb": 1,
@@ -4554,10 +4719,10 @@
       "foreignNetValTy": 4.3,
       "foreignNetQty": 329900,
       "quarterLabels": [
-        "Q3-2025",
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026"
+        "Q3/2025",
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026"
       ],
       "quarterlyRevenue": [
         317.0,
@@ -4581,7 +4746,10 @@
       "foreignNet20P": 85.83,
       "foreignBuySessions5P": 5,
       "foreignBuySessions10P": 7,
-      "foreignBuySessions20P": 13
+      "foreignBuySessions20P": 13,
+      "latestQuarter": "Q2/2026",
+      "prevRev": 346.0,
+      "prevProfit": 56.3
     },
     "HDG": {
       "symbol": "HDG",
@@ -4599,8 +4767,8 @@
       "ceiling": 17500,
       "floor": 15300,
       "marketCapTỷ": 5044.0,
-      "profitGrowth": 16.5,
-      "revGrowth": 14,
+      "profitGrowth": -32.3,
+      "revGrowth": -16.1,
       "eps": 2150,
       "pe": 7.7,
       "pb": 1.3,
@@ -4633,10 +4801,10 @@
       "foreignNetValTy": -0.44,
       "foreignNetQty": -26900,
       "quarterLabels": [
-        "Q3-2025",
-        "Q4-2025",
-        "Q1-2026",
-        "Q3-2026"
+        "Q3/2025",
+        "Q4/2025",
+        "Q1/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         712.5,
@@ -4660,7 +4828,10 @@
       "foreignNet20P": -5.47,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 4,
-      "foreignBuySessions20P": 6
+      "foreignBuySessions20P": 6,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 712.5,
+      "prevProfit": 336.7
     },
     "CEO": {
       "symbol": "CEO",
@@ -4678,8 +4849,8 @@
       "ceiling": 12800,
       "floor": 10600,
       "marketCapTỷ": 6175.0,
-      "profitGrowth": 14,
-      "revGrowth": 12.5,
+      "profitGrowth": -22.6,
+      "revGrowth": 10.0,
       "eps": 450,
       "pe": 26.7,
       "pb": 1.1,
@@ -4712,10 +4883,10 @@
       "foreignNetValTy": 3.67,
       "foreignNetQty": 310800,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         349.1,
@@ -4739,7 +4910,10 @@
       "foreignNet20P": -11.19,
       "foreignBuySessions5P": 4,
       "foreignBuySessions10P": 6,
-      "foreignBuySessions20P": 12
+      "foreignBuySessions20P": 12,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 241.9,
+      "prevProfit": 52.2
     },
     "DXS": {
       "symbol": "DXS",
@@ -4757,8 +4931,8 @@
       "ceiling": 5080,
       "floor": 4420,
       "marketCapTỷ": 2270.0,
-      "profitGrowth": 18,
-      "revGrowth": 16,
+      "profitGrowth": -128.1,
+      "revGrowth": -26.7,
       "eps": 210,
       "pe": 22.8,
       "pb": 0.6,
@@ -4791,10 +4965,10 @@
       "foreignNetValTy": -0.51,
       "foreignNetQty": -106800,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         1597.1,
@@ -4818,7 +4992,10 @@
       "foreignNet20P": -47.33,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 3,
-      "foreignBuySessions20P": 5
+      "foreignBuySessions20P": 5,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 864.1,
+      "prevProfit": 98.6
     },
     "KBC": {
       "symbol": "KBC",
@@ -4836,8 +5013,8 @@
       "ceiling": 28650,
       "floor": 24950,
       "marketCapTỷ": 20495.0,
-      "profitGrowth": 35,
-      "revGrowth": 28,
+      "profitGrowth": 200.5,
+      "revGrowth": 136.6,
       "eps": 1950,
       "pe": 13.7,
       "pb": 1.1,
@@ -4870,10 +5047,10 @@
       "foreignNetValTy": -1.87,
       "foreignNetQty": -70400,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         1648.5,
@@ -4897,7 +5074,10 @@
       "foreignNet20P": -17.92,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 4,
-      "foreignBuySessions20P": 9
+      "foreignBuySessions20P": 9,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 1347.3,
+      "prevProfit": 311.9
     },
     "IDC": {
       "symbol": "IDC",
@@ -4915,8 +5095,8 @@
       "ceiling": 38000,
       "floor": 31200,
       "marketCapTỷ": 11352.0,
-      "profitGrowth": 42,
-      "revGrowth": 26.5,
+      "profitGrowth": 54.7,
+      "revGrowth": 28.8,
       "eps": 5420,
       "pe": 6.3,
       "pb": 2.8,
@@ -4949,10 +5129,10 @@
       "foreignNetValTy": -3.22,
       "foreignNetQty": -94106,
       "quarterLabels": [
-        "Q3-2025",
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026"
+        "Q3/2025",
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026"
       ],
       "quarterlyRevenue": [
         2871.3,
@@ -4976,7 +5156,10 @@
       "foreignNet20P": 110.37,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 6,
-      "foreignBuySessions20P": 15
+      "foreignBuySessions20P": 15,
+      "latestQuarter": "Q2/2026",
+      "prevRev": 1763.2,
+      "prevProfit": 416.0
     },
     "VGC": {
       "symbol": "VGC",
@@ -4994,8 +5177,8 @@
       "ceiling": 42800,
       "floor": 37200,
       "marketCapTỷ": 17979.0,
-      "profitGrowth": 18.2,
-      "revGrowth": 12.8,
+      "profitGrowth": 423.8,
+      "revGrowth": 16.6,
       "eps": 2650,
       "pe": 15.1,
       "pb": 1.9,
@@ -5028,10 +5211,10 @@
       "foreignNetValTy": 0.05,
       "foreignNetQty": 1200,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         3978.0,
@@ -5055,7 +5238,10 @@
       "foreignNet20P": -39.93,
       "foreignBuySessions5P": 5,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 7
+      "foreignBuySessions20P": 7,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 3254.0,
+      "prevProfit": 117.6
     },
     "SZC": {
       "symbol": "SZC",
@@ -5073,8 +5259,8 @@
       "ceiling": 21650,
       "floor": 18850,
       "marketCapTỷ": 3600.0,
-      "profitGrowth": 29,
-      "revGrowth": 22,
+      "profitGrowth": 24.1,
+      "revGrowth": 114.8,
       "eps": 2280,
       "pe": 8.8,
       "pb": 2.1,
@@ -5107,10 +5293,10 @@
       "foreignNetValTy": -0.06,
       "foreignNetQty": -3000,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         379.4,
@@ -5134,7 +5320,10 @@
       "foreignNet20P": 1.65,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 3,
-      "foreignBuySessions20P": 8
+      "foreignBuySessions20P": 8,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 52.2,
+      "prevProfit": 17.4
     },
     "PHR": {
       "symbol": "PHR",
@@ -5152,8 +5341,8 @@
       "ceiling": 31050,
       "floor": 27050,
       "marketCapTỷ": 3848.0,
-      "profitGrowth": 24.5,
-      "revGrowth": 16.8,
+      "profitGrowth": 63.7,
+      "revGrowth": 6.6,
       "eps": 3950,
       "pe": 7.2,
       "pb": 2,
@@ -5186,10 +5375,10 @@
       "foreignNetValTy": -0.0,
       "foreignNetQty": -100,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         498.7,
@@ -5213,7 +5402,10 @@
       "foreignNet20P": -0.96,
       "foreignBuySessions5P": 0,
       "foreignBuySessions10P": 0,
-      "foreignBuySessions20P": 0
+      "foreignBuySessions20P": 0,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 616.8,
+      "prevProfit": 264.5
     },
     "DPR": {
       "symbol": "DPR",
@@ -5231,8 +5423,8 @@
       "ceiling": 38100,
       "floor": 33200,
       "marketCapTỷ": 3049.0,
-      "profitGrowth": 22,
-      "revGrowth": 15,
+      "profitGrowth": 39.0,
+      "revGrowth": 16.0,
       "eps": 2850,
       "pe": 12.3,
       "pb": 1.5,
@@ -5265,10 +5457,10 @@
       "foreignNetValTy": -0.23,
       "foreignNetQty": -6500,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         301.7,
@@ -5292,7 +5484,10 @@
       "foreignNet20P": 4.29,
       "foreignBuySessions5P": 0,
       "foreignBuySessions10P": 2,
-      "foreignBuySessions20P": 7
+      "foreignBuySessions20P": 7,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 482.2,
+      "prevProfit": 154.9
     },
     "FRT": {
       "symbol": "FRT",
@@ -5310,8 +5505,8 @@
       "ceiling": 157200,
       "floor": 136800,
       "marketCapTỷ": 19825.0,
-      "profitGrowth": 185,
-      "revGrowth": 26,
+      "profitGrowth": 110.3,
+      "revGrowth": 33.7,
       "eps": 2450,
       "pe": 59.4,
       "pb": 4.2,
@@ -5344,10 +5539,10 @@
       "foreignNetValTy": -0.04,
       "foreignNetQty": -290,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         14912.8,
@@ -5371,7 +5566,10 @@
       "foreignNet20P": 102.47,
       "foreignBuySessions5P": 5,
       "foreignBuySessions10P": 8,
-      "foreignBuySessions20P": 17
+      "foreignBuySessions20P": 17,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 13109.9,
+      "prevProfit": 265.9
     },
     "DGW": {
       "symbol": "DGW",
@@ -5389,8 +5587,8 @@
       "ceiling": 43650,
       "floor": 37950,
       "marketCapTỷ": 6738.0,
-      "profitGrowth": 32,
-      "revGrowth": 19.5,
+      "profitGrowth": 65.0,
+      "revGrowth": 49.1,
       "eps": 3120,
       "pe": 12.9,
       "pb": 2.6,
@@ -5423,10 +5621,10 @@
       "foreignNetValTy": -0.25,
       "foreignNetQty": -6000,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         7990.1,
@@ -5450,7 +5648,10 @@
       "foreignNet20P": -11.61,
       "foreignBuySessions5P": 4,
       "foreignBuySessions10P": 6,
-      "foreignBuySessions20P": 9
+      "foreignBuySessions20P": 9,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 7390.6,
+      "prevProfit": 168.5
     },
     "PET": {
       "symbol": "PET",
@@ -5468,8 +5669,8 @@
       "ceiling": 53400,
       "floor": 46500,
       "marketCapTỷ": 5289.0,
-      "profitGrowth": 26,
-      "revGrowth": 15,
+      "profitGrowth": -24.9,
+      "revGrowth": 32.5,
       "eps": 1250,
       "pe": 39.9,
       "pb": 1.1,
@@ -5502,10 +5703,10 @@
       "foreignNetValTy": 0.0,
       "foreignNetQty": 0,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         7594.8,
@@ -5529,7 +5730,10 @@
       "foreignNet20P": -0.88,
       "foreignBuySessions5P": 0,
       "foreignBuySessions10P": 0,
-      "foreignBuySessions20P": 0
+      "foreignBuySessions20P": 0,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 5483.8,
+      "prevProfit": 145.2
     },
     "PNJ": {
       "symbol": "PNJ",
@@ -5547,8 +5751,8 @@
       "ceiling": 15450,
       "floor": 13450,
       "marketCapTỷ": 4800.0,
-      "profitGrowth": 14.8,
-      "revGrowth": 18.2,
+      "profitGrowth": -152.0,
+      "revGrowth": -14.0,
       "eps": 6450,
       "pe": 2.2,
       "pb": 2.8,
@@ -5581,10 +5785,10 @@
       "foreignNetValTy": 0.78,
       "foreignNetQty": 54230,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         9623.0,
@@ -5608,7 +5812,10 @@
       "foreignNet20P": -196.77,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 2,
-      "foreignBuySessions20P": 9
+      "foreignBuySessions20P": 9,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 8135.5,
+      "prevProfit": 495.7
     },
     "CTR": {
       "symbol": "CTR",
@@ -5626,8 +5833,8 @@
       "ceiling": 64800,
       "floor": 56400,
       "marketCapTỷ": 6795.0,
-      "profitGrowth": 12.8,
-      "revGrowth": 14.2,
+      "profitGrowth": 8.6,
+      "revGrowth": 6.6,
       "eps": 4850,
       "pe": 12.2,
       "pb": 3.2,
@@ -5660,10 +5867,10 @@
       "foreignNetValTy": -1.73,
       "foreignNetQty": -29100,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         3999.5,
@@ -5687,7 +5894,10 @@
       "foreignNet20P": -11.23,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 4,
-      "foreignBuySessions20P": 7
+      "foreignBuySessions20P": 7,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 3965.2,
+      "prevProfit": 168.9
     },
     "ELC": {
       "symbol": "ELC",
@@ -5705,8 +5915,8 @@
       "ceiling": 11050,
       "floor": 9630,
       "marketCapTỷ": 846.0,
-      "profitGrowth": 45,
-      "revGrowth": 28,
+      "profitGrowth": -5.9,
+      "revGrowth": 55.7,
       "eps": 1850,
       "pe": 5.5,
       "pb": 1.7,
@@ -5739,10 +5949,10 @@
       "foreignNetValTy": 0.23,
       "foreignNetQty": 22100,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         760.1,
@@ -5766,7 +5976,10 @@
       "foreignNet20P": 0.55,
       "foreignBuySessions5P": 4,
       "foreignBuySessions10P": 7,
-      "foreignBuySessions20P": 11
+      "foreignBuySessions20P": 11,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 427.6,
+      "prevProfit": 37.6
     },
     "DGC": {
       "symbol": "DGC",
@@ -5784,8 +5997,8 @@
       "ceiling": 35000,
       "floor": 30500,
       "marketCapTỷ": 12400.0,
-      "profitGrowth": 3.5,
-      "revGrowth": 4.2,
+      "profitGrowth": -50.5,
+      "revGrowth": -16.5,
       "eps": 5420,
       "pe": 6.0,
       "pb": 2.4,
@@ -5818,10 +6031,10 @@
       "foreignNetValTy": -0.16,
       "foreignNetQty": -5000,
       "quarterLabels": [
-        "Q3-2025",
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026"
+        "Q3/2025",
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026"
       ],
       "quarterlyRevenue": [
         2816.7,
@@ -5845,7 +6058,10 @@
       "foreignNet20P": -5.66,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 6
+      "foreignBuySessions20P": 6,
+      "latestQuarter": "Q2/2026",
+      "prevRev": 2894.4,
+      "prevProfit": 890.8
     },
     "DCM": {
       "symbol": "DCM",
@@ -5863,8 +6079,8 @@
       "ceiling": 32750,
       "floor": 28550,
       "marketCapTỷ": 16014.0,
-      "profitGrowth": 48,
-      "revGrowth": 15.5,
+      "profitGrowth": 32.4,
+      "revGrowth": 11.2,
       "eps": 3250,
       "pe": 9.3,
       "pb": 1.8,
@@ -5897,10 +6113,10 @@
       "foreignNetValTy": -2.51,
       "foreignNetQty": -82900,
       "quarterLabels": [
-        "Q3-2025",
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026"
+        "Q3/2025",
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026"
       ],
       "quarterlyRevenue": [
         2988.2,
@@ -5924,7 +6140,10 @@
       "foreignNet20P": 91.64,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 15
+      "foreignBuySessions20P": 15,
+      "latestQuarter": "Q2/2026",
+      "prevRev": 6037.3,
+      "prevProfit": 806.4
     },
     "DPM": {
       "symbol": "DPM",
@@ -5942,8 +6161,8 @@
       "ceiling": 20800,
       "floor": 18100,
       "marketCapTỷ": 7534.0,
-      "profitGrowth": 35,
-      "revGrowth": 12.8,
+      "profitGrowth": -81.2,
+      "revGrowth": 10.7,
       "eps": 2150,
       "pe": 9.0,
       "pb": 1.1,
@@ -5976,10 +6195,10 @@
       "foreignNetValTy": -1.14,
       "foreignNetQty": -59250,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         3414.4,
@@ -6003,7 +6222,10 @@
       "foreignNet20P": -13.24,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 3,
-      "foreignBuySessions20P": 8
+      "foreignBuySessions20P": 8,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 3728.8,
+      "prevProfit": 238.8
     },
     "BFC": {
       "symbol": "BFC",
@@ -6021,8 +6243,8 @@
       "ceiling": 59300,
       "floor": 51700,
       "marketCapTỷ": 3123.0,
-      "profitGrowth": 140,
-      "revGrowth": 22,
+      "profitGrowth": 28.0,
+      "revGrowth": 31.0,
       "eps": 4250,
       "pe": 12.9,
       "pb": 1.6,
@@ -6055,10 +6277,10 @@
       "foreignNetValTy": -0.07,
       "foreignNetQty": -1300,
       "quarterLabels": [
-        "Q2-2025",
-        "Q3-2025",
-        "Q4-2025",
-        "Q1-2026"
+        "Q2/2025",
+        "Q3/2025",
+        "Q4/2025",
+        "Q1/2026"
       ],
       "quarterlyRevenue": [
         3534.6,
@@ -6082,7 +6304,10 @@
       "foreignNet20P": -13.15,
       "foreignBuySessions5P": 0,
       "foreignBuySessions10P": 3,
-      "foreignBuySessions20P": 5
+      "foreignBuySessions20P": 5,
+      "latestQuarter": "Q1/2026",
+      "prevRev": 2554.3,
+      "prevProfit": 111.1
     },
     "CSV": {
       "symbol": "CSV",
@@ -6100,8 +6325,8 @@
       "ceiling": 23150,
       "floor": 20150,
       "marketCapTỷ": 948.0,
-      "profitGrowth": 18.5,
-      "revGrowth": 14,
+      "profitGrowth": 60.2,
+      "revGrowth": 59.6,
       "eps": 3100,
       "pe": 6.9,
       "pb": 1.7,
@@ -6134,10 +6359,10 @@
       "foreignNetValTy": -0.04,
       "foreignNetQty": -1900,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         644.0,
@@ -6161,7 +6386,10 @@
       "foreignNet20P": -1.25,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 4,
-      "foreignBuySessions20P": 8
+      "foreignBuySessions20P": 8,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 510.1,
+      "prevProfit": 60.1
     },
     "DBC": {
       "symbol": "DBC",
@@ -6179,8 +6407,8 @@
       "ceiling": 17500,
       "floor": 15300,
       "marketCapTỷ": 5578.0,
-      "profitGrowth": 280,
-      "revGrowth": 18.5,
+      "profitGrowth": -41.6,
+      "revGrowth": 6.1,
       "eps": 2150,
       "pe": 7.8,
       "pb": 1.6,
@@ -6213,10 +6441,10 @@
       "foreignNetValTy": 5.0,
       "foreignNetQty": 299300,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         3729.0,
@@ -6240,7 +6468,10 @@
       "foreignNet20P": 4.11,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 6,
-      "foreignBuySessions20P": 9
+      "foreignBuySessions20P": 9,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 4841.2,
+      "prevProfit": 343.0
     },
     "BAF": {
       "symbol": "BAF",
@@ -6258,8 +6489,8 @@
       "ceiling": 33500,
       "floor": 29200,
       "marketCapTỷ": 7457.0,
-      "profitGrowth": 110,
-      "revGrowth": 24,
+      "profitGrowth": -5.8,
+      "revGrowth": 81.9,
       "eps": 1250,
       "pe": 25.0,
       "pb": 1.5,
@@ -6292,10 +6523,10 @@
       "foreignNetValTy": 0.08,
       "foreignNetQty": 2600,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         1399.2,
@@ -6319,7 +6550,10 @@
       "foreignNet20P": -60.03,
       "foreignBuySessions5P": 3,
       "foreignBuySessions10P": 6,
-      "foreignBuySessions20P": 8
+      "foreignBuySessions20P": 8,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 1136.3,
+      "prevProfit": 22.5
     },
     "PVD": {
       "symbol": "PVD",
@@ -6337,8 +6571,8 @@
       "ceiling": 17700,
       "floor": 15400,
       "marketCapTỷ": 8979.0,
-      "profitGrowth": 68,
-      "revGrowth": 28.5,
+      "profitGrowth": -70.5,
+      "revGrowth": 25.0,
       "eps": 1580,
       "pe": 10.2,
       "pb": 1.1,
@@ -6371,10 +6605,10 @@
       "foreignNetValTy": -1.68,
       "foreignNetQty": -102700,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         4312.9,
@@ -6398,7 +6632,10 @@
       "foreignNet20P": 21.4,
       "foreignBuySessions5P": 3,
       "foreignBuySessions10P": 4,
-      "foreignBuySessions20P": 12
+      "foreignBuySessions20P": 12,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 2570.6,
+      "prevProfit": 277.1
     },
     "PVS": {
       "symbol": "PVS",
@@ -6416,8 +6653,8 @@
       "ceiling": 31500,
       "floor": 25900,
       "marketCapTỷ": 13336.0,
-      "profitGrowth": 24,
-      "revGrowth": 18,
+      "profitGrowth": 2.1,
+      "revGrowth": 9.9,
       "eps": 2250,
       "pe": 12.4,
       "pb": 1.3,
@@ -6450,10 +6687,10 @@
       "foreignNetValTy": -11.74,
       "foreignNetQty": -417200,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         9553.7,
@@ -6477,7 +6714,10 @@
       "foreignNet20P": -153.56,
       "foreignBuySessions5P": 0,
       "foreignBuySessions10P": 1,
-      "foreignBuySessions20P": 4
+      "foreignBuySessions20P": 4,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 9629.5,
+      "prevProfit": 334.0
     },
     "PVT": {
       "symbol": "PVT",
@@ -6495,8 +6735,8 @@
       "ceiling": 22350,
       "floor": 19450,
       "marketCapTỷ": 7308.0,
-      "profitGrowth": 22.5,
-      "revGrowth": 16.5,
+      "profitGrowth": 88.1,
+      "revGrowth": 31.3,
       "eps": 2850,
       "pe": 7.2,
       "pb": 1.2,
@@ -6529,10 +6769,10 @@
       "foreignNetValTy": -2.05,
       "foreignNetQty": -98600,
       "quarterLabels": [
-        "Q3-2025",
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026"
+        "Q3/2025",
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026"
       ],
       "quarterlyRevenue": [
         4419.4,
@@ -6556,7 +6796,10 @@
       "foreignNet20P": -94.48,
       "foreignBuySessions5P": 0,
       "foreignBuySessions10P": 0,
-      "foreignBuySessions20P": 6
+      "foreignBuySessions20P": 6,
+      "latestQuarter": "Q2/2026",
+      "prevRev": 4352.0,
+      "prevProfit": 360.7
     },
     "BSR": {
       "symbol": "BSR",
@@ -6574,8 +6817,8 @@
       "ceiling": 27200,
       "floor": 23700,
       "marketCapTỷ": 76737.0,
-      "profitGrowth": 15,
-      "revGrowth": 10.2,
+      "profitGrowth": 887.1,
+      "revGrowth": 68.8,
       "eps": 1850,
       "pe": 13.4,
       "pb": 1.1,
@@ -6608,10 +6851,10 @@
       "foreignNetValTy": -27.86,
       "foreignNetQty": -1114350,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         37621.4,
@@ -6635,7 +6878,10 @@
       "foreignNet20P": -250.06,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 2,
-      "foreignBuySessions20P": 5
+      "foreignBuySessions20P": 5,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 35290.2,
+      "prevProfit": 908.6
     },
     "GMD": {
       "symbol": "GMD",
@@ -6653,8 +6899,8 @@
       "ceiling": 57000,
       "floor": 49600,
       "marketCapTỷ": 17527.0,
-      "profitGrowth": -32,
-      "revGrowth": 24.5,
+      "profitGrowth": 35.6,
+      "revGrowth": 41.6,
       "eps": 4150,
       "pe": 12.6,
       "pb": 1.9,
@@ -6687,10 +6933,10 @@
       "foreignNetValTy": -9.89,
       "foreignNetQty": -188500,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         1614.4,
@@ -6714,7 +6960,10 @@
       "foreignNet20P": -554.54,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 3,
-      "foreignBuySessions20P": 4
+      "foreignBuySessions20P": 4,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 1560.5,
+      "prevProfit": 432.4
     },
     "HAH": {
       "symbol": "HAH",
@@ -6732,8 +6981,8 @@
       "ceiling": 50200,
       "floor": 43750,
       "marketCapTỷ": 5699.0,
-      "profitGrowth": 45,
-      "revGrowth": 28,
+      "profitGrowth": 3.7,
+      "revGrowth": 5.3,
       "eps": 3850,
       "pe": 12.2,
       "pb": 1.5,
@@ -6766,10 +7015,10 @@
       "foreignNetValTy": -0.2,
       "foreignNetQty": -4300,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         1299.6,
@@ -6793,7 +7042,10 @@
       "foreignNet20P": -12.89,
       "foreignBuySessions5P": 3,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 9
+      "foreignBuySessions20P": 9,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 1347.7,
+      "prevProfit": 352.9
     },
     "VOS": {
       "symbol": "VOS",
@@ -6811,8 +7063,8 @@
       "ceiling": 11350,
       "floor": 9910,
       "marketCapTỷ": 1491.0,
-      "profitGrowth": 85,
-      "revGrowth": 22,
+      "profitGrowth": -41.6,
+      "revGrowth": -13.0,
       "eps": 1650,
       "pe": 6.5,
       "pb": 1.2,
@@ -6845,34 +7097,37 @@
       "foreignNetValTy": -0.0,
       "foreignNetQty": -200,
       "quarterLabels": [
-        "Q1-2026",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
-        0.0,
+        955.9,
         709.0,
         922.1,
         739.0
       ],
       "quarterlyProfit": [
-        0.0,
+        216.6,
         4.3,
         42.7,
         76.9
       ],
       "latestRev": 739.0,
       "latestProfit": 76.9,
-      "ttmProfit": 123.9,
-      "ttmRevenue": 2370.1,
+      "ttmProfit": 340.5,
+      "ttmRevenue": 3326.0,
       "foreignNet1P": -0.05,
       "foreignNet5P": -0.06,
       "foreignNet10P": -1.44,
       "foreignNet20P": 0.16,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 4,
-      "foreignBuySessions20P": 9
+      "foreignBuySessions20P": 9,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 849.7,
+      "prevProfit": 131.7
     },
     "REE": {
       "symbol": "REE",
@@ -6890,8 +7145,8 @@
       "ceiling": 51900,
       "floor": 45200,
       "marketCapTỷ": 22603.0,
-      "profitGrowth": 11.5,
-      "revGrowth": 9.8,
+      "profitGrowth": 5.8,
+      "revGrowth": -3.5,
       "eps": 4520,
       "pe": 10.6,
       "pb": 1.3,
@@ -6924,10 +7179,10 @@
       "foreignNetValTy": 0.01,
       "foreignNetQty": 290,
       "quarterLabels": [
-        "Q3-2025",
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026"
+        "Q3/2025",
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026"
       ],
       "quarterlyRevenue": [
         2552.2,
@@ -6951,7 +7206,10 @@
       "foreignNet20P": 1.54,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 4,
-      "foreignBuySessions20P": 8
+      "foreignBuySessions20P": 8,
+      "latestQuarter": "Q2/2026",
+      "prevRev": 2513.5,
+      "prevProfit": 739.2
     },
     "GEG": {
       "symbol": "GEG",
@@ -6969,8 +7227,8 @@
       "ceiling": 12350,
       "floor": 10750,
       "marketCapTỷ": 3708.0,
-      "profitGrowth": 21,
-      "revGrowth": 14,
+      "profitGrowth": 25.3,
+      "revGrowth": 7.5,
       "eps": 750,
       "pe": 15.4,
       "pb": 0.9,
@@ -7003,10 +7261,10 @@
       "foreignNetValTy": -0.11,
       "foreignNetQty": -9300,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         590.4,
@@ -7030,7 +7288,10 @@
       "foreignNet20P": -1.27,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 3,
-      "foreignBuySessions20P": 7
+      "foreignBuySessions20P": 7,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 671.3,
+      "prevProfit": 80.1
     },
     "PC1": {
       "symbol": "PC1",
@@ -7048,8 +7309,8 @@
       "ceiling": 17350,
       "floor": 15150,
       "marketCapTỷ": 5069.0,
-      "profitGrowth": 42,
-      "revGrowth": 24.5,
+      "profitGrowth": 5.6,
+      "revGrowth": -20.1,
       "eps": 1450,
       "pe": 11.2,
       "pb": 1.1,
@@ -7082,10 +7343,10 @@
       "foreignNetValTy": -0.18,
       "foreignNetQty": -11100,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         5011.8,
@@ -7109,7 +7370,10 @@
       "foreignNet20P": -6.62,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 2,
-      "foreignBuySessions20P": 7
+      "foreignBuySessions20P": 7,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 3278.1,
+      "prevProfit": 394.4
     },
     "VCG": {
       "symbol": "VCG",
@@ -7127,8 +7391,8 @@
       "ceiling": 15850,
       "floor": 13850,
       "marketCapTỷ": 7903.0,
-      "profitGrowth": 35,
-      "revGrowth": 22,
+      "profitGrowth": -88.8,
+      "revGrowth": -25.6,
       "eps": 1150,
       "pe": 12.9,
       "pb": 1,
@@ -7161,10 +7425,10 @@
       "foreignNetValTy": -0.95,
       "foreignNetQty": -63900,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         4651.7,
@@ -7188,7 +7452,10 @@
       "foreignNet20P": 0.83,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 4,
-      "foreignBuySessions20P": 12
+      "foreignBuySessions20P": 12,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 4429.3,
+      "prevProfit": 3304.4
     },
     "HHV": {
       "symbol": "HHV",
@@ -7206,8 +7473,8 @@
       "ceiling": 10150,
       "floor": 8850,
       "marketCapTỷ": 3880.0,
-      "profitGrowth": 28,
-      "revGrowth": 19.5,
+      "profitGrowth": 39.6,
+      "revGrowth": 22.0,
       "eps": 980,
       "pe": 9.6,
       "pb": 0.9,
@@ -7240,10 +7507,10 @@
       "foreignNetValTy": -0.37,
       "foreignNetQty": -39100,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         1205.9,
@@ -7267,7 +7534,10 @@
       "foreignNet20P": 18.81,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 6,
-      "foreignBuySessions20P": 11
+      "foreignBuySessions20P": 11,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 913.5,
+      "prevProfit": 152.4
     },
     "LCG": {
       "symbol": "LCG",
@@ -7285,8 +7555,8 @@
       "ceiling": 6980,
       "floor": 6080,
       "marketCapTỷ": 1249.0,
-      "profitGrowth": 25,
-      "revGrowth": 18,
+      "profitGrowth": 17.2,
+      "revGrowth": 12.3,
       "eps": 850,
       "pe": 7.7,
       "pb": 0.9,
@@ -7319,10 +7589,10 @@
       "foreignNetValTy": 0.02,
       "foreignNetQty": 3200,
       "quarterLabels": [
-        "Q3-2025",
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026"
+        "Q3/2025",
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026"
       ],
       "quarterlyRevenue": [
         565.7,
@@ -7346,7 +7616,10 @@
       "foreignNet20P": 1.38,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 6,
-      "foreignBuySessions20P": 10
+      "foreignBuySessions20P": 10,
+      "latestQuarter": "Q2/2026",
+      "prevRev": 731.9,
+      "prevProfit": 30.8
     },
     "FCN": {
       "symbol": "FCN",
@@ -7364,8 +7637,8 @@
       "ceiling": 11750,
       "floor": 10250,
       "marketCapTỷ": 1711.0,
-      "profitGrowth": 40,
-      "revGrowth": 20,
+      "profitGrowth": 517.6,
+      "revGrowth": 62.6,
       "eps": 650,
       "pe": 16.8,
       "pb": 0.8,
@@ -7398,10 +7671,10 @@
       "foreignNetValTy": 0.06,
       "foreignNetQty": 5800,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         2714.8,
@@ -7425,7 +7698,10 @@
       "foreignNet20P": 3.8,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 11
+      "foreignBuySessions20P": 11,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 1142.6,
+      "prevProfit": 16.5
     },
     "CII": {
       "symbol": "CII",
@@ -7443,8 +7719,8 @@
       "ceiling": 14350,
       "floor": 12550,
       "marketCapTỷ": 4357.0,
-      "profitGrowth": 32,
-      "revGrowth": 18,
+      "profitGrowth": -11.9,
+      "revGrowth": 27.9,
       "eps": 920,
       "pe": 14.9,
       "pb": 0.9,
@@ -7477,10 +7753,10 @@
       "foreignNetValTy": -1.18,
       "foreignNetQty": -84900,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         824.7,
@@ -7504,7 +7780,10 @@
       "foreignNet20P": 1.94,
       "foreignBuySessions5P": 3,
       "foreignBuySessions10P": 3,
-      "foreignBuySessions20P": 11
+      "foreignBuySessions20P": 11,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 714.5,
+      "prevProfit": 56.1
     },
     "VHC": {
       "symbol": "VHC",
@@ -7522,8 +7801,8 @@
       "ceiling": 54200,
       "floor": 47200,
       "marketCapTỷ": 11469.0,
-      "profitGrowth": 28,
-      "revGrowth": 18.2,
+      "profitGrowth": 0.0,
+      "revGrowth": 0.0,
       "eps": 4650,
       "pe": 11.0,
       "pb": 1.7,
@@ -7556,10 +7835,10 @@
       "foreignNetValTy": -0.93,
       "foreignNetQty": -18200,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         2715.0,
@@ -7583,7 +7862,10 @@
       "foreignNet20P": -7.48,
       "foreignBuySessions5P": 2,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 9
+      "foreignBuySessions20P": 9,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 0.0,
+      "prevProfit": 0.0
     },
     "ANV": {
       "symbol": "ANV",
@@ -7601,8 +7883,8 @@
       "ceiling": 17850,
       "floor": 15550,
       "marketCapTỷ": 2228.0,
-      "profitGrowth": 65,
-      "revGrowth": 21,
+      "profitGrowth": -27.0,
+      "revGrowth": 3.5,
       "eps": 1850,
       "pe": 9.1,
       "pb": 1.3,
@@ -7635,10 +7917,10 @@
       "foreignNetValTy": 0.08,
       "foreignNetQty": 4900,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         2118.9,
@@ -7662,7 +7944,10 @@
       "foreignNet20P": -16.08,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 4,
-      "foreignBuySessions20P": 7
+      "foreignBuySessions20P": 7,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 2000.1,
+      "prevProfit": 283.1
     },
     "TNG": {
       "symbol": "TNG",
@@ -7680,8 +7965,8 @@
       "ceiling": 18300,
       "floor": 15100,
       "marketCapTỷ": 1887.0,
-      "profitGrowth": 28.5,
-      "revGrowth": 18,
+      "profitGrowth": 29.5,
+      "revGrowth": 22.6,
       "eps": 2550,
       "pe": 6.5,
       "pb": 1.3,
@@ -7714,10 +7999,10 @@
       "foreignNetValTy": -0.51,
       "foreignNetQty": -30700,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         2027.4,
@@ -7741,7 +8026,10 @@
       "foreignNet20P": 13.36,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 4,
-      "foreignBuySessions20P": 10
+      "foreignBuySessions20P": 10,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 2632.8,
+      "prevProfit": 117.0
     },
     "MSH": {
       "symbol": "MSH",
@@ -7759,8 +8047,8 @@
       "ceiling": 36900,
       "floor": 32100,
       "marketCapTỷ": 2554.0,
-      "profitGrowth": 34,
-      "revGrowth": 20.5,
+      "profitGrowth": -2.2,
+      "revGrowth": -1.0,
       "eps": 4850,
       "pe": 7.0,
       "pb": 1.6,
@@ -7793,10 +8081,10 @@
       "foreignNetValTy": -0.08,
       "foreignNetQty": -2400,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         1388.4,
@@ -7820,7 +8108,10 @@
       "foreignNet20P": 4.14,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 3,
-      "foreignBuySessions20P": 8
+      "foreignBuySessions20P": 8,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 1646.7,
+      "prevProfit": 200.7
     },
     "GIL": {
       "symbol": "GIL",
@@ -7838,8 +8129,8 @@
       "ceiling": 9640,
       "floor": 8380,
       "marketCapTỷ": 619.0,
-      "profitGrowth": 45,
-      "revGrowth": 22,
+      "profitGrowth": 193.0,
+      "revGrowth": 66.3,
       "eps": 1950,
       "pe": 4.5,
       "pb": 1,
@@ -7872,10 +8163,10 @@
       "foreignNetValTy": -0.0,
       "foreignNetQty": -200,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         260.5,
@@ -7899,7 +8190,10 @@
       "foreignNet20P": 0.03,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 12
+      "foreignBuySessions20P": 12,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 198.1,
+      "prevProfit": -33.0
     },
     "PTB": {
       "symbol": "PTB",
@@ -7917,8 +8211,8 @@
       "ceiling": 30450,
       "floor": 26550,
       "marketCapTỷ": 1913.0,
-      "profitGrowth": 24,
-      "revGrowth": 15,
+      "profitGrowth": -5.9,
+      "revGrowth": 27.9,
       "eps": 5200,
       "pe": 5.5,
       "pb": 1.4,
@@ -7951,10 +8245,10 @@
       "foreignNetValTy": -0.02,
       "foreignNetQty": -800,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         2088.4,
@@ -7978,7 +8272,10 @@
       "foreignNet20P": 3.83,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 5,
-      "foreignBuySessions20P": 11
+      "foreignBuySessions20P": 11,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 1683.9,
+      "prevProfit": 140.1
     },
     "HAX": {
       "symbol": "HAX",
@@ -7996,8 +8293,8 @@
       "ceiling": 8730,
       "floor": 7590,
       "marketCapTỷ": 875.0,
-      "profitGrowth": 180,
-      "revGrowth": 28,
+      "profitGrowth": 114.0,
+      "revGrowth": 21.1,
       "eps": 1650,
       "pe": 4.9,
       "pb": 1.1,
@@ -8030,10 +8327,10 @@
       "foreignNetValTy": -0.08,
       "foreignNetQty": -10000,
       "quarterLabels": [
-        "Q4-2025",
-        "Q1-2026",
-        "Q2-2026",
-        "Q3-2026"
+        "Q4/2025",
+        "Q1/2026",
+        "Q2/2026",
+        "Q3/2026"
       ],
       "quarterlyRevenue": [
         1513.4,
@@ -8057,7 +8354,11 @@
       "foreignNet20P": -0.08,
       "foreignBuySessions5P": 1,
       "foreignBuySessions10P": 2,
-      "foreignBuySessions20P": 3
+      "foreignBuySessions20P": 3,
+      "latestQuarter": "Q3/2026",
+      "prevRev": 1149.5,
+      "prevProfit": -25.8
     }
-  }
+  },
+  "bctc_last_synced": "2026-11-18 09:52:12"
 }

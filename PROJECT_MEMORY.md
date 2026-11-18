@@ -461,3 +461,28 @@
         + `Khối ngoại (xP)`: `w-[14%] min-w-[115px] text-right whitespace-nowrap` (tiêu đề và nội dung trên 1 dòng)
         + `LNST / DTT`: `w-[12%] min-w-[102px] text-right whitespace-nowrap` (dòng 1: % LNST/DTT, dòng 2: nhãn Tăng trưởng YoY)
       * Bổ sung `whitespace-nowrap` cho toàn bộ các ô dữ liệu tài chính, đảm bảo giao diện luôn ngay ngắn, chuyên nghiệp trên mọi độ phân giải.
+
+26. **Lấy Kết Quả Kinh Doanh Quý Gần Nhất (YoY) Cho Toàn Bộ 100 Mã Cổ Phiếu (18/11/2026)**:
+    - **Yêu cầu của người dùng**: Lấy kết quả kinh doanh của quý gần nhất cho cột `LNST / DTT` trong Modal Tuyển chọn Danh mục Tự động.
+    - **Nguyên nhân phát hiện**:
+      * Cột `LNST / DTT` trước đây hiển thị nhãn chung chung `Tăng trưởng YoY` mà không định danh quý báo cáo cụ thể.
+      * Tỷ lệ tăng trưởng `% LNST / % DTT` của một số mã trước đó dùng số liệu ước tính tĩnh (`STOCK_METRICS`), khiến một số cổ phiếu suy giảm kinh doanh (như KDH -67.9%, DXG -98.0%) vẫn bị hiển thị số dương và lọt qua bộ lọc "Kết quả kinh doanh tốt".
+    - **Triển khai kỹ thuật hoàn chỉnh**:
+      * **Nâng cấp `sync_real_financials.py`**:
+        + Nâng `pageSize=8` truy vấn trực tiếp 8 quý BCTC chính thức từ CafeF API.
+        + Tự động định danh quý gần nhất đã công bố (`latestQuarter`: ví dụ `Q3/2026`).
+        + Trích xuất chính xác Lợi nhuận sau thuế (`latestProfit`, tỷ đồng) và Doanh thu thuần (`latestRev`, tỷ đồng) của quý gần nhất.
+        + Tìm kiếm quý cùng kỳ của năm trước (`same_q_last_year`, ví dụ `Q3/2025`) và tính toán chính xác 100% tỷ lệ tăng trưởng YoY:
+          - $\text{profitGrowth} = \frac{\text{latestProfit} - \text{prevProfit}}{|\text{prevProfit}|} \times 100\%$
+          - $\text{revGrowth} = \frac{\text{latestRev} - \text{prevRev}}{|\text{prevRev}|} \times 100\%$
+      * **Đồng bộ cơ sở dữ liệu hệ thống**:
+        + Cập nhật toàn diện `financials_real_quarterly.json` và `vnstock_snapshot.json` cho toàn bộ 100 mã CP rổ VN100.
+        + Cập nhật `STOCK_METRICS` trong `realtime_server.py` và mảng khởi tạo `StockApp.stocks` trong `index.html`.
+        + Cập nhật `applyRealStockData()` sao cho đồng bộ cả `latestQuarter`, `prevRev`, `prevProfit`.
+      * **Cải tiến giao diện hiển thị cột `LNST / DTT`**:
+        + Dòng 1: Tỷ lệ tăng trưởng % LNST và % DTT thực tế quý gần nhất so với cùng kỳ (YoY), đổi màu xanh lá (`text-emerald-500`) nếu tăng trưởng dương, đỏ (`text-rose-500`) nếu suy giảm.
+        + Dòng 2: Nhãn định danh quý rõ ràng `${qLabel} (YoY)` (ví dụ: `Q3/2026 (YoY)`).
+        + Tooltip `title` chi tiết khi di chuột: hiển thị cả số tiền thực tế tỷ đồng của LNST và DTT quý gần nhất, ví dụ: `BCTC Q3/2026: LNST 22,759.8 tỷ (+652.3% YoY) | DTT 150,579 tỷ (+284.8% YoY)`.
+        + Tiêu đề cột `<th>`: bổ sung thuộc tính `title="Tăng trưởng Lợi nhuận sau thuế (LNST) & Doanh thu thuần (DTT) của Quý gần nhất so với cùng kỳ năm trước (YoY)"`.
+      * **Chuẩn hóa bộ lọc Tuyển chọn Tự động**:
+        + Khi bật `[x] Kết quả kinh doanh tốt (LNST tăng trưởng & ROE cao)`, các mã thực tế có tăng trưởng quý gần nhất âm (như DXG, KDH) sẽ bị loại bỏ chính xác, chỉ chọn các mã có kết quả kinh doanh quý gần nhất thực sự xuất sắc (VIC +652%, MSN +144%, FRT +110%, POW +119%, HPG +106%).
