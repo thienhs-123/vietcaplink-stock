@@ -123,6 +123,30 @@
     }
 
     /* Apple SF Mono for all numbers, tables, ticker metrics and code */
+        /* Drag & Drop Reordering for Macro Cards */
+    .macro-drag-card {
+      user-select: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+    .macro-drag-card.is-dragging {
+      opacity: 0.45 !important;
+      border-style: dashed !important;
+      border-color: #3b82f6 !important;
+      transform: scale(0.99);
+      box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.25) !important;
+    }
+    .macro-drag-card.drag-over {
+      border-color: #3b82f6 !important;
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4) !important;
+    }
+    .macro-drag-handle {
+      cursor: grab;
+      touch-action: none;
+    }
+    .macro-drag-handle:active {
+      cursor: grabbing;
+    }
+
     .font-mono, code, pre, .tabular-nums, #tickerTrack {
       font-family: 'SF Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
       font-feature-settings: "tnum" on, "lnum" on;
@@ -807,16 +831,22 @@
         <!-- ================= MODULE 2: NHẬN ĐỊNH THỊ TRƯỜNG ================= -->
         <section id="module-macro" class="space-y-6 hidden">
         <!-- Section Header -->
+                <!-- Tiêu đề Header Module 2: Nhận định thị trường -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-light-border dark:border-studio-border">
           <div>
             <div class="flex items-center space-x-2">
               <h1 class="text-xl md:text-2xl font-bold tracking-tight">2. Nhận định thị trường</h1>
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-studio-blueLight border border-blue-500/20 font-medium">9 chỉ số</span>
             </div>
             <p class="text-xs md:text-sm text-light-subtext dark:text-studio-subtext mt-1">
-              Phân tách 2 cấu phần trọng yếu: <span class="font-semibold text-light-text dark:text-studio-text">Vĩ mô</span> (5 chỉ số kinh tế) và <span class="font-semibold text-light-text dark:text-studio-text">Thị trường</span> (4 chỉ số chứng khoán) theo chiều ngang kết hợp biểu đồ lịch sử trực quan.
+              Tổng hợp 9 chỉ số kinh tế vĩ mô &amp; thị trường chứng khoán kết hợp biểu đồ lịch sử trực quan. Dễ dàng <span class="font-semibold text-blue-500">kéo thả</span> hoặc bấm nút <span class="font-semibold text-light-text dark:text-studio-text">Lên / Xuống</span> để tùy biến thứ tự ưu tiên theo dõi.
             </p>
           </div>
-          <div class="flex items-center space-x-2.5 self-start sm:self-auto">
+          <div class="flex items-center space-x-2 self-start sm:self-auto">
+            <button onclick="resetMacroCardOrder()" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-light-elevated dark:bg-studio-elevated hover:bg-light-border dark:hover:bg-studio-border border border-light-border dark:border-studio-border text-light-text dark:text-studio-text flex items-center space-x-1.5 transition-all shadow-sm" title="Khôi phục thứ tự mặc định 9 chỉ số">
+              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5 text-light-subtext dark:text-studio-subtext"></i>
+              <span>Đặt lại thứ tự</span>
+            </button>
             <button onclick="openManualEditModal('macro')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white flex items-center space-x-1.5 transition-all shadow-sm">
               <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
               <span>Cập nhật số liệu</span>
@@ -824,478 +854,553 @@
           </div>
         </div>
 
-        <!-- macOS Segmented Control Filter Tabs: Tất cả | Vĩ mô | Thị trường -->
-        <div class="flex items-center space-x-1 bg-light-surface dark:bg-studio-surface p-1 rounded-xl border border-light-border dark:border-studio-border w-fit text-xs font-medium">
-          <button id="macroFilterBtnAll" onclick="filterMacroSection('all')" class="px-4 py-1.5 rounded-lg bg-blue-600 text-white font-semibold transition-all shadow-sm">
-            Tất cả (9)
-          </button>
-          <button id="macroFilterBtnMacro" onclick="filterMacroSection('macro')" class="px-4 py-1.5 rounded-lg text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text transition-all">
-            Vĩ mô (5)
-          </button>
-          <button id="macroFilterBtnMarket" onclick="filterMacroSection('market')" class="px-4 py-1.5 rounded-lg text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text transition-all">
-            Thị trường (4)
-          </button>
-        </div>
-
-        <!-- ================= PHẦN 1: VĨ MÔ ================= -->
-        <div id="macroGroupMacroContainer" class="space-y-4">
-          <!-- Section Divider / Header -->
-          <div class="flex items-center justify-between pb-1">
-            <div class="flex items-center space-x-2.5">
-              <div class="w-2.5 h-2.5 rounded-full bg-blue-500"></div>
-              <h2 class="text-base md:text-lg font-bold tracking-tight text-light-text dark:text-studio-text">Vĩ mô</h2>
-              <span class="text-xs px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-studio-blueLight border border-blue-500/20 font-medium">5 chỉ báo cốt lõi</span>
-            </div>
-            <span class="text-xs text-light-subtext dark:text-studio-subtext">Chu kỳ kinh tế &amp; Hàng hóa toàn cầu</span>
-          </div>
-
-          <!-- 5 Horizontal Items (No leading numbers in titles) -->
-          <div class="space-y-4">
-            <!-- TĂNG TRƯỞNG GDP -->
-            <div class="p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-blue-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5">
-              <!-- Hộp chỉ số (Bên trái) -->
-              <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
-                <div class="flex items-start justify-between">
-                  <div class="flex items-center space-x-2.5">
-                    <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0">
-                      <i data-lucide="trending-up" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                      <span class="text-[10px] font-bold text-light-subtext dark:text-studio-muted uppercase tracking-wider">Kinh tế Vĩ mô</span>
-                      <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Tăng trưởng GDP</h3>
-                    </div>
+        <!-- Container chung duy nhất chứa 9 chỉ số có thể kéo thả sắp xếp (Drag & Drop) -->
+        <div id="macroCardsContainer" class="space-y-4">
+          <!-- 1. TĂNG TRƯỞNG GDP -->
+          <div id="macro-card-gdp" data-macro-id="gdp" class="macro-drag-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-blue-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
+            <!-- Hộp chỉ số (Bên trái) -->
+            <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
+              <div class="flex items-start justify-between">
+                <div class="flex items-center space-x-2.5">
+                  <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0">
+                    <i data-lucide="trending-up" class="w-5 h-5"></i>
                   </div>
+                  <div>
+                    <span class="text-[10px] font-bold text-light-subtext dark:text-studio-muted uppercase tracking-wider">Kinh tế Vĩ mô</span>
+                    <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Tăng trưởng GDP</h3>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-2">
                   <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono font-medium">YoY</span>
-                </div>
-
-                <div>
-                  <div class="flex items-baseline space-x-2.5">
-                    <span class="text-3xl font-bold font-mono text-emerald-500" id="cardGdpVal">6.82%</span>
-                    <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono font-medium">+1.16% QoQ</span>
+                  <div class="flex items-center space-x-0.5 pl-1.5 border-l border-light-border/60 dark:border-studio-border/60 text-light-subtext dark:text-studio-muted">
+                    <button type="button" onclick="moveMacroCard('gdp', -1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển lên trên">
+                      <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button type="button" onclick="moveMacroCard('gdp', 1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển xuống dưới">
+                      <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <span class="macro-drag-handle p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 cursor-grab active:cursor-grabbing transition-colors" title="Kéo thả di chuyển">
+                      <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
+                    </span>
                   </div>
-                  <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
-                    <span>Quý trước: <strong class="text-light-text dark:text-studio-text font-mono" id="cardGdpPrev">6.93% (Q2)</strong></span>
-                    <span>Mục tiêu năm: <strong class="text-light-text dark:text-studio-text font-mono">6.5 - 7.0%</strong></span>
-                  </div>
-                </div>
-
-                <div class="pt-2 border-t border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-[11px] text-light-subtext dark:text-studio-muted">
-                  <span class="truncate">Nguồn: Tổng cục Thống kê (GSO)</span>
-                  <span class="text-blue-500 hover:underline cursor-pointer font-medium" onclick="openManualEditModal('macro')">Sửa</span>
                 </div>
               </div>
 
-              <!-- Biểu đồ lịch sử (Bên cạnh / Bên phải) -->
-              <div class="flex-1 min-w-0 flex flex-col justify-between">
-                <div class="flex items-center justify-between pb-1 text-xs">
-                  <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
-                    <i data-lucide="bar-chart-2" class="w-3.5 h-3.5 text-blue-500"></i>
-                    <span>Lịch sử Tăng trưởng GDP Việt Nam theo Quý</span>
-                  </span>
-                  <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">Q1/22 - Q3/24 (YoY %)</span>
+              <div>
+                <div class="flex items-baseline space-x-2.5">
+                  <span class="text-3xl font-bold font-mono text-emerald-500" id="cardGdpVal">6.82%</span>
+                  <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono font-medium">+1.16% QoQ</span>
                 </div>
-                <div id="macroChartGdp" class="w-full min-h-[175px]"></div>
+                <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
+                  <span>Quý trước: <strong class="text-light-text dark:text-studio-text font-mono" id="cardGdpPrev">6.93% (Q2)</strong></span>
+                  <span>Mục tiêu năm: <strong class="text-light-text dark:text-studio-text font-mono">6.5 - 7.0%</strong></span>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-[11px] text-light-subtext dark:text-studio-muted">
+                <span class="truncate">Nguồn: Tổng cục Thống kê (GSO)</span>
+                <span class="text-blue-500 hover:underline cursor-pointer font-medium" onclick="openManualEditModal('macro')">Sửa</span>
               </div>
             </div>
 
-            <!-- LÃI SUẤT -->
-            <div class="p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-purple-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5">
-              <!-- Hộp chỉ số (Bên trái) -->
-              <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
-                <div class="flex items-start justify-between">
-                  <div class="flex items-center space-x-2.5">
-                    <div class="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0">
-                      <i data-lucide="percent" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                      <span class="text-[10px] font-bold text-light-subtext dark:text-studio-muted uppercase tracking-wider">Chính sách Tiền tệ</span>
-                      <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Lãi suất</h3>
-                    </div>
+            <!-- Biểu đồ lịch sử (Bên cạnh / Bên phải) -->
+            <div class="flex-1 min-w-0 flex flex-col justify-between">
+              <div class="flex items-center justify-between pb-1 text-xs">
+                <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
+                  <i data-lucide="bar-chart-2" class="w-3.5 h-3.5 text-blue-500"></i>
+                  <span>Lịch sử Tăng trưởng GDP Việt Nam theo Quý</span>
+                </span>
+                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">Q1/22 - Q3/24 (YoY %)</span>
+              </div>
+              <div id="macroChartGdp" class="w-full min-h-[175px]"></div>
+            </div>
+          </div>
+
+          <!-- 2. LÃI SUẤT -->
+          <div id="macro-card-interest" data-macro-id="interest" class="macro-drag-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-purple-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
+            <!-- Hộp chỉ số (Bên trái) -->
+            <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
+              <div class="flex items-start justify-between">
+                <div class="flex items-center space-x-2.5">
+                  <div class="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0">
+                    <i data-lucide="percent" class="w-5 h-5"></i>
                   </div>
+                  <div>
+                    <span class="text-[10px] font-bold text-light-subtext dark:text-studio-muted uppercase tracking-wider">Chính sách Tiền tệ</span>
+                    <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Lãi suất</h3>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-2">
                   <span class="text-xs px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-500 font-mono font-medium">Huy động 12T</span>
-                </div>
-
-                <div>
-                  <div class="flex items-baseline space-x-2.5">
-                    <span class="text-3xl font-bold font-mono text-purple-400" id="cardInterestVal">4.8 - 5.3%</span>
-                    <span class="text-xs px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 font-mono font-medium">/năm</span>
+                  <div class="flex items-center space-x-0.5 pl-1.5 border-l border-light-border/60 dark:border-studio-border/60 text-light-subtext dark:text-studio-muted">
+                    <button type="button" onclick="moveMacroCard('interest', -1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển lên trên">
+                      <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button type="button" onclick="moveMacroCard('interest', 1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển xuống dưới">
+                      <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <span class="macro-drag-handle p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 cursor-grab active:cursor-grabbing transition-colors" title="Kéo thả di chuyển">
+                      <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
+                    </span>
                   </div>
-                  <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
-                    <span>Big 4: <strong class="text-light-text dark:text-studio-text font-mono">4.7%</strong></span>
-                    <span>TMCP: <strong class="text-light-text dark:text-studio-text font-mono">5.2 - 5.5%</strong></span>
-                    <span>Tái cấp vốn: <strong class="text-light-text dark:text-studio-text font-mono">4.5%</strong></span>
-                  </div>
-                </div>
-
-                <div class="pt-2 border-t border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-[11px] text-light-subtext dark:text-studio-muted">
-                  <span class="truncate">Nguồn: Ngân hàng Nhà nước (SBV)</span>
-                  <span class="text-blue-500 hover:underline cursor-pointer font-medium" onclick="openManualEditModal('macro')">Sửa</span>
                 </div>
               </div>
 
-              <!-- Biểu đồ lịch sử (Bên cạnh / Bên phải) -->
-              <div class="flex-1 min-w-0 flex flex-col justify-between">
-                <div class="flex items-center justify-between pb-1 text-xs">
-                  <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
-                    <i data-lucide="line-chart" class="w-3.5 h-3.5 text-purple-500"></i>
-                    <span>Lịch sử Lãi suất điều hành &amp; Lãi suất huy động 12T</span>
-                  </span>
-                  <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">2023 - 2024 (%/năm)</span>
+              <div>
+                <div class="flex items-baseline space-x-2.5">
+                  <span class="text-3xl font-bold font-mono text-purple-400" id="cardInterestVal">4.8 - 5.3%</span>
+                  <span class="text-xs px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 font-mono font-medium">/năm</span>
                 </div>
-                <div id="macroChartInterest" class="w-full min-h-[175px]"></div>
+                <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
+                  <span>Big 4: <strong class="text-light-text dark:text-studio-text font-mono">4.7%</strong></span>
+                  <span>TMCP: <strong class="text-light-text dark:text-studio-text font-mono">5.2 - 5.5%</strong></span>
+                  <span>Tái cấp vốn: <strong class="text-light-text dark:text-studio-text font-mono">4.5%</strong></span>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-[11px] text-light-subtext dark:text-studio-muted">
+                <span class="truncate">Nguồn: Ngân hàng Nhà nước (SBV)</span>
+                <span class="text-blue-500 hover:underline cursor-pointer font-medium" onclick="openManualEditModal('macro')">Sửa</span>
               </div>
             </div>
 
-            <!-- TỶ GIÁ VND/USD -->
-            <div class="p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-emerald-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5">
-              <!-- Hộp chỉ số (Bên trái) -->
-              <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
-                <div class="flex items-start justify-between">
-                  <div class="flex items-center space-x-2.5">
-                    <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0">
-                      <i data-lucide="dollar-sign" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                      <span class="text-[10px] font-bold text-light-subtext dark:text-studio-muted uppercase tracking-wider">Ngoại hối &amp; Tỷ giá</span>
-                      <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Tỷ giá VND/USD</h3>
-                    </div>
+            <!-- Biểu đồ lịch sử (Bên cạnh / Bên phải) -->
+            <div class="flex-1 min-w-0 flex flex-col justify-between">
+              <div class="flex items-center justify-between pb-1 text-xs">
+                <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
+                  <i data-lucide="line-chart" class="w-3.5 h-3.5 text-purple-500"></i>
+                  <span>Lịch sử Lãi suất điều hành &amp; Lãi suất huy động 12T</span>
+                </span>
+                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">2023 - 2024 (%/năm)</span>
+              </div>
+              <div id="macroChartInterest" class="w-full min-h-[175px]"></div>
+            </div>
+          </div>
+
+          <!-- 3. TỶ GIÁ VND/USD -->
+          <div id="macro-card-usdVnd" data-macro-id="usdVnd" class="macro-drag-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-emerald-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
+            <!-- Hộp chỉ số (Bên trái) -->
+            <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
+              <div class="flex items-start justify-between">
+                <div class="flex items-center space-x-2.5">
+                  <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0">
+                    <i data-lucide="dollar-sign" class="w-5 h-5"></i>
                   </div>
+                  <div>
+                    <span class="text-[10px] font-bold text-light-subtext dark:text-studio-muted uppercase tracking-wider">Ngoại hối &amp; Tỷ giá</span>
+                    <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Tỷ giá VND/USD</h3>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-2">
                   <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono font-medium">VCB Niêm yết</span>
-                </div>
-
-                <div>
-                  <div class="flex items-baseline space-x-2.5">
-                    <span class="text-3xl font-bold font-mono text-light-text dark:text-studio-text" id="cardUsdVndVal">25,780</span>
-                    <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-500 font-mono font-medium">+15 VND</span>
+                  <div class="flex items-center space-x-0.5 pl-1.5 border-l border-light-border/60 dark:border-studio-border/60 text-light-subtext dark:text-studio-muted">
+                    <button type="button" onclick="moveMacroCard('usdVnd', -1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển lên trên">
+                      <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button type="button" onclick="moveMacroCard('usdVnd', 1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển xuống dưới">
+                      <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <span class="macro-drag-handle p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 cursor-grab active:cursor-grabbing transition-colors" title="Kéo thả di chuyển">
+                      <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
+                    </span>
                   </div>
-                  <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
-                    <span>Mua TM: <strong class="text-light-text dark:text-studio-text font-mono">25,370</strong></span>
-                    <span>CK: <strong class="text-light-text dark:text-studio-text font-mono">25,400</strong></span>
-                    <span>Bán ra: <strong class="text-light-text dark:text-studio-text font-mono">25,780</strong></span>
-                  </div>
-                </div>
-
-                <div class="pt-2 border-t border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-[11px] text-light-subtext dark:text-studio-muted">
-                  <span class="truncate">Nguồn: Vietcombank / SBV</span>
-                  <span class="text-blue-500 hover:underline cursor-pointer font-medium" onclick="openManualEditModal('macro')">Sửa</span>
                 </div>
               </div>
 
-              <!-- Biểu đồ lịch sử (Bên cạnh / Bên phải) -->
-              <div class="flex-1 min-w-0 flex flex-col justify-between">
-                <div class="flex items-center justify-between pb-1 text-xs">
-                  <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
-                    <i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-500"></i>
-                    <span>Lịch sử Biến động Tỷ giá USD/VND theo Tháng (2024)</span>
-                  </span>
-                  <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">T1/2024 - Hiện tại (VND)</span>
+              <div>
+                <div class="flex items-baseline space-x-2.5">
+                  <span class="text-3xl font-bold font-mono text-light-text dark:text-studio-text" id="cardUsdVndVal">25,780</span>
+                  <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-500 font-mono font-medium">+15 VND</span>
                 </div>
-                <div id="macroChartUsdVnd" class="w-full min-h-[175px]"></div>
+                <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
+                  <span>Mua TM: <strong class="text-light-text dark:text-studio-text font-mono">25,370</strong></span>
+                  <span>CK: <strong class="text-light-text dark:text-studio-text font-mono">25,400</strong></span>
+                  <span>Bán ra: <strong class="text-light-text dark:text-studio-text font-mono">25,780</strong></span>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-[11px] text-light-subtext dark:text-studio-muted">
+                <span class="truncate">Nguồn: Vietcombank / SBV</span>
+                <span class="text-blue-500 hover:underline cursor-pointer font-medium" onclick="openManualEditModal('macro')">Sửa</span>
               </div>
             </div>
 
-            <!-- GIÁ VÀNG -->
-            <div class="p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-amber-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5">
-              <!-- Hộp chỉ số (Bên trái) -->
-              <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
-                <div class="flex items-start justify-between">
-                  <div class="flex items-center space-x-2.5">
-                    <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center shrink-0">
-                      <i data-lucide="coins" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                      <span class="text-[10px] font-bold text-light-subtext dark:text-studio-muted uppercase tracking-wider">Hàng hóa &amp; Kim loại quý</span>
-                      <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Giá vàng</h3>
-                    </div>
+            <!-- Biểu đồ lịch sử (Bên cạnh / Bên phải) -->
+            <div class="flex-1 min-w-0 flex flex-col justify-between">
+              <div class="flex items-center justify-between pb-1 text-xs">
+                <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
+                  <i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-500"></i>
+                  <span>Lịch sử Biến động Tỷ giá USD/VND theo Tháng (2024)</span>
+                </span>
+                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">T1/2024 - Hiện tại (VND)</span>
+              </div>
+              <div id="macroChartUsdVnd" class="w-full min-h-[175px]"></div>
+            </div>
+          </div>
+
+          <!-- 4. GIÁ VÀNG -->
+          <div id="macro-card-gold" data-macro-id="gold" class="macro-drag-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-amber-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
+            <!-- Hộp chỉ số (Bên trái) -->
+            <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
+              <div class="flex items-start justify-between">
+                <div class="flex items-center space-x-2.5">
+                  <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center shrink-0">
+                    <i data-lucide="coins" class="w-5 h-5"></i>
                   </div>
+                  <div>
+                    <span class="text-[10px] font-bold text-light-subtext dark:text-studio-muted uppercase tracking-wider">Hàng hóa &amp; Kim loại quý</span>
+                    <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Giá vàng</h3>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-2">
                   <span class="text-xs px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-500 font-mono font-medium">Spot Gold</span>
-                </div>
-
-                <div>
-                  <div class="flex items-baseline space-x-2.5">
-                    <span class="text-3xl font-bold font-mono text-amber-500" id="cardGoldVal">$4,138.4</span>
-                    <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-500 font-mono font-medium">+1.56%</span>
+                  <div class="flex items-center space-x-0.5 pl-1.5 border-l border-light-border/60 dark:border-studio-border/60 text-light-subtext dark:text-studio-muted">
+                    <button type="button" onclick="moveMacroCard('gold', -1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển lên trên">
+                      <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button type="button" onclick="moveMacroCard('gold', 1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển xuống dưới">
+                      <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <span class="macro-drag-handle p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 cursor-grab active:cursor-grabbing transition-colors" title="Kéo thả di chuyển">
+                      <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
+                    </span>
                   </div>
-                  <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
-                    <span>SJC Mua: <strong class="text-light-text dark:text-studio-text font-mono">87.50 Tr</strong></span>
-                    <span>SJC Bán: <strong class="text-light-text dark:text-studio-text font-mono">89.50 Tr</strong></span>
-                    <span>Chênh: <strong class="text-amber-500 font-mono">2.0 Tr</strong></span>
-                  </div>
-                </div>
-
-                <div class="pt-2 border-t border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-[11px] text-light-subtext dark:text-studio-muted">
-                  <span class="truncate">Nguồn: Kitco / SJC Vietnam</span>
-                  <span class="text-blue-500 hover:underline cursor-pointer font-medium" onclick="openManualEditModal('macro')">Sửa</span>
                 </div>
               </div>
 
-              <!-- Biểu đồ lịch sử (Bên cạnh / Bên phải) -->
-              <div class="flex-1 min-w-0 flex flex-col justify-between">
-                <div class="flex items-center justify-between pb-1 text-xs">
-                  <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
-                    <i data-lucide="activity" class="w-3.5 h-3.5 text-amber-500"></i>
-                    <span>Lịch sử Giá Vàng Thế giới &amp; Xu hướng lập đỉnh mới</span>
-                  </span>
-                  <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">T1/2024 - Hiện tại (USD/oz)</span>
+              <div>
+                <div class="flex items-baseline space-x-2.5">
+                  <span class="text-3xl font-bold font-mono text-amber-500" id="cardGoldVal">$4,138.4</span>
+                  <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-500 font-mono font-medium">+1.56%</span>
                 </div>
-                <div id="macroChartGold" class="w-full min-h-[175px]"></div>
+                <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
+                  <span>SJC Mua: <strong class="text-light-text dark:text-studio-text font-mono">87.50 Tr</strong></span>
+                  <span>SJC Bán: <strong class="text-light-text dark:text-studio-text font-mono">89.50 Tr</strong></span>
+                  <span>Chênh: <strong class="text-amber-500 font-mono">2.0 Tr</strong></span>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-[11px] text-light-subtext dark:text-studio-muted">
+                <span class="truncate">Nguồn: Kitco / SJC Vietnam</span>
+                <span class="text-blue-500 hover:underline cursor-pointer font-medium" onclick="openManualEditModal('macro')">Sửa</span>
               </div>
             </div>
 
-            <!-- GIÁ DẦU -->
-            <div class="p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-rose-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5">
-              <!-- Hộp chỉ số (Bên trái) -->
-              <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
-                <div class="flex items-start justify-between">
-                  <div class="flex items-center space-x-2.5">
-                    <div class="w-9 h-9 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center shrink-0">
-                      <i data-lucide="fuel" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                      <span class="text-[10px] font-bold text-light-subtext dark:text-studio-muted uppercase tracking-wider">Năng lượng &amp; Hàng hóa</span>
-                      <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Giá dầu</h3>
-                    </div>
+            <!-- Biểu đồ lịch sử (Bên cạnh / Bên phải) -->
+            <div class="flex-1 min-w-0 flex flex-col justify-between">
+              <div class="flex items-center justify-between pb-1 text-xs">
+                <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
+                  <i data-lucide="activity" class="w-3.5 h-3.5 text-amber-500"></i>
+                  <span>Lịch sử Giá Vàng Thế giới &amp; Xu hướng lập đỉnh mới</span>
+                </span>
+                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">T1/2024 - Hiện tại (USD/oz)</span>
+              </div>
+              <div id="macroChartGold" class="w-full min-h-[175px]"></div>
+            </div>
+          </div>
+
+          <!-- 5. GIÁ DẦU -->
+          <div id="macro-card-oil" data-macro-id="oil" class="macro-drag-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-rose-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
+            <!-- Hộp chỉ số (Bên trái) -->
+            <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
+              <div class="flex items-start justify-between">
+                <div class="flex items-center space-x-2.5">
+                  <div class="w-9 h-9 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center shrink-0">
+                    <i data-lucide="fuel" class="w-5 h-5"></i>
                   </div>
+                  <div>
+                    <span class="text-[10px] font-bold text-light-subtext dark:text-studio-muted uppercase tracking-wider">Năng lượng &amp; Hàng hóa</span>
+                    <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Giá dầu</h3>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-2">
                   <span class="text-xs px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-400 font-mono font-medium">Brent Crude</span>
-                </div>
-
-                <div>
-                  <div class="flex items-baseline space-x-2.5">
-                    <span class="text-3xl font-bold font-mono text-light-text dark:text-studio-text" id="cardOilVal">$91.81</span>
-                    <span class="text-xs px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 font-mono font-medium" id="cardOilChange">-1.43%</span>
+                  <div class="flex items-center space-x-0.5 pl-1.5 border-l border-light-border/60 dark:border-studio-border/60 text-light-subtext dark:text-studio-muted">
+                    <button type="button" onclick="moveMacroCard('oil', -1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển lên trên">
+                      <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button type="button" onclick="moveMacroCard('oil', 1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển xuống dưới">
+                      <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <span class="macro-drag-handle p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 cursor-grab active:cursor-grabbing transition-colors" title="Kéo thả di chuyển">
+                      <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
+                    </span>
                   </div>
-                  <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
-                    <span>WTI: <strong class="text-light-text dark:text-studio-text font-mono" id="cardOilWtiVal">$84.07</strong></span>
-                    <span>Biến động: <strong class="text-rose-500 font-mono" id="cardOilWtiChange">-2.26%</strong></span>
-                    <span>Tác động: <span class="text-emerald-500 font-medium">Hạ nhiệt CPI</span></span>
-                  </div>
-                </div>
-
-                <div class="pt-2 border-t border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-[11px] text-light-subtext dark:text-studio-muted">
-                  <span class="truncate">Nguồn: ICE Futures / Bloomberg</span>
-                  <span class="text-blue-500 hover:underline cursor-pointer font-medium" onclick="openManualEditModal('macro')">Sửa</span>
                 </div>
               </div>
 
-              <!-- Biểu đồ lịch sử (Bên cạnh / Bên phải) -->
-              <div class="flex-1 min-w-0 flex flex-col justify-between">
-                <div class="flex items-center justify-between pb-1 text-xs">
-                  <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
-                    <i data-lucide="line-chart" class="w-3.5 h-3.5 text-rose-400"></i>
-                    <span>Lịch sử Giá Dầu Brent &amp; Dầu WTI (USD/thùng)</span>
-                  </span>
-                  <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">T1/2024 - Hiện tại (USD/bbl)</span>
+              <div>
+                <div class="flex items-baseline space-x-2.5">
+                  <span class="text-3xl font-bold font-mono text-light-text dark:text-studio-text" id="cardOilVal">$91.81</span>
+                  <span class="text-xs px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 font-mono font-medium" id="cardOilChange">-1.43%</span>
                 </div>
-                <div id="macroChartOil" class="w-full min-h-[175px]"></div>
+                <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
+                  <span>WTI: <strong class="text-light-text dark:text-studio-text font-mono" id="cardOilWtiVal">$84.07</strong></span>
+                  <span>Biến động: <strong class="text-rose-500 font-mono" id="cardOilWtiChange">-2.26%</strong></span>
+                  <span>Tác động: <span class="text-emerald-500 font-medium">Hạ nhiệt CPI</span></span>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-[11px] text-light-subtext dark:text-studio-muted">
+                <span class="truncate">Nguồn: ICE Futures / Bloomberg</span>
+                <span class="text-blue-500 hover:underline cursor-pointer font-medium" onclick="openManualEditModal('macro')">Sửa</span>
               </div>
             </div>
-          </div>
-        </div>
 
-        <!-- ================= PHẦN 2: THỊ TRƯỜNG ================= -->
-        <div id="macroGroupMarketContainer" class="space-y-4 pt-4 border-t border-light-border dark:border-studio-border">
-          <!-- Section Divider / Header -->
-          <div class="flex items-center justify-between pb-1">
-            <div class="flex items-center space-x-2.5">
-              <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
-              <h2 class="text-base md:text-lg font-bold tracking-tight text-light-text dark:text-studio-text">Thị trường</h2>
-              <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-medium">4 chỉ số thị trường chứng khoán</span>
+            <!-- Biểu đồ lịch sử (Bên cạnh / Bên phải) -->
+            <div class="flex-1 min-w-0 flex flex-col justify-between">
+              <div class="flex items-center justify-between pb-1 text-xs">
+                <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
+                  <i data-lucide="line-chart" class="w-3.5 h-3.5 text-rose-400"></i>
+                  <span>Lịch sử Giá Dầu Brent &amp; Dầu WTI (USD/thùng)</span>
+                </span>
+                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">T1/2024 - Hiện tại (USD/bbl)</span>
+              </div>
+              <div id="macroChartOil" class="w-full min-h-[175px]"></div>
             </div>
-            <span class="text-xs text-light-subtext dark:text-studio-subtext">Dữ liệu dòng tiền &amp; Thanh khoản thực tế</span>
           </div>
 
-          <!-- 4 Horizontal Market Indicators -->
-          <div class="space-y-4">
-            <!-- 1. CHỈ SỐ VNINDEX -->
-            <div class="p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-emerald-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5">
-              <!-- Hộp chỉ số (Bên trái) -->
-              <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
-                <div class="flex items-start justify-between">
-                  <div class="flex items-center space-x-2.5">
-                    <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0">
-                      <i data-lucide="activity" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                      <span class="text-[10px] font-bold text-light-subtext dark:text-studio-muted uppercase tracking-wider">Chỉ số Thị trường</span>
-                      <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Chỉ số VNIndex</h3>
-                    </div>
+          <!-- 6. CHỈ SỐ VNINDEX -->
+          <div id="macro-card-vnindex" data-macro-id="vnindex" class="macro-drag-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-emerald-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
+            <!-- Hộp chỉ số (Bên trái) -->
+            <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
+              <div class="flex items-start justify-between">
+                <div class="flex items-center space-x-2.5">
+                  <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0">
+                    <i data-lucide="activity" class="w-5 h-5"></i>
                   </div>
+                  <div>
+                    <span class="text-[10px] font-bold text-light-subtext dark:text-studio-muted uppercase tracking-wider">Chỉ số Thị trường</span>
+                    <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Chỉ số VNIndex</h3>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-2">
                   <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono font-medium">HOSE Live</span>
-                </div>
-
-                <div>
-                  <div class="flex items-baseline space-x-2.5">
-                    <span class="text-3xl font-bold font-mono text-rose-500" id="cardVnindexVal">1,723.61</span>
-                    <span class="text-xs px-2 py-0.5 rounded bg-rose-500/10 text-rose-600 dark:text-rose-400 font-mono font-medium" id="cardVnindexChange">-17.12 (-0.98%)</span>
+                  <div class="flex items-center space-x-0.5 pl-1.5 border-l border-light-border/60 dark:border-studio-border/60 text-light-subtext dark:text-studio-muted">
+                    <button type="button" onclick="moveMacroCard('vnindex', -1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển lên trên">
+                      <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button type="button" onclick="moveMacroCard('vnindex', 1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển xuống dưới">
+                      <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <span class="macro-drag-handle p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 cursor-grab active:cursor-grabbing transition-colors" title="Kéo thả di chuyển">
+                      <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
+                    </span>
                   </div>
-                  <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
-                    <span>Biên độ: <strong class="text-light-text dark:text-studio-text font-mono">1,732.10 - 1,745.80</strong></span>
-                    <span>Khối lượng: <strong class="text-light-text dark:text-studio-text font-mono">720.5M cp</strong></span>
-                  </div>
-                </div>
-
-                <div class="pt-2 border-t border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-[11px] text-light-subtext dark:text-studio-muted">
-                  <span class="truncate">Nguồn: Sở Giao dịch Chứng khoán TP.HCM (HOSE)</span>
-                  <span class="text-blue-500 hover:underline cursor-pointer font-medium" onclick="openManualEditModal('macro')">Sửa</span>
                 </div>
               </div>
 
-              <!-- Biểu đồ lịch sử (Bên cạnh / Bên phải) -->
-              <div class="flex-1 min-w-0 flex flex-col justify-between">
-                <div class="flex items-center justify-between pb-1 text-xs">
-                  <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
-                    <i data-lucide="line-chart" class="w-3.5 h-3.5 text-emerald-500"></i>
-                    <span>Biến động Chỉ số VN-Index trong phiên (Intraday Live)</span>
-                  </span>
-                  <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">09:15 - 14:45 (Điểm)</span>
+              <div>
+                <div class="flex items-baseline space-x-2.5">
+                  <span class="text-3xl font-bold font-mono text-rose-500" id="cardVnindexVal">1,723.61</span>
+                  <span class="text-xs px-2 py-0.5 rounded bg-rose-500/10 text-rose-600 dark:text-rose-400 font-mono font-medium" id="cardVnindexChange">-17.12 (-0.98%)</span>
                 </div>
-                <div id="marketChartVnindex" class="w-full min-h-[175px]"></div>
+                <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
+                  <span>Biên độ: <strong class="text-light-text dark:text-studio-text font-mono">1,732.10 - 1,745.80</strong></span>
+                  <span>Khối lượng: <strong class="text-light-text dark:text-studio-text font-mono">720.5M cp</strong></span>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-[11px] text-light-subtext dark:text-studio-muted">
+                <span class="truncate">Nguồn: Sở Giao dịch Chứng khoán TP.HCM (HOSE)</span>
+                <span class="text-blue-500 hover:underline cursor-pointer font-medium" onclick="openManualEditModal('macro')">Sửa</span>
               </div>
             </div>
 
-            <!-- 2. THANH KHOẢN -->
-            <div class="p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-blue-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5">
-              <!-- Hộp chỉ số (Bên trái) -->
-              <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
-                <div class="flex items-start justify-between">
-                  <div class="flex items-center space-x-2.5">
-                    <div class="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center shrink-0">
-                      <i data-lucide="zap" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                      <span class="text-[10px] font-bold text-light-subtext dark:text-studio-muted uppercase tracking-wider">Dòng tiền Giao dịch</span>
-                      <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Thanh khoản</h3>
-                    </div>
+            <!-- Biểu đồ lịch sử (Bên cạnh / Bên phải) -->
+            <div class="flex-1 min-w-0 flex flex-col justify-between">
+              <div class="flex items-center justify-between pb-1 text-xs">
+                <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
+                  <i data-lucide="line-chart" class="w-3.5 h-3.5 text-emerald-500"></i>
+                  <span>Biến động Chỉ số VN-Index trong phiên (Intraday Live)</span>
+                </span>
+                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">09:15 - 14:45 (Điểm)</span>
+              </div>
+              <div id="marketChartVnindex" class="w-full min-h-[175px]"></div>
+            </div>
+          </div>
+
+          <!-- 7. THANH KHOẢN -->
+          <div id="macro-card-liquidity" data-macro-id="liquidity" class="macro-drag-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-blue-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
+            <!-- Hộp chỉ số (Bên trái) -->
+            <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
+              <div class="flex items-start justify-between">
+                <div class="flex items-center space-x-2.5">
+                  <div class="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center shrink-0">
+                    <i data-lucide="zap" class="w-5 h-5"></i>
                   </div>
+                  <div>
+                    <span class="text-[10px] font-bold text-light-subtext dark:text-studio-muted uppercase tracking-wider">Dòng tiền Giao dịch</span>
+                    <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Thanh khoản</h3>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-2">
                   <span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 font-mono font-medium">3 Sàn</span>
-                </div>
-
-                <div>
-                  <div class="flex items-baseline space-x-2.5">
-                    <span class="text-3xl font-bold font-mono text-blue-500" id="cardMarketLiquidityVal">18,450 tỷ</span>
-                    <span class="text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 font-mono font-medium">+15.2% vs TB 20P</span>
+                  <div class="flex items-center space-x-0.5 pl-1.5 border-l border-light-border/60 dark:border-studio-border/60 text-light-subtext dark:text-studio-muted">
+                    <button type="button" onclick="moveMacroCard('liquidity', -1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển lên trên">
+                      <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button type="button" onclick="moveMacroCard('liquidity', 1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển xuống dưới">
+                      <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <span class="macro-drag-handle p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 cursor-grab active:cursor-grabbing transition-colors" title="Kéo thả di chuyển">
+                      <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
+                    </span>
                   </div>
-                  <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
-                    <span>Khớp lệnh: <strong class="text-light-text dark:text-studio-text font-mono">16,820 tỷ</strong></span>
-                    <span>Thỏa thuận: <strong class="text-light-text dark:text-studio-text font-mono">1,630 tỷ</strong></span>
-                    <span>KL: <strong class="text-light-text dark:text-studio-text font-mono">842.6M cp</strong></span>
-                  </div>
-                </div>
-
-                <div class="pt-2 border-t border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-[11px] text-light-subtext dark:text-studio-muted">
-                  <span class="truncate">Nguồn: HOSE, HNX, UPCoM</span>
-                  <span class="text-blue-500 hover:underline cursor-pointer font-medium" onclick="openManualEditModal('macro')">Sửa</span>
                 </div>
               </div>
 
-              <!-- Biểu đồ lịch sử (Bên cạnh / Bên phải) -->
-              <div class="flex-1 min-w-0 flex flex-col justify-between">
-                <div class="flex items-center justify-between pb-1 text-xs">
-                  <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
-                    <i data-lucide="bar-chart-3" class="w-3.5 h-3.5 text-blue-500"></i>
-                    <span>Thanh khoản Giá trị Khớp lệnh 10 phiên gần nhất</span>
-                  </span>
-                  <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">Đơn vị: Tỷ VND</span>
+              <div>
+                <div class="flex items-baseline space-x-2.5">
+                  <span class="text-3xl font-bold font-mono text-blue-500" id="cardMarketLiquidityVal">18,450 tỷ</span>
+                  <span class="text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 font-mono font-medium">+15.2% vs TB 20P</span>
                 </div>
-                <div id="marketChartLiquidity" class="w-full min-h-[175px]"></div>
+                <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
+                  <span>Khớp lệnh: <strong class="text-light-text dark:text-studio-text font-mono">16,820 tỷ</strong></span>
+                  <span>Thỏa thuận: <strong class="text-light-text dark:text-studio-text font-mono">1,630 tỷ</strong></span>
+                  <span>KL: <strong class="text-light-text dark:text-studio-text font-mono">842.6M cp</strong></span>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-[11px] text-light-subtext dark:text-studio-muted">
+                <span class="truncate">Nguồn: HOSE, HNX, UPCoM</span>
+                <span class="text-blue-500 hover:underline cursor-pointer font-medium" onclick="openManualEditModal('macro')">Sửa</span>
               </div>
             </div>
 
-            <!-- 3. MARGIN -->
-            <div class="p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-purple-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5">
-              <!-- Hộp chỉ số (Bên trái) -->
-              <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
-                <div class="flex items-start justify-between">
-                  <div class="flex items-center space-x-2.5">
-                    <div class="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0">
-                      <i data-lucide="scale" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                      <span class="text-[10px] font-bold text-light-subtext dark:text-studio-muted uppercase tracking-wider">Đòn bẩy Tài chính</span>
-                      <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Margin</h3>
-                    </div>
+            <!-- Biểu đồ lịch sử (Bên cạnh / Bên phải) -->
+            <div class="flex-1 min-w-0 flex flex-col justify-between">
+              <div class="flex items-center justify-between pb-1 text-xs">
+                <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
+                  <i data-lucide="bar-chart-3" class="w-3.5 h-3.5 text-blue-500"></i>
+                  <span>Thanh khoản Giá trị Khớp lệnh 10 phiên gần nhất</span>
+                </span>
+                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">Đơn vị: Tỷ VND</span>
+              </div>
+              <div id="marketChartLiquidity" class="w-full min-h-[175px]"></div>
+            </div>
+          </div>
+
+          <!-- 8. MARGIN -->
+          <div id="macro-card-margin" data-macro-id="margin" class="macro-drag-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-purple-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
+            <!-- Hộp chỉ số (Bên trái) -->
+            <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
+              <div class="flex items-start justify-between">
+                <div class="flex items-center space-x-2.5">
+                  <div class="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0">
+                    <i data-lucide="scale" class="w-5 h-5"></i>
                   </div>
+                  <div>
+                    <span class="text-[10px] font-bold text-light-subtext dark:text-studio-muted uppercase tracking-wider">Đòn bẩy Tài chính</span>
+                    <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Margin</h3>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-2">
                   <span class="text-xs px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 font-mono font-medium">Toàn thị trường</span>
-                </div>
-
-                <div>
-                  <div class="flex items-baseline space-x-2.5">
-                    <span class="text-3xl font-bold font-mono text-purple-400" id="cardMarketMarginVal">235,000 tỷ</span>
-                    <span class="text-xs px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 font-mono font-medium">+8.5% QoQ</span>
+                  <div class="flex items-center space-x-0.5 pl-1.5 border-l border-light-border/60 dark:border-studio-border/60 text-light-subtext dark:text-studio-muted">
+                    <button type="button" onclick="moveMacroCard('margin', -1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển lên trên">
+                      <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button type="button" onclick="moveMacroCard('margin', 1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển xuống dưới">
+                      <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <span class="macro-drag-handle p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 cursor-grab active:cursor-grabbing transition-colors" title="Kéo thả di chuyển">
+                      <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
+                    </span>
                   </div>
-                  <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
-                    <span>Dư địa CTCK: <strong class="text-light-text dark:text-studio-text font-mono">~180k tỷ</strong></span>
-                    <span>Margin/VCSH: <strong class="text-light-text dark:text-studio-text font-mono">88.5%</strong></span>
-                    <span>Free-float: <strong class="text-emerald-500 font-mono">9.2% (An toàn)</strong></span>
-                  </div>
-                </div>
-
-                <div class="pt-2 border-t border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-[11px] text-light-subtext dark:text-studio-muted">
-                  <span class="truncate">Nguồn: BCTC Quý các CTCK / UBCKNN</span>
-                  <span class="text-blue-500 hover:underline cursor-pointer font-medium" onclick="openManualEditModal('macro')">Sửa</span>
                 </div>
               </div>
 
-              <!-- Biểu đồ lịch sử (Bên cạnh / Bên phải) -->
-              <div class="flex-1 min-w-0 flex flex-col justify-between">
-                <div class="flex items-center justify-between pb-1 text-xs">
-                  <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
-                    <i data-lucide="layers" class="w-3.5 h-3.5 text-purple-400"></i>
-                    <span>Xu hướng Dư nợ Cho vay Ký quỹ (Margin) theo Quý</span>
-                  </span>
-                  <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">Q1/23 - Q3/24 (Tỷ VND)</span>
+              <div>
+                <div class="flex items-baseline space-x-2.5">
+                  <span class="text-3xl font-bold font-mono text-purple-400" id="cardMarketMarginVal">235,000 tỷ</span>
+                  <span class="text-xs px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 font-mono font-medium">+8.5% QoQ</span>
                 </div>
-                <div id="marketChartMargin" class="w-full min-h-[175px]"></div>
+                <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
+                  <span>Dư địa CTCK: <strong class="text-light-text dark:text-studio-text font-mono">~180k tỷ</strong></span>
+                  <span>Margin/VCSH: <strong class="text-light-text dark:text-studio-text font-mono">88.5%</strong></span>
+                  <span>Free-float: <strong class="text-emerald-500 font-mono">9.2% (An toàn)</strong></span>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-[11px] text-light-subtext dark:text-studio-muted">
+                <span class="truncate">Nguồn: BCTC Quý các CTCK / UBCKNN</span>
+                <span class="text-blue-500 hover:underline cursor-pointer font-medium" onclick="openManualEditModal('macro')">Sửa</span>
               </div>
             </div>
 
-            <!-- 4. VỐN HÓA THỊ TRƯỜNG -->
-            <div class="p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-amber-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5">
-              <!-- Hộp chỉ số (Bên trái) -->
-              <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
-                <div class="flex items-start justify-between">
-                  <div class="flex items-center space-x-2.5">
-                    <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center shrink-0">
-                      <i data-lucide="globe" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                      <span class="text-[10px] font-bold text-light-subtext dark:text-studio-muted uppercase tracking-wider">Quy mô Thị trường</span>
-                      <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Vốn hóa thị trường</h3>
-                    </div>
+            <!-- Biểu đồ lịch sử (Bên cạnh / Bên phải) -->
+            <div class="flex-1 min-w-0 flex flex-col justify-between">
+              <div class="flex items-center justify-between pb-1 text-xs">
+                <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
+                  <i data-lucide="layers" class="w-3.5 h-3.5 text-purple-400"></i>
+                  <span>Xu hướng Dư nợ Cho vay Ký quỹ (Margin) theo Quý</span>
+                </span>
+                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">Q1/23 - Q3/24 (Tỷ VND)</span>
+              </div>
+              <div id="marketChartMargin" class="w-full min-h-[175px]"></div>
+            </div>
+          </div>
+
+          <!-- 9. VỐN HÓA THỊ TRƯỜNG -->
+          <div id="macro-card-marketCap" data-macro-id="marketCap" class="macro-drag-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-amber-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
+            <!-- Hộp chỉ số (Bên trái) -->
+            <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
+              <div class="flex items-start justify-between">
+                <div class="flex items-center space-x-2.5">
+                  <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center shrink-0">
+                    <i data-lucide="globe" class="w-5 h-5"></i>
                   </div>
+                  <div>
+                    <span class="text-[10px] font-bold text-light-subtext dark:text-studio-muted uppercase tracking-wider">Quy mô Thị trường</span>
+                    <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Vốn hóa thị trường</h3>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-2">
                   <span class="text-xs px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-500 font-mono font-medium">Toàn sàn VN</span>
-                </div>
-
-                <div>
-                  <div class="flex items-baseline space-x-2.5">
-                    <span class="text-3xl font-bold font-mono text-amber-500" id="cardMarketCapVal">6.85M tỷ</span>
-                    <span class="text-xs px-2 py-0.5 rounded bg-amber-500/10 text-amber-500 font-mono font-medium">~$275 tỷ USD</span>
+                  <div class="flex items-center space-x-0.5 pl-1.5 border-l border-light-border/60 dark:border-studio-border/60 text-light-subtext dark:text-studio-muted">
+                    <button type="button" onclick="moveMacroCard('marketCap', -1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển lên trên">
+                      <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <button type="button" onclick="moveMacroCard('marketCap', 1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển xuống dưới">
+                      <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                    </button>
+                    <span class="macro-drag-handle p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 cursor-grab active:cursor-grabbing transition-colors" title="Kéo thả di chuyển">
+                      <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
+                    </span>
                   </div>
-                  <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
-                    <span>HOSE: <strong class="text-light-text dark:text-studio-text font-mono">5.12M tỷ</strong></span>
-                    <span>UPCoM: <strong class="text-light-text dark:text-studio-text font-mono">1.38M tỷ</strong></span>
-                    <span>HNX: <strong class="text-light-text dark:text-studio-text font-mono">345k tỷ</strong></span>
-                    <span>Vốn hóa/GDP: <strong class="text-emerald-500 font-mono">66.5%</strong></span>
-                  </div>
-                </div>
-
-                <div class="pt-2 border-t border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-[11px] text-light-subtext dark:text-studio-muted">
-                  <span class="truncate">Nguồn: FiinPro / HOSE / HNX</span>
-                  <span class="text-blue-500 hover:underline cursor-pointer font-medium" onclick="openManualEditModal('macro')">Sửa</span>
                 </div>
               </div>
 
-              <!-- Biểu đồ lịch sử (Bên cạnh / Bên phải) -->
-              <div class="flex-1 min-w-0 flex flex-col justify-between">
-                <div class="flex items-center justify-between pb-1 text-xs">
-                  <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
-                    <i data-lucide="pie-chart" class="w-3.5 h-3.5 text-amber-500"></i>
-                    <span>Quy mô Vốn hóa Toàn thị trường Chứng khoán Việt Nam (2024)</span>
-                  </span>
-                  <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">T1 - T10/2024 (Triệu tỷ VND)</span>
+              <div>
+                <div class="flex items-baseline space-x-2.5">
+                  <span class="text-3xl font-bold font-mono text-amber-500" id="cardMarketCapVal">6.85M tỷ</span>
+                  <span class="text-xs px-2 py-0.5 rounded bg-amber-500/10 text-amber-500 font-mono font-medium">~$275 tỷ USD</span>
                 </div>
-                <div id="marketChartCap" class="w-full min-h-[175px]"></div>
+                <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
+                  <span>HOSE: <strong class="text-light-text dark:text-studio-text font-mono">5.12M tỷ</strong></span>
+                  <span>UPCoM: <strong class="text-light-text dark:text-studio-text font-mono">1.38M tỷ</strong></span>
+                  <span>HNX: <strong class="text-light-text dark:text-studio-text font-mono">345k tỷ</strong></span>
+                  <span>Vốn hóa/GDP: <strong class="text-emerald-500 font-mono">66.5%</strong></span>
+                </div>
               </div>
+
+              <div class="pt-2 border-t border-light-border/60 dark:border-studio-border/60 flex items-center justify-between text-[11px] text-light-subtext dark:text-studio-muted">
+                <span class="truncate">Nguồn: FiinPro / HOSE / HNX</span>
+                <span class="text-blue-500 hover:underline cursor-pointer font-medium" onclick="openManualEditModal('macro')">Sửa</span>
+              </div>
+            </div>
+
+            <!-- Biểu đồ lịch sử (Bên cạnh / Bên phải) -->
+            <div class="flex-1 min-w-0 flex flex-col justify-between">
+              <div class="flex items-center justify-between pb-1 text-xs">
+                <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
+                  <i data-lucide="pie-chart" class="w-3.5 h-3.5 text-amber-500"></i>
+                  <span>Quy mô Vốn hóa Toàn thị trường Chứng khoán Việt Nam (2024)</span>
+                </span>
+                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">T1 - T10/2024 (Triệu tỷ VND)</span>
+              </div>
+              <div id="marketChartCap" class="w-full min-h-[175px]"></div>
             </div>
           </div>
         </div>
@@ -13569,6 +13674,8 @@
           }
         }, 100);
       } else if (tabId === 'macro') {
+        restoreMacroCardOrder();
+        initMacroDragAndDrop();
         setTimeout(() => {
           ['macroGdp', 'macroInterest', 'macroUsdVnd', 'macroGold', 'macroOil', 'marketVnindex', 'marketLiquidity', 'marketMargin', 'marketCap'].forEach(k => {
             if (StockApp.charts[k]) StockApp.charts[k].render();
@@ -13591,57 +13698,213 @@
       }
     }
 
-    function filterMacroSection(type) {
-      const groupMacro = document.getElementById("macroGroupMacroContainer");
-      const groupMarket = document.getElementById("macroGroupMarketContainer");
-      
-      const btnAll = document.getElementById("macroFilterBtnAll");
-      const btnMacro = document.getElementById("macroFilterBtnMacro");
-      const btnMarket = document.getElementById("macroFilterBtnMarket");
+    /* =========================================================================
+       MACRO CARDS REORDER & DRAG AND DROP
+       ========================================================================= */
+    const DEFAULT_MACRO_CARDS_ORDER = [
+      'gdp', 'interest', 'usdVnd', 'gold', 'oil',
+      'vnindex', 'liquidity', 'margin', 'marketCap'
+    ];
 
-      const activeClass = "px-4 py-1.5 rounded-lg bg-blue-600 text-white font-semibold transition-all shadow-sm";
-      const inactiveClass = "px-4 py-1.5 rounded-lg text-light-subtext dark:text-studio-subtext hover:text-light-text dark:hover:text-studio-text transition-all";
+    function restoreMacroCardOrder() {
+      const container = document.getElementById("macroCardsContainer");
+      if (!container) return;
 
-      if (btnAll) btnAll.className = (type === 'all') ? activeClass : inactiveClass;
-      if (btnMacro) btnMacro.className = (type === 'macro') ? activeClass : inactiveClass;
-      if (btnMarket) btnMarket.className = (type === 'market') ? activeClass : inactiveClass;
+      let order = DEFAULT_MACRO_CARDS_ORDER;
+      try {
+        const saved = localStorage.getItem("macro_cards_order");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            order = parsed;
+          }
+        }
+      } catch (e) {
+        console.warn("Could not read macro_cards_order from localStorage", e);
+      }
 
-      if (groupMacro) {
-        if (type === 'all' || type === 'macro') {
-          groupMacro.classList.remove("hidden");
+      // Re-append elements according to saved order
+      order.forEach(id => {
+        const card = document.getElementById(`macro-card-${id}`);
+        if (card && card.parentElement === container) {
+          container.appendChild(card);
+        }
+      });
+
+      // Append any remaining cards not in the saved list
+      DEFAULT_MACRO_CARDS_ORDER.forEach(id => {
+        const card = document.getElementById(`macro-card-${id}`);
+        if (card && card.parentElement === container) {
+          container.appendChild(card);
+        }
+      });
+    }
+
+    function saveMacroCardOrder() {
+      const container = document.getElementById("macroCardsContainer");
+      if (!container) return;
+
+      const cards = container.querySelectorAll(".macro-drag-card");
+      const currentOrder = Array.from(cards).map(c => c.getAttribute("data-macro-id")).filter(Boolean);
+      try {
+        localStorage.setItem("macro_cards_order", JSON.stringify(currentOrder));
+      } catch (e) {
+        console.warn("Could not save macro_cards_order", e);
+      }
+    }
+
+    function moveMacroCard(id, direction) {
+      const card = document.getElementById(`macro-card-${id}`);
+      const container = document.getElementById("macroCardsContainer");
+      if (!card || !container) return;
+
+      if (direction === -1) {
+        const prev = card.previousElementSibling;
+        if (prev && prev.classList.contains("macro-drag-card")) {
+          container.insertBefore(card, prev);
         } else {
-          groupMacro.classList.add("hidden");
+          showMacToast({
+            title: "Vị trí chỉ số",
+            message: "Chỉ số này đã nằm ở vị trí đầu tiên.",
+            type: "info"
+          });
+          return;
+        }
+      } else if (direction === 1) {
+        const next = card.nextElementSibling;
+        if (next && next.classList.contains("macro-drag-card")) {
+          container.insertBefore(next, card);
+        } else {
+          showMacToast({
+            title: "Vị trí chỉ số",
+            message: "Chỉ số này đã nằm ở vị trí cuối cùng.",
+            type: "info"
+          });
+          return;
         }
       }
 
-      if (groupMarket) {
-        if (type === 'all' || type === 'market') {
-          groupMarket.classList.remove("hidden");
-        } else {
-          groupMarket.classList.add("hidden");
-        }
-      }
-
-      // Redraw charts
+      saveMacroCardOrder();
+      triggerMacroChartsResize();
+      card.classList.add("ring-2", "ring-blue-500/50");
       setTimeout(() => {
-        const keys = type === 'macro' 
-          ? ['macroGdp', 'macroInterest', 'macroUsdVnd', 'macroGold', 'macroOil']
-          : type === 'market'
-          ? ['marketVnindex', 'marketLiquidity', 'marketMargin', 'marketCap']
-          : ['macroGdp', 'macroInterest', 'macroUsdVnd', 'macroGold', 'macroOil', 'marketVnindex', 'marketLiquidity', 'marketMargin', 'marketCap'];
-        keys.forEach(k => {
-          if (StockApp.charts[k]) StockApp.charts[k].render();
+        card.classList.remove("ring-2", "ring-blue-500/50");
+      }, 600);
+    }
+
+    function resetMacroCardOrder() {
+      const container = document.getElementById("macroCardsContainer");
+      if (!container) return;
+
+      try {
+        localStorage.removeItem("macro_cards_order");
+      } catch (e) {}
+
+      DEFAULT_MACRO_CARDS_ORDER.forEach(id => {
+        const card = document.getElementById(`macro-card-${id}`);
+        if (card && card.parentElement === container) {
+          container.appendChild(card);
+        }
+      });
+
+      triggerMacroChartsResize();
+      showMacToast({
+        title: "Đã đặt lại thứ tự",
+        message: "Khôi phục thành công thứ tự hiển thị mặc định của 9 chỉ số.",
+        type: "success"
+      });
+    }
+
+    function triggerMacroChartsResize() {
+      window.dispatchEvent(new Event('resize'));
+      setTimeout(() => {
+        const chartKeys = ['macroGdp', 'macroInterest', 'macroUsdVnd', 'macroGold', 'macroOil', 'marketVnindex', 'marketLiquidity', 'marketMargin', 'marketCap'];
+        chartKeys.forEach(k => {
+          if (StockApp.charts && StockApp.charts[k]) {
+            StockApp.charts[k].render();
+          }
         });
       }, 50);
+    }
 
-      // Feedback toast
-      const filterLabel = (type === 'macro') ? 'Vĩ mô (5 chỉ số)' : (type === 'market' ? 'Thị trường (4 chỉ số)' : 'Toàn bộ 9 chỉ số');
-      showMacToast({
-        title: "Bộ lọc Nhận định thị trường",
-        message: `Đang hiển thị: ${filterLabel}`,
-        type: "info",
-        duration: 2200
+    let dragSrcEl = null;
+
+    function initMacroDragAndDrop() {
+      const container = document.getElementById("macroCardsContainer");
+      if (!container) return;
+      if (container.dataset.dndInit === "true") return;
+      container.dataset.dndInit = "true";
+
+      const cards = container.querySelectorAll(".macro-drag-card");
+
+      cards.forEach(card => {
+        card.setAttribute("draggable", "true");
+
+        card.addEventListener("dragstart", (e) => {
+          if (e.target.closest("button") || e.target.closest("a") || e.target.closest("input")) {
+            e.preventDefault();
+            return;
+          }
+          dragSrcEl = card;
+          e.dataTransfer.effectAllowed = "move";
+          e.dataTransfer.setData("text/plain", card.getAttribute("data-macro-id") || "");
+          card.classList.add("is-dragging");
+        });
+
+        card.addEventListener("dragend", () => {
+          card.classList.remove("is-dragging");
+          cards.forEach(c => c.classList.remove("drag-over"));
+          saveMacroCardOrder();
+          triggerMacroChartsResize();
+        });
+
+        card.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = "move";
+          return false;
+        });
+
+        card.addEventListener("dragenter", (e) => {
+          if (card !== dragSrcEl) {
+            card.classList.add("drag-over");
+          }
+        });
+
+        card.addEventListener("dragleave", (e) => {
+          card.classList.remove("drag-over");
+        });
+
+        card.addEventListener("drop", (e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          card.classList.remove("drag-over");
+
+          if (dragSrcEl && dragSrcEl !== card) {
+            const allCards = Array.from(container.querySelectorAll(".macro-drag-card"));
+            const srcIdx = allCards.indexOf(dragSrcEl);
+            const targetIdx = allCards.indexOf(card);
+
+            if (srcIdx < targetIdx) {
+              container.insertBefore(dragSrcEl, card.nextSibling);
+            } else {
+              container.insertBefore(dragSrcEl, card);
+            }
+            saveMacroCardOrder();
+            triggerMacroChartsResize();
+            showMacToast({
+              title: "Sắp xếp thành công",
+              message: "Đã cập nhật vị trí các chỉ số theo thứ tự mới.",
+              type: "success"
+            });
+          }
+          return false;
+        });
       });
+    }
+
+    // Keep backwards compatibility stub
+    function filterMacroSection(type) {
+      triggerMacroChartsResize();
     }
 
     /* =========================================================================
@@ -20610,7 +20873,9 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
         startMarketRealtimeMinuteTimer();
       }
 
-      // 6. Khởi tạo các biểu đồ Vĩ mô & Báo cáo nhận định tuần
+      // 6. Khôi phục thứ tự 9 chỉ số Vĩ mô & Thị trường và khởi tạo Drag & Drop
+      restoreMacroCardOrder();
+      initMacroDragAndDrop();
       initMacroCharts();
       renderWeeklyReportList();
       renderActiveWeeklyReport();

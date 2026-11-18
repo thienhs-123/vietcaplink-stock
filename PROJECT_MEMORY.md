@@ -547,3 +547,27 @@
       * Nâng cấp hàm `applyRealMacroData()` tự động cập nhật đồng thời cả Brent, WTI và nhãn % biến động.
       * Cập nhật giá trị hiển thị trên thanh Ticker chạy tự động ở đầu trang và Modal Chỉnh sửa Vĩ mô thủ công.
       * Cập nhật giá trị mặc định trong `realtime_server.py`.
+
+30. **Gộp Chung Danh Sách Nhận Định Thị Trường & Bổ Sung Tính Năng Kéo Thả Sắp Xếp Tùy Biến (18/11/2026)**:
+    - **Yêu cầu của người dùng**:
+      * Không phân chia làm 2 mục riêng biệt "Vĩ mô" và "Thị trường" nữa.
+      * Tạo tính năng sắp xếp kéo thả (Drag and Drop) di chuyển lên xuống tự do giữa tất cả các mục này.
+    - **Triển khai kỹ thuật hoàn chỉnh**:
+      * **Hủy bỏ phân tách 2 nhóm & Hợp nhất danh sách**:
+        + Loại bỏ hoàn toàn thanh segmented control tabs: `Tất cả (9) | Vĩ mô (5) | Thị trường (4)`.
+        + Loại bỏ 2 thanh tiêu đề phân nhóm: `Vĩ mô (5 chỉ báo cốt lõi)` và `Thị trường (4 chỉ số thị trường chứng khoán)`.
+        + Gom toàn bộ 9 chỉ số vào một container duy nhất `#macroCardsContainer`: Tăng trưởng GDP, Lãi suất, Tỷ giá VND/USD, Giá vàng, Giá dầu, Chỉ số VNIndex, Thanh khoản, Margin, Vốn hóa thị trường.
+      * **Bộ công cụ điều hướng linh hoạt trên từng thẻ**:
+        + Mỗi thẻ trang bị cụm điều khiển tinh tế theo phong cách Apple: Mũi tên Lên (`chevron-up`), Mũi tên Xuống (`chevron-down`) và Biểu tượng tay nắm kéo thả (`grip-vertical`).
+        + Hỗ trợ cả 2 phương thức điều hướng: Kéo thả chuột/touch trực quan hoặc bấm nút chuyển vị trí từng bước.
+      * **Hệ thống Drag & Drop HTML5 mượt mà**:
+        + Thiết lập thuộc tính `draggable="true"` cho từng thẻ với class `.macro-drag-card`.
+        + Quản lý sự kiện kéo thả (`dragstart`, `dragover`, `dragenter`, `dragleave`, `drop`, `dragend`).
+        + Hiệu ứng thị giác trực quan: thẻ đang kéo nhận class `.is-dragging` (mờ nhẹ 45%, viền nét đứt xanh dương, thu nhỏ nhẹ 0.99), thẻ đích đến hiển thị ring viền highlight.
+        + Đảm bảo chống xung đột khi bấm vào các liên kết, nút bấm hoặc input trên thẻ (`e.target.closest("button")`).
+      * **Lưu trữ & Khôi phục trạng thái (Persistence)**:
+        + Thứ tự tùy biến của người dùng được tự động lưu vào `localStorage` (`macro_cards_order`).
+        + Tự động khôi phục chính xác thứ tự đã sắp xếp khi mở trang hoặc khi chuyển tab sang "2. Nhận định thị trường".
+        + Cung cấp nút **"Đặt lại thứ tự"** (`resetMacroCardOrder()`) trên thanh tiêu đề Module 2 để đưa danh sách trở về thứ tự mặc định ban đầu bất cứ lúc nào.
+      * **Tối ưu hiển thị Biểu đồ (ApexCharts)**:
+        + Tự động kích hoạt `window.dispatchEvent(new Event('resize'))` và kích hoạt re-render biểu đồ sau khi sắp xếp, đảm bảo biểu đồ không bị vỡ hoặc lệch tỷ lệ co giãn khi thay đổi vị trí trong DOM.
