@@ -13206,9 +13206,9 @@
 
       port.holdings = topSelected.map((s, idx) => {
         const curPrice = (typeof s.price === 'number' && s.price > 0) ? s.price : (s.ref || 10000);
-        // Reasonable estimated baseline buy price (e.g. 5-8% profit buffer)
-        const buyPrice = Math.round(curPrice * 0.93);
-        const profitPct = parseFloat((((curPrice - buyPrice) / buyPrice) * 100).toFixed(2));
+        // Giá vốn bằng đúng thị giá khi lọc danh mục tự động
+        const buyPrice = curPrice;
+        const profitPct = 0;
 
         return {
           symbol: s.symbol,
@@ -13249,7 +13249,7 @@
 
       showMacToast({
         title: "Cập nhật tự động thành công!",
-        message: `Đã tự động tuyển chọn và nạp Top ${topSelected.length} mã vào Danh mục ${port.name}!`,
+        message: `Đã tuyển chọn và nạp Top ${topSelected.length} mã vào Danh mục ${port.name} với giá vốn bằng đúng thị giá hiện tại!`,
         type: "success",
         duration: 3500
       });

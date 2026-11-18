@@ -431,3 +431,13 @@
         + Đường NAV danh mục (`port.navPortfolio`) tự động co giãn đường cong theo hàm tiến trình mượt mà, điểm kết thúc đồ thị khớp chuẩn xác 100% với $100 + \text{PortReturn}$.
         + Chú giải góc trên đồ thị `#portfolioChartLegendVal` đồng bộ tức thời: `Danh mục (+X.X%)` hoặc `Danh mục (-X.X%)`.
         + Ô giá vốn trong bảng danh mục bổ sung thuộc tính `title` tooltip hiển thị đầy đủ Giá vốn, Thị giá hiện tại và % Lãi lỗ chi tiết của từng mã khi di chuột.
+
+24. **Cập Nhật Cơ Chế Giá Vốn Khi Lọc Tự Động: Bằng Đúng Thị Giá Khi Lọc (18/11/2026)**:
+    - **Yêu cầu của người dùng**: Khi áp dụng danh mục từ tính năng "Cập nhật tự động", thiết lập giá vốn của mỗi cổ phiếu bằng đúng thị giá khớp lệnh thực tế tại thời điểm lọc danh mục (thay vì giả lập mức đệm an toàn lùi 7% so với thị giá).
+    - **Triển khai kỹ thuật**:
+      * Cập nhật hàm `applyAutoPortfolio()` trong `index.html`:
+        + `buyPrice = curPrice` (lấy đúng giá đóng cửa/khớp lệnh mới nhất của cổ phiếu trên sàn HOSE).
+        + `profitPct = 0` (tại thời điểm lọc/mở vị thế ban đầu, lãi/lỗ = 0.0%).
+      * Tỷ suất sinh lời danh mục tức thời đạt `+0.0%`, Alpha so với VN-Index Benchmark đạt `-12.4% Alpha`.
+      * Khi thị trường vận động các phiên tiếp theo, % Lãi/lỗ và Hiệu suất YTD Danh mục sẽ tự động tính toán tăng/giảm chính xác so với mức giá vốn khởi điểm này.
+      * Cập nhật nội dung thông báo Toast khi áp dụng thành công.
