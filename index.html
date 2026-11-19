@@ -127,6 +127,18 @@
     .macro-card {
       transition: transform 0.18s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.18s ease, border-color 0.18s ease;
     }
+    .quick-reorder-item {
+      user-select: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, opacity 0.15s ease, background-color 0.15s ease;
+    }
+    .quick-reorder-item.is-quick-dragging {
+      opacity: 0.35 !important;
+      border-style: dashed !important;
+      border-color: #3b82f6 !important;
+      transform: scale(0.985);
+      background-color: rgba(59, 130, 246, 0.08) !important;
+      box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.25) !important;
+    }
 
     .font-mono, code, pre, .tabular-nums, #tickerTrack {
       font-family: 'SF Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
@@ -820,7 +832,7 @@
               <span class="text-xs px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-studio-blueLight border border-blue-500/20 font-medium">9 chỉ số</span>
             </div>
             <p class="text-xs md:text-sm text-light-subtext dark:text-studio-subtext mt-1">
-              Tổng hợp 9 chỉ số kinh tế vĩ mô &amp; thị trường chứng khoán kết hợp biểu đồ lịch sử trực quan. Tùy biến thứ tự ưu tiên theo dõi qua tính năng Sắp xếp nhanh.
+              Tổng hợp 9 chỉ số kinh tế vĩ mô &amp; thị trường chứng khoán kết hợp biểu đồ lịch sử trực quan. Tùy biến thứ tự hiển thị nhanh chóng qua bảng Sắp xếp nhanh (hỗ trợ kéo thả trực tiếp).
             </p>
           </div>
           <div class="flex items-center space-x-2.5 shrink-0 self-start sm:self-auto">
@@ -3625,7 +3637,7 @@
           </div>
           <div>
             <h3 class="text-base font-bold text-light-text dark:text-studio-text">Sắp xếp Nhanh 9 Chỉ số</h3>
-            <p class="text-xs text-light-subtext dark:text-studio-subtext mt-0.5">Tùy biến vị trí hiển thị ưu tiên theo thứ tự mong muốn.</p>
+            <p class="text-xs text-light-subtext dark:text-studio-subtext mt-0.5">Kéo thả di chuyển trực tiếp hoặc dùng nút mũi tên để tùy biến thứ tự.</p>
           </div>
         </div>
         <button onclick="closeQuickReorderModal()" class="w-8 h-8 rounded-full bg-light-elevated dark:bg-studio-elevated flex items-center justify-center text-light-subtext dark:text-studio-muted hover:text-light-text dark:hover:text-studio-text transition-all">
@@ -13720,9 +13732,10 @@
     }
 
     /* =========================================================================
-       MODAL: QUICK REORDER 9 MACRO CARDS
+       MODAL: QUICK REORDER 9 MACRO CARDS (WITH DRAG & DROP & ARROW BUTTONS)
        ========================================================================= */
     let quickReorderCurrentOrder = [];
+    let dragSrcQuickItem = null;
 
     function openQuickReorderModal() {
       const container = document.getElementById("macroCardsContainer");
@@ -13753,6 +13766,109 @@
       }
     }
 
+    function syncQuickOrderFromDOM() {
+      const listContainer = document.getElementById("quickReorderList");
+      if (!listContainer) return;
+      const items = listContainer.querySelectorAll(".quick-reorder-item");
+      quickReorderCurrentOrder = Array.from(items).map(el => el.getAttribute("data-quick-id")).filter(Boolean);
+    }
+
+    function updateQuickListOrderBadges() {
+      const listContainer = document.getElementById("quickReorderList");
+      if (!listContainer) return;
+      const items = listContainer.querySelectorAll(".quick-reorder-item");
+      const total = items.length;
+
+      items.forEach((item, idx) => {
+        const badge = item.querySelector(".quick-order-badge");
+        if (badge) badge.textContent = `#${idx + 1}`;
+
+        const isFirst = (idx === 0);
+        const isLast = (idx === total - 1);
+
+        const btnTop = item.querySelector(".btn-quick-top");
+        const btnUp = item.querySelector(".btn-quick-up");
+        const btnDown = item.querySelector(".btn-quick-down");
+        const btnBottom = item.querySelector(".btn-quick-bottom");
+
+        if (btnTop) {
+          btnTop.disabled = isFirst;
+          btnTop.classList.toggle("opacity-25", isFirst);
+          btnTop.classList.toggle("pointer-events-none", isFirst);
+        }
+        if (btnUp) {
+          btnUp.disabled = isFirst;
+          btnUp.classList.toggle("opacity-25", isFirst);
+          btnUp.classList.toggle("pointer-events-none", isFirst);
+        }
+        if (btnDown) {
+          btnDown.disabled = isLast;
+          btnDown.classList.toggle("opacity-25", isLast);
+          btnDown.classList.toggle("pointer-events-none", isLast);
+        }
+        if (btnBottom) {
+          btnBottom.disabled = isLast;
+          btnBottom.classList.toggle("opacity-25", isLast);
+          btnBottom.classList.toggle("pointer-events-none", isLast);
+        }
+      });
+    }
+
+    function initQuickReorderItemDrag(item, listContainer) {
+      item.setAttribute("draggable", "true");
+
+      item.addEventListener("dragstart", (e) => {
+        if (e.target.closest("button") || e.target.closest("a") || e.target.closest("input")) {
+          e.preventDefault();
+          return;
+        }
+        dragSrcQuickItem = item;
+        e.dataTransfer.effectAllowed = "move";
+        e.dataTransfer.setData("text/plain", item.getAttribute("data-quick-id") || "");
+        setTimeout(() => {
+          if (dragSrcQuickItem) dragSrcQuickItem.classList.add("is-quick-dragging");
+        }, 0);
+      });
+
+      item.addEventListener("dragend", () => {
+        if (dragSrcQuickItem) {
+          dragSrcQuickItem.classList.remove("is-quick-dragging");
+          dragSrcQuickItem = null;
+        }
+        syncQuickOrderFromDOM();
+        updateQuickListOrderBadges();
+      });
+
+      item.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "move";
+
+        if (!dragSrcQuickItem || dragSrcQuickItem === item) return;
+
+        const rect = item.getBoundingClientRect();
+        const midY = rect.top + rect.height / 2;
+
+        if (e.clientY < midY) {
+          if (dragSrcQuickItem.nextElementSibling !== item) {
+            listContainer.insertBefore(dragSrcQuickItem, item);
+            updateQuickListOrderBadges();
+          }
+        } else {
+          if (dragSrcQuickItem.previousElementSibling !== item) {
+            listContainer.insertBefore(dragSrcQuickItem, item.nextSibling);
+            updateQuickListOrderBadges();
+          }
+        }
+      });
+
+      item.addEventListener("drop", (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        syncQuickOrderFromDOM();
+        updateQuickListOrderBadges();
+      });
+    }
+
     function renderQuickReorderList() {
       const listContainer = document.getElementById("quickReorderList");
       if (!listContainer) return;
@@ -13764,9 +13880,12 @@
         const isLast = (idx === total - 1);
 
         return `
-          <div class="flex items-center justify-between p-2.5 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80 hover:border-blue-500/40 transition-all text-xs" data-quick-id="${id}">
-            <div class="flex items-center space-x-2.5 min-w-0">
-              <span class="w-6 h-6 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 font-mono font-bold flex items-center justify-center text-[11px] shrink-0 border border-blue-500/20">
+          <div draggable="true" class="quick-reorder-item flex items-center justify-between p-2.5 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80 hover:border-blue-500/40 cursor-grab active:cursor-grabbing transition-all text-xs select-none group" data-quick-id="${id}">
+            <div class="flex items-center space-x-2 min-w-0">
+              <span class="quick-drag-handle text-light-subtext/40 dark:text-studio-muted/40 group-hover:text-blue-500 hover:text-blue-500 transition-colors p-1 cursor-grab active:cursor-grabbing shrink-0 flex items-center justify-center rounded" title="Bấm giữ và kéo thả di chuyển vị trí">
+                <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
+              </span>
+              <span class="quick-order-badge w-6 h-6 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 font-mono font-bold flex items-center justify-center text-[11px] shrink-0 border border-blue-500/20">
                 #${idx + 1}
               </span>
               <div class="w-7 h-7 rounded-lg ${meta.bg} ${meta.color} flex items-center justify-center shrink-0">
@@ -13780,16 +13899,16 @@
 
             <!-- Controls -->
             <div class="flex items-center space-x-1 shrink-0 text-light-subtext dark:text-studio-muted">
-              <button onclick="moveQuickReorderToBoundary('${id}', 'top')" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors ${isFirst ? 'opacity-25 pointer-events-none' : ''}" title="Lên vị trí đầu tiên">
+              <button type="button" onclick="moveQuickReorderToBoundary('${id}', 'top')" class="btn-quick-top p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors ${isFirst ? 'opacity-25 pointer-events-none' : ''}" title="Lên vị trí đầu tiên">
                 <i data-lucide="chevrons-up" class="w-3.5 h-3.5"></i>
               </button>
-              <button onclick="moveQuickReorderItem('${id}', -1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors ${isFirst ? 'opacity-25 pointer-events-none' : ''}" title="Lên 1 nấc">
+              <button type="button" onclick="moveQuickReorderItem('${id}', -1)" class="btn-quick-up p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors ${isFirst ? 'opacity-25 pointer-events-none' : ''}" title="Lên 1 nấc">
                 <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
               </button>
-              <button onclick="moveQuickReorderItem('${id}', 1)" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors ${isLast ? 'opacity-25 pointer-events-none' : ''}" title="Xuống 1 nấc">
+              <button type="button" onclick="moveQuickReorderItem('${id}', 1)" class="btn-quick-down p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors ${isLast ? 'opacity-25 pointer-events-none' : ''}" title="Xuống 1 nấc">
                 <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
               </button>
-              <button onclick="moveQuickReorderToBoundary('${id}', 'bottom')" class="p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors ${isLast ? 'opacity-25 pointer-events-none' : ''}" title="Xuống vị trí cuối cùng">
+              <button type="button" onclick="moveQuickReorderToBoundary('${id}', 'bottom')" class="btn-quick-bottom p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors ${isLast ? 'opacity-25 pointer-events-none' : ''}" title="Xuống vị trí cuối cùng">
                 <i data-lucide="chevrons-down" class="w-3.5 h-3.5"></i>
               </button>
             </div>
@@ -13797,10 +13916,15 @@
         `;
       }).join('');
 
+      listContainer.querySelectorAll(".quick-reorder-item").forEach(item => {
+        initQuickReorderItemDrag(item, listContainer);
+      });
+
       if (window.lucide) lucide.createIcons();
     }
 
     function moveQuickReorderItem(id, direction) {
+      syncQuickOrderFromDOM();
       const idx = quickReorderCurrentOrder.indexOf(id);
       if (idx === -1) return;
       const targetIdx = idx + direction;
@@ -13812,6 +13936,7 @@
     }
 
     function moveQuickReorderToBoundary(id, boundary) {
+      syncQuickOrderFromDOM();
       const idx = quickReorderCurrentOrder.indexOf(id);
       if (idx === -1) return;
       const [removed] = quickReorderCurrentOrder.splice(idx, 1);
@@ -13829,6 +13954,7 @@
     }
 
     function applyQuickReorder() {
+      syncQuickOrderFromDOM();
       const container = document.getElementById("macroCardsContainer");
       if (!container) return;
 

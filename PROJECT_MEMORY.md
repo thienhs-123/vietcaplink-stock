@@ -621,3 +621,21 @@
             2. Nút **"Đặt lại thứ tự"**: icon `rotate-ccw`, bo góc `rounded-xl`, hiệu ứng hover êm ái.
             3. Nút **"Cập nhật số liệu"**: nút hành động chính (Primary action) màu xanh dương `bg-blue-600 hover:bg-blue-500`, icon `edit-3`.
 
+33. **Bổ Sung Tính Năng Kéo Thả Trực Tiếp Trong Modal Sắp Xếp Nhanh (Modal Drag & Drop Reorder) (19/11/2026)**:
+    - **Yêu cầu của người dùng**:
+      * Áp dụng tính năng kéo thả (Drag and Drop) trực tiếp bên trong danh sách của Modal "Sắp xếp Nhanh 9 Chỉ số".
+    - **Triển khai kỹ thuật hoàn chỉnh**:
+      * **Trải nghiệm kéo thả mượt mà trên từng hàng**:
+        + Bổ sung biểu tượng tay nắm kéo thả `grip-vertical` ở đầu mỗi hàng (`quick-drag-handle`) với con trỏ chuột `cursor-grab active:cursor-grabbing`.
+        + Đặt thuộc tính `draggable="true"` trên toàn bộ thẻ hàng `.quick-reorder-item`. Người dùng có thể cầm vào tay nắm hoặc bất kỳ vị trí nào trên hàng để kéo thả.
+        + Tự động bỏ qua sự kiện drag khi bấm vào cụm 4 nút mũi tên (`chevrons-up`, `chevron-up`, `chevron-down`, `chevrons-down`), đảm bảo tính năng bấm nút 1-click vẫn hoạt động trơn tru 100%.
+      * **Động cơ Live Swap thời gian thực trong Modal**:
+        + Khi kéo một chỉ số lướt qua trên hoặc dưới trung điểm của chỉ số khác, hệ thống dùng `listContainer.insertBefore` hoán đổi vị trí trực tiếp trong DOM ngay dưới con trỏ chuột mà không làm gián đoạn luồng drag của trình duyệt.
+        + Hàm `updateQuickListOrderBadges()` tự động cập nhật ngay lập tức các huy hiệu số thứ tự `#1..#9` và cập nhật trạng thái làm mờ/vô hiệu hóa các nút biên (`btn-quick-top`, `btn-quick-bottom`).
+      * **Hiệu ứng thị giác chuẩn Apple iOS / macOS**:
+        + Thẻ hàng đang kéo nhận class `.is-quick-dragging`: mờ 35%, viền nét đứt màu xanh dương `border-blue-500`, nền `bg-blue-500/5` và đổ bóng nổi bật.
+      * **Đồng bộ thứ tự 2 chiều**:
+        + Khi thả chuột (`drop` / `dragend`), hàm `syncQuickOrderFromDOM()` cập nhật mảng `quickReorderCurrentOrder`.
+        + Khi bấm **"Áp dụng thứ tự"**: Áp dụng chuẩn xác thứ tự vừa kéo thả ra 9 thẻ lớn trên Dashboard, lưu vào `localStorage` và tự động kích hoạt tính toán lại kích thước biểu đồ ApexCharts.
+
+
