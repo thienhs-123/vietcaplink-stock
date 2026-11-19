@@ -124,30 +124,8 @@
 
     /* Apple SF Mono for all numbers, tables, ticker metrics and code */
         /* Drag & Drop Reordering for Macro Cards */
-    .macro-drag-card {
-      user-select: none;
-      transition: transform 0.18s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.18s ease, border-color 0.18s ease, opacity 0.18s ease;
-    }
-    .macro-drag-card.is-dragging {
-      opacity: 0.35 !important;
-      border-style: dashed !important;
-      border-color: #3b82f6 !important;
-      transform: scale(0.985);
-      box-shadow: 0 16px 36px -10px rgba(59, 130, 246, 0.35) !important;
-    }
-    .macro-drag-card.drag-over-active {
-      border-color: #3b82f6 !important;
-      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5) !important;
-    }
-    .macro-drag-handle {
-      cursor: grab;
-      touch-action: none;
-    }
-    .macro-drag-handle:active {
-      cursor: grabbing;
-    }
-    .macro-order-badge {
-      font-feature-settings: "tnum" on, "lnum" on;
+    .macro-card {
+      transition: transform 0.18s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.18s ease, border-color 0.18s ease;
     }
 
     .font-mono, code, pre, .tabular-nums, #tickerTrack {
@@ -835,36 +813,33 @@
         <section id="module-macro" class="space-y-6 hidden">
         <!-- Section Header -->
                 <!-- Tiêu đề Header Module 2: Nhận định thị trường -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-light-border dark:border-studio-border">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-light-border dark:border-studio-border">
           <div>
-            <div class="flex items-center space-x-2">
+            <div class="flex items-center space-x-2.5">
               <h1 class="text-xl md:text-2xl font-bold tracking-tight">2. Nhận định thị trường</h1>
               <span class="text-xs px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-studio-blueLight border border-blue-500/20 font-medium">9 chỉ số</span>
             </div>
             <p class="text-xs md:text-sm text-light-subtext dark:text-studio-subtext mt-1">
-              Tổng hợp 9 chỉ số kinh tế vĩ mô &amp; thị trường chứng khoán kết hợp biểu đồ lịch sử trực quan. Dễ dàng <span class="font-semibold text-blue-500">kéo thả</span> (thanh cuộn tự động chạy theo khi kéo sát mép) hoặc dùng các nút <span class="font-semibold text-light-text dark:text-studio-text">Lên / Xuống / Lên đầu / Xuống cuối</span> để tùy biến thứ tự theo dõi.
+              Tổng hợp 9 chỉ số kinh tế vĩ mô &amp; thị trường chứng khoán kết hợp biểu đồ lịch sử trực quan. Tùy biến thứ tự ưu tiên theo dõi qua tính năng Sắp xếp nhanh.
             </p>
           </div>
-          <div class="flex items-center space-x-2 self-start sm:self-auto flex-wrap gap-y-2">
-            <button onclick="openQuickReorderModal()" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 dark:text-studio-blueLight border border-blue-500/30 flex items-center space-x-1.5 transition-all shadow-sm" title="Mở bảng sắp xếp nhanh 9 chỉ số trên 1 màn hình">
-              <i data-lucide="arrow-up-down" class="w-3.5 h-3.5 text-blue-500"></i>
+          <div class="flex items-center space-x-2.5 shrink-0 self-start sm:self-auto">
+            <button onclick="openQuickReorderModal()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-blue-500/10 hover:bg-blue-500/20 text-blue-600 dark:text-studio-blueLight border border-blue-500/30 flex items-center space-x-1.5 transition-all shadow-sm active:scale-95" title="Mở bảng sắp xếp nhanh thứ tự 9 chỉ số">
+              <i data-lucide="arrow-up-down" class="w-4 h-4 text-blue-500"></i>
               <span>Sắp xếp nhanh</span>
             </button>
-            <button onclick="resetMacroCardOrder()" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-light-elevated dark:bg-studio-elevated hover:bg-light-border dark:hover:bg-studio-border border border-light-border dark:border-studio-border text-light-text dark:text-studio-text flex items-center space-x-1.5 transition-all shadow-sm" title="Khôi phục thứ tự mặc định 9 chỉ số">
-              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5 text-light-subtext dark:text-studio-subtext"></i>
-              <span>Đặt lại thứ tự</span>
+            <button onclick="resetMacroCardOrder()" class="p-2 rounded-xl text-xs font-medium bg-light-elevated dark:bg-studio-elevated hover:bg-light-border dark:hover:bg-studio-border border border-light-border dark:border-studio-border text-light-subtext dark:text-studio-muted hover:text-light-text dark:hover:text-studio-text transition-all shadow-sm active:scale-95" title="Khôi phục thứ tự mặc định của 9 chỉ số">
+              <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
             </button>
-            <button onclick="openManualEditModal('macro')" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white flex items-center space-x-1.5 transition-all shadow-sm">
-              <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+            <button onclick="openManualEditModal('macro')" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white flex items-center space-x-1.5 transition-all shadow-sm active:scale-95">
+              <i data-lucide="edit-3" class="w-4 h-4"></i>
               <span>Cập nhật số liệu</span>
             </button>
           </div>
-        </div>
-
-        <!-- Container chung duy nhất chứa 9 chỉ số có thể kéo thả sắp xếp (Drag & Drop) -->
+        </div><!-- Container chung duy nhất chứa 9 chỉ số có thể kéo thả sắp xếp (Drag & Drop) -->
         <div id="macroCardsContainer" class="space-y-4">
           <!-- 1. TĂNG TRƯỞNG GDP -->
-          <div id="macro-card-gdp" data-macro-id="gdp" class="macro-drag-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-blue-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
+          <div id="macro-card-gdp" data-macro-id="gdp" class="macro-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-blue-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
             <!-- Hộp chỉ số (Bên trái) -->
             <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
               <div class="flex items-start justify-between">
@@ -877,28 +852,7 @@
                     <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Tăng trưởng GDP</h3>
                   </div>
                 </div>
-                <div class="flex items-center space-x-1.5">
-                  <span class="macro-order-badge font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 shrink-0" title="Thứ tự hiển thị hiện tại">#1</span>
-                  <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono font-medium">YoY</span>
-                  <!-- Cụm điều khiển sắp xếp cao cấp (Đầu / Lên / Xuống / Cuối / Kéo thả) -->
-                  <div class="flex items-center space-x-0.5 pl-1.5 border-l border-light-border/60 dark:border-studio-border/60 text-light-subtext dark:text-studio-muted">
-                    <button type="button" onclick="moveMacroCardToBoundary('gdp', 'top')" class="btn-move-top p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Chuyển thẳng lên vị trí đầu tiên (#1)">
-                      <i data-lucide="chevrons-up" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCard('gdp', -1)" class="btn-move-up p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển lên 1 nấc">
-                      <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCard('gdp', 1)" class="btn-move-down p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển xuống 1 nấc">
-                      <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCardToBoundary('gdp', 'bottom')" class="btn-move-bottom p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Chuyển thẳng xuống vị trí cuối cùng (#9)">
-                      <i data-lucide="chevrons-down" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <span class="macro-drag-handle p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface text-blue-500 dark:text-blue-400 bg-blue-500/10 hover:bg-blue-500/20 cursor-grab active:cursor-grabbing transition-all flex items-center justify-center" title="Bấm giữ và kéo thả di chuyển (Thanh cuộn tự động chạy theo khi kéo sát mép)">
-                      <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
-                    </span>
-                  </div>
-                </div>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono font-medium">YoY</span>
               </div>
 
               <div>
@@ -932,7 +886,7 @@
           </div>
 
           <!-- 2. LÃI SUẤT -->
-          <div id="macro-card-interest" data-macro-id="interest" class="macro-drag-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-purple-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
+          <div id="macro-card-interest" data-macro-id="interest" class="macro-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-purple-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
             <!-- Hộp chỉ số (Bên trái) -->
             <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
               <div class="flex items-start justify-between">
@@ -945,28 +899,7 @@
                     <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Lãi suất</h3>
                   </div>
                 </div>
-                <div class="flex items-center space-x-1.5">
-                  <span class="macro-order-badge font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 shrink-0" title="Thứ tự hiển thị hiện tại">#2</span>
-                  <span class="text-xs px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-500 font-mono font-medium">Huy động 12T</span>
-                  <!-- Cụm điều khiển sắp xếp cao cấp -->
-                  <div class="flex items-center space-x-0.5 pl-1.5 border-l border-light-border/60 dark:border-studio-border/60 text-light-subtext dark:text-studio-muted">
-                    <button type="button" onclick="moveMacroCardToBoundary('interest', 'top')" class="btn-move-top p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Chuyển thẳng lên vị trí đầu tiên (#1)">
-                      <i data-lucide="chevrons-up" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCard('interest', -1)" class="btn-move-up p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển lên 1 nấc">
-                      <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCard('interest', 1)" class="btn-move-down p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển xuống 1 nấc">
-                      <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCardToBoundary('interest', 'bottom')" class="btn-move-bottom p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Chuyển thẳng xuống vị trí cuối cùng (#9)">
-                      <i data-lucide="chevrons-down" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <span class="macro-drag-handle p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface text-blue-500 dark:text-blue-400 bg-blue-500/10 hover:bg-blue-500/20 cursor-grab active:cursor-grabbing transition-all flex items-center justify-center" title="Bấm giữ và kéo thả di chuyển (Thanh cuộn tự động chạy theo khi kéo sát mép)">
-                      <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
-                    </span>
-                  </div>
-                </div>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-purple-500/10 text-purple-400 font-mono font-medium">Huy động 12T</span>
               </div>
 
               <div>
@@ -1001,7 +934,7 @@
           </div>
 
           <!-- 3. TỶ GIÁ VND/USD -->
-          <div id="macro-card-usdVnd" data-macro-id="usdVnd" class="macro-drag-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-emerald-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
+          <div id="macro-card-usdVnd" data-macro-id="usdVnd" class="macro-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-emerald-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
             <!-- Hộp chỉ số (Bên trái) -->
             <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
               <div class="flex items-start justify-between">
@@ -1014,28 +947,7 @@
                     <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Tỷ giá VND/USD</h3>
                   </div>
                 </div>
-                <div class="flex items-center space-x-1.5">
-                  <span class="macro-order-badge font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 shrink-0" title="Thứ tự hiển thị hiện tại">#3</span>
-                  <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono font-medium">VCB Niêm yết</span>
-                  <!-- Cụm điều khiển sắp xếp cao cấp -->
-                  <div class="flex items-center space-x-0.5 pl-1.5 border-l border-light-border/60 dark:border-studio-border/60 text-light-subtext dark:text-studio-muted">
-                    <button type="button" onclick="moveMacroCardToBoundary('usdVnd', 'top')" class="btn-move-top p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Chuyển thẳng lên vị trí đầu tiên (#1)">
-                      <i data-lucide="chevrons-up" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCard('usdVnd', -1)" class="btn-move-up p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển lên 1 nấc">
-                      <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCard('usdVnd', 1)" class="btn-move-down p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển xuống 1 nấc">
-                      <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCardToBoundary('usdVnd', 'bottom')" class="btn-move-bottom p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Chuyển thẳng xuống vị trí cuối cùng (#9)">
-                      <i data-lucide="chevrons-down" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <span class="macro-drag-handle p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface text-blue-500 dark:text-blue-400 bg-blue-500/10 hover:bg-blue-500/20 cursor-grab active:cursor-grabbing transition-all flex items-center justify-center" title="Bấm giữ và kéo thả di chuyển (Thanh cuộn tự động chạy theo khi kéo sát mép)">
-                      <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
-                    </span>
-                  </div>
-                </div>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono font-medium">VCB Niêm yết</span>
               </div>
 
               <div>
@@ -1070,7 +982,7 @@
           </div>
 
           <!-- 4. GIÁ VÀNG -->
-          <div id="macro-card-gold" data-macro-id="gold" class="macro-drag-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-amber-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
+          <div id="macro-card-gold" data-macro-id="gold" class="macro-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-amber-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
             <!-- Hộp chỉ số (Bên trái) -->
             <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
               <div class="flex items-start justify-between">
@@ -1083,28 +995,7 @@
                     <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Giá vàng</h3>
                   </div>
                 </div>
-                <div class="flex items-center space-x-1.5">
-                  <span class="macro-order-badge font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 shrink-0" title="Thứ tự hiển thị hiện tại">#4</span>
-                  <span class="text-xs px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-500 font-mono font-medium">Spot Gold</span>
-                  <!-- Cụm điều khiển sắp xếp cao cấp -->
-                  <div class="flex items-center space-x-0.5 pl-1.5 border-l border-light-border/60 dark:border-studio-border/60 text-light-subtext dark:text-studio-muted">
-                    <button type="button" onclick="moveMacroCardToBoundary('gold', 'top')" class="btn-move-top p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Chuyển thẳng lên vị trí đầu tiên (#1)">
-                      <i data-lucide="chevrons-up" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCard('gold', -1)" class="btn-move-up p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển lên 1 nấc">
-                      <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCard('gold', 1)" class="btn-move-down p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển xuống 1 nấc">
-                      <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCardToBoundary('gold', 'bottom')" class="btn-move-bottom p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Chuyển thẳng xuống vị trí cuối cùng (#9)">
-                      <i data-lucide="chevrons-down" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <span class="macro-drag-handle p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface text-blue-500 dark:text-blue-400 bg-blue-500/10 hover:bg-blue-500/20 cursor-grab active:cursor-grabbing transition-all flex items-center justify-center" title="Bấm giữ và kéo thả di chuyển (Thanh cuộn tự động chạy theo khi kéo sát mép)">
-                      <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
-                    </span>
-                  </div>
-                </div>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-500 font-mono font-medium">Spot Gold</span>
               </div>
 
               <div>
@@ -1139,7 +1030,7 @@
           </div>
 
           <!-- 5. GIÁ DẦU -->
-          <div id="macro-card-oil" data-macro-id="oil" class="macro-drag-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-rose-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
+          <div id="macro-card-oil" data-macro-id="oil" class="macro-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-rose-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
             <!-- Hộp chỉ số (Bên trái) -->
             <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
               <div class="flex items-start justify-between">
@@ -1152,28 +1043,7 @@
                     <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Giá dầu</h3>
                   </div>
                 </div>
-                <div class="flex items-center space-x-1.5">
-                  <span class="macro-order-badge font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 shrink-0" title="Thứ tự hiển thị hiện tại">#5</span>
-                  <span class="text-xs px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-400 font-mono font-medium">Brent Crude</span>
-                  <!-- Cụm điều khiển sắp xếp cao cấp -->
-                  <div class="flex items-center space-x-0.5 pl-1.5 border-l border-light-border/60 dark:border-studio-border/60 text-light-subtext dark:text-studio-muted">
-                    <button type="button" onclick="moveMacroCardToBoundary('oil', 'top')" class="btn-move-top p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Chuyển thẳng lên vị trí đầu tiên (#1)">
-                      <i data-lucide="chevrons-up" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCard('oil', -1)" class="btn-move-up p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển lên 1 nấc">
-                      <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCard('oil', 1)" class="btn-move-down p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển xuống 1 nấc">
-                      <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCardToBoundary('oil', 'bottom')" class="btn-move-bottom p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Chuyển thẳng xuống vị trí cuối cùng (#9)">
-                      <i data-lucide="chevrons-down" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <span class="macro-drag-handle p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface text-blue-500 dark:text-blue-400 bg-blue-500/10 hover:bg-blue-500/20 cursor-grab active:cursor-grabbing transition-all flex items-center justify-center" title="Bấm giữ và kéo thả di chuyển (Thanh cuộn tự động chạy theo khi kéo sát mép)">
-                      <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
-                    </span>
-                  </div>
-                </div>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-rose-500/10 text-rose-400 font-mono font-medium">Brent Crude</span>
               </div>
 
               <div>
@@ -1208,7 +1078,7 @@
           </div>
 
           <!-- 6. CHỈ SỐ VNINDEX -->
-          <div id="macro-card-vnindex" data-macro-id="vnindex" class="macro-drag-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-emerald-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
+          <div id="macro-card-vnindex" data-macro-id="vnindex" class="macro-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-emerald-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
             <!-- Hộp chỉ số (Bên trái) -->
             <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
               <div class="flex items-start justify-between">
@@ -1221,28 +1091,7 @@
                     <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Chỉ số VNIndex</h3>
                   </div>
                 </div>
-                <div class="flex items-center space-x-1.5">
-                  <span class="macro-order-badge font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 shrink-0" title="Thứ tự hiển thị hiện tại">#6</span>
-                  <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono font-medium">HOSE Live</span>
-                  <!-- Cụm điều khiển sắp xếp cao cấp -->
-                  <div class="flex items-center space-x-0.5 pl-1.5 border-l border-light-border/60 dark:border-studio-border/60 text-light-subtext dark:text-studio-muted">
-                    <button type="button" onclick="moveMacroCardToBoundary('vnindex', 'top')" class="btn-move-top p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Chuyển thẳng lên vị trí đầu tiên (#1)">
-                      <i data-lucide="chevrons-up" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCard('vnindex', -1)" class="btn-move-up p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển lên 1 nấc">
-                      <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCard('vnindex', 1)" class="btn-move-down p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển xuống 1 nấc">
-                      <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCardToBoundary('vnindex', 'bottom')" class="btn-move-bottom p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Chuyển thẳng xuống vị trí cuối cùng (#9)">
-                      <i data-lucide="chevrons-down" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <span class="macro-drag-handle p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface text-blue-500 dark:text-blue-400 bg-blue-500/10 hover:bg-blue-500/20 cursor-grab active:cursor-grabbing transition-all flex items-center justify-center" title="Bấm giữ và kéo thả di chuyển (Thanh cuộn tự động chạy theo khi kéo sát mép)">
-                      <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
-                    </span>
-                  </div>
-                </div>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono font-medium">HOSE Live</span>
               </div>
 
               <div>
@@ -1276,7 +1125,7 @@
           </div>
 
           <!-- 7. THANH KHOẢN -->
-          <div id="macro-card-liquidity" data-macro-id="liquidity" class="macro-drag-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-blue-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
+          <div id="macro-card-liquidity" data-macro-id="liquidity" class="macro-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-blue-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
             <!-- Hộp chỉ số (Bên trái) -->
             <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
               <div class="flex items-start justify-between">
@@ -1289,28 +1138,7 @@
                     <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Thanh khoản</h3>
                   </div>
                 </div>
-                <div class="flex items-center space-x-1.5">
-                  <span class="macro-order-badge font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 shrink-0" title="Thứ tự hiển thị hiện tại">#7</span>
-                  <span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 font-mono font-medium">3 Sàn</span>
-                  <!-- Cụm điều khiển sắp xếp cao cấp -->
-                  <div class="flex items-center space-x-0.5 pl-1.5 border-l border-light-border/60 dark:border-studio-border/60 text-light-subtext dark:text-studio-muted">
-                    <button type="button" onclick="moveMacroCardToBoundary('liquidity', 'top')" class="btn-move-top p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Chuyển thẳng lên vị trí đầu tiên (#1)">
-                      <i data-lucide="chevrons-up" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCard('liquidity', -1)" class="btn-move-up p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển lên 1 nấc">
-                      <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCard('liquidity', 1)" class="btn-move-down p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển xuống 1 nấc">
-                      <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCardToBoundary('liquidity', 'bottom')" class="btn-move-bottom p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Chuyển thẳng xuống vị trí cuối cùng (#9)">
-                      <i data-lucide="chevrons-down" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <span class="macro-drag-handle p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface text-blue-500 dark:text-blue-400 bg-blue-500/10 hover:bg-blue-500/20 cursor-grab active:cursor-grabbing transition-all flex items-center justify-center" title="Bấm giữ và kéo thả di chuyển (Thanh cuộn tự động chạy theo khi kéo sát mép)">
-                      <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
-                    </span>
-                  </div>
-                </div>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 font-mono font-medium">3 Sàn</span>
               </div>
 
               <div>
@@ -1345,7 +1173,7 @@
           </div>
 
           <!-- 8. MARGIN -->
-          <div id="macro-card-margin" data-macro-id="margin" class="macro-drag-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-purple-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
+          <div id="macro-card-margin" data-macro-id="margin" class="macro-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-purple-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
             <!-- Hộp chỉ số (Bên trái) -->
             <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
               <div class="flex items-start justify-between">
@@ -1358,28 +1186,7 @@
                     <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Margin</h3>
                   </div>
                 </div>
-                <div class="flex items-center space-x-1.5">
-                  <span class="macro-order-badge font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 shrink-0" title="Thứ tự hiển thị hiện tại">#8</span>
-                  <span class="text-xs px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 font-mono font-medium">Toàn thị trường</span>
-                  <!-- Cụm điều khiển sắp xếp cao cấp -->
-                  <div class="flex items-center space-x-0.5 pl-1.5 border-l border-light-border/60 dark:border-studio-border/60 text-light-subtext dark:text-studio-muted">
-                    <button type="button" onclick="moveMacroCardToBoundary('margin', 'top')" class="btn-move-top p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Chuyển thẳng lên vị trí đầu tiên (#1)">
-                      <i data-lucide="chevrons-up" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCard('margin', -1)" class="btn-move-up p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển lên 1 nấc">
-                      <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCard('margin', 1)" class="btn-move-down p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển xuống 1 nấc">
-                      <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCardToBoundary('margin', 'bottom')" class="btn-move-bottom p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Chuyển thẳng xuống vị trí cuối cùng (#9)">
-                      <i data-lucide="chevrons-down" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <span class="macro-drag-handle p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface text-blue-500 dark:text-blue-400 bg-blue-500/10 hover:bg-blue-500/20 cursor-grab active:cursor-grabbing transition-all flex items-center justify-center" title="Bấm giữ và kéo thả di chuyển (Thanh cuộn tự động chạy theo khi kéo sát mép)">
-                      <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
-                    </span>
-                  </div>
-                </div>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-purple-500/10 text-purple-400 font-mono font-medium">Toàn thị trường</span>
               </div>
 
               <div>
@@ -1414,7 +1221,7 @@
           </div>
 
           <!-- 9. VỐN HÓA THỊ TRƯỜNG -->
-          <div id="macro-card-marketCap" data-macro-id="marketCap" class="macro-drag-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-amber-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
+          <div id="macro-card-marketCap" data-macro-id="marketCap" class="macro-card p-4 md:p-5 rounded-2xl bg-light-surface dark:bg-studio-surface border border-light-border dark:border-studio-border hover:border-amber-500/30 transition-all shadow-sm flex flex-col lg:flex-row lg:items-center gap-5 relative group">
             <!-- Hộp chỉ số (Bên trái) -->
             <div class="w-full lg:w-80 xl:w-96 shrink-0 flex flex-col justify-between space-y-3.5 p-4 rounded-xl bg-light-elevated/70 dark:bg-studio-elevated/70 border border-light-border/80 dark:border-studio-border/80">
               <div class="flex items-start justify-between">
@@ -1427,28 +1234,7 @@
                     <h3 class="text-sm font-bold text-light-text dark:text-studio-text">Vốn hóa thị trường</h3>
                   </div>
                 </div>
-                <div class="flex items-center space-x-1.5">
-                  <span class="macro-order-badge font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 shrink-0" title="Thứ tự hiển thị hiện tại">#9</span>
-                  <span class="text-xs px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-500 font-mono font-medium">Toàn sàn VN</span>
-                  <!-- Cụm điều khiển sắp xếp cao cấp -->
-                  <div class="flex items-center space-x-0.5 pl-1.5 border-l border-light-border/60 dark:border-studio-border/60 text-light-subtext dark:text-studio-muted">
-                    <button type="button" onclick="moveMacroCardToBoundary('marketCap', 'top')" class="btn-move-top p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Chuyển thẳng lên vị trí đầu tiên (#1)">
-                      <i data-lucide="chevrons-up" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCard('marketCap', -1)" class="btn-move-up p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển lên 1 nấc">
-                      <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCard('marketCap', 1)" class="btn-move-down p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Di chuyển xuống 1 nấc">
-                      <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <button type="button" onclick="moveMacroCardToBoundary('marketCap', 'bottom')" class="btn-move-bottom p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface hover:text-blue-500 transition-colors" title="Chuyển thẳng xuống vị trí cuối cùng (#9)">
-                      <i data-lucide="chevrons-down" class="w-3.5 h-3.5"></i>
-                    </button>
-                    <span class="macro-drag-handle p-1 rounded hover:bg-light-surface dark:hover:bg-studio-surface text-blue-500 dark:text-blue-400 bg-blue-500/10 hover:bg-blue-500/20 cursor-grab active:cursor-grabbing transition-all flex items-center justify-center" title="Bấm giữ và kéo thả di chuyển (Thanh cuộn tự động chạy theo khi kéo sát mép)">
-                      <i data-lucide="grip-vertical" class="w-3.5 h-3.5"></i>
-                    </span>
-                  </div>
-                </div>
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-500 font-mono font-medium">Toàn sàn VN</span>
               </div>
 
               <div>
@@ -13841,45 +13627,7 @@
     };
 
     function updateMacroOrderBadges() {
-      const container = document.getElementById("macroCardsContainer");
-      if (!container) return;
-      const cards = container.querySelectorAll(".macro-drag-card");
-      const total = cards.length;
-
-      cards.forEach((card, idx) => {
-        const badge = card.querySelector(".macro-order-badge");
-        if (badge) {
-          badge.textContent = `#${idx + 1}`;
-        }
-        const btnTop = card.querySelector(".btn-move-top");
-        const btnUp = card.querySelector(".btn-move-up");
-        const btnDown = card.querySelector(".btn-move-down");
-        const btnBottom = card.querySelector(".btn-move-bottom");
-
-        const isFirst = (idx === 0);
-        const isLast = (idx === total - 1);
-
-        if (btnTop) {
-          btnTop.disabled = isFirst;
-          btnTop.classList.toggle("opacity-25", isFirst);
-          btnTop.classList.toggle("pointer-events-none", isFirst);
-        }
-        if (btnUp) {
-          btnUp.disabled = isFirst;
-          btnUp.classList.toggle("opacity-25", isFirst);
-          btnUp.classList.toggle("pointer-events-none", isFirst);
-        }
-        if (btnDown) {
-          btnDown.disabled = isLast;
-          btnDown.classList.toggle("opacity-25", isLast);
-          btnDown.classList.toggle("pointer-events-none", isLast);
-        }
-        if (btnBottom) {
-          btnBottom.disabled = isLast;
-          btnBottom.classList.toggle("opacity-25", isLast);
-          btnBottom.classList.toggle("pointer-events-none", isLast);
-        }
-      });
+      // Per-card order badges removed - streamlined Apple UI
     }
 
     function restoreMacroCardOrder() {
@@ -13913,7 +13661,6 @@
         }
       });
 
-      updateMacroOrderBadges();
       if (window.lucide) lucide.createIcons();
     }
 
@@ -13921,104 +13668,13 @@
       const container = document.getElementById("macroCardsContainer");
       if (!container) return;
 
-      const cards = container.querySelectorAll(".macro-drag-card");
+      const cards = container.querySelectorAll("[data-macro-id]");
       const currentOrder = Array.from(cards).map(c => c.getAttribute("data-macro-id")).filter(Boolean);
       try {
         localStorage.setItem("macro_cards_order", JSON.stringify(currentOrder));
       } catch (e) {
         console.warn("Could not save macro_cards_order", e);
       }
-      updateMacroOrderBadges();
-    }
-
-    function moveMacroCard(id, direction) {
-      const card = document.getElementById(`macro-card-${id}`);
-      const container = document.getElementById("macroCardsContainer");
-      if (!card || !container) return;
-
-      if (direction === -1) {
-        const prev = card.previousElementSibling;
-        if (prev && prev.classList.contains("macro-drag-card")) {
-          container.insertBefore(card, prev);
-        } else {
-          showMacToast({
-            title: "Vị trí chỉ số",
-            message: "Chỉ số này đã nằm ở vị trí đầu tiên.",
-            type: "info"
-          });
-          return;
-        }
-      } else if (direction === 1) {
-        const next = card.nextElementSibling;
-        if (next && next.classList.contains("macro-drag-card")) {
-          container.insertBefore(next, card);
-        } else {
-          showMacToast({
-            title: "Vị trí chỉ số",
-            message: "Chỉ số này đã nằm ở vị trí cuối cùng.",
-            type: "info"
-          });
-          return;
-        }
-      }
-
-      saveMacroCardOrder();
-      triggerMacroChartsResize();
-      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      card.classList.add("ring-2", "ring-blue-500/60");
-      setTimeout(() => {
-        card.classList.remove("ring-2", "ring-blue-500/60");
-      }, 700);
-    }
-
-    function moveMacroCardToBoundary(id, boundary) {
-      const card = document.getElementById(`macro-card-${id}`);
-      const container = document.getElementById("macroCardsContainer");
-      if (!card || !container) return;
-
-      const meta = MACRO_CARD_META[id] || { title: "Chỉ số" };
-
-      if (boundary === 'top') {
-        const first = container.firstElementChild;
-        if (card === first) {
-          showMacToast({
-            title: "Vị trí chỉ số",
-            message: `"${meta.title}" đã nằm ở vị trí đầu tiên (#1).`,
-            type: "info"
-          });
-          return;
-        }
-        container.insertBefore(card, first);
-        showMacToast({
-          title: "Đưa lên đầu danh sách",
-          message: `Đã đưa "${meta.title}" lên vị trí đầu tiên (#1).`,
-          type: "success"
-        });
-      } else if (boundary === 'bottom') {
-        const last = container.lastElementChild;
-        if (card === last) {
-          showMacToast({
-            title: "Vị trí chỉ số",
-            message: `"${meta.title}" đã nằm ở vị trí cuối cùng (#9).`,
-            type: "info"
-          });
-          return;
-        }
-        container.appendChild(card);
-        showMacToast({
-          title: "Đưa xuống cuối danh sách",
-          message: `Đã đưa "${meta.title}" xuống vị trí cuối cùng (#9).`,
-          type: "success"
-        });
-      }
-
-      saveMacroCardOrder();
-      triggerMacroChartsResize();
-      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      card.classList.add("ring-2", "ring-blue-500/60");
-      setTimeout(() => {
-        card.classList.remove("ring-2", "ring-blue-500/60");
-      }, 700);
     }
 
     function resetMacroCardOrder() {
@@ -14036,7 +13692,6 @@
         }
       });
 
-      updateMacroOrderBadges();
       triggerMacroChartsResize();
       const mainEl = document.querySelector('main');
       if (mainEl) mainEl.scrollTo({ top: 0, behavior: 'smooth' });
@@ -14060,180 +13715,8 @@
       }, 60);
     }
 
-    /* =========================================================================
-       AUTO-SCROLL ENGINE FOR DRAG AND DROP
-       ========================================================================= */
-    let macroAutoScrollRaf = null;
-    let macroCurrentScrollSpeed = 0;
-    let dragSrcCard = null;
-
-    function getMacroScrollElement() {
-      const mainEl = document.querySelector('main');
-      if (mainEl && mainEl.scrollHeight > mainEl.clientHeight) {
-        return mainEl;
-      }
-      return document.scrollingElement || document.documentElement || document.body;
-    }
-
-    function stepAutoScroll() {
-      if (macroCurrentScrollSpeed !== 0) {
-        const scroller = getMacroScrollElement();
-        scroller.scrollTop += macroCurrentScrollSpeed;
-        if (scroller !== document.documentElement && scroller !== document.body) {
-          window.scrollBy(0, macroCurrentScrollSpeed);
-        }
-        macroAutoScrollRaf = requestAnimationFrame(stepAutoScroll);
-      } else {
-        macroAutoScrollRaf = null;
-      }
-    }
-
-    function handleMacroAutoScrollCheck(clientY) {
-      if (clientY === undefined || clientY === null || clientY <= 0) return;
-
-      const scroller = getMacroScrollElement();
-      const rect = scroller.getBoundingClientRect ? scroller.getBoundingClientRect() : { top: 0, bottom: window.innerHeight };
-
-      const topBoundary = Math.max(0, rect.top);
-      const bottomBoundary = Math.min(window.innerHeight, rect.bottom);
-      const ZONE = 140; // Vùng 140px từ mép trên/dưới kích hoạt cuộn tự động
-
-      let desiredSpeed = 0;
-
-      if (clientY < topBoundary + ZONE) {
-        // Gần mép trên -> cuộn lên
-        const dist = Math.max(0, (topBoundary + ZONE) - clientY);
-        const factor = Math.min(1, dist / ZONE);
-        desiredSpeed = -(6 + Math.round(factor * 26)); // Tốc độ từ -6px đến -32px/frame
-      } else if (clientY > bottomBoundary - ZONE) {
-        // Gần mép dưới -> cuộn xuống
-        const dist = Math.max(0, clientY - (bottomBoundary - ZONE));
-        const factor = Math.min(1, dist / ZONE);
-        desiredSpeed = 6 + Math.round(factor * 26); // Tốc độ từ +6px đến +32px/frame
-      } else {
-        desiredSpeed = 0;
-      }
-
-      macroCurrentScrollSpeed = desiredSpeed;
-
-      if (macroCurrentScrollSpeed !== 0 && !macroAutoScrollRaf) {
-        macroAutoScrollRaf = requestAnimationFrame(stepAutoScroll);
-      } else if (macroCurrentScrollSpeed === 0 && macroAutoScrollRaf) {
-        cancelAnimationFrame(macroAutoScrollRaf);
-        macroAutoScrollRaf = null;
-      }
-    }
-
-    function stopMacroAutoScroll() {
-      macroCurrentScrollSpeed = 0;
-      if (macroAutoScrollRaf) {
-        cancelAnimationFrame(macroAutoScrollRaf);
-        macroAutoScrollRaf = null;
-      }
-    }
-
     function initMacroDragAndDrop() {
-      const container = document.getElementById("macroCardsContainer");
-      if (!container) return;
-      if (container.dataset.dndInit === "true") {
-        updateMacroOrderBadges();
-        return;
-      }
-      container.dataset.dndInit = "true";
-
-      updateMacroOrderBadges();
-
-      // Listen on window to guarantee auto-scroll even if cursor moves over headers/borders
-      window.addEventListener("dragover", (e) => {
-        if (dragSrcCard) {
-          handleMacroAutoScrollCheck(e.clientY);
-        }
-      });
-
-      const cards = container.querySelectorAll(".macro-drag-card");
-
-      cards.forEach(card => {
-        card.setAttribute("draggable", "true");
-
-        card.addEventListener("dragstart", (e) => {
-          if (e.target.closest("button") || e.target.closest("a") || e.target.closest("input")) {
-            e.preventDefault();
-            return;
-          }
-          dragSrcCard = card;
-          e.dataTransfer.effectAllowed = "move";
-          e.dataTransfer.setData("text/plain", card.getAttribute("data-macro-id") || "");
-          card.classList.add("is-dragging");
-        });
-
-        card.addEventListener("drag", (e) => {
-          if (e.clientY && e.clientY > 0) {
-            handleMacroAutoScrollCheck(e.clientY);
-          }
-        });
-
-        card.addEventListener("dragend", () => {
-          stopMacroAutoScroll();
-          card.classList.remove("is-dragging");
-          cards.forEach(c => c.classList.remove("drag-over-active"));
-          saveMacroCardOrder();
-          triggerMacroChartsResize();
-          dragSrcCard = null;
-        });
-
-        card.addEventListener("dragover", (e) => {
-          e.preventDefault();
-          e.dataTransfer.dropEffect = "move";
-
-          handleMacroAutoScrollCheck(e.clientY);
-
-          if (!dragSrcCard || dragSrcCard === card) return;
-
-          // Live swap on hover: calculate card middle Y
-          const rect = card.getBoundingClientRect();
-          const midY = rect.top + rect.height / 2;
-
-          if (e.clientY < midY) {
-            if (dragSrcCard.nextElementSibling !== card) {
-              container.insertBefore(dragSrcCard, card);
-              updateMacroOrderBadges();
-            }
-          } else {
-            if (dragSrcCard.previousElementSibling !== card) {
-              container.insertBefore(dragSrcCard, card.nextSibling);
-              updateMacroOrderBadges();
-            }
-          }
-        });
-
-        card.addEventListener("dragenter", (e) => {
-          if (dragSrcCard && dragSrcCard !== card) {
-            card.classList.add("drag-over-active");
-          }
-        });
-
-        card.addEventListener("dragleave", () => {
-          card.classList.remove("drag-over-active");
-        });
-
-        card.addEventListener("drop", (e) => {
-          e.stopPropagation();
-          e.preventDefault();
-          stopMacroAutoScroll();
-          card.classList.remove("drag-over-active");
-
-          saveMacroCardOrder();
-          triggerMacroChartsResize();
-
-          const cardId = dragSrcCard ? dragSrcCard.getAttribute("data-macro-id") : null;
-          const meta = cardId ? (MACRO_CARD_META[cardId] || { title: "Chỉ số" }) : { title: "Chỉ số" };
-          showMacToast({
-            title: "Sắp xếp thành công",
-            message: `Đã cập nhật vị trí mới cho "${meta.title}".`,
-            type: "success"
-          });
-        });
-      });
+      restoreMacroCardOrder();
     }
 
     /* =========================================================================
@@ -14245,7 +13728,7 @@
       const container = document.getElementById("macroCardsContainer");
       if (!container) return;
 
-      const cards = container.querySelectorAll(".macro-drag-card");
+      const cards = container.querySelectorAll("[data-macro-id]");
       quickReorderCurrentOrder = Array.from(cards).map(c => c.getAttribute("data-macro-id")).filter(Boolean);
       if (quickReorderCurrentOrder.length === 0) {
         quickReorderCurrentOrder = [...DEFAULT_MACRO_CARDS_ORDER];

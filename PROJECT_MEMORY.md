@@ -597,3 +597,27 @@
         + Bổ sung nút **"Sắp xếp nhanh"** trên thanh tiêu đề Module 2.
         + Mở popup modal hiển thị cả 9 chỉ số dưới dạng danh sách compact thu nhỏ trên cùng một khung hình (không cần cuộn).
         + Cho phép người dùng sắp xếp toàn bộ 9 chỉ số chỉ trong vài giây và bấm "Áp dụng thứ tự" là cập nhật ngay lập tức trên dashboard.
+
+32. **Tinh Gọn Giao Diện Apple macOS: Bỏ Toàn Bộ Icon Kéo Thả Trên 9 Thẻ Chỉ Số, Tối Ưu Hóa Duy Nhất Modal Sắp Xếp Nhanh & Căn Chỉnh Chuẩn Xác Thanh Tác Vụ (19/11/2026)**:
+    - **Yêu cầu của người dùng**:
+      * Bỏ toàn bộ các icon/nút sắp xếp tại 9 tiêu chí chỉ số trên màn hình chính để trả lại không gian tối giản, không gây rối mắt.
+      * Chỉ sử dụng duy nhất tính năng "Sắp xếp nhanh" (Modal tập trung) để tùy biến thứ tự các chỉ số.
+      * Căn chỉnh lại vị trí của phần "Sắp xếp nhanh" với các phần xung quanh (tiêu đề, nút đặt lại thứ tự, nút cập nhật số liệu) sao cho vừa vặn, cân đối và chuyên nghiệp nhất.
+    - **Triển khai kỹ thuật hoàn chỉnh**:
+      * **Loại bỏ toàn bộ 45 nút điều khiển và huy hiệu thứ tự trên 9 thẻ**:
+        + Gỡ bỏ hoàn toàn cụm 5 nút điều khiển (`chevrons-up`, `chevron-up`, `chevron-down`, `chevrons-down`, `grip-vertical`) khỏi góc phải hộp chỉ số của cả 9 thẻ (`gdp`, `interest`, `usdVnd`, `gold`, `oil`, `vnindex`, `liquidity`, `margin`, `marketCap`).
+        + Gỡ bỏ các badge số thứ tự `#1` đến `#9` trên từng thẻ.
+        + Trả lại góc phải hộp chỉ số nguyên bản theo chuẩn Apple Design System: chỉ giữ duy nhất badge phân loại cốt lõi (`YoY`, `Huy động 12T`, `VCB Niêm yết`, `Spot Gold`, `Brent Crude`, `HOSE Live`, `3 Sàn`, `Toàn thị trường`, `Toàn sàn VN`).
+        + Bỏ class `macro-drag-card` và thuộc tính `draggable="true"` trên thẻ lớn.
+      * **Tập trung hóa trải nghiệm qua Modal "Sắp xếp nhanh 9 chỉ số" (`quickReorderModal`)**:
+        + Mọi thao tác đảo vị trí, chuyển lên đầu trang (#1), chuyển xuống cuối trang (#9) hay dời 1 nấc được thực hiện trực quan và nhanh chóng trong Modal compact trên 1 khung nhìn (không phải cuộn trang dài).
+        + Bấm **"Áp dụng thứ tự"**: Cập nhật tức thì thứ tự hiển thị của 9 thẻ trên Dashboard, lưu vào `localStorage` (`macro_cards_order`), tự động kích hoạt tính toán lại kích thước biểu đồ ApexCharts mượt mà.
+        + Nút **"Về mặc định"** trong Modal hoặc nút icon **"Đặt lại thứ tự"** trên Header cho phép khôi phục thứ tự gốc bất kỳ lúc nào.
+      * **Căn chỉnh thanh Header Module 2 hoàn hảo & chuyên nghiệp**:
+        + Thiết kế khối Header cân đối giữa phần thông tin bên trái và cụm tác vụ bên phải:
+          * Bên trái: Tiêu đề `2. Nhận định thị trường` + Badge `9 chỉ số` + Mô tả cập nhật súc tích, thanh lịch.
+          * Bên phải: Cụm nút tác vụ căn chỉnh chuẩn macOS, đồng nhất chiều cao, bo góc mềm mại `rounded-xl`, icon và padding cân đối:
+            1. Nút **"Sắp xếp nhanh"**: nền mờ `bg-blue-500/10 hover:bg-blue-500/20`, viền `border-blue-500/30`, chữ xanh `text-blue-600 dark:text-studio-blueLight`, icon `arrow-up-down`.
+            2. Nút **"Đặt lại thứ tự"**: icon `rotate-ccw`, bo góc `rounded-xl`, hiệu ứng hover êm ái.
+            3. Nút **"Cập nhật số liệu"**: nút hành động chính (Primary action) màu xanh dương `bg-blue-600 hover:bg-blue-500`, icon `edit-3`.
+
