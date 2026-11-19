@@ -666,3 +666,22 @@
         + Đã kiểm thử trực tiếp trên trình duyệt tại `http://localhost:8088/`.
         + Cả 5 biểu đồ hiển thị chuẩn xác số liệu 7 quý (`Q1/25` đến `Q3/26`) cho mã mặc định FPT.
         + Khi tìm kiếm hoặc bấm chọn các mã khác trong danh sách (thử nghiệm với `HPG`, `MWG`, `VIC`), toàn bộ 5 biểu đồ và thẻ chỉ số cập nhật ngay lập tức với số liệu thực tế đến Q3/2026 của từng doanh nghiệp.
+
+
+35. **Sửa Lỗi Tìm Kiếm Cổ Phiếu Module 3: Nhấn Phím Enter Chọn Ngay Lập Tức (19/11/2026)**:
+    - **Yêu cầu của người dùng**:
+      * Sửa lỗi khi gõ tìm kiếm cổ phiếu (Module 3: Doanh nghiệp), chỉ cần nhấn Enter là chọn và mở doanh nghiệp đó ngay, không cần phải click chuột.
+    - **Triển khai kỹ thuật hoàn chỉnh**:
+      * **Bổ sung bộ lắng nghe sự kiện bàn phím Spotlight (`onkeydown="handleCompanySearchKeydown(event)"`)**:
+        + Hỗ trợ phím **Enter** (`event.key === 'Enter' || event.keyCode === 13 || event.which === 13`):
+          1. Nếu đang duyệt danh sách bằng phím mũi tên: Chọn ngay mục đang highlight (`StockApp.companySearchActiveIndex`).
+          2. Nếu vừa gõ từ khóa (VD: `vic`, `hpg`, `fpt`): Mặc định tự động chọn ngay kết quả số 1 (`matches[0]`) phù hợp nhất.
+          3. Nếu chưa có matches trong cache: Tìm kiếm tức thì trong 100 mã CP rổ VN100 (khớp chính xác mã -> bắt đầu bằng mã -> tên doanh nghiệp).
+          4. Tự động đóng dropdown, cập nhật toàn bộ 5 biểu đồ tài chính thực tế và thẻ thông tin hero của doanh nghiệp, sau đó blur ô nhập liệu mượt mà.
+        + Hỗ trợ phím **ArrowDown / ArrowUp**: Cho phép điều hướng lên xuống giữa các gợi ý với visual highlight xanh Apple (`ring-1 ring-blue-500/30`), tự động cuộn đến phần tử (`scrollIntoView`).
+        + Hỗ trợ phím **Escape**: Đóng ngay dropdown gợi ý.
+      * **Triệt tiêu lỗi dropdown báo "Không tìm thấy cổ phiếu khớp với..."**:
+        + Khi một doanh nghiệp đã được chọn (chuỗi hiển thị dạng `${Mã CP} - ${Tên DN}`, ví dụ `"VIC - Tập đoàn Vingroup"`), hàm `handleCompanySearch` kiểm tra chuỗi chứa `" - "` hoặc cờ `StockApp.isSelectingCompany` để luôn ẩn dropdown, không phát sinh thông báo không tìm thấy.
+        + Khi focus lại vào ô tìm kiếm (`handleCompanySearchFocus`), tự động bôi đen toàn bộ chuỗi theo chuẩn macOS Spotlight để người dùng có thể gõ từ khóa mới đè lên ngay lập tức mà không bị popup lỗi.
+      * **Đồng bộ mã nguồn trực tiếp lên GitHub Pages**:
+        + Đã commit và push toàn bộ thay đổi lên `origin/main` để đồng bộ hoàn chỉnh trên cả Localhost và GitHub Pages.

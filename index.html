@@ -1402,7 +1402,7 @@
             <!-- Search Input Box (Apple Spotlight Style) -->
             <div class="relative w-full max-w-xl">
               <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-light-subtext dark:text-studio-muted pointer-events-none"></i>
-              <input type="text" id="companySearchInput" oninput="handleCompanySearch(this.value)" onfocus="handleCompanySearch(this.value)" placeholder="Tìm mã CP hoặc tên DN (VD: FPT, HPG, VCB, MWG...)" class="w-full pl-10 pr-10 py-2.5 text-xs rounded-xl bg-light-elevated dark:bg-studio-elevated border border-light-border dark:border-studio-border text-light-text dark:text-studio-text focus:outline-none focus:border-blue-500 font-medium transition-all shadow-inner" autocomplete="off">
+              <input type="text" id="companySearchInput" oninput="handleCompanySearch(this.value)" onfocus="handleCompanySearchFocus(this)" onkeydown="handleCompanySearchKeydown(event)" placeholder="Tìm mã CP hoặc tên DN (VD: FPT, HPG, VCB, MWG...)" class="w-full pl-10 pr-10 py-2.5 text-xs rounded-xl bg-light-elevated dark:bg-studio-elevated border border-light-border dark:border-studio-border text-light-text dark:text-studio-text focus:outline-none focus:border-blue-500 font-medium transition-all shadow-inner" autocomplete="off">
               <button onclick="clearCompanySearch()" id="companySearchClearBtn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 p-0.5 text-light-subtext dark:text-studio-muted hover:text-light-text dark:hover:text-studio-text">
                 <i data-lucide="x" class="w-3.5 h-3.5"></i>
               </button>
@@ -2351,7 +2351,7 @@
             <!-- Quick Search Input -->
             <div class="relative w-full sm:w-64">
               <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-3 text-light-subtext dark:text-studio-muted"></i>
-              <input type="text" id="screenerSearchInput" oninput="renderScreenerTable()" placeholder="Tìm theo mã CP hoặc ngành..." class="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl bg-light-elevated dark:bg-studio-elevated border border-light-border dark:border-studio-border focus:border-emerald-500 focus:outline-none text-light-text dark:text-studio-text placeholder-light-subtext dark:placeholder-studio-muted">
+              <input type="text" id="screenerSearchInput" oninput="renderScreenerTable()" onkeydown="if(event.key==='Enter'){event.preventDefault(); this.blur();}" placeholder="Tìm theo mã CP hoặc ngành..." class="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl bg-light-elevated dark:bg-studio-elevated border border-light-border dark:border-studio-border focus:border-emerald-500 focus:outline-none text-light-text dark:text-studio-text placeholder-light-subtext dark:placeholder-studio-muted">
             </div>
           </div>
 
@@ -17986,15 +17986,45 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       return;
     }
 
+    function handleCompanySearchFocus(input) {
+      if (!input) return;
+      const val = (input.value || "").trim();
+      if (!val) return;
+      // Nếu đã có giá trị định dạng "${symbol} - ${name}", tự động bôi đen toàn bộ (Spotlight style)
+      // để người dùng gõ phím là ghi đè ngay, và không bung popup lỗi
+      if (val.includes(" - ") || StockApp.selectedCompany) {
+        input.select();
+        const dropdown = document.getElementById("companySearchDropdown");
+        if (dropdown) dropdown.classList.add("hidden");
+        return;
+      }
+      handleCompanySearch(val);
+    }
+
     function handleCompanySearch(query) {
       const dropdown = document.getElementById("companySearchDropdown");
       const clearBtn = document.getElementById("companySearchClearBtn");
       if (!dropdown) return;
 
+      if (StockApp.isSelectingCompany) {
+        dropdown.classList.add("hidden");
+        return;
+      }
+
       const q = (query || "").trim().toLowerCase();
       if (!q) {
         dropdown.classList.add("hidden");
         if (clearBtn) clearBtn.classList.add("hidden");
+        StockApp.companySearchMatches = [];
+        StockApp.companySearchActiveIndex = -1;
+        return;
+      }
+
+      // Nếu chuỗi chứa dấu " - " (đã chọn doanh nghiệp dạng "VIC - Tập đoàn Vingroup"): luôn ẩn dropdown
+      if (q.includes(" - ")) {
+        dropdown.classList.add("hidden");
+        StockApp.companySearchMatches = [];
+        StockApp.companySearchActiveIndex = -1;
         return;
       }
 
@@ -18006,6 +18036,20 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
         st.industry.toLowerCase().includes(q)
       );
 
+      // Sắp xếp ưu tiên: Mã CP khớp chính xác -> Bắt đầu bằng mã -> Chứa mã -> Tên khớp
+      matches.sort((a, b) => {
+        const aSym = a.symbol.toLowerCase();
+        const bSym = b.symbol.toLowerCase();
+        if (aSym === q && bSym !== q) return -1;
+        if (bSym === q && aSym !== q) return 1;
+        if (aSym.startsWith(q) && !bSym.startsWith(q)) return -1;
+        if (!aSym.startsWith(q) && bSym.startsWith(q)) return 1;
+        return 0;
+      });
+
+      StockApp.companySearchMatches = matches;
+      StockApp.companySearchActiveIndex = matches.length > 0 ? 0 : -1;
+
       if (matches.length === 0) {
         dropdown.innerHTML = `
           <div class="p-3 text-center text-xs text-light-subtext dark:text-studio-muted">
@@ -18016,25 +18060,30 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
         return;
       }
 
-      dropdown.innerHTML = matches.map(st => {
+      dropdown.innerHTML = matches.map((st, idx) => {
         const isSelected = st.symbol === StockApp.selectedCompany;
+        const isActive = idx === StockApp.companySearchActiveIndex;
         return `
-          <div onclick="selectCompanyFromDropdown('${st.symbol}')" class="p-2.5 hover:bg-blue-500/10 cursor-pointer flex items-center justify-between transition-colors ${isSelected ? 'bg-blue-500/[0.08]' : ''}">
-            <div class="flex items-center space-x-2.5">
-              <span class="w-8 h-8 rounded-lg bg-[#0071e3]/10 text-blue-600 dark:text-studio-blueLight flex items-center justify-center font-bold font-mono text-xs">
+          <div id="company-search-item-${idx}" 
+               data-index="${idx}"
+               onclick="selectCompanyFromDropdown('${st.symbol}')" 
+               onmouseenter="setCompanySearchActiveIndex(${idx})"
+               class="p-2.5 hover:bg-blue-500/10 cursor-pointer flex items-center justify-between transition-colors ${isActive ? 'bg-blue-500/[0.12] ring-1 ring-blue-500/30' : (isSelected ? 'bg-blue-500/[0.08]' : '')}">
+            <div class="flex items-center space-x-2.5 min-w-0">
+              <span class="w-8 h-8 rounded-lg bg-[#0071e3]/10 text-blue-600 dark:text-studio-blueLight flex items-center justify-center font-bold font-mono text-xs shrink-0">
                 ${st.symbol}
               </span>
-              <div>
+              <div class="min-w-0">
                 <div class="font-bold text-xs text-light-text dark:text-studio-text flex items-center space-x-1.5">
-                  <span>${st.symbol}</span>
+                  <span class="font-mono text-blue-600 dark:text-studio-blueLight">${st.symbol}</span>
                   <span class="text-[10px] text-light-subtext dark:text-studio-muted font-normal">• ${st.exchange || 'HOSE'}</span>
                   ${isSelected ? '<span class="text-[9px] px-1.5 py-0.2 rounded bg-blue-500 text-white font-mono">Đang xem</span>' : ''}
                 </div>
                 <div class="text-[10px] text-light-subtext dark:text-studio-muted truncate max-w-[200px] sm:max-w-xs">${st.name}</div>
               </div>
             </div>
-            <div class="text-right">
-              <div class="font-mono font-semibold text-xs text-light-text dark:text-studio-text">${st.price.toLocaleString('en-US')} đ</div>
+            <div class="text-right shrink-0">
+              <div class="font-mono font-semibold text-xs text-light-text dark:text-studio-text">${typeof st.price === 'number' ? st.price.toLocaleString('en-US') : st.price} đ</div>
               <div class="font-mono text-[10px] font-semibold ${st.change >= 0 ? 'text-emerald-500' : 'text-rose-500'}">
                 ${st.change >= 0 ? '+' : ''}${st.change}%
               </div>
@@ -18046,10 +18095,112 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       dropdown.classList.remove("hidden");
     }
 
+    function setCompanySearchActiveIndex(idx) {
+      StockApp.companySearchActiveIndex = idx;
+      updateCompanySearchActiveStyles();
+    }
+
+    function updateCompanySearchActiveStyles() {
+      const items = document.querySelectorAll('[id^="company-search-item-"]');
+      items.forEach((el, idx) => {
+        if (idx === StockApp.companySearchActiveIndex) {
+          el.classList.add('bg-blue-500/[0.12]', 'ring-1', 'ring-blue-500/30');
+          el.scrollIntoView({ block: 'nearest' });
+        } else {
+          el.classList.remove('bg-blue-500/[0.12]', 'ring-1', 'ring-blue-500/30');
+        }
+      });
+    }
+
+    function handleCompanySearchKeydown(event) {
+      const dropdown = document.getElementById("companySearchDropdown");
+      const input = document.getElementById("companySearchInput");
+      const matches = StockApp.companySearchMatches || [];
+
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        if (matches.length > 0) {
+          if (dropdown && dropdown.classList.contains("hidden")) {
+            dropdown.classList.remove("hidden");
+          }
+          const cur = StockApp.companySearchActiveIndex !== undefined ? StockApp.companySearchActiveIndex : -1;
+          StockApp.companySearchActiveIndex = Math.min(cur + 1, matches.length - 1);
+          updateCompanySearchActiveStyles();
+        }
+        return;
+      }
+
+      if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        if (matches.length > 0) {
+          const cur = StockApp.companySearchActiveIndex !== undefined ? StockApp.companySearchActiveIndex : 0;
+          StockApp.companySearchActiveIndex = Math.max(cur - 1, 0);
+          updateCompanySearchActiveStyles();
+        }
+        return;
+      }
+
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        if (dropdown) dropdown.classList.add("hidden");
+        return;
+      }
+
+      if (event.key === 'Enter' || event.keyCode === 13 || event.which === 13) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const inputVal = (input?.value || "").trim();
+        if (!inputVal) return;
+
+        // 1. Nếu đang chọn mục qua phím mũi tên
+        const activeIdx = StockApp.companySearchActiveIndex;
+        if (activeIdx >= 0 && matches && activeIdx < matches.length) {
+          selectCompanyFromDropdown(matches[activeIdx].symbol);
+          if (input) input.blur();
+          return;
+        }
+
+        // 2. Mặc định chọn ngay kết quả đứng đầu danh sách gợi ý khi ấn Enter
+        if (matches && matches.length > 0) {
+          selectCompanyFromDropdown(matches[0].symbol);
+          if (input) input.blur();
+          return;
+        }
+
+        // 3. Nếu chưa có matches trong bộ nhớ, tìm trực tiếp từ giá trị người dùng gõ
+        const qUpper = inputVal.toUpperCase();
+        const qLower = inputVal.toLowerCase();
+
+        let targetStock = StockApp.stocks.find(s => s.symbol.toUpperCase() === qUpper);
+        if (!targetStock) {
+          targetStock = StockApp.stocks.find(s => s.symbol.toUpperCase().startsWith(qUpper));
+        }
+        if (!targetStock) {
+          targetStock = StockApp.stocks.find(s => s.symbol.toLowerCase().includes(qLower) || s.name.toLowerCase().includes(qLower));
+        }
+
+        if (targetStock) {
+          selectCompanyFromDropdown(targetStock.symbol);
+          if (input) input.blur();
+          return;
+        }
+      }
+    }
+
     function selectCompanyFromDropdown(symbol) {
+      if (!symbol) return;
+      StockApp.isSelectingCompany = true;
       selectCompanyForModule(symbol);
       const dropdown = document.getElementById("companySearchDropdown");
       if (dropdown) dropdown.classList.add("hidden");
+      StockApp.companySearchActiveIndex = -1;
+      StockApp.companySearchMatches = [];
+      setTimeout(() => {
+        StockApp.isSelectingCompany = false;
+        const dd = document.getElementById("companySearchDropdown");
+        if (dd) dd.classList.add("hidden");
+      }, 350);
     }
 
     function clearCompanySearch() {
@@ -18059,6 +18210,8 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       if (input) input.value = "";
       if (dropdown) dropdown.classList.add("hidden");
       if (clearBtn) clearBtn.classList.add("hidden");
+      StockApp.companySearchMatches = [];
+      StockApp.companySearchActiveIndex = -1;
     }
 
     function selectCompanyForModule(symbol, notify = true) {
@@ -18075,6 +18228,9 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       if (searchInput) searchInput.value = `${stock.symbol} - ${stock.name}`;
       const clearBtn = document.getElementById("companySearchClearBtn");
       if (clearBtn) clearBtn.classList.remove("hidden");
+      const dropdown = document.getElementById("companySearchDropdown");
+      if (dropdown) dropdown.classList.add("hidden");
+      StockApp.companySearchActiveIndex = -1;
 
       // 2. Update Active Company Hero Profile Banner
       const heroBadge = document.getElementById("heroStockBadge");
