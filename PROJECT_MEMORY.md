@@ -571,3 +571,29 @@
         + Cung cấp nút **"Đặt lại thứ tự"** (`resetMacroCardOrder()`) trên thanh tiêu đề Module 2 để đưa danh sách trở về thứ tự mặc định ban đầu bất cứ lúc nào.
       * **Tối ưu hiển thị Biểu đồ (ApexCharts)**:
         + Tự động kích hoạt `window.dispatchEvent(new Event('resize'))` và kích hoạt re-render biểu đồ sau khi sắp xếp, đảm bảo biểu đồ không bị vỡ hoặc lệch tỷ lệ co giãn khi thay đổi vị trí trong DOM.
+
+31. **Đột Phá Cơ Cấu Kéo Thả: Động Cơ Tự Động Cuộn Trang (Auto-Scroll Engine), Nút Chuyển Siêu Tốc & Modal Sắp Xếp Nhanh (19/11/2026)**:
+    - **Yêu cầu của người dùng**:
+      * Tạo lại cơ cấu kéo thả của danh sách để dễ thao tác nhất có thể.
+      * Khi kéo từ vị trí đầu tiên tới vị trí cuối cùng thì thanh cuộn của trang phải tự động chạy theo.
+    - **Phân tích nguyên nhân gốc rễ**:
+      * Phần tử cuộn trang của layout không phải `window` mà là `<main class="flex-1 overflow-y-auto w-full">`.
+      * Cơ chế Drag & Drop mặc định của trình duyệt không tự kích hoạt cuộn cho container `overflow-y: auto`, khiến người dùng bị kẹt khi kéo thẻ ra ngoài viewport nhìn thấy.
+    - **Triển khai kỹ thuật hoàn chỉnh**:
+      * **Động cơ Auto-Scroll Engine 60fps thông minh**:
+        + Thiết lập vòng lặp `requestAnimationFrame` (`stepAutoScroll`) kiểm soát việc cuộn mượt mà trên thẻ `<main>` và `window`.
+        + Vùng đệm mép trên và mép dưới (`ZONE = 140px`): Khi người dùng kéo thẻ đến sát mép trên hoặc mép dưới của khung nhìn, hệ thống tự động tính toán khoảng cách và gia tốc cuộn từ 6px/frame đến 32px/frame.
+        + Kéo chuột xuống sát đáy màn hình -> Trang tự động lướt êm xuống tận cùng (thẻ #9). Kéo chuột lên đỉnh màn hình -> Trang tự động lướt ngược lên đầu (thẻ #1).
+        + Tự động dừng cuộn ngay lập tức khi thả thẻ (`dragend` / `drop`).
+      * **Hoán đổi vị trí trực tiếp theo thời gian thực (Live Swap)**:
+        + Khi con trỏ chuột lướt qua thẻ khác, hệ thống tính toán vị trí nửa trên/nửa dưới của thẻ đích và hoán đổi vị trí trực tiếp (`container.insertBefore`), giúp người dùng thấy ngay kết quả sắp xếp trước khi thả chuột.
+      * **Huy hiệu số thứ tự `#1` - `#9` & Bộ nút chuyển siêu tốc (Quick Jump)**:
+        + Bổ sung badge số thứ tự linh hoạt: `#1` đến `#9` trên từng thẻ, tự động cập nhật ngay khi hoán đổi vị trí.
+        + Bổ sung nút **Lên đầu trang** (`chevrons-up`): Đưa thẻ bay thẳng lên vị trí #1 chỉ trong 1 click + cuộn trang mượt tới đó.
+        + Bổ sung nút **Xuống cuối trang** (`chevrons-down`): Đưa thẻ bay thẳng xuống vị trí #9 chỉ trong 1 click + cuộn trang mượt tới đó.
+        + Hai nút Lên/Xuống 1 nấc (`chevron-up` / `chevron-down`) và tay nắm kéo thả (`grip-vertical`) nổi bật.
+        + Tự động làm mờ nút (`opacity-25 pointer-events-none`) khi thẻ đang ở vị trí đầu tiên hoặc cuối cùng.
+      * **Modal Sắp Xếp Nhanh 9 Chỉ Số (Quick Reorder Sheet)**:
+        + Bổ sung nút **"Sắp xếp nhanh"** trên thanh tiêu đề Module 2.
+        + Mở popup modal hiển thị cả 9 chỉ số dưới dạng danh sách compact thu nhỏ trên cùng một khung hình (không cần cuộn).
+        + Cho phép người dùng sắp xếp toàn bộ 9 chỉ số chỉ trong vài giây và bấm "Áp dụng thứ tự" là cập nhật ngay lập tức trên dashboard.
