@@ -639,3 +639,30 @@
         + Khi bấm **"Áp dụng thứ tự"**: Áp dụng chuẩn xác thứ tự vừa kéo thả ra 9 thẻ lớn trên Dashboard, lưu vào `localStorage` và tự động kích hoạt tính toán lại kích thước biểu đồ ApexCharts.
 
 
+
+
+34. **Vẽ Toàn Bộ 5 Biểu Đồ Báo Cáo Tài Chính (Module 3: Doanh Nghiệp) Với Số Liệu Thực Tế 7 Quý Gần Nhất (Đến Q3/2026) Cho 100 Mã CP VN100 (19/11/2026)**:
+    - **Yêu cầu của người dùng**:
+      * Vẽ lại toàn bộ biểu đồ ở phần "3. Doanh nghiệp" bằng số liệu thực tế và số liệu cập nhật mới nhất tính đến thời điểm hiện tại.
+    - **Triển khai kỹ thuật hoàn chỉnh**:
+      * **Pipeline đồng bộ BCTC thực tế 7 quý (Q1/2025 - Q3/2026) cho toàn bộ 100 mã CP**:
+        + Nguồn cấp dữ liệu: API CafeF BCTC chính thức (`pageSize=12`, loại BCTC `KQKD`, thời gian `QUY`). Lấy 12 quý liên tục để tính toán chuẩn xác tỷ lệ tăng trưởng YoY (%) cho cả 7 quý hiển thị (`Q1/25` đến `Q3/26`) so với đúng quý cùng kỳ năm trước (`Q1/24` đến `Q3/25`), không có bất kỳ khoảng trống dữ liệu nào.
+        + Xử lý đa luồng song song (`ThreadPoolExecutor(max_workers=20)`) trong script `sync_real_financials.py`, trích xuất đầy đủ 7 chuỗi số liệu tài chính thực: Doanh thu thuần (`revNominal` - Tỷ VND), Tăng trưởng Doanh thu (`revGrowth` - % YoY), Lợi nhuận sau thuế (`profitNominal` - Tỷ VND), Tăng trưởng LNST (`profitGrowth` - % YoY), EPS TTM (`eps` - VND), Định giá P/E trailing (`pe` - Lần), Vốn hóa thị trường từng quý (`capTỷ` / `capTy` - Tỷ VND).
+        + Lưu kết quả vào `financials_real_quarterly.json` (100/100 mã, 8.200+ dòng dữ liệu chuẩn xác) và tích hợp vào snapshot `vnstock_snapshot.json`.
+      * **Tích hợp bộ dữ liệu 100 mã CP vào Frontend (`COMPANY_FINANCIAL_DATABASE` & Background Sync)**:
+        + Nhúng đầy đủ 100 mã CP vào `COMPANY_FINANCIAL_DATABASE` trong `index.html`, đảm bảo hiển thị tức thì, mượt mà trên mọi môi trường (`file:///`, localhost, GitHub Pages) mà không phụ thuộc vào độ trễ mạng.
+        + Bổ sung cơ chế fetch nền trong `StockSyncService.fetchRealMarketData` tự động cập nhật `financials_real_quarterly.json?t=` khi server daemon đang chạy.
+        + Cập nhật hàm `getCompanyFinancialData(stock)` để trích xuất đầy đủ chuỗi 7 quý, chuẩn hóa `capTỷ` / `capTy` và đồng bộ điểm dữ liệu quý gần nhất với thị giá thực tế từ Vnstock.
+      * **Hoàn thiện giao diện & 5 biểu đồ ApexCharts trong Module 3**:
+        + **Biểu đồ 1: Doanh thu thuần** (`fundChartRevGrowth`) - Combo Column Doanh thu (Tỷ VND) & Line Tăng trưởng YoY (%) qua 7 quý thực tế.
+        + **Biểu đồ 2: Lợi nhuận sau thuế** (`fundChartProfitGrowth`) - Area LNST (Tỷ VND) qua 7 quý thực tế.
+        + **Biểu đồ 3: EPS TTM & Định giá P/E** (`fundChartEpsGrowth`) - Combo Column EPS TTM (VND) & Line Định giá P/E (Lần).
+        + **Biểu đồ 4: Vốn hóa thị trường** (`fundChartCapDistribution`) - Area Vốn hóa (Tỷ VND) qua 7 quý thực tế.
+        + **Biểu đồ 5: Định giá P/E so với Ngành & VN-Index** (`fundChartPeRatio`) - Multi-line so sánh P/E Trailing của cổ phiếu với P/E TB 2 năm và P/E Ngành.
+        + Cập nhật toàn bộ các nhãn thời gian từ `Q1/2023 - Q3/2024` thành `Q1/2025 - Q3/2026 (7 Quý gần nhất)` và tự động cập nhật động khi chọn bất kỳ mã CP nào qua các ID `chartRevTimeRange`, `chartProfitTimeRange`, `chartEpsTimeRange`, `chartCapTimeRange`, `chartPeTimeRange`.
+        + Cập nhật các thẻ chỉ số hero và card tag: `cardRevQuarterTag` hiển thị `BCTC Q3/2026`, `cardProfitQuarterTag` hiển thị `LNST (Q3/2026)`.
+        + Tự động kích hoạt `initFundamentalCharts()` khi mở tab `3. Doanh nghiệp` (`switchTab('fundamental')`) và khi khởi động ứng dụng (`initializeStockApp()`).
+      * **Xác thực toàn diện bằng Browser Subagent**:
+        + Đã kiểm thử trực tiếp trên trình duyệt tại `http://localhost:8088/`.
+        + Cả 5 biểu đồ hiển thị chuẩn xác số liệu 7 quý (`Q1/25` đến `Q3/26`) cho mã mặc định FPT.
+        + Khi tìm kiếm hoặc bấm chọn các mã khác trong danh sách (thử nghiệm với `HPG`, `MWG`, `VIC`), toàn bộ 5 biểu đồ và thẻ chỉ số cập nhật ngay lập tức với số liệu thực tế đến Q3/2026 của từng doanh nghiệp.
