@@ -161,12 +161,19 @@ def fetch_stock_full_bctc(sym):
             latest_rg = rev_growth[-1] if rev_growth else 0.0
             latest_pg = profit_growth[-1] if profit_growth else 0.0
 
+            # Tính % tăng trưởng EPS so với quý trước (QoQ)
+            if len(profit_nominal) >= 2 and profit_nominal[-2] != 0:
+                eps_growth_qoq = round(((profit_nominal[-1] - profit_nominal[-2]) / abs(profit_nominal[-2])) * 100, 1)
+            else:
+                eps_growth_qoq = 0.0
+
             return sym, {
                 'latestQuarter': latest['fullLabel'],
                 'latestRev': latest['rev'],
                 'latestProfit': latest['profit'],
                 'profitGrowth': latest_pg,
                 'revGrowth': latest_rg,
+                'epsGrowthQoQ': eps_growth_qoq,
                 'quarters': quarter_labels,
                 'revNominal': rev_nominal,
                 'revGrowth': rev_growth,
@@ -215,6 +222,7 @@ def run_sync_all():
                         'latestProfit': data['latestProfit'],
                         'profitGrowth': data['profitGrowth'],
                         'revGrowth': data['revGrowth'],
+                        'epsGrowthQoQ': data['epsGrowthQoQ'],
                         'quarters': data['quarters'],
                         'quarterlyRevenue': data['revNominal'],
                         'quarterlyProfit': data['profitNominal'],

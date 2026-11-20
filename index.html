@@ -1838,16 +1838,6 @@
                     </div>
                     <div class="col-resizer" onmousedown="initColumnResize(event)"></div>
                   </th>
-                  <th class="resizable-th py-3 px-3 text-right" data-col="volume" data-table="fundamental">
-                    <div class="inline-flex items-center justify-end space-x-1 w-full">
-                      <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('fundamental', 'volume')" title="Bấm để sắp xếp">KLGD TB</span>
-                      <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('fundamental', 'volume')" id="sort-fundamental-volume" title="Bấm để sắp xếp">⇅</span>
-                      <button type="button" class="excel-filter-btn p-0.5 rounded hover:bg-black/10 dark:hover:bg-white/10 text-light-subtext dark:text-studio-muted" onclick="openExcelFilter(event, 'fundamental', 'volume', 'KLGD TB')" title="Lọc cột KLGD">
-                        <i data-lucide="filter" class="w-3 h-3"></i>
-                      </button>
-                    </div>
-                    <div class="col-resizer" onmousedown="initColumnResize(event)"></div>
-                  </th>
                   <th class="resizable-th py-3 px-3 text-right" data-col="profitGrowth" data-table="fundamental">
                     <div class="inline-flex items-center justify-end space-x-1 w-full">
                       <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('fundamental', 'profitGrowth')" title="Bấm để sắp xếp">LNST (YoY)</span>
@@ -1873,6 +1863,16 @@
                       <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('fundamental', 'eps')" title="Bấm để sắp xếp">EPS TTM</span>
                       <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('fundamental', 'eps')" id="sort-fundamental-eps" title="Bấm để sắp xếp">⇅</span>
                       <button type="button" class="excel-filter-btn p-0.5 rounded hover:bg-black/10 dark:hover:bg-white/10 text-light-subtext dark:text-studio-muted" onclick="openExcelFilter(event, 'fundamental', 'eps', 'EPS TTM')" title="Lọc cột EPS">
+                        <i data-lucide="filter" class="w-3 h-3"></i>
+                      </button>
+                    </div>
+                    <div class="col-resizer" onmousedown="initColumnResize(event)"></div>
+                  </th>
+                  <th class="resizable-th py-3 px-3 text-right" data-col="epsGrowthQoQ" data-table="fundamental">
+                    <div class="inline-flex items-center justify-end space-x-1 w-full">
+                      <span class="cursor-pointer hover:text-light-text dark:hover:text-studio-text" onclick="handleTableSort('fundamental', 'epsGrowthQoQ')" title="Bấm để sắp xếp">% Tăng EPS (QoQ)</span>
+                      <span class="sort-icon inline-flex items-center opacity-40 text-xs cursor-pointer hover:opacity-100" onclick="handleTableSort('fundamental', 'epsGrowthQoQ')" id="sort-fundamental-epsGrowthQoQ" title="Bấm để sắp xếp">⇅</span>
+                      <button type="button" class="excel-filter-btn p-0.5 rounded hover:bg-black/10 dark:hover:bg-white/10 text-light-subtext dark:text-studio-muted" onclick="openExcelFilter(event, 'fundamental', 'epsGrowthQoQ', '% Tăng EPS (QoQ)')" title="Lọc cột % Tăng EPS (QoQ)">
                         <i data-lucide="filter" class="w-3 h-3"></i>
                       </button>
                     </div>
@@ -1907,9 +1907,6 @@
                       </button>
                     </div>
                     <div class="col-resizer" onmousedown="initColumnResize(event)"></div>
-                  </th>
-                  <th class="resizable-th py-3 px-3 text-center" data-col="profile" data-table="fundamental">
-                    <span>Hồ sơ</span>
                   </th>
                 </tr>
               </thead>
@@ -4357,7 +4354,8 @@
     "foreignNet20P": -820.27,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 3,
-    "foreignBuySessions20P": 6
+    "foreignBuySessions20P": 6,
+    "epsGrowthQoQ": 9.5
   },
   {
     "symbol": "BCM",
@@ -4434,7 +4432,8 @@
     "foreignNet20P": 2.91,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 4,
-    "foreignBuySessions20P": 10
+    "foreignBuySessions20P": 10,
+    "epsGrowthQoQ": 174.4
   },
   {
     "symbol": "BID",
@@ -4511,7 +4510,8 @@
     "foreignNet20P": -417.75,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 1,
-    "foreignBuySessions20P": 1
+    "foreignBuySessions20P": 1,
+    "epsGrowthQoQ": 2.1
   },
   {
     "symbol": "BVH",
@@ -4588,7 +4588,8 @@
     "foreignNet20P": 196.57,
     "foreignBuySessions5P": 3,
     "foreignBuySessions10P": 8,
-    "foreignBuySessions20P": 14
+    "foreignBuySessions20P": 14,
+    "epsGrowthQoQ": -20.2
   },
   {
     "symbol": "CTG",
@@ -4667,7 +4668,8 @@
     "foreignNet20P": 301.72,
     "foreignBuySessions5P": 3,
     "foreignBuySessions10P": 8,
-    "foreignBuySessions20P": 15
+    "foreignBuySessions20P": 15,
+    "epsGrowthQoQ": -7.7
   },
   {
     "symbol": "FPT",
@@ -4746,7 +4748,8 @@
     "foreignNet20P": -2574.58,
     "foreignBuySessions5P": 0,
     "foreignBuySessions10P": 1,
-    "foreignBuySessions20P": 1
+    "foreignBuySessions20P": 1,
+    "epsGrowthQoQ": 6.2
   },
   {
     "symbol": "GAS",
@@ -4823,7 +4826,8 @@
     "foreignNet20P": 16.77,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 3,
-    "foreignBuySessions20P": 8
+    "foreignBuySessions20P": 8,
+    "epsGrowthQoQ": -24.1
   },
   {
     "symbol": "GVR",
@@ -4900,7 +4904,8 @@
     "foreignNet20P": -21.34,
     "foreignBuySessions5P": 0,
     "foreignBuySessions10P": 0,
-    "foreignBuySessions20P": 0
+    "foreignBuySessions20P": 0,
+    "epsGrowthQoQ": 43.9
   },
   {
     "symbol": "HDB",
@@ -4979,7 +4984,8 @@
     "foreignNet20P": 32.46,
     "foreignBuySessions5P": 4,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 11
+    "foreignBuySessions20P": 11,
+    "epsGrowthQoQ": -29.9
   },
   {
     "symbol": "HPG",
@@ -5058,7 +5064,8 @@
     "foreignNet20P": 409.23,
     "foreignBuySessions5P": 4,
     "foreignBuySessions10P": 7,
-    "foreignBuySessions20P": 11
+    "foreignBuySessions20P": 11,
+    "epsGrowthQoQ": 28.7
   },
   {
     "symbol": "MBB",
@@ -5137,7 +5144,8 @@
     "foreignNet20P": -741.4,
     "foreignBuySessions5P": 4,
     "foreignBuySessions10P": 6,
-    "foreignBuySessions20P": 9
+    "foreignBuySessions20P": 9,
+    "epsGrowthQoQ": -2.3
   },
   {
     "symbol": "MSN",
@@ -5214,7 +5222,8 @@
     "foreignNet20P": 989.46,
     "foreignBuySessions5P": 4,
     "foreignBuySessions10P": 7,
-    "foreignBuySessions20P": 15
+    "foreignBuySessions20P": 15,
+    "epsGrowthQoQ": 19.8
   },
   {
     "symbol": "MWG",
@@ -5293,7 +5302,8 @@
     "foreignNet20P": 3.95,
     "foreignBuySessions5P": 4,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 8
+    "foreignBuySessions20P": 8,
+    "epsGrowthQoQ": 5.0
   },
   {
     "symbol": "PLX",
@@ -5370,7 +5380,8 @@
     "foreignNet20P": 13.8,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 10
+    "foreignBuySessions20P": 10,
+    "epsGrowthQoQ": -55.2
   },
   {
     "symbol": "POW",
@@ -5447,7 +5458,8 @@
     "foreignNet20P": 190.68,
     "foreignBuySessions5P": 3,
     "foreignBuySessions10P": 8,
-    "foreignBuySessions20P": 14
+    "foreignBuySessions20P": 14,
+    "epsGrowthQoQ": -44.1
   },
   {
     "symbol": "SAB",
@@ -5524,7 +5536,8 @@
     "foreignNet20P": -5.49,
     "foreignBuySessions5P": 3,
     "foreignBuySessions10P": 6,
-    "foreignBuySessions20P": 8
+    "foreignBuySessions20P": 8,
+    "epsGrowthQoQ": 2.3
   },
   {
     "symbol": "SHB",
@@ -5603,7 +5616,8 @@
     "foreignNet20P": 203.75,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 6,
-    "foreignBuySessions20P": 12
+    "foreignBuySessions20P": 12,
+    "epsGrowthQoQ": 15.6
   },
   {
     "symbol": "SSB",
@@ -5680,7 +5694,8 @@
     "foreignNet20P": 10.79,
     "foreignBuySessions5P": 5,
     "foreignBuySessions10P": 8,
-    "foreignBuySessions20P": 11
+    "foreignBuySessions20P": 11,
+    "epsGrowthQoQ": 6.2
   },
   {
     "symbol": "SSI",
@@ -5757,7 +5772,8 @@
     "foreignNet20P": -106.4,
     "foreignBuySessions5P": 4,
     "foreignBuySessions10P": 7,
-    "foreignBuySessions20P": 10
+    "foreignBuySessions20P": 10,
+    "epsGrowthQoQ": -8.7
   },
   {
     "symbol": "STB",
@@ -5836,7 +5852,8 @@
     "foreignNet20P": -664.89,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 2,
-    "foreignBuySessions20P": 2
+    "foreignBuySessions20P": 2,
+    "epsGrowthQoQ": 0.0
   },
   {
     "symbol": "TCB",
@@ -5915,7 +5932,8 @@
     "foreignNet20P": 1187.5,
     "foreignBuySessions5P": 3,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 13
+    "foreignBuySessions20P": 13,
+    "epsGrowthQoQ": 7.9
   },
   {
     "symbol": "TPB",
@@ -5994,7 +6012,8 @@
     "foreignNet20P": 65.5,
     "foreignBuySessions5P": 4,
     "foreignBuySessions10P": 7,
-    "foreignBuySessions20P": 13
+    "foreignBuySessions20P": 13,
+    "epsGrowthQoQ": 24.3
   },
   {
     "symbol": "VCB",
@@ -6073,7 +6092,8 @@
     "foreignNet20P": -767.33,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 1,
-    "foreignBuySessions20P": 6
+    "foreignBuySessions20P": 6,
+    "epsGrowthQoQ": -37.9
   },
   {
     "symbol": "VHM",
@@ -6150,7 +6170,8 @@
     "foreignNet20P": 125.51,
     "foreignBuySessions5P": 5,
     "foreignBuySessions10P": 7,
-    "foreignBuySessions20P": 12
+    "foreignBuySessions20P": 12,
+    "epsGrowthQoQ": -13.0
   },
   {
     "symbol": "VIB",
@@ -6229,7 +6250,8 @@
     "foreignNet20P": 225.94,
     "foreignBuySessions5P": 4,
     "foreignBuySessions10P": 9,
-    "foreignBuySessions20P": 17
+    "foreignBuySessions20P": 17,
+    "epsGrowthQoQ": 1.0
   },
   {
     "symbol": "VIC",
@@ -6306,7 +6328,8 @@
     "foreignNet20P": 136.71,
     "foreignBuySessions5P": 3,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 11
+    "foreignBuySessions20P": 11,
+    "epsGrowthQoQ": 54.2
   },
   {
     "symbol": "VJC",
@@ -6383,7 +6406,8 @@
     "foreignNet20P": 33.83,
     "foreignBuySessions5P": 3,
     "foreignBuySessions10P": 4,
-    "foreignBuySessions20P": 10
+    "foreignBuySessions20P": 10,
+    "epsGrowthQoQ": -0.2
   },
   {
     "symbol": "VNM",
@@ -6460,7 +6484,8 @@
     "foreignNet20P": -5.82,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 7
+    "foreignBuySessions20P": 7,
+    "epsGrowthQoQ": -7.0
   },
   {
     "symbol": "VPB",
@@ -6539,7 +6564,8 @@
     "foreignNet20P": -164.7,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 9
+    "foreignBuySessions20P": 9,
+    "epsGrowthQoQ": 1.0
   },
   {
     "symbol": "VRE",
@@ -6616,7 +6642,8 @@
     "foreignNet20P": -67.5,
     "foreignBuySessions5P": 0,
     "foreignBuySessions10P": 2,
-    "foreignBuySessions20P": 9
+    "foreignBuySessions20P": 9,
+    "epsGrowthQoQ": -5.4
   },
   {
     "symbol": "VND",
@@ -6693,7 +6720,8 @@
     "foreignNet20P": 166.92,
     "foreignBuySessions5P": 5,
     "foreignBuySessions10P": 8,
-    "foreignBuySessions20P": 12
+    "foreignBuySessions20P": 12,
+    "epsGrowthQoQ": -62.7
   },
   {
     "symbol": "VCI",
@@ -6770,7 +6798,8 @@
     "foreignNet20P": -115.06,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 3,
-    "foreignBuySessions20P": 5
+    "foreignBuySessions20P": 5,
+    "epsGrowthQoQ": 46.6
   },
   {
     "symbol": "HCM",
@@ -6847,7 +6876,8 @@
     "foreignNet20P": 4.37,
     "foreignBuySessions5P": 3,
     "foreignBuySessions10P": 6,
-    "foreignBuySessions20P": 9
+    "foreignBuySessions20P": 9,
+    "epsGrowthQoQ": 8.8
   },
   {
     "symbol": "FTS",
@@ -6924,7 +6954,8 @@
     "foreignNet20P": -1.04,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 4,
-    "foreignBuySessions20P": 8
+    "foreignBuySessions20P": 8,
+    "epsGrowthQoQ": -54.1
   },
   {
     "symbol": "BSI",
@@ -7001,7 +7032,8 @@
     "foreignNet20P": 2.02,
     "foreignBuySessions5P": 3,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 11
+    "foreignBuySessions20P": 11,
+    "epsGrowthQoQ": 33.9
   },
   {
     "symbol": "CTS",
@@ -7078,7 +7110,8 @@
     "foreignNet20P": -4.95,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 3,
-    "foreignBuySessions20P": 8
+    "foreignBuySessions20P": 8,
+    "epsGrowthQoQ": -67.5
   },
   {
     "symbol": "VIX",
@@ -7155,7 +7188,8 @@
     "foreignNet20P": 439,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 4,
-    "foreignBuySessions20P": 8
+    "foreignBuySessions20P": 8,
+    "epsGrowthQoQ": -45.2
   },
   {
     "symbol": "ORS",
@@ -7232,7 +7266,8 @@
     "foreignNet20P": 10.84,
     "foreignBuySessions5P": 4,
     "foreignBuySessions10P": 4,
-    "foreignBuySessions20P": 10
+    "foreignBuySessions20P": 10,
+    "epsGrowthQoQ": -33.2
   },
   {
     "symbol": "AGR",
@@ -7309,7 +7344,8 @@
     "foreignNet20P": 0.58,
     "foreignBuySessions5P": 4,
     "foreignBuySessions10P": 7,
-    "foreignBuySessions20P": 11
+    "foreignBuySessions20P": 11,
+    "epsGrowthQoQ": -3.6
   },
   {
     "symbol": "LPB",
@@ -7388,7 +7424,8 @@
     "foreignNet20P": -36.5,
     "foreignBuySessions5P": 4,
     "foreignBuySessions10P": 6,
-    "foreignBuySessions20P": 8
+    "foreignBuySessions20P": 8,
+    "epsGrowthQoQ": 41.3
   },
   {
     "symbol": "EIB",
@@ -7467,7 +7504,8 @@
     "foreignNet20P": -47.35,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 2,
-    "foreignBuySessions20P": 4
+    "foreignBuySessions20P": 4,
+    "epsGrowthQoQ": -42.5
   },
   {
     "symbol": "MSB",
@@ -7546,7 +7584,8 @@
     "foreignNet20P": -409.02,
     "foreignBuySessions5P": 0,
     "foreignBuySessions10P": 1,
-    "foreignBuySessions20P": 2
+    "foreignBuySessions20P": 2,
+    "epsGrowthQoQ": 31.9
   },
   {
     "symbol": "OCB",
@@ -7625,7 +7664,8 @@
     "foreignNet20P": -99.53,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 2,
-    "foreignBuySessions20P": 5
+    "foreignBuySessions20P": 5,
+    "epsGrowthQoQ": 35.0
   },
   {
     "symbol": "NAB",
@@ -7704,7 +7744,8 @@
     "foreignNet20P": 39.42,
     "foreignBuySessions5P": 3,
     "foreignBuySessions10P": 6,
-    "foreignBuySessions20P": 15
+    "foreignBuySessions20P": 15,
+    "epsGrowthQoQ": 4.9
   },
   {
     "symbol": "NKG",
@@ -7781,7 +7822,8 @@
     "foreignNet20P": 32.85,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 4,
-    "foreignBuySessions20P": 12
+    "foreignBuySessions20P": 12,
+    "epsGrowthQoQ": 24.3
   },
   {
     "symbol": "HSG",
@@ -7858,7 +7900,8 @@
     "foreignNet20P": 3.94,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 4,
-    "foreignBuySessions20P": 10
+    "foreignBuySessions20P": 10,
+    "epsGrowthQoQ": -26.3
   },
   {
     "symbol": "VGS",
@@ -7935,7 +7978,8 @@
     "foreignNet20P": -0.67,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 9
+    "foreignBuySessions20P": 9,
+    "epsGrowthQoQ": 27.6
   },
   {
     "symbol": "KSB",
@@ -8012,7 +8056,8 @@
     "foreignNet20P": -2.66,
     "foreignBuySessions5P": 0,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 7
+    "foreignBuySessions20P": 7,
+    "epsGrowthQoQ": -63.8
   },
   {
     "symbol": "HT1",
@@ -8089,7 +8134,8 @@
     "foreignNet20P": -7.49,
     "foreignBuySessions5P": 0,
     "foreignBuySessions10P": 0,
-    "foreignBuySessions20P": 0
+    "foreignBuySessions20P": 0,
+    "epsGrowthQoQ": -28.0
   },
   {
     "symbol": "NVL",
@@ -8166,7 +8212,8 @@
     "foreignNet20P": -32.13,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 6,
-    "foreignBuySessions20P": 9
+    "foreignBuySessions20P": 9,
+    "epsGrowthQoQ": 20.9
   },
   {
     "symbol": "DIG",
@@ -8243,7 +8290,8 @@
     "foreignNet20P": 56.33,
     "foreignBuySessions5P": 3,
     "foreignBuySessions10P": 7,
-    "foreignBuySessions20P": 14
+    "foreignBuySessions20P": 14,
+    "epsGrowthQoQ": -51.7
   },
   {
     "symbol": "PDR",
@@ -8320,7 +8368,8 @@
     "foreignNet20P": -7.67,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 6
+    "foreignBuySessions20P": 6,
+    "epsGrowthQoQ": -83.0
   },
   {
     "symbol": "DXG",
@@ -8397,7 +8446,8 @@
     "foreignNet20P": 57.87,
     "foreignBuySessions5P": 5,
     "foreignBuySessions10P": 9,
-    "foreignBuySessions20P": 13
+    "foreignBuySessions20P": 13,
+    "epsGrowthQoQ": -90.8
   },
   {
     "symbol": "KDH",
@@ -8476,7 +8526,8 @@
     "foreignNet20P": 60.09,
     "foreignBuySessions5P": 4,
     "foreignBuySessions10P": 6,
-    "foreignBuySessions20P": 9
+    "foreignBuySessions20P": 9,
+    "epsGrowthQoQ": -78.1
   },
   {
     "symbol": "NLG",
@@ -8555,7 +8606,8 @@
     "foreignNet20P": -35.28,
     "foreignBuySessions5P": 3,
     "foreignBuySessions10P": 4,
-    "foreignBuySessions20P": 9
+    "foreignBuySessions20P": 9,
+    "epsGrowthQoQ": -91.9
   },
   {
     "symbol": "TCH",
@@ -8632,7 +8684,8 @@
     "foreignNet20P": 85.83,
     "foreignBuySessions5P": 5,
     "foreignBuySessions10P": 7,
-    "foreignBuySessions20P": 13
+    "foreignBuySessions20P": 13,
+    "epsGrowthQoQ": 358.2
   },
   {
     "symbol": "HDG",
@@ -8711,7 +8764,8 @@
     "foreignNet20P": -5.47,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 4,
-    "foreignBuySessions20P": 6
+    "foreignBuySessions20P": 6,
+    "epsGrowthQoQ": 119.2
   },
   {
     "symbol": "CEO",
@@ -8788,7 +8842,8 @@
     "foreignNet20P": -11.19,
     "foreignBuySessions5P": 4,
     "foreignBuySessions10P": 6,
-    "foreignBuySessions20P": 12
+    "foreignBuySessions20P": 12,
+    "epsGrowthQoQ": -24.5
   },
   {
     "symbol": "DXS",
@@ -8865,7 +8920,8 @@
     "foreignNet20P": -47.33,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 3,
-    "foreignBuySessions20P": 5
+    "foreignBuySessions20P": 5,
+    "epsGrowthQoQ": 39.0
   },
   {
     "symbol": "KBC",
@@ -8944,7 +9000,8 @@
     "foreignNet20P": -17.92,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 4,
-    "foreignBuySessions20P": 9
+    "foreignBuySessions20P": 9,
+    "epsGrowthQoQ": 2616.5
   },
   {
     "symbol": "IDC",
@@ -9023,7 +9080,8 @@
     "foreignNet20P": 110.37,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 6,
-    "foreignBuySessions20P": 15
+    "foreignBuySessions20P": 15,
+    "epsGrowthQoQ": 90.5
   },
   {
     "symbol": "VGC",
@@ -9102,7 +9160,8 @@
     "foreignNet20P": -39.93,
     "foreignBuySessions5P": 5,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 7
+    "foreignBuySessions20P": 7,
+    "epsGrowthQoQ": -25.9
   },
   {
     "symbol": "SZC",
@@ -9181,7 +9240,8 @@
     "foreignNet20P": 1.65,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 3,
-    "foreignBuySessions20P": 8
+    "foreignBuySessions20P": 8,
+    "epsGrowthQoQ": 14.3
   },
   {
     "symbol": "PHR",
@@ -9260,7 +9320,8 @@
     "foreignNet20P": -0.96,
     "foreignBuySessions5P": 0,
     "foreignBuySessions10P": 0,
-    "foreignBuySessions20P": 0
+    "foreignBuySessions20P": 0,
+    "epsGrowthQoQ": 17.0
   },
   {
     "symbol": "DPR",
@@ -9339,7 +9400,8 @@
     "foreignNet20P": 4.29,
     "foreignBuySessions5P": 0,
     "foreignBuySessions10P": 2,
-    "foreignBuySessions20P": 7
+    "foreignBuySessions20P": 7,
+    "epsGrowthQoQ": 115.7
   },
   {
     "symbol": "FRT",
@@ -9418,7 +9480,8 @@
     "foreignNet20P": 102.47,
     "foreignBuySessions5P": 5,
     "foreignBuySessions10P": 8,
-    "foreignBuySessions20P": 17
+    "foreignBuySessions20P": 17,
+    "epsGrowthQoQ": 24.1
   },
   {
     "symbol": "DGW",
@@ -9497,7 +9560,8 @@
     "foreignNet20P": -11.61,
     "foreignBuySessions5P": 4,
     "foreignBuySessions10P": 6,
-    "foreignBuySessions20P": 9
+    "foreignBuySessions20P": 9,
+    "epsGrowthQoQ": -10.0
   },
   {
     "symbol": "PET",
@@ -9576,7 +9640,8 @@
     "foreignNet20P": -0.88,
     "foreignBuySessions5P": 0,
     "foreignBuySessions10P": 0,
-    "foreignBuySessions20P": 0
+    "foreignBuySessions20P": 0,
+    "epsGrowthQoQ": 7.8
   },
   {
     "symbol": "PNJ",
@@ -9655,7 +9720,8 @@
     "foreignNet20P": -196.77,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 2,
-    "foreignBuySessions20P": 9
+    "foreignBuySessions20P": 9,
+    "epsGrowthQoQ": 8.9
   },
   {
     "symbol": "CTR",
@@ -9734,7 +9800,8 @@
     "foreignNet20P": -11.23,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 4,
-    "foreignBuySessions20P": 7
+    "foreignBuySessions20P": 7,
+    "epsGrowthQoQ": 6.7
   },
   {
     "symbol": "ELC",
@@ -9813,7 +9880,8 @@
     "foreignNet20P": 0.55,
     "foreignBuySessions5P": 4,
     "foreignBuySessions10P": 7,
-    "foreignBuySessions20P": 11
+    "foreignBuySessions20P": 11,
+    "epsGrowthQoQ": 26.0
   },
   {
     "symbol": "DGC",
@@ -9892,7 +9960,8 @@
     "foreignNet20P": -5.66,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 6
+    "foreignBuySessions20P": 6,
+    "epsGrowthQoQ": 15.0
   },
   {
     "symbol": "DCM",
@@ -9971,7 +10040,8 @@
     "foreignNet20P": 91.64,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 15
+    "foreignBuySessions20P": 15,
+    "epsGrowthQoQ": -59.5
   },
   {
     "symbol": "DPM",
@@ -10050,7 +10120,8 @@
     "foreignNet20P": -13.24,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 3,
-    "foreignBuySessions20P": 8
+    "foreignBuySessions20P": 8,
+    "epsGrowthQoQ": -95.1
   },
   {
     "symbol": "BFC",
@@ -10129,7 +10200,8 @@
     "foreignNet20P": -13.15,
     "foreignBuySessions5P": 0,
     "foreignBuySessions10P": 3,
-    "foreignBuySessions20P": 5
+    "foreignBuySessions20P": 5,
+    "epsGrowthQoQ": 108.2
   },
   {
     "symbol": "CSV",
@@ -10208,7 +10280,8 @@
     "foreignNet20P": -1.25,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 4,
-    "foreignBuySessions20P": 8
+    "foreignBuySessions20P": 8,
+    "epsGrowthQoQ": -28.2
   },
   {
     "symbol": "DBC",
@@ -10287,7 +10360,8 @@
     "foreignNet20P": 4.11,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 6,
-    "foreignBuySessions20P": 9
+    "foreignBuySessions20P": 9,
+    "epsGrowthQoQ": -30.8
   },
   {
     "symbol": "BAF",
@@ -10366,7 +10440,8 @@
     "foreignNet20P": -60.03,
     "foreignBuySessions5P": 3,
     "foreignBuySessions10P": 6,
-    "foreignBuySessions20P": 8
+    "foreignBuySessions20P": 8,
+    "epsGrowthQoQ": -79.8
   },
   {
     "symbol": "PVD",
@@ -10443,7 +10518,8 @@
     "foreignNet20P": 21.4,
     "foreignBuySessions5P": 3,
     "foreignBuySessions10P": 4,
-    "foreignBuySessions20P": 12
+    "foreignBuySessions20P": 12,
+    "epsGrowthQoQ": -54.1
   },
   {
     "symbol": "PVS",
@@ -10520,7 +10596,8 @@
     "foreignNet20P": -153.56,
     "foreignBuySessions5P": 0,
     "foreignBuySessions10P": 1,
-    "foreignBuySessions20P": 4
+    "foreignBuySessions20P": 4,
+    "epsGrowthQoQ": -39.4
   },
   {
     "symbol": "PVT",
@@ -10599,7 +10676,8 @@
     "foreignNet20P": -94.48,
     "foreignBuySessions5P": 0,
     "foreignBuySessions10P": 0,
-    "foreignBuySessions20P": 6
+    "foreignBuySessions20P": 6,
+    "epsGrowthQoQ": 75.1
   },
   {
     "symbol": "BSR",
@@ -10676,7 +10754,8 @@
     "foreignNet20P": -250.06,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 2,
-    "foreignBuySessions20P": 5
+    "foreignBuySessions20P": 5,
+    "epsGrowthQoQ": 20.2
   },
   {
     "symbol": "GMD",
@@ -10755,7 +10834,8 @@
     "foreignNet20P": -554.54,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 3,
-    "foreignBuySessions20P": 4
+    "foreignBuySessions20P": 4,
+    "epsGrowthQoQ": -54.4
   },
   {
     "symbol": "HAH",
@@ -10834,7 +10914,8 @@
     "foreignNet20P": -12.89,
     "foreignBuySessions5P": 3,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 9
+    "foreignBuySessions20P": 9,
+    "epsGrowthQoQ": -21.6
   },
   {
     "symbol": "VOS",
@@ -10913,7 +10994,8 @@
     "foreignNet20P": 0.16,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 4,
-    "foreignBuySessions20P": 9
+    "foreignBuySessions20P": 9,
+    "epsGrowthQoQ": 80.1
   },
   {
     "symbol": "REE",
@@ -10992,7 +11074,8 @@
     "foreignNet20P": 1.54,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 4,
-    "foreignBuySessions20P": 8
+    "foreignBuySessions20P": 8,
+    "epsGrowthQoQ": 18.4
   },
   {
     "symbol": "GEG",
@@ -11069,7 +11152,8 @@
     "foreignNet20P": -1.27,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 3,
-    "foreignBuySessions20P": 7
+    "foreignBuySessions20P": 7,
+    "epsGrowthQoQ": 1124.4
   },
   {
     "symbol": "PC1",
@@ -11146,7 +11230,8 @@
     "foreignNet20P": -6.62,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 2,
-    "foreignBuySessions20P": 7
+    "foreignBuySessions20P": 7,
+    "epsGrowthQoQ": 77.0
   },
   {
     "symbol": "VCG",
@@ -11223,7 +11308,8 @@
     "foreignNet20P": 0.83,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 4,
-    "foreignBuySessions20P": 12
+    "foreignBuySessions20P": 12,
+    "epsGrowthQoQ": 62.7
   },
   {
     "symbol": "HHV",
@@ -11300,7 +11386,8 @@
     "foreignNet20P": 18.81,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 6,
-    "foreignBuySessions20P": 11
+    "foreignBuySessions20P": 11,
+    "epsGrowthQoQ": 23.9
   },
   {
     "symbol": "LCG",
@@ -11377,7 +11464,8 @@
     "foreignNet20P": 1.38,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 6,
-    "foreignBuySessions20P": 10
+    "foreignBuySessions20P": 10,
+    "epsGrowthQoQ": 134.4
   },
   {
     "symbol": "FCN",
@@ -11454,7 +11542,8 @@
     "foreignNet20P": 3.8,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 11
+    "foreignBuySessions20P": 11,
+    "epsGrowthQoQ": 191.1
   },
   {
     "symbol": "CII",
@@ -11531,7 +11620,8 @@
     "foreignNet20P": 1.94,
     "foreignBuySessions5P": 3,
     "foreignBuySessions10P": 3,
-    "foreignBuySessions20P": 11
+    "foreignBuySessions20P": 11,
+    "epsGrowthQoQ": -10.7
   },
   {
     "symbol": "VHC",
@@ -11610,7 +11700,8 @@
     "foreignNet20P": -7.48,
     "foreignBuySessions5P": 2,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 9
+    "foreignBuySessions20P": 9,
+    "epsGrowthQoQ": -53.5
   },
   {
     "symbol": "ANV",
@@ -11689,7 +11780,8 @@
     "foreignNet20P": -16.08,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 4,
-    "foreignBuySessions20P": 7
+    "foreignBuySessions20P": 7,
+    "epsGrowthQoQ": 53.2
   },
   {
     "symbol": "TNG",
@@ -11768,7 +11860,8 @@
     "foreignNet20P": 13.36,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 4,
-    "foreignBuySessions20P": 10
+    "foreignBuySessions20P": 10,
+    "epsGrowthQoQ": 3.1
   },
   {
     "symbol": "MSH",
@@ -11847,7 +11940,8 @@
     "foreignNet20P": 4.14,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 3,
-    "foreignBuySessions20P": 8
+    "foreignBuySessions20P": 8,
+    "epsGrowthQoQ": -3.5
   },
   {
     "symbol": "GIL",
@@ -11926,7 +12020,8 @@
     "foreignNet20P": 0.03,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 12
+    "foreignBuySessions20P": 12,
+    "epsGrowthQoQ": 158.0
   },
   {
     "symbol": "PTB",
@@ -12005,7 +12100,8 @@
     "foreignNet20P": 3.83,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 5,
-    "foreignBuySessions20P": 11
+    "foreignBuySessions20P": 11,
+    "epsGrowthQoQ": -0.8
   },
   {
     "symbol": "HAX",
@@ -12084,7 +12180,8 @@
     "foreignNet20P": -0.08,
     "foreignBuySessions5P": 1,
     "foreignBuySessions10P": 2,
-    "foreignBuySessions20P": 3
+    "foreignBuySessions20P": 3,
+    "epsGrowthQoQ": -83.6
   }
 ]
     };
@@ -12189,7 +12286,7 @@
         if ((m >= 6.0 && m <= 12.0) || (s > 125 && s <= 250)) return "6 - 12 tháng";
         return "Trên 12 tháng";
       }
-      if (colKey === 'price' || colKey === 'change' || colKey === 'pe' || colKey === 'marketCapTỷ' || colKey === 'volume' || colKey === 'profitGrowth' || colKey === 'revGrowth' || colKey === 'eps' || colKey === 'pb' || colKey === 'roe' || colKey === 'weight' || colKey === 'buyPrice' || colKey === 'currentPrice' || colKey === 'profitPct') {
+      if (colKey === 'price' || colKey === 'change' || colKey === 'pe' || colKey === 'marketCapTỷ' || colKey === 'volume' || colKey === 'profitGrowth' || colKey === 'revGrowth' || colKey === 'eps' || colKey === 'epsGrowthQoQ' || colKey === 'pb' || colKey === 'roe' || colKey === 'weight' || colKey === 'buyPrice' || colKey === 'currentPrice' || colKey === 'profitPct') {
         return row[colKey] !== undefined ? row[colKey] : 0;
       }
       return row[colKey] !== undefined ? String(row[colKey]) : "";
@@ -14551,16 +14648,12 @@
 
           // 2. Fundamental table cells
           const fundPe = document.getElementById(`fund-pe-${sym}`);
-          const fundVol = document.getElementById(`fund-vol-${sym}`);
           if (fundPe) {
             fundPe.innerText = `${stock.pe}x`;
             fundPe.classList.remove('price-up-flash', 'price-down-flash');
             void fundPe.offsetWidth;
             fundPe.classList.add(flashClass);
             setTimeout(() => fundPe?.classList.remove(flashClass), 1000);
-          }
-          if (fundVol) {
-            fundVol.innerText = stock.volume.toLocaleString('en-US');
           }
 
           // 3. Portfolio table cells: Đã ngắt để Danh mục tiêu biểu giữ nguyên Giá của phiên hôm trước theo yêu cầu!
@@ -15236,6 +15329,7 @@
               if (incoming.profitGrowth !== undefined && incoming.profitGrowth !== "Lỗi") st.profitGrowth = incoming.profitGrowth;
               if (incoming.revGrowth !== undefined && incoming.revGrowth !== "Lỗi") st.revGrowth = incoming.revGrowth;
               if (incoming.eps !== undefined && incoming.eps !== "Lỗi") st.eps = incoming.eps;
+              if (incoming.epsGrowthQoQ !== undefined && incoming.epsGrowthQoQ !== "Lỗi") st.epsGrowthQoQ = incoming.epsGrowthQoQ;
               if (incoming.pb !== undefined && incoming.pb !== "Lỗi") st.pb = incoming.pb;
               if (incoming.roe !== undefined && incoming.roe !== "Lỗi") st.roe = incoming.roe;
               if (incoming.quarterLabels) st.quarterLabels = incoming.quarterLabels;
@@ -20684,7 +20778,7 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
       if (filtered.length === 0) {
         tableBody.innerHTML = `
           <tr>
-            <td colspan="11" class="py-8 text-center text-light-subtext dark:text-studio-muted">
+            <td colspan="10" class="py-8 text-center text-light-subtext dark:text-studio-muted">
               Không có doanh nghiệp nào thỏa mãn tất cả tiêu chí cơ bản đã chọn.
             </td>
           </tr>
@@ -20725,10 +20819,12 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
           : "hover:bg-light-elevated/60 dark:hover:bg-studio-elevated/60 transition-colors cursor-pointer";
 
         const capStr = st.marketCapTỷ === "Lỗi" ? '<span class="text-rose-500 font-semibold">Lỗi</span>' : (typeof st.marketCapTỷ === 'number' ? st.marketCapTỷ.toLocaleString('en-US') : st.marketCapTỷ);
-        const volStr = st.volume === "Lỗi" ? '<span class="text-rose-500 font-semibold">Lỗi</span>' : (typeof st.volume === 'number' ? st.volume.toLocaleString('en-US') : st.volume);
         const profitStr = st.profitGrowth === "Lỗi" ? '<span class="text-rose-500 font-semibold">Lỗi</span>' : `${st.profitGrowth >= 0 ? '+' : ''}${st.profitGrowth}%`;
         const revStr = st.revGrowth === "Lỗi" ? '<span class="text-rose-500 font-semibold">Lỗi</span>' : `${st.revGrowth >= 0 ? '+' : ''}${st.revGrowth}%`;
         const epsStr = st.eps === "Lỗi" ? '<span class="text-rose-500 font-semibold">Lỗi</span>' : (typeof st.eps === 'number' ? st.eps.toLocaleString('en-US') + ' đ' : st.eps);
+        const epsQoQVal = st.epsGrowthQoQ !== undefined ? st.epsGrowthQoQ : 0;
+        const epsQoQStr = epsQoQVal === "Lỗi" ? '<span class="text-rose-500 font-semibold">Lỗi</span>' : `${epsQoQVal >= 0 ? '+' : ''}${epsQoQVal}%`;
+        const epsQoQColor = epsQoQVal === "Lỗi" ? 'text-rose-500' : (epsQoQVal >= 0 ? 'text-emerald-500' : 'text-rose-500');
         const peStr = st.pe === "Lỗi" ? '<span class="text-rose-500 font-semibold">Lỗi</span>' : `${st.pe}x`;
         const pbStr = st.pb === "Lỗi" ? '<span class="text-rose-500 font-semibold">Lỗi</span>' : `${st.pb}x`;
         const roeStr = st.roe === "Lỗi" ? '<span class="text-rose-500 font-semibold">Lỗi</span>' : `${st.roe}%`;
@@ -20747,7 +20843,6 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
             </td>
             <td class="py-3 px-3 text-light-subtext dark:text-studio-subtext text-[11px]">${st.industry}</td>
             <td class="py-3 px-3 text-right font-mono font-medium">${capStr}</td>
-            <td id="fund-vol-${st.symbol}" class="py-3 px-3 text-right font-mono text-light-subtext dark:text-studio-subtext">${volStr}</td>
             <td class="py-3 px-3 text-right font-mono font-semibold ${st.profitGrowth === 'Lỗi' ? 'text-rose-500' : (st.profitGrowth >= 0 ? 'text-emerald-500' : 'text-rose-500')}">
               ${profitStr}
             </td>
@@ -20755,14 +20850,12 @@ V. DANH MỤC CỔ PHIẾU THEO DÕI TRỌNG TÂM
               ${revStr}
             </td>
             <td class="py-3 px-3 text-right font-mono font-bold text-blue-500 dark:text-studio-blueLight">${epsStr}</td>
+            <td class="py-3 px-3 text-right font-mono font-semibold ${epsQoQColor}">
+              ${epsQoQStr}
+            </td>
             <td id="fund-pe-${st.symbol}" class="py-3 px-3 text-right font-mono">${peStr}</td>
             <td class="py-3 px-3 text-right font-mono">${pbStr}</td>
             <td class="py-3 px-3 text-right font-mono font-semibold text-emerald-500">${roeStr}</td>
-            <td class="py-3 px-3 text-center" onclick="event.stopPropagation()">
-              <button onclick="openCompanyModalBySymbol('${st.symbol}')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 transition-all">
-                Hồ sơ AI
-              </button>
-            </td>
           </tr>
         `;
       }).join('');

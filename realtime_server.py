@@ -209,6 +209,7 @@ for sym in TRACKED_SYMBOLS:
             "profitGrowth": m.get("profitGrowth", 15.0),
             "revGrowth": m.get("revGrowth", 10.0),
             "eps": m.get("eps", 1500),
+            "epsGrowthQoQ": m.get("epsGrowthQoQ", 0.0),
             "pe": round(base_p / max(1, m.get("eps", 1500)), 1),
             "pb": m.get("pb", 1.2),
             "roe": m.get("roe", 15.0),
@@ -291,6 +292,23 @@ if os.path.exists(SNAPSHOT_FILE_PATH):
                 BREADTH_STATE.update(_snap_data["breadth"])
     except Exception:
         pass
+
+# Hợp nhất chỉ số BCTC 7 quý và % Tăng EPS (QoQ) từ financials_real_quarterly.json
+FINANCIALS_FILE_PATH = os.path.join(BASE_DIR, "financials_real_quarterly.json")
+if os.path.exists(FINANCIALS_FILE_PATH):
+    try:
+        with open(FINANCIALS_FILE_PATH, "r", encoding="utf-8") as _f_fin:
+            _fin_data = json.load(_f_fin)
+            for _sym, _fd in _fin_data.items():
+                if _sym in CURRENT_STOCKS:
+                    CURRENT_STOCKS[_sym]["epsGrowthQoQ"] = _fd.get("epsGrowthQoQ", 0.0)
+                    CURRENT_STOCKS[_sym]["profitGrowth"] = _fd.get("profitGrowth", CURRENT_STOCKS[_sym].get("profitGrowth", 15.0))
+                    CURRENT_STOCKS[_sym]["revGrowth"] = _fd.get("revGrowth", CURRENT_STOCKS[_sym].get("revGrowth", 10.0))
+                    if _fd.get("eps"):
+                        _eps_val = _fd["eps"][-1] if isinstance(_fd["eps"], list) else _fd["eps"]
+                        CURRENT_STOCKS[_sym]["eps"] = _eps_val
+    except Exception as e:
+        print("Lỗi khi nạp financials_real_quarterly.json:", e)
 
 DATA_LOCK = threading.Lock()
 SERVER_PACKET_COUNT = 0
