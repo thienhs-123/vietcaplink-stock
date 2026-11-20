@@ -869,12 +869,12 @@
 
               <div>
                 <div class="flex items-baseline space-x-2.5">
-                  <span class="text-3xl font-bold font-mono text-emerald-500" id="cardGdpVal">6.82%</span>
-                  <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono font-medium">+1.16% QoQ</span>
+                  <span class="text-3xl font-bold font-mono text-emerald-500" id="cardGdpVal">9.95%</span>
+                  <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono font-medium">+1.56% QoQ</span>
                 </div>
                 <div class="text-[11px] text-light-subtext dark:text-studio-subtext mt-1.5 flex items-center justify-between">
-                  <span>Quý trước: <strong class="text-light-text dark:text-studio-text font-mono" id="cardGdpPrev">6.93% (Q2)</strong></span>
-                  <span>Mục tiêu năm: <strong class="text-light-text dark:text-studio-text font-mono">6.5 - 7.0%</strong></span>
+                  <span>Quý trước: <strong class="text-light-text dark:text-studio-text font-mono" id="cardGdpPrev">8.39% (Q2)</strong></span>
+                  <span>Mục tiêu năm: <strong class="text-light-text dark:text-studio-text font-mono">8.0 - 8.5%</strong></span>
                 </div>
               </div>
 
@@ -891,7 +891,7 @@
                   <i data-lucide="bar-chart-2" class="w-3.5 h-3.5 text-blue-500"></i>
                   <span>Lịch sử Tăng trưởng GDP Việt Nam theo Quý</span>
                 </span>
-                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">Q1/22 - Q3/24 (YoY %)</span>
+                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">Q1/23 - Q3/26 (YoY %)</span>
               </div>
               <div id="macroChartGdp" class="w-full min-h-[175px]"></div>
             </div>
@@ -939,7 +939,7 @@
                   <i data-lucide="line-chart" class="w-3.5 h-3.5 text-purple-500"></i>
                   <span>Lịch sử Lãi suất điều hành &amp; Lãi suất huy động 12T</span>
                 </span>
-                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">2023 - 2024 (%/năm)</span>
+                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">2024 - 2026 (%/năm)</span>
               </div>
               <div id="macroChartInterest" class="w-full min-h-[175px]"></div>
             </div>
@@ -985,9 +985,9 @@
               <div class="flex items-center justify-between pb-1 text-xs">
                 <span class="font-medium text-light-subtext dark:text-studio-subtext flex items-center space-x-1.5">
                   <i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-500"></i>
-                  <span>Lịch sử Biến động Tỷ giá USD/VND theo Tháng (2024)</span>
+                  <span>Lịch sử Biến động Tỷ giá USD/VND theo Tháng (2026)</span>
                 </span>
-                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">T1/2024 - Hiện tại (VND)</span>
+                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">T1/2026 - T11/2026 (VND)</span>
               </div>
               <div id="macroChartUsdVnd" class="w-full min-h-[175px]"></div>
             </div>
@@ -1035,7 +1035,7 @@
                   <i data-lucide="activity" class="w-3.5 h-3.5 text-amber-500"></i>
                   <span>Lịch sử Giá Vàng Thế giới &amp; Xu hướng lập đỉnh mới</span>
                 </span>
-                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">T1/2024 - Hiện tại (USD/oz)</span>
+                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">T1/2026 - T11/2026 (USD/oz)</span>
               </div>
               <div id="macroChartGold" class="w-full min-h-[175px]"></div>
             </div>
@@ -1083,7 +1083,7 @@
                   <i data-lucide="line-chart" class="w-3.5 h-3.5 text-rose-400"></i>
                   <span>Lịch sử Giá Dầu Brent &amp; Dầu WTI (USD/thùng)</span>
                 </span>
-                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">T1/2024 - Hiện tại (USD/bbl)</span>
+                <span class="font-mono text-[11px] text-light-subtext dark:text-studio-muted">T1/2026 - T11/2026 (USD/bbl)</span>
               </div>
               <div id="macroChartOil" class="w-full min-h-[175px]"></div>
             </div>
@@ -4100,38 +4100,39 @@
         }
       },
 
-      // Macro Data Model (Chuẩn xác theo thị trường thực tế)
+      // Macro Data Model (Chuẩn xác theo thị trường thực tế 2026)
       macro: {
-        gdpYoY: 6.82,
-        gdpQoQ: 1.16,
-        gdpPrev: "6.93% (Q2)",
+        gdpYoY: 9.95,
+        gdpQoQ: 1.56,
+        gdpPrev: "8.39% (Q2)",
+        gdpTarget: "8.0 - 8.5%",
         pmi: 52.4,
         pmiPrev: 51.6,
-        vnindex: 1733.07,
-        vnindexChange: 18.75,
-        vnindexPct: 1.09,
-        vn30: 1852.58,
-        vn30Change: 22.45,
-        vn30Pct: 1.23,
-        upcom: 121.70,
-        upcomChange: 0.25,
-        upcomPct: 0.21,
-        hnx: 256.73,
-        hnxChange: 1.49,
-        hnxPct: 0.58,
+        vnindex: 1689.62,
+        vnindexChange: -13.39,
+        vnindexPct: -0.79,
+        vn30: 1788.51,
+        vn30Change: -18.03,
+        vn30Pct: -1.0,
+        upcom: 120.58,
+        upcomChange: -0.54,
+        upcomPct: -0.45,
+        hnx: 238.94,
+        hnxChange: -3.79,
+        hnxPct: -1.56,
         vnindexGtgd: "15.500 tỷ",
-        vnindexVol: "232,7 tr cp",
-        interestRate: "4.8 - 5.3%",
-        usdVnd: 25780,
-        usdVndBuy: 25370,
-        eurVnd: 29261,
-        goldWorld: 4138.40,
+        vnindexVol: "573.0 tr cp",
+        interestRate: "4.7 - 5.5%",
+        usdVnd: 25940,
+        usdVndBuy: 25530,
+        eurVnd: 28963,
+        goldWorld: 3736.10,
         goldSjc: 89.50,
-        oilBrent: 91.81,
-        oilWti: 84.07,
-        oilBrentChange: "-1.43%",
-        oilWtiChange: "-2.26%",
-        dxy: 103.73,
+        oilBrent: 89.59,
+        oilWti: 82.39,
+        oilBrentChange: "-2.57%",
+        oilWtiChange: "-1.04%",
+        dxy: 103.74,
         sources: {
           gdp: "Tổng cục Thống kê (GSO) - Báo cáo Kinh tế Xã hội",
           pmi: "S&P Global Manufacturing PMI",
@@ -15084,8 +15085,17 @@
         if (macro.oilBrent) StockApp.macro.oilBrent = macro.oilBrent;
         if (macro.oilWti) StockApp.macro.oilWti = macro.oilWti;
         if (macro.dxy) StockApp.macro.dxy = macro.dxy;
+        if (macro.gdpYoY) StockApp.macro.gdpYoY = macro.gdpYoY;
+        if (macro.gdpPrev) StockApp.macro.gdpPrev = macro.gdpPrev;
+        if (macro.interestRate) StockApp.macro.interestRate = macro.interestRate;
 
         // Cập nhật giá trị hiển thị trên các thẻ Macro Dashboard
+        const cGdp = document.getElementById("cardGdpVal");
+        if (cGdp && macro.gdpYoY) cGdp.innerText = `${macro.gdpYoY}%`;
+        const cGdpPrev = document.getElementById("cardGdpPrev");
+        if (cGdpPrev && macro.gdpPrev) cGdpPrev.innerText = macro.gdpPrev;
+        const cInt = document.getElementById("cardInterestVal");
+        if (cInt && macro.interestRate) cInt.innerText = macro.interestRate;
         const cUsd = document.getElementById("cardUsdVndVal");
         if (cUsd && macro.usdVnd) cUsd.innerText = Number(macro.usdVnd).toLocaleString('en-US');
         const cGold = document.getElementById("cardGoldVal");
@@ -15620,7 +15630,7 @@
       const gdpOptions = {
         series: [{
           name: 'Tăng trưởng GDP YoY (%)',
-          data: [5.03, 7.72, 13.67, 5.92, 3.32, 4.14, 5.33, 6.72, 5.66, 6.93, 6.82]
+          data: [3.32, 4.14, 5.33, 6.72, 5.66, 6.93, 7.43, 7.55, 7.05, 7.96, 8.23, 8.46, 8.15, 8.39, 9.95]
         }],
         chart: {
           height: 175,
@@ -15644,7 +15654,7 @@
         },
         dataLabels: { enabled: false },
         xaxis: {
-          categories: ['Q1/22', 'Q2/22', 'Q3/22', 'Q4/22', 'Q1/23', 'Q2/23', 'Q3/23', 'Q4/23', 'Q1/24', 'Q2/24', 'Q3/24'],
+          categories: ['Q1/23', 'Q2/23', 'Q3/23', 'Q4/23', 'Q1/24', 'Q2/24', 'Q3/24', 'Q4/24', 'Q1/25', 'Q2/25', 'Q3/25', 'Q4/25', 'Q1/26', 'Q2/26', 'Q3/26'],
           axisBorder: { color: gridColor },
           axisTicks: { color: gridColor },
           labels: { style: { fontSize: '10px' } }
@@ -15669,15 +15679,15 @@
         series: [
           {
             name: 'LS Tái cấp vốn SBV',
-            data: [6.0, 5.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5]
+            data: [4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5]
           },
           {
             name: 'Huy động 12T Big 4',
-            data: [7.4, 6.8, 5.8, 5.3, 4.8, 4.7, 4.7, 4.7]
+            data: [4.8, 4.7, 4.7, 4.7, 4.7, 4.8, 4.7, 4.7]
           },
           {
             name: 'Huy động 12T TMCP',
-            data: [8.2, 7.3, 6.4, 5.7, 5.2, 5.0, 5.2, 5.3]
+            data: [5.2, 5.0, 5.2, 5.3, 5.4, 5.5, 5.3, 5.2]
           }
         ],
         chart: {
@@ -15693,7 +15703,7 @@
         stroke: { width: [2.5, 2.5, 2.5], curve: 'smooth' },
         dataLabels: { enabled: false },
         xaxis: {
-          categories: ['T1/23', 'T4/23', 'T7/23', 'T10/23', 'T1/24', 'T4/24', 'T7/24', 'T10/24'],
+          categories: ['T1/25', 'T4/25', 'T7/25', 'T10/25', 'T1/26', 'T4/26', 'T7/26', 'T11/26'],
           axisBorder: { color: gridColor },
           axisTicks: { color: gridColor },
           labels: { style: { fontSize: '10px' } }
@@ -15718,7 +15728,7 @@
       const usdVndOptions = {
         series: [{
           name: 'Tỷ giá USD/VND (VCB)',
-          data: [24350, 24580, 24720, 25350, 25450, 25460, 25420, 25180, 24650, 25480]
+          data: [25120, 25250, 25420, 25580, 25620, 25680, 25740, 25810, 25890, 25920, 25940]
         }],
         chart: {
           height: 175,
@@ -15742,13 +15752,13 @@
         },
         dataLabels: { enabled: false },
         xaxis: {
-          categories: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10'],
+          categories: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11'],
           axisBorder: { color: gridColor },
           axisTicks: { color: gridColor },
           labels: { style: { fontSize: '10px' } }
         },
         yaxis: {
-          min: 24000,
+          min: 24800,
           labels: { formatter: val => val.toLocaleString('en-US'), style: { fontSize: '10px' } }
         },
         grid: { borderColor: gridColor, strokeDashArray: 4 },
@@ -15767,7 +15777,7 @@
       const goldOptions = {
         series: [{
           name: 'Vàng Thế giới (USD/oz)',
-          data: [2039, 2043, 2160, 2330, 2345, 2325, 2390, 2503, 2634, 2658]
+          data: [2750, 2820, 2980, 3120, 3250, 3380, 3450, 3560, 3680, 3710, 3736]
         }],
         chart: {
           height: 175,
@@ -15791,13 +15801,13 @@
         },
         dataLabels: { enabled: false },
         xaxis: {
-          categories: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10'],
+          categories: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11'],
           axisBorder: { color: gridColor },
           axisTicks: { color: gridColor },
           labels: { style: { fontSize: '10px' } }
         },
         yaxis: {
-          min: 1950,
+          min: 2600,
           labels: { formatter: val => `$${val}`, style: { fontSize: '10px' } }
         },
         grid: { borderColor: gridColor, strokeDashArray: 4 },
@@ -15817,11 +15827,11 @@
         series: [
           {
             name: 'Dầu Brent ($/thùng)',
-            data: [79.0, 83.5, 85.4, 89.0, 83.0, 85.2, 80.1, 78.8, 72.5, 77.85]
+            data: [78.5, 80.2, 82.4, 85.1, 84.0, 86.5, 87.2, 88.0, 87.5, 91.2, 89.59]
           },
           {
             name: 'Dầu WTI ($/thùng)',
-            data: [74.5, 78.8, 81.2, 84.5, 78.6, 81.0, 76.2, 74.5, 69.2, 74.20]
+            data: [74.0, 75.8, 77.9, 80.5, 79.4, 81.8, 82.5, 83.1, 82.8, 85.0, 82.39]
           }
         ],
         chart: {
@@ -15837,13 +15847,13 @@
         stroke: { width: [2.5, 2.5], curve: 'smooth' },
         dataLabels: { enabled: false },
         xaxis: {
-          categories: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10'],
+          categories: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11'],
           axisBorder: { color: gridColor },
           axisTicks: { color: gridColor },
           labels: { style: { fontSize: '10px' } }
         },
         yaxis: {
-          min: 65,
+          min: 70,
           labels: { formatter: val => `$${val}`, style: { fontSize: '10px' } }
         },
         grid: { borderColor: gridColor, strokeDashArray: 4 },
