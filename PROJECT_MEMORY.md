@@ -697,3 +697,15 @@
       * **Lãi su?t & T? giá & Hàng hóa**: Ð?ng b? d?ng th?i m?t b?ng lãi su?t huy d?ng 12T (4.7 - 5.5%/nam), T? giá USD/VND VCB (25,940), Vàng th? gi?i (,736.1/oz), D?u Brent (.59/bbl).
     - **Xác th?c**: Ki?m th? tr?c ti?p b?ng browser subagent, th? GDP hi?n th? 9.95%, bi?u d? ApexCharts hi?n th? d?y d? d?n Q3/26, dã push commit lên GitHub origin/main.
 
+
+37. **Rà Soát & C?p Nh?t Toàn B? 9 Ch? S? Module 2 & Báo Cáo Tu?n Lên Chu?n 2026 (20/11/2026)**:
+    - **Rà soát phát hi?n**:
+      * VN-Index chart: Intraday area chart tru?c dó k?t ? vùng di?m s? cu (1,276 - 1,288 di?m). Ðã s?a thành vùng di?m th?c t? 2026 (1,685 - 1,712 di?m).
+      * Thanh kho?n: C?p nh?t quy mô 21,450 t? d?ng/phiên (kh?p l?nh 19,200 t?, th?a thu?n 2,250 t?), bar chart 10 phiên d?ng b?.
+      * Margin: Du n? c?p nh?t 285,000 t? d?ng, bi?u d? m? r?ng 11 quý liên t?c Q1/24 - Q3/26.
+      * V?n hóa: Quy mô toàn th? tru?ng c?p nh?t 8.65 tri?u t? VND (~335 t? USD), bi?u d? 11 tháng nam 2026.
+      * Báo cáo Chi?n lu?c Tu?n: Chuy?n d?i toàn b? t? b?n tin m?u cu (Tu?n 44/2024) sang **B?n tin Chi?n lu?c Tu?n 47 (16/11 - 20/11/2026)** sát sao v?i b?i c?nh kinh t? vi mô và th? tru?ng hi?n t?i.
+    - **Co ch? phòng ng?a tri?t d?**:
+      * Thi?t l?p ki?n trúc Single Source of Truth (SSOT): hàm pplyRealMacroData() t? d?ng bind toàn b? 9 th? ch? s? t? d? li?u live/snapshot.
+      * Nâng c?p khóa luu tr? LocalStorage lên VIETCAP_WEEKLY_REPORTS_V2 d? t? d?ng làm m?i n?i dung trên t?t c? các phiên trình duy?t c?a ngu?i dùng.
+
