@@ -182,22 +182,6 @@ STOCK_METRICS = {
 
 CURRENT_STOCKS = {}
 
-# Nạp dữ liệu thực tế đã xác thực từ vnstock_snapshot.json nếu có
-if os.path.exists(SNAPSHOT_FILE_PATH):
-    try:
-        with open(SNAPSHOT_FILE_PATH, "r", encoding="utf-8") as _f_snap:
-            _snap_data = json.load(_f_snap)
-            if "stocks" in _snap_data and isinstance(_snap_data["stocks"], dict):
-                for _sym, _s in _snap_data["stocks"].items():
-                    if _s.get("price") != "Lỗi" and _s.get("price", 0) > 0:
-                        CURRENT_STOCKS[_sym] = _s
-            if "macro" in _snap_data and isinstance(_snap_data["macro"], dict):
-                MACRO_STATE.update(_snap_data["macro"])
-            if "breadth" in _snap_data and isinstance(_snap_data["breadth"], dict):
-                BREADTH_STATE.update(_snap_data["breadth"])
-    except Exception:
-        pass
-
 for sym in TRACKED_SYMBOLS:
     if sym not in CURRENT_STOCKS or CURRENT_STOCKS[sym].get("price") == "Lỗi":
         m = STOCK_METRICS.get(sym, {
@@ -256,8 +240,12 @@ MACRO_STATE = {
     "eurVnd": 29261,
     "goldWorld": 3768.10,
     "goldSjc": 89.50,
-    "oilBrent": 91.81,
-    "oilWti": 84.07,
+    "oilBrent": 89.82,
+    "oilBrentChange": "-2.35%",
+    "oilBrentIsUp": False,
+    "oilWti": 82.86,
+    "oilWtiChange": "-0.42%",
+    "oilWtiIsUp": False,
     "dxy": 103.73,
     "world_indices": [
         {"label": "DOW JONES (MỸ)", "val": "51,285.73", "change": "-3.88%", "isUp": False},
@@ -273,8 +261,8 @@ MACRO_STATE = {
         {"label": "USD/VND (VCB MUA)", "val": "25,370", "change": "+10đ", "isUp": True},
         {"label": "EUR/VND", "val": "29,261", "change": "+0.35%", "isUp": True},
         {"label": "DXY (DOLLAR INDEX)", "val": "103.73", "change": "+0.23%", "isUp": True},
-        {"label": "DẦU BRENT", "val": "$91.81", "change": "-1.43%", "isUp": False},
-        {"label": "DẦU WTI", "val": "$84.07", "change": "-2.26%", "isUp": False},
+        {"label": "DẦU BRENT", "val": "$89.82", "change": "-2.35%", "isUp": False},
+        {"label": "DẦU WTI", "val": "$82.86", "change": "-0.42%", "isUp": False},
         {"label": "VÀNG THẾ GIỚI", "val": "$4,138.4", "change": "+1.56%", "isUp": True},
         {"label": "VÀNG SJC", "val": "89.50 Tr", "change": "+0.50%", "isUp": True},
         {"label": "VÀNG NHẪN 9999", "val": "88.50 Tr", "change": "+0.45%", "isUp": True}
@@ -287,6 +275,22 @@ BREADTH_STATE = {
     "hnx": {"adv": 28, "ref": 183, "dec": 88, "ceil": 6, "flr": 8},
     "upcom": {"adv": 66, "ref": 632, "dec": 111, "ceil": 11, "flr": 18}
 }
+
+# Nạp dữ liệu thực tế đã xác thực từ vnstock_snapshot.json nếu có
+if os.path.exists(SNAPSHOT_FILE_PATH):
+    try:
+        with open(SNAPSHOT_FILE_PATH, "r", encoding="utf-8") as _f_snap:
+            _snap_data = json.load(_f_snap)
+            if "stocks" in _snap_data and isinstance(_snap_data["stocks"], dict):
+                for _sym, _s in _snap_data["stocks"].items():
+                    if _s.get("price") != "Lỗi" and _s.get("price", 0) > 0:
+                        CURRENT_STOCKS[_sym] = _s
+            if "macro" in _snap_data and isinstance(_snap_data["macro"], dict):
+                MACRO_STATE.update(_snap_data["macro"])
+            if "breadth" in _snap_data and isinstance(_snap_data["breadth"], dict):
+                BREADTH_STATE.update(_snap_data["breadth"])
+    except Exception:
+        pass
 
 DATA_LOCK = threading.Lock()
 SERVER_PACKET_COUNT = 0
@@ -691,12 +695,20 @@ def fetch_world_indices_and_commodities():
 
         if 'goldWorld' in comm_results:
             MACRO_STATE['goldWorld'] = comm_results['goldWorld']['price']
+            MACRO_STATE['goldWorldChange'] = comm_results['goldWorld']['change']
+            MACRO_STATE['goldWorldIsUp'] = comm_results['goldWorld']['isUp']
         if 'oilBrent' in comm_results:
             MACRO_STATE['oilBrent'] = comm_results['oilBrent']['price']
+            MACRO_STATE['oilBrentChange'] = comm_results['oilBrent']['change']
+            MACRO_STATE['oilBrentIsUp'] = comm_results['oilBrent']['isUp']
         if 'oilWti' in comm_results:
             MACRO_STATE['oilWti'] = comm_results['oilWti']['price']
+            MACRO_STATE['oilWtiChange'] = comm_results['oilWti']['change']
+            MACRO_STATE['oilWtiIsUp'] = comm_results['oilWti']['isUp']
         if 'dxy' in comm_results:
             MACRO_STATE['dxy'] = comm_results['dxy']['price']
+            MACRO_STATE['dxyChange'] = comm_results['dxy']['change']
+            MACRO_STATE['dxyIsUp'] = comm_results['dxy']['isUp']
 
         usd_sell = MACRO_STATE.get('usdVnd', 25780)
         usd_buy = MACRO_STATE.get('usdVndBuy', 25370)
@@ -718,6 +730,19 @@ def fetch_world_indices_and_commodities():
         gold_w_up = comm_results.get('goldWorld', {}).get('isUp', True)
 
         gold_sjc = MACRO_STATE.get('goldSjc', 89.50)
+
+        MACRO_STATE['oilBrent'] = brent_val
+        MACRO_STATE['oilBrentChange'] = brent_pct
+        MACRO_STATE['oilBrentIsUp'] = brent_up
+        MACRO_STATE['oilWti'] = wti_val
+        MACRO_STATE['oilWtiChange'] = wti_pct
+        MACRO_STATE['oilWtiIsUp'] = wti_up
+        MACRO_STATE['goldWorld'] = gold_w_val
+        MACRO_STATE['goldWorldChange'] = gold_w_pct
+        MACRO_STATE['goldWorldIsUp'] = gold_w_up
+        MACRO_STATE['dxy'] = dxy_val
+        MACRO_STATE['dxyChange'] = dxy_pct
+        MACRO_STATE['dxyIsUp'] = dxy_up
 
         MACRO_STATE['commodities'] = [
             {"label": "USD/VND (VCB BÁN)", "val": f"{usd_sell:,}", "change": "+15đ", "isUp": True},
@@ -785,16 +810,23 @@ def fetch_prices_from_vnstock():
                                 if it.get('floor'): st["floor"] = int(float(it['floor']))
                                 if it.get('refPrice'): st["ref"] = int(float(it['refPrice']))
 
-                                if st.get("eps", 0) > 0:
-                                    st["pe"] = round(p / st["eps"], 1)
+                                ep = st.get("eps", 0)
+                                if isinstance(ep, list): ep = ep[-1] if ep else 0
+                                if isinstance(ep, (int, float)) and ep > 0:
+                                    st["pe"] = round(p / ep, 1)
                                 shares = st.get("shares") or STOCK_METRICS.get(sym, {}).get("shares", 0)
-                                if shares > 0:
+                                if isinstance(shares, list): shares = shares[-1] if shares else 0
+                                if isinstance(shares, (int, float)) and shares > 0:
                                     st["marketCapTỷ"] = round((shares * p) / 1e9, 0)
 
-                                if st.get("ma10", 0) > 0:
-                                    st["diffMA10"] = round(((p - st["ma10"]) / st["ma10"]) * 100, 1)
-                                if st.get("ma50", 0) > 0:
-                                    st["diffMA50"] = round(((p - st["ma50"]) / st["ma50"]) * 100, 1)
+                                ma10 = st.get("ma10", 0)
+                                if isinstance(ma10, list): ma10 = ma10[-1] if ma10 else 0
+                                if isinstance(ma10, (int, float)) and ma10 > 0:
+                                    st["diffMA10"] = round(((p - ma10) / ma10) * 100, 1)
+                                ma50 = st.get("ma50", 0)
+                                if isinstance(ma50, list): ma50 = ma50[-1] if ma50 else 0
+                                if isinstance(ma50, (int, float)) and ma50 > 0:
+                                    st["diffMA50"] = round(((p - ma50) / ma50) * 100, 1)
                                 st["aboveMA10_50"] = (st.get("diffMA10", 0) > 0 and st.get("diffMA50", 0) > 0)
 
                                 if st.get("baseMin") and st.get("baseMax"):
@@ -1023,10 +1055,13 @@ def fetch_prices_from_vnstock():
                                     st["volume"] = it.get('nmTotalTradedQty') or it.get('stockVol') or 0
                                     st["status"] = "success"
                                     st["source"] = "SSI Live Datafeed"
-                                    if st.get("eps", 0) > 0:
-                                        st["pe"] = round(p / st["eps"], 1)
+                                    ep = st.get("eps", 0)
+                                    if isinstance(ep, list): ep = ep[-1] if ep else 0
+                                    if isinstance(ep, (int, float)) and ep > 0:
+                                        st["pe"] = round(p / ep, 1)
                                     shares = st.get("shares") or STOCK_METRICS.get(sym, {}).get("shares", 0)
-                                    if shares > 0:
+                                    if isinstance(shares, list): shares = shares[-1] if shares else 0
+                                    if isinstance(shares, (int, float)) and shares > 0:
                                         st["marketCapTỷ"] = round((shares * p) / 1e9, 0)
                                 updated_count += 1
             if updated_count > 0:
