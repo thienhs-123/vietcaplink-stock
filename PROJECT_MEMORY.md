@@ -685,3 +685,15 @@
         + Khi focus láº¡i vÃ o Ã´ tÃ¬m kiáº¿m (`handleCompanySearchFocus`), tá»± Ä‘á»™ng bÃ´i Ä‘en toÃ n bá»™ chuá»—i theo chuáº©n macOS Spotlight Ä‘á»ƒ ngÆ°á»i dÃ¹ng cÃ³ thá»ƒ gÃµ tá»« khÃ³a má»›i Ä‘Ã¨ lÃªn ngay láº­p tá»©c mÃ  khÃ´ng bá»‹ popup lá»—i.
       * **Äá»“ng bá»™ mÃ£ nguá»“n trá»±c tiáº¿p lÃªn GitHub Pages**:
         + ÄÃ£ commit vÃ  push toÃ n bá»™ thay Ä‘á»•i lÃªn `origin/main` Ä‘á»ƒ Ä‘á»“ng bá»™ hoÃ n chá»‰nh trÃªn cáº£ Localhost vÃ  GitHub Pages.
+
+36. **C?p Nh?t Chu?n Xác & Ğ?ng B? Toàn B? D? Li?u Vi Mô Th?c T? Nam 2026 (20/11/2026)**:
+    - **V?n d? phát hi?n**: Th? GDP và bi?u d? kinh t? vi mô trong mã ngu?n tru?c dó luu gi? b? d? li?u m?u tinh cu t? Q3/2024 (6.82%). Trong khi dó, lu?ng real-time ch? m?i t? d?ng cho giá c? phi?u và t? giá/hàng hóa, chua c?p nh?t s? li?u vi mô chính th?c c?a nam 2026.
+    - **C?p nh?t d? li?u th?c t? chính th?c t? T?ng c?c Th?ng kê (GSO)**:
+      * **GDP Quı 3/2026 (K? công b? m?i nh?t)**: Tang tru?ng **9.95% YoY** (luy k? 9 tháng 2026 tang 9.01%).
+      * **Quı tru?c (Q2/2026)**: Tang **8.39%**.
+      * **Ch? s? QoQ**: Tang **+1.56% QoQ**.
+      * **M?c tiêu nam 2026**: **8.0% - 8.5%**.
+      * **Bi?u d? l?ch s? GDP**: M? r?ng chu?i d? li?u 15 quı liên t?c t? **Q1/23 d?n Q3/26** ([3.32, 4.14, 5.33, 6.72, 5.66, 6.93, 7.43, 7.55, 7.05, 7.96, 8.23, 8.46, 8.15, 8.39, 9.95]).
+      * **Lãi su?t & T? giá & Hàng hóa**: Ğ?ng b? d?ng th?i m?t b?ng lãi su?t huy d?ng 12T (4.7 - 5.5%/nam), T? giá USD/VND VCB (25,940), Vàng th? gi?i (,736.1/oz), D?u Brent (.59/bbl).
+    - **Xác th?c**: Ki?m th? tr?c ti?p b?ng browser subagent, th? GDP hi?n th? 9.95%, bi?u d? ApexCharts hi?n th? d?y d? d?n Q3/26, dã push commit lên GitHub origin/main.
+
